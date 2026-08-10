@@ -22,6 +22,7 @@
 
     <!-- SONIDO -->
     <audio id="pipisSound" src="pipis.mp3"></audio>
+    <audio id="backgroundMusic" src="want-to-be-a.mp3" loop></audio>
 
     <!-- CONTENEDOR DE LA LLUVIA -->
     <div id="pipisRain"></div>
@@ -29,65 +30,70 @@
 
     <script>
 
-        const pipisButton = document.getElementById("pipisButton");
-        const pipisSound = document.getElementById("pipisSound");
-        const pipisRain = document.getElementById("pipisRain");
+    const pipisButton = document.getElementById("pipisButton");
+    const pipisSound = document.getElementById("pipisSound");
+    const pipisRain = document.getElementById("pipisRain");
+
+    // MÚSICA DE FONDO
+    const backgroundMusic = document.getElementById("backgroundMusic");
+
+    // Volumen al 40%
+    backgroundMusic.volume = 0.4;
 
 
-        pipisButton.addEventListener("click", function () {
+    pipisButton.addEventListener("click", function () {
 
-            // Reproducir sonido
-            pipisSound.currentTime = 0;
-            pipisSound.play();
+        // Reproducir música de fondo
+        backgroundMusic.play();
 
-
-            // Crear 25 Pipis
-            for (let i = 0; i < 25; i++) {
-
-                const pipis = document.createElement("img");
-
-                pipis.src = "pipis.gif";
-
-                pipis.className = "pipis-rain";
+        // Reproducir sonido de Pipis
+        pipisSound.currentTime = 0;
+        pipisSound.play();
 
 
-                // Posición horizontal aleatoria
-                pipis.style.left = Math.random() * 100 + "vw";
+        // Crear 25 Pipis
+        for (let i = 0; i < 25; i++) {
+
+            const pipis = document.createElement("img");
+
+            pipis.src = "pipis.gif";
+
+            pipis.className = "pipis-rain";
 
 
-                // Tamaño aleatorio
-                const size = Math.floor(Math.random() * 60) + 40;
-
-                pipis.style.width = size + "px";
+            // Posición horizontal aleatoria
+            pipis.style.left = Math.random() * 100 + "vw";
 
 
-                // Velocidad aleatoria
-                const speed = Math.random() * 2 + 2;
+            // Tamaño aleatorio
+            const size = Math.floor(Math.random() * 60) + 40;
 
-                pipis.style.animationDuration = speed + "s";
-
-
-                // Rotación aleatoria
-                pipis.style.animationDelay =
-                    Math.random() * 0.5 + "s";
+            pipis.style.width = size + "px";
 
 
-                pipisRain.appendChild(pipis);
+            // Velocidad aleatoria
+            const speed = Math.random() * 2 + 2;
+
+            pipis.style.animationDuration = speed + "s";
 
 
-                // Eliminar después de caer
-                setTimeout(function () {
+            // Rotación aleatoria
+            pipis.style.animationDelay =
+                Math.random() * 0.5 + "s";
 
-                    pipis.remove();
 
-                }, 5000);
+            pipisRain.appendChild(pipis);
 
-            }
 
-        });
+            // Eliminar después de caer
+            setTimeout(function () {
 
-    </script>
+                pipis.remove();
 
-</body>
+            }, 5000);
 
-</html>
+        }
+
+    });
+
+</script>
