@@ -19,21 +19,52 @@
     <!-- GIF DE PIPIS -->
     <img src="pipis.gif" alt="Pipis" class="gif-pipis">
 
-    <!-- BOTÓN PIPIS -->
     <button id="pipisButton">[ PIPIS ]</button>
 
-    <!-- SONIDO -->
-    <audio id="pipisSound" src="pipis.mp3"></audio>
+<audio id="pipisSound" src="pipis.mp3"></audio>
 
-    <script>
-        const pipisButton = document.getElementById("pipisButton");
-        const pipisSound = document.getElementById("pipisSound");
+<div id="pipisRain"></div>
 
-        pipisButton.addEventListener("click", () => {
-            pipisSound.currentTime = 0;
-            pipisSound.play();
-        });
-    </script>
+<script>
+    const pipisButton = document.getElementById("pipisButton");
+    const pipisSound = document.getElementById("pipisSound");
+    const pipisRain = document.getElementById("pipisRain");
 
-</body>
-</html>
+    pipisButton.addEventListener("click", () => {
+
+        // Reproducir sonido
+        pipisSound.currentTime = 0;
+        pipisSound.play();
+
+        // Crear 20 Pipis
+        for (let i = 0; i < 20; i++) {
+
+            const pipis = document.createElement("img");
+
+            pipis.src = "pipis.gif";
+            pipis.classList.add("pipis-rain");
+
+            // Posición aleatoria
+            pipis.style.left = Math.random() * 100 + "vw";
+
+            // Tamaño aleatorio
+            const size = 40 + Math.random() * 80;
+            pipis.style.width = size + "px";
+
+            // Duración aleatoria
+            pipis.style.animationDuration =
+                (2 + Math.random() * 3) + "s";
+
+            // Retraso aleatorio
+            pipis.style.animationDelay =
+                Math.random() * 0.5 + "s";
+
+            pipisRain.appendChild(pipis);
+
+            // Eliminar después de caer
+            setTimeout(() => {
+                pipis.remove();
+            }, 5500);
+        }
+    });
+</script>
