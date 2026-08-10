@@ -5,8 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Spamton Shop</title>
 
@@ -20,7 +19,7 @@
     <h1>HEY EVERY !!</h1>
 
 
-    <!-- SPAMTON -->
+    <!-- SPAMTON PRINCIPAL -->
 
     <img
         src="spamton.gif"
@@ -36,7 +35,7 @@
     </button>
 
 
-    <!-- SONIDO PIPIS -->
+    <!-- SONIDO DE PIPIS -->
 
     <audio
         id="pipisSound"
@@ -50,8 +49,25 @@
         id="backgroundMusic"
         src="want-to-be-a.mp3"
         loop
-        autoplay
+        preload="auto"
     ></audio>
+
+
+    <!-- SPAMTON BAILANDO + BOTÓN DE MÚSICA -->
+
+    <div id="musicBox">
+
+        <img
+            src="spamton-bailando.gif"
+            alt="Spamton bailando"
+            id="dancingSpamton"
+        >
+
+        <button id="musicButton">
+            [ TURN ON THE MUSIC ]
+        </button>
+
+    </div>
 
 
     <!-- CONTENEDOR DE LA LLUVIA -->
@@ -78,48 +94,55 @@
         const backgroundMusic =
             document.getElementById("backgroundMusic");
 
+        const musicButton =
+            document.getElementById("musicButton");
+
+        const musicBox =
+            document.getElementById("musicBox");
+
 
         /* =========================
-           VOLUMEN DE LA MÚSICA
+           VOLUMEN
         ========================= */
 
         backgroundMusic.volume = 0.4;
 
 
         /* =========================
-           INTENTAR REPRODUCIR
-           AL ENTRAR
+           INTENTAR AUTOPLAY
         ========================= */
 
-        window.addEventListener("load", function () {
+        window.addEventListener("load", () => {
 
-            backgroundMusic.play().catch(function () {
+            backgroundMusic.play()
+                .catch(() => {
 
-                console.log(
-                    "El navegador bloqueó el autoplay. Esperando interacción..."
-                );
+                    console.log(
+                        "El navegador bloqueó el autoplay"
+                    );
 
-            });
+                });
 
         });
 
 
         /* =========================
-           SI CHROME BLOQUEA
-           EL AUTOPLAY
+           BOTÓN MUSIC
         ========================= */
 
-        function iniciarMusica() {
-
-            backgroundMusic.play();
-
-        }
-
-
-        document.addEventListener(
+        musicButton.addEventListener(
             "click",
-            iniciarMusica,
-            { once: true }
+            () => {
+
+                backgroundMusic.volume = 0.4;
+
+                backgroundMusic.play();
+
+                musicBox.classList.add(
+                    "musicStarted"
+                );
+
+            }
         );
 
 
@@ -129,19 +152,26 @@
 
         pipisButton.addEventListener(
             "click",
-            function () {
+            () => {
 
 
-                /* SONIDO PIPIS */
+                /* Asegurar música */
+
+                if (backgroundMusic.paused) {
+
+                    backgroundMusic.play();
+
+                }
+
+
+                /* Sonido Pipis */
 
                 pipisSound.currentTime = 0;
 
                 pipisSound.play();
 
 
-                /* =========================
-                   CREAR 25 PIPIS
-                ========================= */
+                /* Crear 25 Pipis */
 
                 for (
                     let i = 0;
@@ -162,13 +192,13 @@
                         "pipis-rain";
 
 
-                    /* POSICIÓN ALEATORIA */
+                    /* Posición aleatoria */
 
                     pipis.style.left =
                         Math.random() * 100 + "vw";
 
 
-                    /* TAMAÑO ALEATORIO */
+                    /* Tamaño aleatorio */
 
                     const size =
                         Math.floor(
@@ -180,7 +210,7 @@
                         size + "px";
 
 
-                    /* VELOCIDAD ALEATORIA */
+                    /* Velocidad */
 
                     const speed =
                         Math.random() * 2 + 2;
@@ -190,23 +220,23 @@
                         speed + "s";
 
 
-                    /* RETRASO ALEATORIO */
+                    /* Retraso */
 
                     pipis.style.animationDelay =
                         Math.random() * 0.5 + "s";
 
 
-                    /* AGREGAR PIPIS */
+                    /* Agregar Pipis */
 
                     pipisRain.appendChild(
                         pipis
                     );
 
 
-                    /* ELIMINAR DESPUÉS DE CAER */
+                    /* Eliminar después */
 
                     setTimeout(
-                        function () {
+                        () => {
 
                             pipis.remove();
 
