@@ -83,3 +83,41 @@ h1 {
 
     box-shadow: 2px 2px 0 #000000;
 }
+
+#pipisRain {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+.pipis-rain {
+    position: absolute;
+
+    top: -120px;
+
+    height: auto;
+
+    animation-name: pipisFall;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pipisFall {
+
+    0% {
+        transform: translateY(-120px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
