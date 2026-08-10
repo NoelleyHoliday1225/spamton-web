@@ -31,7 +31,9 @@ body {
 
     background-attachment: fixed;
 
-    font-family: 'Press Start 2P', cursive;
+    font-family:
+        'Press Start 2P',
+        cursive;
 
     text-align: center;
 
@@ -59,7 +61,7 @@ h1 {
 
 
 /* =========================
-   SPAMTON
+   SPAMTON PRINCIPAL
 ========================= */
 
 .gif-spamton {
@@ -91,7 +93,9 @@ h1 {
 
     padding: 20px 40px;
 
-    font-family: 'Press Start 2P', cursive;
+    font-family:
+        'Press Start 2P',
+        cursive;
 
     font-size: 20px;
 
@@ -101,7 +105,8 @@ h1 {
 
     border: 5px solid black;
 
-    box-shadow: 8px 8px 0 black;
+    box-shadow:
+        8px 8px 0 black;
 
     cursor: pointer;
 
@@ -117,15 +122,132 @@ h1 {
 
 #pipisButton:active {
 
-    transform: translate(6px, 6px);
+    transform:
+        translate(6px, 6px);
 
-    box-shadow: 2px 2px 0 black;
+    box-shadow:
+        2px 2px 0 black;
 
 }
 
 
 /* =========================
-   CONTENEDOR DE LA LLUVIA
+   CAJA DE MÚSICA
+========================= */
+
+#musicBox {
+
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    width: 220px;
+
+    z-index: 20000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+/* =========================
+   SPAMTON BAILANDO
+========================= */
+
+#dancingSpamton {
+
+    width: 150px;
+
+    max-height: 180px;
+
+    object-fit: contain;
+
+    margin-bottom: -5px;
+
+    image-rendering: auto;
+
+}
+
+
+/* =========================
+   BOTÓN MUSIC
+========================= */
+
+#musicButton {
+
+    padding: 12px 15px;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    background: #ff00ff;
+
+    color: white;
+
+    border: 4px solid black;
+
+    box-shadow:
+        6px 6px 0 black;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.1s;
+
+}
+
+
+#musicButton:hover {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+#musicButton:active {
+
+    transform:
+        translate(4px, 4px);
+
+    box-shadow:
+        2px 2px 0 black;
+
+}
+
+
+/* =========================
+   CUANDO LA MÚSICA COMIENZA
+========================= */
+
+.musicStarted #musicButton {
+
+    background: #00ff00;
+
+}
+
+
+.musicStarted #musicButton::after {
+
+    content:
+        " ♪ ON";
+
+}
+
+
+/* =========================
+   LLUVIA DE PIPIS
 ========================= */
 
 #pipisRain {
@@ -136,6 +258,7 @@ h1 {
     left: 0;
 
     width: 100vw;
+
     height: 100vh;
 
     pointer-events: none;
@@ -148,7 +271,7 @@ h1 {
 
 
 /* =========================
-   CADA PIPIS
+   PIPIS INDIVIDUAL
 ========================= */
 
 .pipis-rain {
@@ -167,17 +290,20 @@ h1 {
 
     padding: 0;
 
-    animation-name: caerPipis;
+    animation-name:
+        caerPipis;
 
-    animation-timing-function: linear;
+    animation-timing-function:
+        linear;
 
-    animation-fill-mode: forwards;
+    animation-fill-mode:
+        forwards;
 
 }
 
 
 /* =========================
-   ANIMACIÓN
+   ANIMACIÓN PIPIS
 ========================= */
 
 @keyframes caerPipis {
