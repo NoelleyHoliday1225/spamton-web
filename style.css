@@ -1,54 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+
+/* =========================
+   PÁGINA
+========================= */
+
+html,
 body {
+
     margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+}
+
+
+body {
+
     min-height: 100vh;
 
     background-image: url("spamton-cielo.png");
+
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
+
+    background-attachment: fixed;
 
     font-family: 'Press Start 2P', cursive;
 
     text-align: center;
+
+    overflow-x: hidden;
+
 }
 
-/* TÍTULO */
+
+/* =========================
+   TÍTULO
+========================= */
 
 h1 {
-    color: #ffffff;
+
+    color: white;
+
     font-size: 30px;
 
     text-shadow:
-        4px 4px 0 #000000;
+        4px 4px 0 black;
 
     padding-top: 30px;
+
 }
 
-/* GIF DE SPAMTON */
+
+/* =========================
+   SPAMTON
+========================= */
 
 .gif-spamton {
+
     display: block;
 
-    max-width: 300px;
+    width: 300px;
+
+    max-width: 80%;
 
     margin: 30px auto;
+
 }
 
-/* GIF DE PIPIS */
 
-.gif-pipis {
-    display: block;
-
-    max-width: 250px;
-
-    margin: 30px auto;
-}
-
-/* BOTÓN PIPIS */
+/* =========================
+   BOTÓN PIPIS
+========================= */
 
 #pipisButton {
+
+    position: relative;
+
+    z-index: 10000;
+
     display: block;
 
     margin: 40px auto;
@@ -59,65 +95,107 @@ h1 {
 
     font-size: 20px;
 
-    background: #00ffff;
+    background: cyan;
 
-    color: #000000;
+    color: black;
 
-    border: 5px solid #000000;
+    border: 5px solid black;
 
-    box-shadow: 8px 8px 0 #000000;
+    box-shadow: 8px 8px 0 black;
 
     cursor: pointer;
+
 }
 
-/* EFECTO AL PASAR EL RATÓN */
 
 #pipisButton:hover {
+
     transform: scale(1.08);
+
 }
 
-/* EFECTO AL PRESIONAR */
 
 #pipisButton:active {
+
     transform: translate(6px, 6px);
 
-    box-shadow: 2px 2px 0 #000000;
+    box-shadow: 2px 2px 0 black;
+
 }
 
+
+/* =========================
+   CONTENEDOR DE LA LLUVIA
+========================= */
+
 #pipisRain {
+
     position: fixed;
+
     top: 0;
     left: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
     pointer-events: none;
 
     overflow: hidden;
 
     z-index: 9999;
+
 }
 
+
+/* =========================
+   CADA PIPIS
+========================= */
+
 .pipis-rain {
+
     position: absolute;
 
-    top: -120px;
+    top: -150px;
+
+    left: 0;
 
     height: auto;
 
-    animation-name: pipisFall;
+    display: block;
+
+    margin: 0;
+
+    padding: 0;
+
+    animation-name: caerPipis;
+
     animation-timing-function: linear;
+
     animation-fill-mode: forwards;
+
 }
 
-@keyframes pipisFall {
+
+/* =========================
+   ANIMACIÓN
+========================= */
+
+@keyframes caerPipis {
 
     0% {
-        transform: translateY(-120px) rotate(0deg);
+
+        transform:
+            translateY(-150px)
+            rotate(0deg);
+
     }
 
     100% {
-        transform: translateY(110vh) rotate(720deg);
+
+        transform:
+            translateY(120vh)
+            rotate(720deg);
+
     }
+
 }
