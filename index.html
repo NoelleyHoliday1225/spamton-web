@@ -11,3 +11,21 @@ body {
 
     font-family: 'Press Start 2P', cursive;
 }
+
+<img src="spamton.gif" alt="Spamton" class="gif-spamton">
+
+<img src="pipis.gif" alt="Pipis" class="gif-pipis">
+
+<button id="pipisButton">[ PIPIS ]</button>
+
+<audio id="pipisSound" src="pipis.mp3"></audio>
+
+<script>
+    const pipisButton = document.getElementById("pipisButton");
+    const pipisSound = document.getElementById("pipisSound");
+
+    pipisButton.addEventListener("click", () => {
+        pipisSound.currentTime = 0;
+        pipisSound.play();
+    });
+</script>
