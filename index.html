@@ -1,31 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-    margin: 0;
-    min-height: 100vh;
+    <title>Spamton Shop</title>
 
-    background-image: url("spamton-cielo.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    font-family: 'Press Start 2P', cursive;
-}
+<body>
 
-<img src="spamton.gif" alt="Spamton" class="gif-spamton">
+    <h1>HEY EVERY !!</h1>
 
-<img src="pipis.gif" alt="Pipis" class="gif-pipis">
+    <!-- GIF DE SPAMTON -->
+    <img src="spamton.gif" alt="Spamton" class="gif-spamton">
 
-<button id="pipisButton">[ PIPIS ]</button>
+    <!-- GIF DE PIPIS -->
+    <img src="pipis.gif" alt="Pipis" class="gif-pipis">
 
-<audio id="pipisSound" src="pipis.mp3"></audio>
+    <!-- BOTÓN PIPIS -->
+    <button id="pipisButton">[ PIPIS ]</button>
 
-<script>
-    const pipisButton = document.getElementById("pipisButton");
-    const pipisSound = document.getElementById("pipisSound");
+    <!-- SONIDO -->
+    <audio id="pipisSound" src="pipis.mp3"></audio>
 
-    pipisButton.addEventListener("click", () => {
-        pipisSound.currentTime = 0;
-        pipisSound.play();
-    });
-</script>
+    <script>
+        const pipisButton = document.getElementById("pipisButton");
+        const pipisSound = document.getElementById("pipisSound");
+
+        pipisButton.addEventListener("click", () => {
+            pipisSound.currentTime = 0;
+            pipisSound.play();
+        });
+    </script>
+
+</body>
+</html>
