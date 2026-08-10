@@ -2,100 +2,227 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Spamton Shop</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
     <h1>HEY EVERY !!</h1>
 
+
     <!-- SPAMTON -->
-    <img src="spamton.gif" alt="Spamton" class="gif-spamton">
+
+    <img
+        src="spamton.gif"
+        alt="Spamton"
+        class="gif-spamton"
+    >
+
 
     <!-- BOTÓN PIPIS -->
-    <button id="pipisButton">[ PIPIS ]</button>
 
-    <!-- SONIDO -->
-    <audio id="pipisSound" src="pipis.mp3"></audio>
+    <button id="pipisButton">
+        [ PIPIS ]
+    </button>
 
-<!-- MÚSICA DE FONDO -->
-<audio id="backgroundMusic" src="want-to-be-a.mp3" loop></audio>
+
+    <!-- SONIDO PIPIS -->
+
+    <audio
+        id="pipisSound"
+        src="pipis.mp3"
+    ></audio>
+
+
+    <!-- MÚSICA DE FONDO -->
+
+    <audio
+        id="backgroundMusic"
+        src="want-to-be-a.mp3"
+        loop
+        autoplay
+    ></audio>
+
 
     <!-- CONTENEDOR DE LA LLUVIA -->
+
     <div id="pipisRain"></div>
 
 
     <script>
 
-    const pipisButton = document.getElementById("pipisButton");
-    const pipisSound = document.getElementById("pipisSound");
-    const pipisRain = document.getElementById("pipisRain");
 
-    // MÚSICA DE FONDO
-    const backgroundMusic = document.getElementById("backgroundMusic");
+        /* =========================
+           ELEMENTOS
+        ========================= */
 
-    // Volumen al 40%
-    backgroundMusic.volume = 0.4;
+        const pipisButton =
+            document.getElementById("pipisButton");
 
+        const pipisSound =
+            document.getElementById("pipisSound");
 
-    pipisButton.addEventListener("click", function () {
+        const pipisRain =
+            document.getElementById("pipisRain");
 
-        // Reproducir música de fondo
-        backgroundMusic.play();
-
-        // Reproducir sonido de Pipis
-        pipisSound.currentTime = 0;
-        pipisSound.play();
+        const backgroundMusic =
+            document.getElementById("backgroundMusic");
 
 
-        // Crear 25 Pipis
-        for (let i = 0; i < 25; i++) {
+        /* =========================
+           VOLUMEN DE LA MÚSICA
+        ========================= */
 
-            const pipis = document.createElement("img");
-
-            pipis.src = "pipis.gif";
-
-            pipis.className = "pipis-rain";
+        backgroundMusic.volume = 0.4;
 
 
-            // Posición horizontal aleatoria
-            pipis.style.left = Math.random() * 100 + "vw";
+        /* =========================
+           INTENTAR REPRODUCIR
+           AL ENTRAR
+        ========================= */
+
+        window.addEventListener("load", function () {
+
+            backgroundMusic.play().catch(function () {
+
+                console.log(
+                    "El navegador bloqueó el autoplay. Esperando interacción..."
+                );
+
+            });
+
+        });
 
 
-            // Tamaño aleatorio
-            const size = Math.floor(Math.random() * 60) + 40;
+        /* =========================
+           SI CHROME BLOQUEA
+           EL AUTOPLAY
+        ========================= */
 
-            pipis.style.width = size + "px";
+        function iniciarMusica() {
 
-
-            // Velocidad aleatoria
-            const speed = Math.random() * 2 + 2;
-
-            pipis.style.animationDuration = speed + "s";
-
-
-            // Rotación aleatoria
-            pipis.style.animationDelay =
-                Math.random() * 0.5 + "s";
-
-
-            pipisRain.appendChild(pipis);
-
-
-            // Eliminar después de caer
-            setTimeout(function () {
-
-                pipis.remove();
-
-            }, 5000);
+            backgroundMusic.play();
 
         }
 
-    });
 
-</script>
+        document.addEventListener(
+            "click",
+            iniciarMusica,
+            { once: true }
+        );
+
+
+        /* =========================
+           BOTÓN PIPIS
+        ========================= */
+
+        pipisButton.addEventListener(
+            "click",
+            function () {
+
+
+                /* SONIDO PIPIS */
+
+                pipisSound.currentTime = 0;
+
+                pipisSound.play();
+
+
+                /* =========================
+                   CREAR 25 PIPIS
+                ========================= */
+
+                for (
+                    let i = 0;
+                    i < 25;
+                    i++
+                ) {
+
+
+                    const pipis =
+                        document.createElement("img");
+
+
+                    pipis.src =
+                        "pipis.gif";
+
+
+                    pipis.className =
+                        "pipis-rain";
+
+
+                    /* POSICIÓN ALEATORIA */
+
+                    pipis.style.left =
+                        Math.random() * 100 + "vw";
+
+
+                    /* TAMAÑO ALEATORIO */
+
+                    const size =
+                        Math.floor(
+                            Math.random() * 60
+                        ) + 40;
+
+
+                    pipis.style.width =
+                        size + "px";
+
+
+                    /* VELOCIDAD ALEATORIA */
+
+                    const speed =
+                        Math.random() * 2 + 2;
+
+
+                    pipis.style.animationDuration =
+                        speed + "s";
+
+
+                    /* RETRASO ALEATORIO */
+
+                    pipis.style.animationDelay =
+                        Math.random() * 0.5 + "s";
+
+
+                    /* AGREGAR PIPIS */
+
+                    pipisRain.appendChild(
+                        pipis
+                    );
+
+
+                    /* ELIMINAR DESPUÉS DE CAER */
+
+                    setTimeout(
+                        function () {
+
+                            pipis.remove();
+
+                        },
+                        5000
+                    );
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
