@@ -5,7 +5,8 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Spamton Shop</title>
 
@@ -16,14 +17,38 @@
 
 <body>
 
-    <h1>HEY EVERY !!</h1>
+    <!-- =========================
+         BOTÓN SECRETO
+    ========================== -->
+
+    <a href="bigshot.html"
+       id="secretButton">
+
+        [ SECRET PIPIS ]
+
+    </a>
+
+
+    <!-- =========================
+         TROFEO BIG SHOT
+    ========================== -->
+
+    <button id="achievementButton">
+
+        🏆
+
+    </button>
 
 
     <!-- =========================
          SPAMTON PRINCIPAL
     ========================== -->
 
+    <h1>HEY EVERY !!</h1>
+
+
     <img
+        id="mainSpamton"
         src="spamton.gif"
         alt="Spamton"
         class="gif-spamton"
@@ -35,35 +60,48 @@
     ========================== -->
 
     <button id="pipisButton">
+
         [ PIPIS ]
+
     </button>
 
 
     <!-- =========================
-         SONIDO DE PIPIS
+         SONIDO PIPIS
     ========================== -->
 
     <audio
         id="pipisSound"
-        src="pipis.mp3"
-    ></audio>
+        src="pipis.mp3">
+    </audio>
 
 
     <!-- =========================
-         MÚSICA DE FONDO
+         MÚSICA NORMAL
     ========================== -->
 
     <audio
         id="backgroundMusic"
         src="want-to-be-a.mp3"
         loop
-        preload="auto"
-    ></audio>
+        preload="auto">
+    </audio>
+
+
+    <!-- =========================
+         MÚSICA BIG SHOT
+    ========================== -->
+
+    <audio
+        id="bigShotMusic"
+        src="big-shot.mp3"
+        loop
+        preload="auto">
+    </audio>
 
 
     <!-- =========================
          SPAMTON BAILANDO
-         + MÚSICA
     ========================== -->
 
     <div id="musicBox">
@@ -75,19 +113,19 @@
         >
 
         <button id="musicButton">
+
             [ TURN ON THE MUSIC ]
+
         </button>
 
     </div>
 
 
     <!-- =========================
-         SUSIE GLITCH
+         SUSIE
     ========================== -->
 
     <div id="susieGlitch">
-
-        <!-- TEXTO ARRIBA -->
 
         <div class="susieCaption">
 
@@ -97,8 +135,6 @@
 
         </div>
 
-
-        <!-- GARBATOS -->
 
         <div class="glitch-scribbles">
 
@@ -113,16 +149,12 @@
         </div>
 
 
-        <!-- GIF DE SUSIE -->
-
         <img
             src="susie.gif"
             alt="Susie comiendo pancakes"
             id="susieGif"
         >
 
-
-        <!-- TEXTO INFERIOR -->
 
         <div class="glitch-text">
 
@@ -134,7 +166,7 @@
 
 
     <!-- =========================
-         CONTENEDOR DE LA LLUVIA
+         LLUVIA DE PIPIS
     ========================== -->
 
     <div id="pipisRain"></div>
@@ -142,10 +174,9 @@
 
     <script>
 
-
-        /* =========================
+        /* =================================
            ELEMENTOS
-        ========================= */
+        ================================= */
 
         const pipisButton =
             document.getElementById("pipisButton");
@@ -159,65 +190,232 @@
         const backgroundMusic =
             document.getElementById("backgroundMusic");
 
+        const bigShotMusic =
+            document.getElementById("bigShotMusic");
+
         const musicButton =
             document.getElementById("musicButton");
 
         const musicBox =
             document.getElementById("musicBox");
 
+        const mainSpamton =
+            document.getElementById("mainSpamton");
 
-        /* =========================
-           VOLUMEN DE LA MÚSICA
-           40%
-        ========================== */
+        const achievementButton =
+            document.getElementById(
+                "achievementButton"
+            );
+
+
+        /* =================================
+           ESTADO
+        ================================= */
+
+        let bigShotMode = false;
+
+        let musicPlaying = false;
+
+
+        /* =================================
+           VOLUMEN
+        ================================= */
 
         backgroundMusic.volume = 0.4;
 
+        bigShotMusic.volume = 0.4;
 
-        /* =========================
-           BOTÓN TURN ON THE MUSIC
-        ========================== */
 
-        musicButton.addEventListener(
+        /* =================================
+           COMPROBAR LOGRO
+        ================================= */
+
+        if (
+            localStorage.getItem(
+                "bigShotAchievement"
+            ) === "true"
+        ) {
+
+            achievementButton.style.display =
+                "block";
+
+        }
+        else {
+
+            achievementButton.style.display =
+                "none";
+
+        }
+
+
+        /* =================================
+           ACTIVAR / DESACTIVAR BIG SHOT
+        ================================= */
+
+        function toggleBigShot() {
+
+            bigShotMode =
+                !bigShotMode;
+
+
+            if (bigShotMode) {
+
+                /* =========================
+                   ACTIVAR BIG SHOT
+                ========================== */
+
+                document.body.classList.add(
+                    "big-shot-mode"
+                );
+
+
+                mainSpamton.src =
+                    "spamton.neo.gif";
+
+
+                musicButton.textContent =
+                    "[ TURN ON THE BIG SHOT! ]";
+
+
+                /* Apagar música normal */
+
+                backgroundMusic.pause();
+
+                backgroundMusic.currentTime = 0;
+
+
+                /* Si la música estaba activa,
+                   iniciar Big Shot */
+
+                if (musicPlaying) {
+
+                    bigShotMusic.play();
+
+                }
+
+            }
+            else {
+
+                /* =========================
+                   DESACTIVAR BIG SHOT
+                ========================== */
+
+                document.body.classList.remove(
+                    "big-shot-mode"
+                );
+
+
+                mainSpamton.src =
+                    "spamton.gif";
+
+
+                musicButton.textContent =
+                    "[ TURN ON THE MUSIC ]";
+
+
+                /* Apagar Big Shot */
+
+                bigShotMusic.pause();
+
+                bigShotMusic.currentTime = 0;
+
+
+                /* Si estaba encendida,
+                   volver a música normal */
+
+                if (musicPlaying) {
+
+                    backgroundMusic.play();
+
+                }
+
+            }
+
+        }
+
+
+        /* =================================
+           BOTÓN DEL TROFEO
+        ================================= */
+
+        achievementButton.addEventListener(
             "click",
             function () {
 
-                backgroundMusic.play()
-                    .then(function () {
-
-                        musicBox.classList.add(
-                            "musicStarted"
-                        );
-
-                    })
-                    .catch(function (error) {
-
-                        console.log(
-                            "No se pudo reproducir la música:",
-                            error
-                        );
-
-                    });
+                toggleBigShot();
 
             }
         );
 
 
-        /* =========================
+        /* =================================
+           BOTÓN DE MÚSICA
+        ================================= */
+
+        musicButton.addEventListener(
+            "click",
+            function () {
+
+                if (!musicPlaying) {
+
+                    /* =========================
+                       ENCENDER
+                    ========================== */
+
+                    musicPlaying = true;
+
+
+                    if (bigShotMode) {
+
+                        bigShotMusic.play();
+
+                    }
+                    else {
+
+                        backgroundMusic.play();
+
+                    }
+
+
+                    musicBox.classList.add(
+                        "musicStarted"
+                    );
+
+                }
+                else {
+
+                    /* =========================
+                       APAGAR
+                    ========================== */
+
+                    musicPlaying = false;
+
+
+                    backgroundMusic.pause();
+
+                    bigShotMusic.pause();
+
+
+                    musicBox.classList.remove(
+                        "musicStarted"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================
            BOTÓN PIPIS
            
-           ESTE BOTÓN NO ENCIENDE
-           LA MÚSICA DE FONDO.
-        ========================== */
+           NO TOCA LA MÚSICA
+        ================================= */
 
         pipisButton.addEventListener(
             "click",
             function () {
 
-
-                /* =========================
-                   SONIDO PIPIS
-                ========================== */
 
                 pipisSound.currentTime = 0;
 
@@ -234,9 +432,10 @@
                     i++
                 ) {
 
-
                     const pipis =
-                        document.createElement("img");
+                        document.createElement(
+                            "img"
+                        );
 
 
                     pipis.src =
@@ -247,17 +446,10 @@
                         "pipis-rain";
 
 
-                    /* =========================
-                       POSICIÓN ALEATORIA
-                    ========================== */
-
                     pipis.style.left =
-                        Math.random() * 100 + "vw";
+                        Math.random() * 100 +
+                        "vw";
 
-
-                    /* =========================
-                       TAMAÑO ALEATORIO
-                    ========================== */
 
                     const size =
                         Math.floor(
@@ -269,10 +461,6 @@
                         size + "px";
 
 
-                    /* =========================
-                       VELOCIDAD ALEATORIA
-                    ========================== */
-
                     const speed =
                         Math.random() * 2 + 2;
 
@@ -281,26 +469,15 @@
                         speed + "s";
 
 
-                    /* =========================
-                       RETRASO ALEATORIO
-                    ========================== */
-
                     pipis.style.animationDelay =
-                        Math.random() * 0.5 + "s";
+                        Math.random() * 0.5 +
+                        "s";
 
-
-                    /* =========================
-                       AGREGAR PIPIS
-                    ========================== */
 
                     pipisRain.appendChild(
                         pipis
                     );
 
-
-                    /* =========================
-                       ELIMINAR DESPUÉS DE CAER
-                    ========================== */
 
                     setTimeout(
                         function () {
