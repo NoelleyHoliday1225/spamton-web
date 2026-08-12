@@ -17,7 +17,7 @@
 <body>
 
     <!-- =====================================================
-         BOTÓN PARA ENTRAR A LA SALA SECRETA
+         BOTÓN SALA SECRETA
     ====================================================== -->
 
     <a
@@ -29,14 +29,14 @@
 
 
     <!-- =====================================================
-         TROFEO
-         SOLO APARECE DESPUÉS DE CONSEGUIR EL LOGRO
+         TROFEO BIG SHOT
     ====================================================== -->
 
     <button
         id="achievementButton"
         type="button"
         title="Big Shot!"
+        style="display: none;"
     >
         🏆
     </button>
@@ -179,7 +179,7 @@
 
 
     <!-- =====================================================
-         CONTENEDOR DE LA LLUVIA DE PIPIS
+         LLUVIA DE PIPIS
     ====================================================== -->
 
     <div id="pipisRain"></div>
@@ -191,533 +191,612 @@
 
     <script>
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
 
 
-                /* =================================================
-                   ELEMENTOS
-                ================================================= */
+            /* =================================================
+               ELEMENTOS
+            ================================================= */
 
-                const pipisButton =
-                    document.getElementById("pipisButton");
+            const pipisButton =
+                document.getElementById("pipisButton");
 
-                const pipisSound =
-                    document.getElementById("pipisSound");
+            const pipisSound =
+                document.getElementById("pipisSound");
 
-                const pipisRain =
-                    document.getElementById("pipisRain");
+            const pipisRain =
+                document.getElementById("pipisRain");
 
-                const normalMusic =
-                    document.getElementById("normalMusic");
+            const normalMusic =
+                document.getElementById("normalMusic");
 
-                const bigShotMusic =
-                    document.getElementById("bigShotMusic");
+            const bigShotMusic =
+                document.getElementById("bigShotMusic");
 
-                const musicButton =
-                    document.getElementById("musicButton");
+            const musicButton =
+                document.getElementById("musicButton");
 
-                const mainSpamton =
-                    document.getElementById("mainSpamton");
+            const mainSpamton =
+                document.getElementById("mainSpamton");
 
-                const achievementButton =
-                    document.getElementById(
-                        "achievementButton"
-                    );
+            const achievementButton =
+                document.getElementById(
+                    "achievementButton"
+                );
 
-                const secretRoomButton =
-                    document.getElementById(
-                        "secretRoomButton"
-                    );
-
-
-                /* =================================================
-                   CONFIGURACIÓN DE VOLUMEN
-                ================================================= */
-
-                normalMusic.volume = 0.40;
-
-                bigShotMusic.volume = 0.40;
-
-                pipisSound.volume = 0.70;
+            const secretRoomButton =
+                document.getElementById(
+                    "secretRoomButton"
+                );
 
 
-                /* =================================================
-                   ESTADO
-                ================================================= */
+            /* =================================================
+               VOLUMEN
+            ================================================= */
 
-                let musicIsPlaying = false;
+            normalMusic.volume = 0.40;
 
-                let bigShotMode = false;
+            bigShotMusic.volume = 0.40;
 
-
-                /* =================================================
-                   COMPROBAR SI EL LOGRO YA FUE CONSEGUIDO
-                ================================================= */
-
-                const achievementUnlocked =
-                    localStorage.getItem(
-                        "spamtonBigShotAchievement"
-                    ) === "true";
+            pipisSound.volume = 0.70;
 
 
-                if (achievementUnlocked) {
+            /* =================================================
+               ESTADO
+            ================================================= */
 
-                    achievementButton.style.display =
-                        "block";
+            let musicIsPlaying = false;
 
-                    secretRoomButton.style.display =
-                        "none";
-
-                }
+            let bigShotMode = false;
 
 
-                /* =================================================
-                   FUNCIÓN PARA ACTUALIZAR EL BOTÓN
-                ================================================= */
+            /* =================================================
+               COMPROBAR LOGRO
+            ================================================= */
 
-                function updateMusicButton() {
+            const achievementUnlocked =
+                localStorage.getItem(
+                    "spamtonBigShotAchievement"
+                ) === "true";
 
-                    if (bigShotMode) {
 
-                        if (musicIsPlaying) {
+            if (achievementUnlocked) {
 
-                            musicButton.textContent =
-                                "[ TURN OFF THE BIG SHOT ]";
+                achievementButton.style.display =
+                    "block";
 
-                        }
-                        else {
+                secretRoomButton.style.display =
+                    "none";
 
-                            musicButton.textContent =
-                                "[ TURN ON THE BIG SHOT! ]";
+            }
 
-                        }
+
+            /* =================================================
+               ACTUALIZAR BOTÓN
+            ================================================= */
+
+            function updateMusicButton() {
+
+                if (bigShotMode) {
+
+                    if (musicIsPlaying) {
+
+                        musicButton.textContent =
+                            "[ TURN OFF THE BIG SHOT ]";
 
                     }
                     else {
 
-                        if (musicIsPlaying) {
+                        musicButton.textContent =
+                            "[ TURN ON THE BIG SHOT! ]";
 
-                            musicButton.textContent =
-                                "[ TURN OFF THE MUSIC ]";
+                    }
 
-                        }
-                        else {
+                }
+                else {
 
-                            musicButton.textContent =
-                                "[ TURN ON THE MUSIC ]";
+                    if (musicIsPlaying) {
 
-                        }
+                        musicButton.textContent =
+                            "[ TURN OFF THE MUSIC ]";
+
+                    }
+                    else {
+
+                        musicButton.textContent =
+                            "[ TURN ON THE MUSIC ]";
 
                     }
 
                 }
 
+            }
 
-                /* =================================================
-                   DETENER TODAS LAS MÚSICAS
-                ================================================= */
 
-                function stopAllMusic() {
+            /* =================================================
+               DETENER TODAS LAS MÚSICAS
+            ================================================= */
 
-                    normalMusic.pause();
+            function stopAllMusic() {
 
-                    bigShotMusic.pause();
+                normalMusic.pause();
 
-                    musicIsPlaying = false;
+                bigShotMusic.pause();
+
+                musicIsPlaying = false;
+
+            }
+
+
+            /* =================================================
+               MÚSICA NORMAL
+            ================================================= */
+
+            function playNormalMusic() {
+
+                /*
+                 * Detener Big Shot completamente
+                 */
+
+                bigShotMusic.pause();
+
+                bigShotMusic.currentTime = 0;
+
+
+                /*
+                 * Configurar volumen
+                 */
+
+                normalMusic.volume = 0.40;
+
+
+                /*
+                 * Reproducir
+                 */
+
+                const promise =
+                    normalMusic.play();
+
+
+                if (promise !== undefined) {
+
+                    promise.then(
+                        function () {
+
+                            musicIsPlaying = true;
+
+                            musicButton.classList.add(
+                                "music-on"
+                            );
+
+                            updateMusicButton();
+
+                        }
+                    )
+                    .catch(
+                        function (error) {
+
+                            console.error(
+                                "Error música normal:",
+                                error
+                            );
+
+                            musicIsPlaying = false;
+
+                            updateMusicButton();
+
+                        }
+                    );
 
                 }
 
-
-                /* =================================================
-                   REPRODUCIR MÚSICA NORMAL
-                ================================================= */
-
-                function playNormalMusic() {
-
-                    bigShotMusic.pause();
-
-                    normalMusic.volume = 0.40;
-
-                    const playPromise =
-                        normalMusic.play();
+            }
 
 
-                    if (
-                        playPromise !== undefined
-                    ) {
+            /* =================================================
+               BIG SHOT
+            ================================================= */
 
-                        playPromise
-                            .then(function () {
+            function playBigShotMusic() {
 
-                                musicIsPlaying = true;
+                /*
+                 * Detener música normal
+                 */
 
-                                updateMusicButton();
+                normalMusic.pause();
 
-                            })
-                            .catch(function (error) {
+                normalMusic.currentTime = 0;
 
-                                console.log(
-                                    "No se pudo reproducir la música normal:",
+
+                /*
+                 * Detener Big Shot
+                 * antes de reiniciarlo
+                 */
+
+                bigShotMusic.pause();
+
+                bigShotMusic.currentTime = 0;
+
+
+                /*
+                 * Volumen
+                 */
+
+                bigShotMusic.volume = 0.40;
+
+
+                /*
+                 * Cargar nuevamente el audio
+                 */
+
+                bigShotMusic.load();
+
+
+                /*
+                 * Reproducir
+                 */
+
+                const promise =
+                    bigShotMusic.play();
+
+
+                if (promise !== undefined) {
+
+                    promise.then(
+                        function () {
+
+                            console.log(
+                                "BIG SHOT reproduciéndose"
+                            );
+
+                            musicIsPlaying = true;
+
+                            musicButton.classList.add(
+                                "music-on"
+                            );
+
+                            updateMusicButton();
+
+                        }
+                    )
+                    .catch(
+                        function (error) {
+
+                            console.error(
+                                "ERROR BIG SHOT:",
+                                error
+                            );
+
+                            musicIsPlaying = false;
+
+                            updateMusicButton();
+
+                        }
+                    );
+
+                }
+
+            }
+
+
+            /* =================================================
+               BOTÓN DE MÚSICA
+            ================================================= */
+
+            musicButton.addEventListener(
+                "click",
+                function (event) {
+
+                    /*
+                     * Evita que el clic
+                     * afecte otras cosas
+                     */
+
+                    event.stopPropagation();
+
+
+                    /* ===============================
+                       APAGAR MÚSICA
+                    =============================== */
+
+                    if (musicIsPlaying) {
+
+                        stopAllMusic();
+
+                        musicButton.classList.remove(
+                            "music-on"
+                        );
+
+                        updateMusicButton();
+
+                        return;
+
+                    }
+
+
+                    /* ===============================
+                       ENCENDER MÚSICA
+                    =============================== */
+
+                    if (bigShotMode) {
+
+                        playBigShotMusic();
+
+                    }
+                    else {
+
+                        playNormalMusic();
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               BOTÓN PIPIS
+
+               IMPORTANTE:
+               NO MODIFICA LA MÚSICA.
+            ================================================= */
+
+            pipisButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+
+                    /* ===============================
+                       SONIDO PIPIS
+                    =============================== */
+
+                    pipisSound.currentTime = 0;
+
+                    const sound =
+                        pipisSound.play();
+
+
+                    if (sound !== undefined) {
+
+                        sound.catch(
+                            function (error) {
+
+                                console.error(
+                                    "Error Pipis:",
                                     error
                                 );
 
-                                musicIsPlaying = false;
-
-                                updateMusicButton();
-
-                            });
+                            }
+                        );
 
                     }
 
-                }
 
+                    /* ===============================
+                       CREAR PIPIS
+                    =============================== */
 
-                /* =================================================
-                   REPRODUCIR BIG SHOT
-                ================================================= */
-
-                function playBigShotMusic() {
-
-                    normalMusic.pause();
-
-                    bigShotMusic.volume = 0.40;
-
-                    const playPromise =
-                        bigShotMusic.play();
-
-
-                    if (
-                        playPromise !== undefined
+                    for (
+                        let i = 0;
+                        i < 25;
+                        i++
                     ) {
 
-                        playPromise
-                            .then(function () {
 
-                                musicIsPlaying = true;
+                        const pipis =
+                            document.createElement(
+                                "img"
+                            );
 
-                                updateMusicButton();
 
-                            })
-                            .catch(function (error) {
+                        pipis.src =
+                            "pipis.gif";
 
-                                console.log(
-                                    "No se pudo reproducir Big Shot:",
-                                    error
-                                );
 
-                                musicIsPlaying = false;
+                        pipis.className =
+                            "pipis-rain";
 
-                                updateMusicButton();
 
-                            });
+                        /*
+                         * Posición horizontal
+                         */
+
+                        pipis.style.left =
+                            Math.random() *
+                            100 +
+                            "vw";
+
+
+                        /*
+                         * Tamaño
+                         */
+
+                        const size =
+                            Math.floor(
+                                Math.random() * 60
+                            ) + 40;
+
+
+                        pipis.style.width =
+                            size +
+                            "px";
+
+
+                        /*
+                         * Velocidad
+                         */
+
+                        const speed =
+                            Math.random() * 2 +
+                            2;
+
+
+                        pipis.style.animationDuration =
+                            speed +
+                            "s";
+
+
+                        /*
+                         * Retraso
+                         */
+
+                        pipis.style.animationDelay =
+                            Math.random() *
+                            0.5 +
+                            "s";
+
+
+                        /*
+                         * Agregar
+                         */
+
+                        pipisRain.appendChild(
+                            pipis
+                        );
+
+
+                        /*
+                         * Eliminar
+                         */
+
+                        setTimeout(
+                            function () {
+
+                                if (
+                                    pipis.parentNode
+                                ) {
+
+                                    pipis.remove();
+
+                                }
+
+                            },
+                            5500
+                        );
 
                     }
 
                 }
+            );
 
 
-                /* =================================================
-                   BOTÓN DE MÚSICA
-                   
-                   IMPORTANTE:
-                   PIPIS NO LLAMA ESTA FUNCIÓN.
-                ================================================= */
+            /* =================================================
+               TROFEO BIG SHOT
+            ================================================= */
 
-                musicButton.addEventListener(
-                    "click",
-                    function () {
+            achievementButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
 
 
-                        /* =============================
-                           SI LA MÚSICA ESTÁ SONANDO
-                        ============================== */
+                    /*
+                     * Cambiar modo
+                     */
+
+                    bigShotMode =
+                        !bigShotMode;
+
+
+                    /* =================================
+                       ACTIVAR BIG SHOT
+                    ================================= */
+
+                    if (bigShotMode) {
+
+
+                        document.body.classList.add(
+                            "big-shot-mode"
+                        );
+
+
+                        /*
+                         * Cambiar Spamton
+                         */
+
+                        mainSpamton.src =
+                            "spamton-neo.gif";
+
+
+                        /*
+                         * Si estaba sonando música
+                         * cambiar automáticamente
+                         */
 
                         if (musicIsPlaying) {
 
                             stopAllMusic();
-
-                            updateMusicButton();
-
-                            musicButton.classList.remove(
-                                "music-on"
-                            );
-
-                            return;
-
-                        }
-
-
-                        /* =============================
-                           SI NO ESTÁ SONANDO
-                        ============================== */
-
-                        if (bigShotMode) {
 
                             playBigShotMusic();
 
                         }
                         else {
 
-                            playNormalMusic();
+                            updateMusicButton();
 
                         }
 
+                    }
 
-                        musicButton.classList.add(
-                            "music-on"
+
+                    /* =================================
+                       DESACTIVAR BIG SHOT
+                    ================================= */
+
+                    else {
+
+
+                        document.body.classList.remove(
+                            "big-shot-mode"
                         );
 
-                    }
-                );
 
+                        /*
+                         * Volver a Spamton normal
+                         */
 
-                /* =================================================
-                   BOTÓN PIPIS
+                        mainSpamton.src =
+                            "spamton-idle.gif";
 
-                   ESTE BOTÓN SOLO REPRODUCE PIPIS.
-                   NO TOCA NINGUNA MÚSICA.
-                ================================================= */
 
-                pipisButton.addEventListener(
-                    "click",
-                    function () {
+                        /*
+                         * Si estaba sonando Big Shot,
+                         * volver a la música normal
+                         */
 
+                        if (musicIsPlaying) {
 
-                        /* =============================
-                           SONIDO
-                        ============================== */
+                            stopAllMusic();
 
-                        pipisSound.currentTime = 0;
-
-                        const pipisPromise =
-                            pipisSound.play();
-
-
-                        if (
-                            pipisPromise !== undefined
-                        ) {
-
-                            pipisPromise.catch(
-                                function (error) {
-
-                                    console.log(
-                                        "No se pudo reproducir Pipis:",
-                                        error
-                                    );
-
-                                }
-                            );
-
-                        }
-
-
-                        /* =============================
-                           CREAR PIPIS
-                        ============================== */
-
-                        const amount = 25;
-
-
-                        for (
-                            let i = 0;
-                            i < amount;
-                            i++
-                        ) {
-
-
-                            const pipis =
-                                document.createElement(
-                                    "img"
-                                );
-
-
-                            pipis.src =
-                                "pipis.gif";
-
-
-                            pipis.className =
-                                "pipis-rain";
-
-
-                            /* POSICIÓN */
-
-                            pipis.style.left =
-                                (
-                                    Math.random() *
-                                    100
-                                ) + "vw";
-
-
-                            /* TAMAÑO */
-
-                            const size =
-                                Math.floor(
-                                    Math.random() * 60
-                                ) + 40;
-
-
-                            pipis.style.width =
-                                size + "px";
-
-
-                            /* VELOCIDAD */
-
-                            const speed =
-                                Math.random() * 2 + 2;
-
-
-                            pipis.style.animationDuration =
-                                speed + "s";
-
-
-                            /* RETRASO */
-
-                            pipis.style.animationDelay =
-                                (
-                                    Math.random() * 0.5
-                                ) + "s";
-
-
-                            pipisRain.appendChild(
-                                pipis
-                            );
-
-
-                            /* ELIMINAR */
-
-                            setTimeout(
-                                function () {
-
-                                    if (
-                                        pipis.parentNode
-                                    ) {
-
-                                        pipis.remove();
-
-                                    }
-
-                                },
-                                5500
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                /* =================================================
-                   ACTIVAR / DESACTIVAR BIG SHOT
-                ================================================= */
-
-                achievementButton.addEventListener(
-                    "click",
-                    function () {
-
-
-                        bigShotMode =
-                            !bigShotMode;
-
-
-                        if (bigShotMode) {
-
-
-                            /* =============================
-                               ACTIVAR MODO BIG SHOT
-                            ============================== */
-
-                            document.body.classList.add(
-                                "big-shot-mode"
-                            );
-
-
-                            mainSpamton.src =
-                                "spamton-neo.gif";
-
-
-                            /* Cambiar botón */
-
-                            if (musicIsPlaying) {
-
-                                musicButton.textContent =
-                                    "[ TURN OFF THE BIG SHOT ]";
-
-                            }
-                            else {
-
-                                musicButton.textContent =
-                                    "[ TURN ON THE BIG SHOT! ]";
-
-                            }
-
-
-                            /* =============================
-                               CAMBIAR MÚSICA
-                            ============================== */
-
-                            if (musicIsPlaying) {
-
-                                normalMusic.pause();
-
-                                playBigShotMusic();
-
-                            }
+                            playNormalMusic();
 
                         }
                         else {
 
-
-                            /* =============================
-                               SALIR DE BIG SHOT
-                            ============================== */
-
-                            document.body.classList.remove(
-                                "big-shot-mode"
-                            );
-
-
-                            mainSpamton.src =
-                                "spamton-idle.gif";
-
-
-                            /* =============================
-                               CAMBIAR MÚSICA
-                            ============================== */
-
-                            if (musicIsPlaying) {
-
-                                bigShotMusic.pause();
-
-                                playNormalMusic();
-
-                            }
-                            else {
-
-                                musicButton.textContent =
-                                    "[ TURN ON THE MUSIC ]";
-
-                            }
+                            updateMusicButton();
 
                         }
 
                     }
-                );
+
+                }
+            );
 
 
-                /* =================================================
-                   ESTADO INICIAL
-                ================================================= */
+            /* =================================================
+               ESTADO INICIAL
+            ================================================= */
 
-                updateMusicButton();
+            updateMusicButton();
 
 
-            }
-        );
+    });
 
     </script>
-
 
 </body>
 
