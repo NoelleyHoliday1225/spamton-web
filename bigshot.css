@@ -1,1 +1,338 @@
+* {
 
+    box-sizing: border-box;
+
+}
+
+
+html,
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    width: 100%;
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background: black;
+
+    color: white;
+
+    font-family:
+        'Press Start 2P',
+        monospace;
+
+    text-align: center;
+
+    overflow-x: hidden;
+
+}
+
+
+h1 {
+
+    margin-top: 30px;
+
+    font-size: 22px;
+
+    text-shadow:
+
+        3px 3px 0 #ff00ff,
+
+        -3px -3px 0 cyan;
+
+}
+
+
+#counter {
+
+    font-size: 10px;
+
+    margin-bottom: 25px;
+
+    color: #aaa;
+
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+#backButton {
+
+    position: fixed;
+
+    top: 15px;
+
+    left: 15px;
+
+    color: white;
+
+    background: black;
+
+    border: 3px solid white;
+
+    padding: 10px;
+
+    font-size: 9px;
+
+    text-decoration: none;
+
+    z-index: 10000;
+
+}
+
+
+#backButton:hover {
+
+    background: white;
+
+    color: black;
+
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+#pipisGrid {
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    margin: 0 auto 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(10, 1fr);
+
+    gap: 18px;
+
+    align-items: center;
+
+    justify-items: center;
+
+}
+
+
+/* =========================
+   PIPIS
+========================= */
+
+.gridPipis {
+
+    width: 55px;
+
+    height: 55px;
+
+    object-fit: contain;
+
+    cursor: pointer;
+
+    transition:
+        transform .1s;
+
+}
+
+
+.gridPipis:hover {
+
+    transform:
+        scale(1.12);
+
+}
+
+
+/* =========================
+   PIPIS SECRETO
+========================= */
+
+.secretPipis {
+
+    animation:
+        secretGlitch
+        .35s
+        infinite;
+
+}
+
+
+@keyframes secretGlitch {
+
+    0% {
+
+        transform:
+            translate(0,0)
+            skew(0deg);
+
+        filter:
+            none;
+
+    }
+
+    20% {
+
+        transform:
+            translate(-4px,2px)
+            skew(10deg);
+
+        filter:
+            hue-rotate(90deg);
+
+    }
+
+    40% {
+
+        transform:
+            translate(5px,-2px)
+            skew(-15deg);
+
+        filter:
+            contrast(2);
+
+    }
+
+    60% {
+
+        transform:
+            translate(-2px,3px)
+            skew(5deg);
+
+        filter:
+            hue-rotate(250deg);
+
+    }
+
+    80% {
+
+        transform:
+            translate(4px,-1px)
+            skew(-5deg);
+
+        filter:
+            brightness(2);
+
+    }
+
+    100% {
+
+        transform:
+            translate(0,0)
+            skew(0deg);
+
+        filter:
+            none;
+
+    }
+
+}
+
+
+/* =========================
+   PIPIS ENCONTRADO
+========================= */
+
+.secretPipis.found {
+
+    animation: none;
+
+    transform:
+        scale(1.5)
+        rotate(360deg);
+
+    filter:
+        brightness(3);
+
+}
+
+
+/* =========================
+   LOGRO
+========================= */
+
+#achievement {
+
+    position: fixed;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.5);
+
+    width: 380px;
+
+    padding: 25px;
+
+    background: black;
+
+    border: 5px solid gold;
+
+    box-shadow:
+
+        10px 10px 0 #ff00ff,
+
+        -10px -10px 0 cyan;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        .3s;
+
+    z-index: 50000;
+
+}
+
+
+#achievement.show {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+
+}
+
+
+.achievementTitle {
+
+    font-size: 11px;
+
+    color: gold;
+
+    margin-bottom: 25px;
+
+}
+
+
+.achievementName {
+
+    font-size: 25px;
+
+    color: white;
+
+    text-shadow:
+
+        4px 0 #ff00ff,
+
+        -4px 0 cyan;
+
+}
