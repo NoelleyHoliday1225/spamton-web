@@ -19,7 +19,9 @@
     <h1>HEY EVERY !!</h1>
 
 
-    <!-- SPAMTON PRINCIPAL -->
+    <!-- =========================
+         SPAMTON PRINCIPAL
+    ========================== -->
 
     <img
         src="spamton.gif"
@@ -28,14 +30,18 @@
     >
 
 
-    <!-- BOTÓN PIPIS -->
+    <!-- =========================
+         BOTÓN PIPIS
+    ========================== -->
 
     <button id="pipisButton">
         [ PIPIS ]
     </button>
 
 
-    <!-- SONIDO DE PIPIS -->
+    <!-- =========================
+         SONIDO DE PIPIS
+    ========================== -->
 
     <audio
         id="pipisSound"
@@ -43,7 +49,9 @@
     ></audio>
 
 
-    <!-- MÚSICA DE FONDO -->
+    <!-- =========================
+         MÚSICA DE FONDO
+    ========================== -->
 
     <audio
         id="backgroundMusic"
@@ -53,7 +61,10 @@
     ></audio>
 
 
-    <!-- SPAMTON BAILANDO + BOTÓN DE MÚSICA -->
+    <!-- =========================
+         SPAMTON BAILANDO
+         + MÚSICA
+    ========================== -->
 
     <div id="musicBox">
 
@@ -70,188 +81,243 @@
     </div>
 
 
-    <!-- CONTENEDOR DE LA LLUVIA -->
+    <!-- =========================
+         SUSIE GLITCH
+    ========================== -->
+
+    <div id="susieGlitch">
+
+        <!-- TEXTO ARRIBA -->
+
+        <div class="susieCaption">
+
+            <span class="arrow">↘</span>
+
+            SUSIE COMIENDO PANCAKES
+
+        </div>
+
+
+        <!-- GARBATOS -->
+
+        <div class="glitch-scribbles">
+
+            /// !!! ///
+            <br>
+
+            PANCAKES???
+            <br>
+
+            !! ?? ##
+
+        </div>
+
+
+        <!-- GIF DE SUSIE -->
+
+        <img
+            src="susie.gif"
+            alt="Susie comiendo pancakes"
+            id="susieGif"
+        >
+
+
+        <!-- TEXTO INFERIOR -->
+
+        <div class="glitch-text">
+
+            S U S I E
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CONTENEDOR DE LA LLUVIA
+    ========================== -->
 
     <div id="pipisRain"></div>
 
 
     <script>
 
-    /* =========================
-       ELEMENTOS
-    ========================= */
 
-    const pipisButton =
-        document.getElementById("pipisButton");
+        /* =========================
+           ELEMENTOS
+        ========================= */
 
-    const pipisSound =
-        document.getElementById("pipisSound");
+        const pipisButton =
+            document.getElementById("pipisButton");
 
-    const pipisRain =
-        document.getElementById("pipisRain");
+        const pipisSound =
+            document.getElementById("pipisSound");
 
-    const backgroundMusic =
-        document.getElementById("backgroundMusic");
+        const pipisRain =
+            document.getElementById("pipisRain");
 
-    const musicButton =
-        document.getElementById("musicButton");
+        const backgroundMusic =
+            document.getElementById("backgroundMusic");
 
-    const musicBox =
-        document.getElementById("musicBox");
+        const musicButton =
+            document.getElementById("musicButton");
 
-
-    /* =========================
-       VOLUMEN DE LA MÚSICA
-       40%
-    ========================= */
-
-    backgroundMusic.volume = 0.4;
+        const musicBox =
+            document.getElementById("musicBox");
 
 
-    /* =========================
-       BOTÓN TURN ON THE MUSIC
-    ========================= */
+        /* =========================
+           VOLUMEN DE LA MÚSICA
+           40%
+        ========================== */
 
-    musicButton.addEventListener(
-        "click",
-        function () {
-
-            backgroundMusic.play()
-                .then(function () {
-
-                    musicBox.classList.add(
-                        "musicStarted"
-                    );
-
-                })
-                .catch(function (error) {
-
-                    console.log(
-                        "No se pudo reproducir la música:",
-                        error
-                    );
-
-                });
-
-        }
-    );
+        backgroundMusic.volume = 0.4;
 
 
-    /* =========================
-       BOTÓN PIPIS
-       
-       IMPORTANTE:
-       Este botón NO toca
-       la música de fondo.
-    ========================= */
+        /* =========================
+           BOTÓN TURN ON THE MUSIC
+        ========================== */
 
-    pipisButton.addEventListener(
-        "click",
-        function () {
+        musicButton.addEventListener(
+            "click",
+            function () {
 
+                backgroundMusic.play()
+                    .then(function () {
 
-            /* =========================
-               SONIDO DE PIPIS
-            ========================= */
+                        musicBox.classList.add(
+                            "musicStarted"
+                        );
 
-            pipisSound.currentTime = 0;
+                    })
+                    .catch(function (error) {
 
-            pipisSound.play();
+                        console.log(
+                            "No se pudo reproducir la música:",
+                            error
+                        );
 
-
-            /* =========================
-               CREAR 25 PIPIS
-            ========================= */
-
-            for (
-                let i = 0;
-                i < 25;
-                i++
-            ) {
-
-
-                const pipis =
-                    document.createElement("img");
-
-
-                pipis.src =
-                    "pipis.gif";
-
-
-                pipis.className =
-                    "pipis-rain";
-
-
-                /* =========================
-                   POSICIÓN ALEATORIA
-                ========================= */
-
-                pipis.style.left =
-                    Math.random() * 100 + "vw";
-
-
-                /* =========================
-                   TAMAÑO ALEATORIO
-                ========================= */
-
-                const size =
-                    Math.floor(
-                        Math.random() * 60
-                    ) + 40;
-
-
-                pipis.style.width =
-                    size + "px";
-
-
-                /* =========================
-                   VELOCIDAD ALEATORIA
-                ========================= */
-
-                const speed =
-                    Math.random() * 2 + 2;
-
-
-                pipis.style.animationDuration =
-                    speed + "s";
-
-
-                /* =========================
-                   RETRASO ALEATORIO
-                ========================= */
-
-                pipis.style.animationDelay =
-                    Math.random() * 0.5 + "s";
-
-
-                /* =========================
-                   AGREGAR PIPIS
-                ========================= */
-
-                pipisRain.appendChild(
-                    pipis
-                );
-
-
-                /* =========================
-                   ELIMINAR DESPUÉS DE CAER
-                ========================= */
-
-                setTimeout(
-                    function () {
-
-                        pipis.remove();
-
-                    },
-                    5000
-                );
+                    });
 
             }
+        );
 
-        }
-    );
 
-</script>
+        /* =========================
+           BOTÓN PIPIS
+           
+           ESTE BOTÓN NO ENCIENDE
+           LA MÚSICA DE FONDO.
+        ========================== */
+
+        pipisButton.addEventListener(
+            "click",
+            function () {
+
+
+                /* =========================
+                   SONIDO PIPIS
+                ========================== */
+
+                pipisSound.currentTime = 0;
+
+                pipisSound.play();
+
+
+                /* =========================
+                   CREAR 25 PIPIS
+                ========================== */
+
+                for (
+                    let i = 0;
+                    i < 25;
+                    i++
+                ) {
+
+
+                    const pipis =
+                        document.createElement("img");
+
+
+                    pipis.src =
+                        "pipis.gif";
+
+
+                    pipis.className =
+                        "pipis-rain";
+
+
+                    /* =========================
+                       POSICIÓN ALEATORIA
+                    ========================== */
+
+                    pipis.style.left =
+                        Math.random() * 100 + "vw";
+
+
+                    /* =========================
+                       TAMAÑO ALEATORIO
+                    ========================== */
+
+                    const size =
+                        Math.floor(
+                            Math.random() * 60
+                        ) + 40;
+
+
+                    pipis.style.width =
+                        size + "px";
+
+
+                    /* =========================
+                       VELOCIDAD ALEATORIA
+                    ========================== */
+
+                    const speed =
+                        Math.random() * 2 + 2;
+
+
+                    pipis.style.animationDuration =
+                        speed + "s";
+
+
+                    /* =========================
+                       RETRASO ALEATORIO
+                    ========================== */
+
+                    pipis.style.animationDelay =
+                        Math.random() * 0.5 + "s";
+
+
+                    /* =========================
+                       AGREGAR PIPIS
+                    ========================== */
+
+                    pipisRain.appendChild(
+                        pipis
+                    );
+
+
+                    /* =========================
+                       ELIMINAR DESPUÉS DE CAER
+                    ========================== */
+
+                    setTimeout(
+                        function () {
+
+                            pipis.remove();
+
+                        },
+                        5000
+                    );
+
+                }
+
+            }
+        );
+
+
+    </script>
 
 
 </body>
