@@ -1,1 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>???</title>
+
+    <link rel="stylesheet"
+          href="bigshot.css">
+
+</head>
+
+
+<body>
+
+    <a href="index.html"
+       id="backButton">
+
+        ← BACK
+
+    </a>
+
+
+    <h1>
+
+        FIND THE SECRET PIPIS
+
+    </h1>
+
+
+    <p id="counter">
+
+        100 PIPIS
+
+    </p>
+
+
+    <div id="pipisGrid"></div>
+
+
+    <!-- MENSAJE DE LOGRO -->
+
+    <div id="achievement">
+
+        <div class="achievementTitle">
+
+            🏆 ACHIEVEMENT UNLOCKED!
+
+        </div>
+
+        <div class="achievementName">
+
+            BIG SHOT!
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        const grid =
+            document.getElementById(
+                "pipisGrid"
+            );
+
+
+        const achievement =
+            document.getElementById(
+                "achievement"
+            );
+
+
+        /* =========================
+           CREAR 100 PIPIS
+        ========================== */
+
+        const secret =
+            Math.floor(
+                Math.random() * 100
+            );
+
+
+        for (
+            let i = 0;
+            i < 100;
+            i++
+        ) {
+
+
+            const pipis =
+                document.createElement("img");
+
+
+            pipis.src =
+                "pipis.gif";
+
+
+            pipis.className =
+                "gridPipis";
+
+
+            /* =========================
+               PIPIS SECRETO
+            ========================== */
+
+            if (i === secret) {
+
+                pipis.classList.add(
+                    "secretPipis"
+                );
+
+
+                pipis.addEventListener(
+                    "click",
+                    function () {
+
+                        unlockAchievement(
+                            pipis
+                        );
+
+                    }
+                );
+
+            }
+
+
+            grid.appendChild(
+                pipis
+            );
+
+        }
+
+
+        /* =========================
+           DESBLOQUEAR LOGRO
+        ========================== */
+
+        function unlockAchievement(
+            pipis
+        ) {
+
+
+            localStorage.setItem(
+                "bigShotAchievement",
+                "true"
+            );
+
+
+            achievement.classList.add(
+                "show"
+            );
+
+
+            pipis.classList.add(
+                "found"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    achievement.classList.remove(
+                        "show"
+                    );
+
+                },
+                4000
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
