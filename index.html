@@ -2,29 +2,21 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Spamton Shop</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
-
     <!-- =====================================================
-         BOTON SECRET PIPIS
+         SALA SECRETA
     ====================================================== -->
 
-    <a
-        href="secret-pipis.html"
-        id="secretRoomButton"
-    >
+    <a href="secret-pipis.html" id="secretRoomButton">
         [ SECRET PIPIS ]
     </a>
 
@@ -35,28 +27,26 @@
 
     <div id="achievements">
 
-
         <!-- BIG SHOT -->
-
         <button
-            id="achievementButton"
+            id="achievementBigShot"
             class="achievement"
+            type="button"
             title="Big Shot!"
         >
             🏆
         </button>
 
 
-        <!-- GATO SAGRADO -->
-
+        <!-- GATO -->
         <button
-            id="catAchievementButton"
+            id="achievementCat"
             class="achievement"
-            title="Gato Sagrado"
+            type="button"
+            title="Gato Sagrado de Susie"
         >
             🐱
         </button>
-
 
     </div>
 
@@ -65,7 +55,7 @@
          TITULO
     ====================================================== -->
 
-    <h1 id="mainTitle">
+    <h1>
         HEY EVERY !!
     </h1>
 
@@ -158,37 +148,23 @@
     <div id="susieGlitch">
 
         <div class="susie-caption">
-
-            <span class="susie-arrow">
-                ↘
-            </span>
-
+            <span class="susie-arrow">↘</span>
             SUSIE COMIENDO PANCAKES
-
         </div>
-
 
         <div class="glitch-scribbles">
-
             /// !!! ///
-
             <br>
-
             PANCAKES???
-
             <br>
-
             !! ?? ##
-
         </div>
-
 
         <img
             src="susie-eating-pancakes.gif"
             alt="Susie comiendo pancakes"
             id="susieGif"
         >
-
 
         <div class="susie-name">
             S U S I E
@@ -198,51 +174,34 @@
 
 
     <!-- =====================================================
-         LLUVIA DE PIPIS
+         LLUVIA DE PIPIS / GATOS
     ====================================================== -->
 
     <div id="pipisRain"></div>
 
 
     <!-- =====================================================
-         GATO SAGRADO
+         MENSAJE DEL GATO
     ====================================================== -->
 
-    <div
-        id="sacredCatEvent"
-        aria-hidden="true"
-    >
+    <div id="catDiscovery">
 
-        <div id="sacredCatGlitch">
-
-            /// [[ SPECIAL DEAL ]] ///
-
-            <br>
-
-            !!! [[ GATO ]] !!!
-
+        <div class="catDiscoveryGlitch">
+            [[ !! SPECIAL DEAL !! ]]
         </div>
 
-
-        <div id="sacredCatText">
-
-            HAZ ENCONTRADO AL
-
+        <div class="catDiscoveryText">
+            HAS ENCONTRADO AL
             <br>
-
             [[ GATO ]]
-
             <br>
-
             SAGRADO DE SUSIE!!
-
         </div>
-
 
         <img
-            src="gato-sagrado.jpg"
+            src="gato.png"
             alt="Gato Sagrado de Susie"
-            id="sacredCat"
+            id="catDiscoveryImage"
         >
 
     </div>
@@ -254,121 +213,87 @@
 
     <script>
 
+    document.addEventListener("DOMContentLoaded", function () {
 
-        /* =====================================================
+        /* =================================================
            ELEMENTOS
-        ===================================================== */
+        ================================================= */
 
         const pipisButton =
-            document.getElementById(
-                "pipisButton"
-            );
-
+            document.getElementById("pipisButton");
 
         const pipisSound =
-            document.getElementById(
-                "pipisSound"
-            );
-
+            document.getElementById("pipisSound");
 
         const pipisRain =
-            document.getElementById(
-                "pipisRain"
-            );
-
+            document.getElementById("pipisRain");
 
         const normalMusic =
-            document.getElementById(
-                "normalMusic"
-            );
-
+            document.getElementById("normalMusic");
 
         const bigShotMusic =
-            document.getElementById(
-                "bigShotMusic"
-            );
-
+            document.getElementById("bigShotMusic");
 
         const musicButton =
-            document.getElementById(
-                "musicButton"
-            );
-
+            document.getElementById("musicButton");
 
         const mainSpamton =
-            document.getElementById(
-                "mainSpamton"
-            );
+            document.getElementById("mainSpamton");
 
+        const achievementBigShot =
+            document.getElementById("achievementBigShot");
 
-        const achievementButton =
-            document.getElementById(
-                "achievementButton"
-            );
-
-
-        const catAchievementButton =
-            document.getElementById(
-                "catAchievementButton"
-            );
-
-
-        const sacredCatEvent =
-            document.getElementById(
-                "sacredCatEvent"
-            );
-
+        const achievementCat =
+            document.getElementById("achievementCat");
 
         const secretRoomButton =
-            document.getElementById(
-                "secretRoomButton"
-            );
+            document.getElementById("secretRoomButton");
+
+        const catDiscovery =
+            document.getElementById("catDiscovery");
 
 
-        /* =====================================================
+        /* =================================================
            VOLUMEN
-        ===================================================== */
+        ================================================= */
 
         normalMusic.volume = 0.40;
-
         bigShotMusic.volume = 0.40;
-
         pipisSound.volume = 0.70;
 
 
-        /* =====================================================
+        /* =================================================
            ESTADO
-        ===================================================== */
+        ================================================= */
 
-        let currentMusic = null;
-
+        let musicIsPlaying = false;
         let bigShotMode = false;
 
 
-        /* =====================================================
+        /* =================================================
            LOGROS GUARDADOS
-        ===================================================== */
+        ================================================= */
 
-        const bigShotUnlocked =
+        let bigShotUnlocked =
             localStorage.getItem(
                 "spamtonBigShotAchievement"
             ) === "true";
 
 
-        const catUnlocked =
+        let catUnlocked =
             localStorage.getItem(
                 "spamtonSacredCatAchievement"
             ) === "true";
 
 
-        /* =====================================================
+        /* =================================================
            MOSTRAR TROFEOS
-        ===================================================== */
+        ================================================= */
 
         if (bigShotUnlocked) {
 
-            achievementButton.style.display =
-                "block";
+            achievementBigShot.style.display =
+                "flex";
 
             secretRoomButton.style.display =
                 "none";
@@ -378,49 +303,40 @@
 
         if (catUnlocked) {
 
-            catAchievementButton.style.display =
-                "block";
+            achievementCat.style.display =
+                "flex";
 
         }
 
 
-        /* =====================================================
-           ACTUALIZAR BOTON MUSICA
-        ===================================================== */
+        /* =================================================
+           BOTON DE MUSICA
+        ================================================= */
 
         function updateMusicButton() {
 
             if (bigShotMode) {
 
-                if (
-                    currentMusic ===
-                    bigShotMusic
-                ) {
+                if (musicIsPlaying) {
 
                     musicButton.textContent =
                         "[ TURN OFF THE BIG SHOT ]";
 
-                }
-                else {
+                } else {
 
                     musicButton.textContent =
                         "[ TURN ON THE BIG SHOT! ]";
 
                 }
 
-            }
-            else {
+            } else {
 
-                if (
-                    currentMusic ===
-                    normalMusic
-                ) {
+                if (musicIsPlaying) {
 
                     musicButton.textContent =
                         "[ TURN OFF THE MUSIC ]";
 
-                }
-                else {
+                } else {
 
                     musicButton.textContent =
                         "[ TURN ON THE MUSIC ]";
@@ -432,26 +348,25 @@
         }
 
 
-        /* =====================================================
-           DETENER TODA LA MUSICA
-        ====================================================== */
+        /* =================================================
+           DETENER TODAS LAS MUSICAS
+        ================================================= */
 
         function stopAllMusic() {
 
             normalMusic.pause();
-
             bigShotMusic.pause();
 
-            currentMusic = null;
+            musicIsPlaying = false;
 
             updateMusicButton();
 
         }
 
 
-        /* =====================================================
+        /* =================================================
            MUSICA NORMAL
-        ====================================================== */
+        ================================================= */
 
         function playNormalMusic() {
 
@@ -459,35 +374,40 @@
 
             normalMusic.volume = 0.40;
 
-            normalMusic
-                .play()
-                .then(function () {
+            const promise =
+                normalMusic.play();
 
-                    currentMusic =
-                        normalMusic;
+            if (promise !== undefined) {
 
-                    updateMusicButton();
+                promise
+                    .then(function () {
 
-                })
-                .catch(function (error) {
+                        musicIsPlaying = true;
 
-                    console.error(
-                        "No se pudo reproducir la música normal:",
-                        error
-                    );
+                        updateMusicButton();
 
-                    currentMusic = null;
+                    })
+                    .catch(function (error) {
 
-                    updateMusicButton();
+                        console.log(
+                            "Error música normal:",
+                            error
+                        );
 
-                });
+                        musicIsPlaying = false;
+
+                        updateMusicButton();
+
+                    });
+
+            }
 
         }
 
 
-        /* =====================================================
+        /* =================================================
            MUSICA BIG SHOT
-        ====================================================== */
+        ================================================= */
 
         function playBigShotMusic() {
 
@@ -495,72 +415,67 @@
 
             bigShotMusic.volume = 0.40;
 
-            bigShotMusic
-                .play()
-                .then(function () {
+            const promise =
+                bigShotMusic.play();
 
-                    currentMusic =
-                        bigShotMusic;
+            if (promise !== undefined) {
 
-                    updateMusicButton();
+                promise
+                    .then(function () {
 
-                })
-                .catch(function (error) {
+                        musicIsPlaying = true;
 
-                    console.error(
-                        "No se pudo reproducir BIG SHOT:",
-                        error
-                    );
+                        updateMusicButton();
 
-                    currentMusic = null;
+                    })
+                    .catch(function (error) {
 
-                    updateMusicButton();
+                        console.log(
+                            "Error Big Shot:",
+                            error
+                        );
 
-                });
+                        musicIsPlaying = false;
+
+                        updateMusicButton();
+
+                    });
+
+            }
 
         }
 
 
-        /* =====================================================
-           BOTON MUSICA
-        ====================================================== */
+        /* =================================================
+           BOTON DE MUSICA
+
+           ESTE ES EL UNICO BOTON QUE CONTROLA
+           LA MUSICA DE FONDO.
+        ================================================= */
 
         musicButton.addEventListener(
             "click",
             function (event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
 
-                /* =============================================
-                   SI ESTA SONANDO
-                ============================================= */
-
-                if (
-                    currentMusic !== null
-                ) {
+                if (musicIsPlaying) {
 
                     stopAllMusic();
 
-                    return;
+                } else {
 
-                }
+                    if (bigShotMode) {
 
+                        playBigShotMusic();
 
-                /* =============================================
-                   SI ESTA APAGADA
-                ============================================= */
+                    } else {
 
-                if (bigShotMode) {
+                        playNormalMusic();
 
-                    playBigShotMusic();
-
-                }
-                else {
-
-                    playNormalMusic();
+                    }
 
                 }
 
@@ -568,147 +483,154 @@
         );
 
 
-        /* =====================================================
-           BOTON PIPIS
-        ====================================================== */
+        /* =================================================
+           CREAR PIPIS
+        ================================================= */
 
-        pipisButton.addEventListener(
-            "click",
-            function (event) {
+        function createPipis() {
 
-                event.preventDefault();
+            for (let i = 0; i < 25; i++) {
 
-                event.stopPropagation();
+                const pipis =
+                    document.createElement("img");
 
+                pipis.src =
+                    "pipis.gif";
 
-                /* =============================================
-                   SONIDO PIPIS
-                ============================================= */
-
-                pipisSound.currentTime = 0;
-
-                pipisSound
-                    .play()
-                    .catch(function (error) {
-
-                        console.error(
-                            "Error al reproducir Pipis:",
-                            error
-                        );
-
-                    });
+                pipis.className =
+                    "pipis-rain";
 
 
-                /* =============================================
-                   CREAR PIPIS
-                ============================================= */
-
-                for (
-                    let i = 0;
-                    i < 25;
-                    i++
-                ) {
-
-                    const pipis =
-                        document.createElement(
-                            "img"
-                        );
+                const size =
+                    Math.floor(
+                        Math.random() * 60
+                    ) + 40;
 
 
-                    pipis.src =
-                        "pipis.gif";
+                const left =
+                    Math.random() * 100;
 
 
-                    pipis.className =
-                        "pipis-rain";
+                const speed =
+                    Math.random() * 2 + 2;
 
 
-                    pipis.style.left =
-                        (
-                            Math.random() *
-                            100
-                        ) + "vw";
+                const delay =
+                    Math.random() * 0.8;
 
 
-                    const size =
-                        Math.floor(
-                            Math.random() * 60
-                        ) + 40;
+                pipis.style.left =
+                    left + "vw";
+
+                pipis.style.width =
+                    size + "px";
+
+                pipis.style.animationDuration =
+                    speed + "s";
+
+                pipis.style.animationDelay =
+                    delay + "s";
 
 
-                    pipis.style.width =
-                        size + "px";
+                pipisRain.appendChild(
+                    pipis
+                );
 
 
-                    const speed =
-                        Math.random() * 2 + 2;
+                setTimeout(function () {
 
+                    if (pipis.parentNode) {
 
-                    pipis.style.animationDuration =
-                        speed + "s";
+                        pipis.remove();
 
+                    }
 
-                    pipis.style.animationDelay =
-                        (
-                            Math.random() * 0.5
-                        ) + "s";
-
-
-                    pipisRain.appendChild(
-                        pipis
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            if (
-                                pipis.parentNode
-                            ) {
-
-                                pipis.remove();
-
-                            }
-
-                        },
-                        5500
-                    );
-
-                }
-
-
-                /* =============================================
-                   PROBABILIDAD GATO
-
-                   3%
-                ============================================= */
-
-                const randomNumber =
-                    Math.random();
-
-
-                if (
-                    randomNumber < 0.03
-                ) {
-
-                    unlockSacredCat();
-
-                }
+                }, 6000);
 
             }
-        );
+
+        }
 
 
-        /* =====================================================
-           GATO SAGRADO
-        ====================================================== */
+        /* =================================================
+           CREAR LLUVIA DE GATOS
+        ================================================= */
 
-        function unlockSacredCat() {
+        function createCatRain() {
+
+            for (let i = 0; i < 25; i++) {
+
+                const cat =
+                    document.createElement("img");
 
 
-            /* =============================================
-               GUARDAR LOGRO
-            ============================================= */
+                cat.src =
+                    "gato.png";
+
+
+                cat.className =
+                    "cat-rain";
+
+
+                const size =
+                    Math.floor(
+                        Math.random() * 55
+                    ) + 45;
+
+
+                const left =
+                    Math.random() * 100;
+
+
+                const speed =
+                    Math.random() * 2 + 2;
+
+
+                const delay =
+                    Math.random() * 0.8;
+
+
+                cat.style.left =
+                    left + "vw";
+
+                cat.style.width =
+                    size + "px";
+
+                cat.style.animationDuration =
+                    speed + "s";
+
+                cat.style.animationDelay =
+                    delay + "s";
+
+
+                pipisRain.appendChild(
+                    cat
+                );
+
+
+                setTimeout(function () {
+
+                    if (cat.parentNode) {
+
+                        cat.remove();
+
+                    }
+
+                }, 6000);
+
+            }
+
+        }
+
+
+        /* =================================================
+           DESCUBRIR GATO POR PRIMERA VEZ
+        ================================================= */
+
+        function discoverCat() {
+
+            catUnlocked = true;
+
 
             localStorage.setItem(
                 "spamtonSacredCatAchievement",
@@ -716,83 +638,137 @@
             );
 
 
-            /* =============================================
-               MOSTRAR TROFEO
-            ============================================= */
-
-            catAchievementButton.style.display =
-                "block";
+            achievementCat.style.display =
+                "flex";
 
 
-            /* =============================================
-               MOSTRAR EVENTO
-            ============================================= */
-
-            sacredCatEvent.classList.add(
+            catDiscovery.classList.add(
                 "show"
             );
 
 
-            sacredCatEvent.setAttribute(
-                "aria-hidden",
-                "false"
-            );
+            /* =============================================
+               MENSAJE SOLO LA PRIMERA VEZ
+            ============================================= */
 
+            setTimeout(function () {
 
-            document.body.classList.add(
-                "cat-glitch"
-            );
+                catDiscovery.classList.remove(
+                    "show"
+                );
+
+            }, 5000);
 
 
             /* =============================================
-               OCULTAR DESPUES DE 5 SEGUNDOS
+               LLUVIA DE GATOS
             ============================================= */
 
-            setTimeout(
-                function () {
-
-                    sacredCatEvent.classList.remove(
-                        "show"
-                    );
-
-
-                    document.body.classList.remove(
-                        "cat-glitch"
-                    );
-
-
-                    sacredCatEvent.setAttribute(
-                        "aria-hidden",
-                        "true"
-                    );
-
-                },
-                5000
-            );
+            createCatRain();
 
         }
 
 
-        /* =====================================================
-           BIG SHOT
-        ====================================================== */
+        /* =================================================
+           BOTON PIPIS
 
-        achievementButton.addEventListener(
+           1% DE PROBABILIDAD DE GATO
+        ================================================= */
+
+        pipisButton.addEventListener(
             "click",
             function (event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
+
+                /* =========================================
+                   SONIDO PIPIS
+                ========================================= */
+
+                pipisSound.currentTime = 0;
+
+                const soundPromise =
+                    pipisSound.play();
+
+                if (
+                    soundPromise !== undefined
+                ) {
+
+                    soundPromise.catch(
+                        function (error) {
+
+                            console.log(
+                                "Error sonido Pipis:",
+                                error
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                /* =========================================
+                   PROBABILIDAD
+
+                   Math.random() devuelve entre 0 y 1.
+
+                   Menor a 0.01 = 1%
+                ========================================= */
+
+                const catEvent =
+                    Math.random() < 0.01;
+
+
+                if (catEvent) {
+
+                    /* =====================================
+                       SI NUNCA LO HABIA CONSEGUIDO
+                    ===================================== */
+
+                    if (!catUnlocked) {
+
+                        discoverCat();
+
+                    } else {
+
+                        /* ================================
+                           YA TIENE EL LOGRO
+
+                           NO MOSTRAR MENSAJE
+                        ================================= */
+
+                        createCatRain();
+
+                    }
+
+                } else {
+
+                    /* =====================================
+                       PIPIS NORMALES
+                    ===================================== */
+
+                    createPipis();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           TROFEO BIG SHOT
+        ================================================= */
+
+        achievementBigShot.addEventListener(
+            "click",
+            function () {
 
                 bigShotMode =
                     !bigShotMode;
 
-
-                /* =============================================
-                   ACTIVAR BIG SHOT
-                ============================================= */
 
                 if (bigShotMode) {
 
@@ -805,38 +781,21 @@
                         "spamton-neo.gif";
 
 
-                    /*
-                     * Si estaba sonando música normal,
-                     * cambiar inmediatamente a Big Shot.
-                     */
-
-                    if (
-                        currentMusic ===
-                        normalMusic
-                    ) {
+                    if (musicIsPlaying) {
 
                         normalMusic.pause();
 
-                        currentMusic =
-                            null;
+                        musicIsPlaying = false;
 
                         playBigShotMusic();
 
-                    }
-                    else {
+                    } else {
 
                         updateMusicButton();
 
                     }
 
-                }
-
-
-                /* =============================================
-                   VOLVER A NORMAL
-                ============================================= */
-
-                else {
+                } else {
 
                     document.body.classList.remove(
                         "big-shot-mode"
@@ -847,25 +806,15 @@
                         "spamton-idle.gif";
 
 
-                    /*
-                     * Si estaba sonando Big Shot,
-                     * volver a la música normal.
-                     */
-
-                    if (
-                        currentMusic ===
-                        bigShotMusic
-                    ) {
+                    if (musicIsPlaying) {
 
                         bigShotMusic.pause();
 
-                        currentMusic =
-                            null;
+                        musicIsPlaying = false;
 
                         playNormalMusic();
 
-                    }
-                    else {
+                    } else {
 
                         updateMusicButton();
 
@@ -877,39 +826,41 @@
         );
 
 
-        /* =====================================================
-           TROFEO GATO
-        ====================================================== */
+        /* =================================================
+           TROFEO DEL GATO
+        ================================================= */
 
-        catAchievementButton.addEventListener(
+        achievementCat.addEventListener(
             "click",
-            function (event) {
+            function () {
 
-                event.preventDefault();
+                catDiscovery.classList.add(
+                    "show"
+                );
 
-                event.stopPropagation();
 
+                setTimeout(function () {
 
-                /*
-                 * Al tocar el trofeo mostramos
-                 * nuevamente el mensaje del gato.
-                 */
+                    catDiscovery.classList.remove(
+                        "show"
+                    );
 
-                unlockSacredCat();
+                }, 5000);
 
             }
         );
 
 
-        /* =====================================================
+        /* =================================================
            ESTADO INICIAL
-        ====================================================== */
+        ================================================= */
 
         updateMusicButton();
 
 
-    </script>
+    });
 
+    </script>
 
 </body>
 
