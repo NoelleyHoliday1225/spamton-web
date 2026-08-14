@@ -18,7 +18,7 @@
 
 
     <!-- =====================================================
-         SALA SECRETA
+         BOTON SECRET PIPIS
     ====================================================== -->
 
     <a
@@ -30,24 +30,42 @@
 
 
     <!-- =====================================================
-         TROFEO BIG SHOT
+         TROFEOS
     ====================================================== -->
 
-    <button
-        id="achievementButton"
-        type="button"
-        title="Big Shot!"
-        style="display: none;"
-    >
-        🏆
-    </button>
+    <div id="achievements">
+
+
+        <!-- BIG SHOT -->
+
+        <button
+            id="achievementButton"
+            class="achievement"
+            title="Big Shot!"
+        >
+            🏆
+        </button>
+
+
+        <!-- GATO SAGRADO -->
+
+        <button
+            id="catAchievementButton"
+            class="achievement"
+            title="Gato Sagrado"
+        >
+            🐱
+        </button>
+
+
+    </div>
 
 
     <!-- =====================================================
          TITULO
     ====================================================== -->
 
-    <h1>
+    <h1 id="mainTitle">
         HEY EVERY !!
     </h1>
 
@@ -94,8 +112,8 @@
     <audio
         id="normalMusic"
         src="want-to-be-a.mp3"
-        loop
         preload="auto"
+        loop
     ></audio>
 
 
@@ -106,8 +124,8 @@
     <audio
         id="bigShotMusic"
         src="big-shot.mp3"
-        loop
         preload="auto"
+        loop
     ></audio>
 
 
@@ -173,9 +191,7 @@
 
 
         <div class="susie-name">
-
             S U S I E
-
         </div>
 
     </div>
@@ -190,15 +206,11 @@
 
     <!-- =====================================================
          GATO SAGRADO
-         
-         IMPORTANTE:
-         ESTÁ OCULTO DESDE HTML.
-         NO APARECERÁ AL CARGAR LA PÁGINA.
     ====================================================== -->
 
     <div
         id="sacredCatEvent"
-        style="display: none;"
+        aria-hidden="true"
     >
 
         <div id="sacredCatGlitch">
@@ -207,7 +219,7 @@
 
             <br>
 
-            !!! !!! !!!
+            !!! [[ GATO ]] !!!
 
         </div>
 
@@ -248,43 +260,69 @@
         ===================================================== */
 
         const pipisButton =
-            document.getElementById("pipisButton");
+            document.getElementById(
+                "pipisButton"
+            );
 
 
         const pipisSound =
-            document.getElementById("pipisSound");
+            document.getElementById(
+                "pipisSound"
+            );
 
 
         const pipisRain =
-            document.getElementById("pipisRain");
+            document.getElementById(
+                "pipisRain"
+            );
 
 
         const normalMusic =
-            document.getElementById("normalMusic");
+            document.getElementById(
+                "normalMusic"
+            );
 
 
         const bigShotMusic =
-            document.getElementById("bigShotMusic");
+            document.getElementById(
+                "bigShotMusic"
+            );
 
 
         const musicButton =
-            document.getElementById("musicButton");
+            document.getElementById(
+                "musicButton"
+            );
 
 
         const mainSpamton =
-            document.getElementById("mainSpamton");
+            document.getElementById(
+                "mainSpamton"
+            );
 
 
         const achievementButton =
-            document.getElementById("achievementButton");
+            document.getElementById(
+                "achievementButton"
+            );
 
 
-        const secretRoomButton =
-            document.getElementById("secretRoomButton");
+        const catAchievementButton =
+            document.getElementById(
+                "catAchievementButton"
+            );
 
 
         const sacredCatEvent =
-            document.getElementById("sacredCatEvent");
+            document.getElementById(
+                "sacredCatEvent"
+            );
+
+
+        const secretRoomButton =
+            document.getElementById(
+                "secretRoomButton"
+            );
 
 
         /* =====================================================
@@ -299,7 +337,7 @@
 
 
         /* =====================================================
-           ESTADO DE MUSICA
+           ESTADO
         ===================================================== */
 
         let currentMusic = null;
@@ -308,14 +346,26 @@
 
 
         /* =====================================================
-           COMPROBAR LOGRO
+           LOGROS GUARDADOS
         ===================================================== */
 
-        if (
+        const bigShotUnlocked =
             localStorage.getItem(
                 "spamtonBigShotAchievement"
-            ) === "true"
-        ) {
+            ) === "true";
+
+
+        const catUnlocked =
+            localStorage.getItem(
+                "spamtonSacredCatAchievement"
+            ) === "true";
+
+
+        /* =====================================================
+           MOSTRAR TROFEOS
+        ===================================================== */
+
+        if (bigShotUnlocked) {
 
             achievementButton.style.display =
                 "block";
@@ -326,8 +376,16 @@
         }
 
 
+        if (catUnlocked) {
+
+            catAchievementButton.style.display =
+                "block";
+
+        }
+
+
         /* =====================================================
-           BOTON DE MUSICA
+           ACTUALIZAR BOTON MUSICA
         ===================================================== */
 
         function updateMusicButton() {
@@ -375,10 +433,10 @@
 
 
         /* =====================================================
-           DETENER MUSICA
-        ===================================================== */
+           DETENER TODA LA MUSICA
+        ====================================================== */
 
-        function stopMusic() {
+        function stopAllMusic() {
 
             normalMusic.pause();
 
@@ -393,15 +451,16 @@
 
         /* =====================================================
            MUSICA NORMAL
-        ===================================================== */
+        ====================================================== */
 
-        function startNormalMusic() {
+        function playNormalMusic() {
 
             bigShotMusic.pause();
 
             normalMusic.volume = 0.40;
 
-            normalMusic.play()
+            normalMusic
+                .play()
                 .then(function () {
 
                     currentMusic =
@@ -413,9 +472,13 @@
                 .catch(function (error) {
 
                     console.error(
-                        "Error música normal:",
+                        "No se pudo reproducir la música normal:",
                         error
                     );
+
+                    currentMusic = null;
+
+                    updateMusicButton();
 
                 });
 
@@ -423,20 +486,17 @@
 
 
         /* =====================================================
-           BIG SHOT
-        ===================================================== */
+           MUSICA BIG SHOT
+        ====================================================== */
 
-        function startBigShotMusic() {
+        function playBigShotMusic() {
 
             normalMusic.pause();
 
-            bigShotMusic.pause();
-
-            bigShotMusic.currentTime = 0;
-
             bigShotMusic.volume = 0.40;
 
-            bigShotMusic.play()
+            bigShotMusic
+                .play()
                 .then(function () {
 
                     currentMusic =
@@ -448,9 +508,13 @@
                 .catch(function (error) {
 
                     console.error(
-                        "Error Big Shot:",
+                        "No se pudo reproducir BIG SHOT:",
                         error
                     );
+
+                    currentMusic = null;
+
+                    updateMusicButton();
 
                 });
 
@@ -458,8 +522,8 @@
 
 
         /* =====================================================
-           BOTON DE MUSICA
-        ===================================================== */
+           BOTON MUSICA
+        ====================================================== */
 
         musicButton.addEventListener(
             "click",
@@ -470,25 +534,33 @@
                 event.stopPropagation();
 
 
+                /* =============================================
+                   SI ESTA SONANDO
+                ============================================= */
+
                 if (
                     currentMusic !== null
                 ) {
 
-                    stopMusic();
+                    stopAllMusic();
 
                     return;
 
                 }
 
 
+                /* =============================================
+                   SI ESTA APAGADA
+                ============================================= */
+
                 if (bigShotMode) {
 
-                    startBigShotMusic();
+                    playBigShotMusic();
 
                 }
                 else {
 
-                    startNormalMusic();
+                    playNormalMusic();
 
                 }
 
@@ -497,81 +569,8 @@
 
 
         /* =====================================================
-           MOSTRAR GATO SAGRADO
-        ===================================================== */
-
-        function showSacredCat() {
-
-            /*
-             * Mostrar
-             */
-
-            sacredCatEvent.style.display =
-                "flex";
-
-
-            /*
-             * Activar animación
-             */
-
-            setTimeout(
-                function () {
-
-                    sacredCatEvent.classList.add(
-                        "sacred-cat-visible"
-                    );
-
-                },
-                20
-            );
-
-
-            /*
-             * Glitch de pantalla
-             */
-
-            document.body.classList.add(
-                "sacred-cat-glitch"
-            );
-
-
-            /*
-             * Ocultar después de 5 segundos
-             */
-
-            setTimeout(
-                function () {
-
-                    sacredCatEvent.classList.remove(
-                        "sacred-cat-visible"
-                    );
-
-                    document.body.classList.remove(
-                        "sacred-cat-glitch"
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            sacredCatEvent.style.display =
-                                "none";
-
-                        },
-                        200
-                    );
-
-
-                },
-                5000
-            );
-
-        }
-
-
-        /* =====================================================
            BOTON PIPIS
-        ===================================================== */
+        ====================================================== */
 
         pipisButton.addEventListener(
             "click",
@@ -582,26 +581,27 @@
                 event.stopPropagation();
 
 
-                /* =========================================
-                   SONIDO
-                ========================================= */
+                /* =============================================
+                   SONIDO PIPIS
+                ============================================= */
 
                 pipisSound.currentTime = 0;
 
-                pipisSound.play()
+                pipisSound
+                    .play()
                     .catch(function (error) {
 
                         console.error(
-                            "Error Pipis:",
+                            "Error al reproducir Pipis:",
                             error
                         );
 
                     });
 
 
-                /* =========================================
+                /* =============================================
                    CREAR PIPIS
-                ========================================= */
+                ============================================= */
 
                 for (
                     let i = 0;
@@ -624,9 +624,10 @@
 
 
                     pipis.style.left =
-                        Math.random() *
-                        100 +
-                        "vw";
+                        (
+                            Math.random() *
+                            100
+                        ) + "vw";
 
 
                     const size =
@@ -636,24 +637,21 @@
 
 
                     pipis.style.width =
-                        size +
-                        "px";
+                        size + "px";
 
 
                     const speed =
-                        Math.random() * 2 +
-                        2;
+                        Math.random() * 2 + 2;
 
 
                     pipis.style.animationDuration =
-                        speed +
-                        "s";
+                        speed + "s";
 
 
                     pipis.style.animationDelay =
-                        Math.random() *
-                        0.5 +
-                        "s";
+                        (
+                            Math.random() * 0.5
+                        ) + "s";
 
 
                     pipisRain.appendChild(
@@ -679,21 +677,21 @@
                 }
 
 
-                /* =========================================
-                   GATO SAGRADO
-                   
-                   3% DE PROBABILIDAD
-                ========================================= */
+                /* =============================================
+                   PROBABILIDAD GATO
 
-                const chance =
+                   3%
+                ============================================= */
+
+                const randomNumber =
                     Math.random();
 
 
                 if (
-                    chance < 0.03
+                    randomNumber < 0.03
                 ) {
 
-                    showSacredCat();
+                    unlockSacredCat();
 
                 }
 
@@ -702,8 +700,82 @@
 
 
         /* =====================================================
-           TROFEO BIG SHOT
-        ===================================================== */
+           GATO SAGRADO
+        ====================================================== */
+
+        function unlockSacredCat() {
+
+
+            /* =============================================
+               GUARDAR LOGRO
+            ============================================= */
+
+            localStorage.setItem(
+                "spamtonSacredCatAchievement",
+                "true"
+            );
+
+
+            /* =============================================
+               MOSTRAR TROFEO
+            ============================================= */
+
+            catAchievementButton.style.display =
+                "block";
+
+
+            /* =============================================
+               MOSTRAR EVENTO
+            ============================================= */
+
+            sacredCatEvent.classList.add(
+                "show"
+            );
+
+
+            sacredCatEvent.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "cat-glitch"
+            );
+
+
+            /* =============================================
+               OCULTAR DESPUES DE 5 SEGUNDOS
+            ============================================= */
+
+            setTimeout(
+                function () {
+
+                    sacredCatEvent.classList.remove(
+                        "show"
+                    );
+
+
+                    document.body.classList.remove(
+                        "cat-glitch"
+                    );
+
+
+                    sacredCatEvent.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                },
+                5000
+            );
+
+        }
+
+
+        /* =====================================================
+           BIG SHOT
+        ====================================================== */
 
         achievementButton.addEventListener(
             "click",
@@ -718,9 +790,9 @@
                     !bigShotMode;
 
 
-                /* =========================================
-                   ACTIVAR
-                ========================================= */
+                /* =============================================
+                   ACTIVAR BIG SHOT
+                ============================================= */
 
                 if (bigShotMode) {
 
@@ -733,14 +805,22 @@
                         "spamton-neo.gif";
 
 
+                    /*
+                     * Si estaba sonando música normal,
+                     * cambiar inmediatamente a Big Shot.
+                     */
+
                     if (
                         currentMusic ===
                         normalMusic
                     ) {
 
-                        stopMusic();
+                        normalMusic.pause();
 
-                        startBigShotMusic();
+                        currentMusic =
+                            null;
+
+                        playBigShotMusic();
 
                     }
                     else {
@@ -752,9 +832,9 @@
                 }
 
 
-                /* =========================================
-                   DESACTIVAR
-                ========================================= */
+                /* =============================================
+                   VOLVER A NORMAL
+                ============================================= */
 
                 else {
 
@@ -767,14 +847,22 @@
                         "spamton-idle.gif";
 
 
+                    /*
+                     * Si estaba sonando Big Shot,
+                     * volver a la música normal.
+                     */
+
                     if (
                         currentMusic ===
                         bigShotMusic
                     ) {
 
-                        stopMusic();
+                        bigShotMusic.pause();
 
-                        startNormalMusic();
+                        currentMusic =
+                            null;
+
+                        playNormalMusic();
 
                     }
                     else {
@@ -790,8 +878,32 @@
 
 
         /* =====================================================
-           INICIO
-        ===================================================== */
+           TROFEO GATO
+        ====================================================== */
+
+        catAchievementButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                /*
+                 * Al tocar el trofeo mostramos
+                 * nuevamente el mensaje del gato.
+                 */
+
+                unlockSacredCat();
+
+            }
+        );
+
+
+        /* =====================================================
+           ESTADO INICIAL
+        ====================================================== */
 
         updateMusicButton();
 
