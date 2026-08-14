@@ -2,21 +2,28 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Spamton Shop</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
     <!-- =====================================================
-         SALA SECRETA
+         BOTÓN SALA SECRETA
     ====================================================== -->
 
-    <a href="secret-pipis.html" id="secretRoomButton">
+    <a
+        href="secret-pipis.html"
+        id="secretRoomButton"
+    >
         [ SECRET PIPIS ]
     </a>
 
@@ -39,11 +46,13 @@
          TÍTULO
     ====================================================== -->
 
-    <h1>HEY EVERY !!</h1>
+    <h1>
+        HEY EVERY !!
+    </h1>
 
 
     <!-- =====================================================
-         SPAMTON
+         SPAMTON PRINCIPAL
     ====================================================== -->
 
     <img
@@ -90,7 +99,7 @@
 
 
     <!-- =====================================================
-         BIG SHOT
+         MÚSICA BIG SHOT
     ====================================================== -->
 
     <audio
@@ -130,17 +139,28 @@
     <div id="susieGlitch">
 
         <div class="susie-caption">
+
             <span class="susie-arrow">↘</span>
+
             SUSIE COMIENDO PANCAKES
+
         </div>
 
+
         <div class="glitch-scribbles">
+
             /// !!! ///
+
             <br>
+
             PANCAKES???
+
             <br>
+
             !! ?? ##
+
         </div>
+
 
         <img
             src="susie-eating-pancakes.gif"
@@ -148,8 +168,11 @@
             id="susieGif"
         >
 
+
         <div class="susie-name">
+
             S U S I E
+
         </div>
 
     </div>
@@ -163,10 +186,54 @@
 
 
     <!-- =====================================================
+         GATO SAGRADO DE SUSIE
+         
+         OCULTO HASTA QUE SE ACTIVE EL 3%
+    ====================================================== -->
+
+    <div id="sacredCatEvent">
+
+        <div id="sacredCatGlitch">
+
+            /// [[ SPECIAL DEAL ]] ///
+
+            <br>
+
+            ! ! ! ! ! !
+
+        </div>
+
+
+        <div id="sacredCatText">
+
+            HAZ ENCONTRADO AL
+
+            <br>
+
+            [[ GATO ]]
+
+            <br>
+
+            SAGRADO DE SUSIE!!
+
+        </div>
+
+
+        <img
+            src="gato-sagrado.jpg"
+            alt="Gato Sagrado de Susie"
+            id="sacredCat"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
          JAVASCRIPT
     ====================================================== -->
 
     <script>
+
 
         /* =====================================================
            ELEMENTOS
@@ -175,29 +242,41 @@
         const pipisButton =
             document.getElementById("pipisButton");
 
+
         const pipisSound =
             document.getElementById("pipisSound");
+
 
         const pipisRain =
             document.getElementById("pipisRain");
 
+
         const normalMusic =
             document.getElementById("normalMusic");
+
 
         const bigShotMusic =
             document.getElementById("bigShotMusic");
 
+
         const musicButton =
             document.getElementById("musicButton");
+
 
         const mainSpamton =
             document.getElementById("mainSpamton");
 
+
         const achievementButton =
             document.getElementById("achievementButton");
 
+
         const secretRoomButton =
             document.getElementById("secretRoomButton");
+
+
+        const sacredCatEvent =
+            document.getElementById("sacredCatEvent");
 
 
         /* =====================================================
@@ -212,7 +291,7 @@
 
 
         /* =====================================================
-           ESTADO
+           ESTADO DE MÚSICA
         ====================================================== */
 
         let currentMusic = null;
@@ -230,41 +309,55 @@
             ) === "true"
         ) {
 
-            achievementButton.style.display = "block";
+            achievementButton.style.display =
+                "block";
 
-            secretRoomButton.style.display = "none";
+            secretRoomButton.style.display =
+                "none";
 
         }
 
 
         /* =====================================================
-           ACTUALIZAR BOTÓN
+           ACTUALIZAR BOTÓN DE MÚSICA
         ====================================================== */
 
         function updateMusicButton() {
 
+
             if (bigShotMode) {
 
-                if (currentMusic === bigShotMusic) {
+
+                if (
+                    currentMusic ===
+                    bigShotMusic
+                ) {
 
                     musicButton.textContent =
                         "[ TURN OFF THE BIG SHOT ]";
 
-                } else {
+                }
+                else {
 
                     musicButton.textContent =
                         "[ TURN ON THE BIG SHOT! ]";
 
                 }
 
-            } else {
+            }
+            else {
 
-                if (currentMusic === normalMusic) {
+
+                if (
+                    currentMusic ===
+                    normalMusic
+                ) {
 
                     musicButton.textContent =
                         "[ TURN OFF THE MUSIC ]";
 
-                } else {
+                }
+                else {
 
                     musicButton.textContent =
                         "[ TURN ON THE MUSIC ]";
@@ -282,7 +375,9 @@
 
         function stopMusic() {
 
+
             normalMusic.pause();
+
             bigShotMusic.pause();
 
             currentMusic = null;
@@ -293,45 +388,45 @@
 
 
         /* =====================================================
-           REPRODUCIR MÚSICA NORMAL
+           MÚSICA NORMAL
         ====================================================== */
 
         function startNormalMusic() {
 
-            /* Detener Big Shot */
 
             bigShotMusic.pause();
 
-            /* Volumen */
-
             normalMusic.volume = 0.40;
 
-            /*
-             * IMPORTANTE:
-             * play() ocurre directamente desde el botón.
-             */
 
             normalMusic.play()
                 .then(function () {
 
-                    currentMusic = normalMusic;
+
+                    currentMusic =
+                        normalMusic;
+
 
                     updateMusicButton();
+
 
                     console.log(
                         "Música normal reproduciéndose."
                     );
 
+
                 })
                 .catch(function (error) {
 
+
                     console.error(
-                        "ERROR MÚSICA NORMAL:",
+                        "Error música normal:",
                         error
                     );
 
+
                     alert(
-                        "No se pudo reproducir want-to-be-a.mp3. Revisa que el archivo esté en GitHub y que el nombre sea exactamente igual."
+                        "No se pudo reproducir want-to-be-a.mp3"
                     );
 
                 });
@@ -340,16 +435,14 @@
 
 
         /* =====================================================
-           REPRODUCIR BIG SHOT
+           BIG SHOT
         ====================================================== */
 
         function startBigShotMusic() {
 
-            /* Detener música normal */
 
             normalMusic.pause();
 
-            /* Reiniciar Big Shot */
 
             bigShotMusic.pause();
 
@@ -357,31 +450,35 @@
 
             bigShotMusic.volume = 0.40;
 
-            /*
-             * Reproducir directamente.
-             */
 
             bigShotMusic.play()
                 .then(function () {
 
-                    currentMusic = bigShotMusic;
+
+                    currentMusic =
+                        bigShotMusic;
+
 
                     updateMusicButton();
+
 
                     console.log(
                         "BIG SHOT reproduciéndose."
                     );
 
+
                 })
                 .catch(function (error) {
 
+
                     console.error(
-                        "ERROR BIG SHOT:",
+                        "Error Big Shot:",
                         error
                     );
 
+
                     alert(
-                        "No se pudo reproducir big-shot.mp3. Revisa que el archivo exista y que el nombre sea exactamente big-shot.mp3"
+                        "No se pudo reproducir big-shot.mp3"
                     );
 
                 });
@@ -397,16 +494,19 @@
             "click",
             function (event) {
 
+
                 event.preventDefault();
 
                 event.stopPropagation();
 
 
-                /* =========================================
-                   SI ESTÁ SONANDO → APAGAR
-                ========================================= */
+                /* ===============================
+                   APAGAR
+                =============================== */
 
-                if (currentMusic !== null) {
+                if (
+                    currentMusic !== null
+                ) {
 
                     stopMusic();
 
@@ -415,9 +515,9 @@
                 }
 
 
-                /* =========================================
-                   SI BIG SHOT ESTÁ ACTIVADO
-                ========================================= */
+                /* ===============================
+                   BIG SHOT
+                =============================== */
 
                 if (bigShotMode) {
 
@@ -426,9 +526,9 @@
                 }
 
 
-                /* =========================================
+                /* ===============================
                    MÚSICA NORMAL
-                ========================================= */
+                =============================== */
 
                 else {
 
@@ -441,40 +541,92 @@
 
 
         /* =====================================================
-           BOTÓN PIPIS
+           FUNCIÓN GATO SAGRADO
+        ====================================================== */
 
-           NO TOCA LA MÚSICA.
+        function showSacredCat() {
+
+
+            /*
+             * Mostrar el gato
+             */
+
+            sacredCatEvent.classList.add(
+                "sacred-cat-visible"
+            );
+
+
+            /*
+             * Efecto especial en el cuerpo
+             */
+
+            document.body.classList.add(
+                "sacred-cat-glitch"
+            );
+
+
+            /*
+             * Después de 5 segundos
+             */
+
+            setTimeout(
+                function () {
+
+
+                    sacredCatEvent.classList.remove(
+                        "sacred-cat-visible"
+                    );
+
+
+                    document.body.classList.remove(
+                        "sacred-cat-glitch"
+                    );
+
+
+                },
+                5000
+            );
+
+        }
+
+
+        /* =====================================================
+           BOTÓN PIPIS
         ====================================================== */
 
         pipisButton.addEventListener(
             "click",
             function (event) {
 
+
                 event.preventDefault();
 
                 event.stopPropagation();
 
 
-                /* =========================================
+                /* =================================================
                    SONIDO PIPIS
-                ========================================= */
+                ================================================= */
 
                 pipisSound.currentTime = 0;
+
 
                 pipisSound.play()
                     .catch(function (error) {
 
+
                         console.error(
-                            "Error con pipis.mp3:",
+                            "Error Pipis:",
                             error
                         );
+
 
                     });
 
 
-                /* =========================================
+                /* =================================================
                    CREAR PIPIS
-                ========================================= */
+                ================================================= */
 
                 for (
                     let i = 0;
@@ -482,8 +634,11 @@
                     i++
                 ) {
 
+
                     const pipis =
-                        document.createElement("img");
+                        document.createElement(
+                            "img"
+                        );
 
 
                     pipis.src =
@@ -545,11 +700,44 @@
                     setTimeout(
                         function () {
 
-                            pipis.remove();
+
+                            if (
+                                pipis.parentNode
+                            ) {
+
+                                pipis.remove();
+
+                            }
+
 
                         },
                         5500
                     );
+
+                }
+
+
+                /* =================================================
+                   GATO SAGRADO
+
+                   3% DE PROBABILIDAD
+                ================================================= */
+
+                const randomChance =
+                    Math.random();
+
+
+                if (
+                    randomChance < 0.03
+                ) {
+
+
+                    console.log(
+                        "¡¡¡ GATO SAGRADO ENCONTRADO !!!"
+                    );
+
+
+                    showSacredCat();
 
                 }
 
@@ -565,41 +753,36 @@
             "click",
             function (event) {
 
+
                 event.preventDefault();
 
                 event.stopPropagation();
 
 
-                /* =========================================
-                   CAMBIAR ESTADO
-                ========================================= */
+                /* CAMBIAR ESTADO */
 
                 bigShotMode =
                     !bigShotMode;
 
 
-                /* =========================================
-                   ACTIVAR BIG SHOT
-                ========================================= */
+                /* =================================================
+                   ACTIVAR
+                ================================================= */
 
                 if (bigShotMode) {
+
 
                     document.body.classList.add(
                         "big-shot-mode"
                     );
 
 
-                    /*
-                     * Cambiar Spamton
-                     */
-
                     mainSpamton.src =
                         "spamton-neo.gif";
 
 
                     /*
-                     * Si había música normal,
-                     * cambiar a Big Shot.
+                     * Si estaba sonando música normal
                      */
 
                     if (
@@ -607,11 +790,14 @@
                         normalMusic
                     ) {
 
+
                         stopMusic();
 
                         startBigShotMusic();
 
-                    } else {
+                    }
+                    else {
+
 
                         updateMusicButton();
 
@@ -620,28 +806,24 @@
                 }
 
 
-                /* =========================================
-                   DESACTIVAR BIG SHOT
-                ========================================= */
+                /* =================================================
+                   DESACTIVAR
+                ================================================= */
 
                 else {
+
 
                     document.body.classList.remove(
                         "big-shot-mode"
                     );
 
 
-                    /*
-                     * Volver a Spamton normal
-                     */
-
                     mainSpamton.src =
                         "spamton-idle.gif";
 
 
                     /*
-                     * Si estaba sonando Big Shot,
-                     * cambiar a música normal.
+                     * Si estaba sonando Big Shot
                      */
 
                     if (
@@ -649,11 +831,14 @@
                         bigShotMusic
                     ) {
 
+
                         stopMusic();
 
                         startNormalMusic();
 
-                    } else {
+                    }
+                    else {
+
 
                         updateMusicButton();
 
@@ -671,7 +856,9 @@
 
         updateMusicButton();
 
+
     </script>
+
 
 </body>
 
