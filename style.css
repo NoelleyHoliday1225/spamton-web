@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* =====================================================
+   FUENTE
+===================================================== */
+
+@import url(
+    'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
+);
 
 
 /* =====================================================
-   CONFIGURACIÓN GENERAL
+   CUERPO
 ===================================================== */
-
-* {
-
-    box-sizing: border-box;
-
-}
-
 
 html,
 body {
@@ -30,8 +29,10 @@ body {
 
     min-height: 100vh;
 
+    overflow-x: hidden;
+
     background-image:
-        url("background-spamton.png");
+        url("spamton-cielo.png");
 
     background-size: cover;
 
@@ -42,60 +43,34 @@ body {
     background-attachment: fixed;
 
     font-family:
-        "Press Start 2P",
+        'Press Start 2P',
         cursive;
 
     text-align: center;
 
-    overflow-x: hidden;
-
-    transition:
-        background-image 0.5s ease;
-
 }
 
 
 /* =====================================================
-   MODO BIG SHOT
-
-   El GIF se utiliza como fondo.
-===================================================== */
-
-body.big-shot-mode {
-
-    background-image:
-        url("background-neo.gif");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
-
-}
-
-
-/* =====================================================
-   TÍTULO
+   TITULO
 ===================================================== */
 
 h1 {
 
-    margin: 0;
-
-    padding-top: 35px;
+    margin-top: 40px;
 
     color: white;
 
-    font-size: 30px;
+    font-size:
+        clamp(
+            22px,
+            4vw,
+            45px
+        );
 
     text-shadow:
-
-        4px 4px 0 black,
-
-        -2px -2px 0 #ff00ff;
+        4px 4px #000,
+        -2px -2px #ff00ff;
 
 }
 
@@ -108,9 +83,11 @@ h1 {
 
     display: block;
 
-    width: 300px;
-
-    max-width: 75vw;
+    width:
+        min(
+            300px,
+            55vw
+        );
 
     height: auto;
 
@@ -119,33 +96,24 @@ h1 {
 }
 
 
-/*
-   IMPORTANTE:
-
-   No usamos scaleX(-1)
-   ni rotateY()
-
-   para evitar invertir el GIF.
-*/
-
-
 /* =====================================================
-   BOTÓN SECRET PIPIS
+   BOTON PIPIS
 ===================================================== */
 
-#secretRoomButton {
+#pipisButton {
 
-    position: fixed;
+    position: relative;
 
-    top: 20px;
+    z-index: 100;
 
-    right: 20px;
+    padding:
+        15px 25px;
 
-    z-index: 30000;
+    font-family:
+        'Press Start 2P',
+        cursive;
 
-    display: block;
-
-    padding: 12px 15px;
+    font-size: 16px;
 
     color: white;
 
@@ -153,110 +121,10 @@ h1 {
 
     border: 4px solid white;
 
-    box-shadow:
-
-        5px 5px 0 #ff00ff;
-
-    font-family:
-        "Press Start 2P",
-        cursive;
-
-    font-size: 10px;
-
-    text-decoration: none;
-
-}
-
-
-#secretRoomButton:hover {
-
-    color: black;
-
-    background: #00ffff;
-
-}
-
-
-/* =====================================================
-   TROFEO
-===================================================== */
-
-#achievementButton {
-
-    position: fixed;
-
-    top: 15px;
-
-    left: 15px;
-
-    z-index: 35000;
-
-    display: none;
-
-    width: 50px;
-
-    height: 50px;
-
-    padding: 0;
-
-    color: white;
-
-    background: black;
-
-    border: 3px solid gold;
-
-    box-shadow:
-
-        4px 4px 0 black;
-
-    font-size: 24px;
-
     cursor: pointer;
 
-}
-
-
-#achievementButton:hover {
-
-    transform:
-        scale(1.1);
-
-}
-
-
-/* =====================================================
-   BOTÓN PIPIS
-===================================================== */
-
-#pipisButton {
-
-    position: relative;
-
-    z-index: 10000;
-
-    display: block;
-
-    margin: 40px auto;
-
-    padding: 20px 40px;
-
-    color: black;
-
-    background: #00ffff;
-
-    border: 5px solid black;
-
     box-shadow:
-
-        8px 8px 0 black;
-
-    font-family:
-        "Press Start 2P",
-        cursive;
-
-    font-size: 20px;
-
-    cursor: pointer;
+        6px 6px 0 #ff00ff;
 
 }
 
@@ -264,24 +132,19 @@ h1 {
 #pipisButton:hover {
 
     transform:
-        scale(1.05);
-
-}
-
-
-#pipisButton:active {
-
-    transform:
-        translate(5px, 5px);
+        translate(
+            3px,
+            3px
+        );
 
     box-shadow:
-        3px 3px 0 black;
+        3px 3px 0 #00ffff;
 
 }
 
 
 /* =====================================================
-   CAJA DE MÚSICA
+   CAJA DE MUSICA
 ===================================================== */
 
 #musicBox {
@@ -292,9 +155,7 @@ h1 {
 
     bottom: 25px;
 
-    z-index: 20000;
-
-    width: 230px;
+    z-index: 500;
 
     display: flex;
 
@@ -311,42 +172,35 @@ h1 {
 
 #dancingSpamton {
 
-    display: block;
-
-    width: 150px;
+    width: 130px;
 
     height: auto;
 
-    margin-bottom: -5px;
+    margin-bottom: 5px;
 
 }
 
 
 /* =====================================================
-   BOTÓN DE MÚSICA
+   BOTON MUSICA
 ===================================================== */
 
 #musicButton {
 
-    padding: 12px 15px;
+    padding:
+        12px 15px;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size: 11px;
 
     color: white;
 
-    background: #ff00ff;
+    background: black;
 
-    border: 4px solid black;
-
-    box-shadow:
-
-        6px 6px 0 black;
-
-    font-family:
-        "Press Start 2P",
-        cursive;
-
-    font-size: 10px;
-
-    line-height: 1.5;
+    border: 3px solid white;
 
     cursor: pointer;
 
@@ -355,339 +209,107 @@ h1 {
 
 #musicButton:hover {
 
-    transform:
-        scale(1.05);
-
-}
-
-
-#musicButton:active {
-
-    transform:
-        translate(4px, 4px);
-
-    box-shadow:
-        2px 2px 0 black;
-
-}
-
-
-#musicButton.music-on {
-
-    background: #00ff00;
-
-    color: black;
+    background: #222;
 
 }
 
 
 /* =====================================================
-   SUSIE
+   BOTON SALA SECRETA
 ===================================================== */
 
-#susieGlitch {
+#secretRoomButton {
 
     position: fixed;
 
-    left: 25px;
+    top: 20px;
 
-    bottom: 25px;
+    right: 20px;
 
-    z-index: 15000;
+    z-index: 1000;
 
-    width: 230px;
-
-    height: 205px;
-
-    background:
-
-        repeating-linear-gradient(
-            0deg,
-
-            rgba(0, 0, 0, 0.95),
-
-            rgba(0, 0, 0, 0.95) 3px,
-
-            rgba(40, 40, 40, 0.8) 4px,
-
-            rgba(0, 0, 0, 0.95) 7px
-        );
-
-    border: 4px solid white;
-
-    box-shadow:
-
-        7px 7px 0 black,
-
-        -5px -5px 0 #ff00ff;
-
-    overflow: visible;
-
-}
-
-
-/* =====================================================
-   TEXTO SUSIE
-===================================================== */
-
-.susie-caption {
-
-    position: absolute;
-
-    top: -43px;
-
-    left: 5px;
-
-    width: 230px;
+    padding:
+        10px 15px;
 
     color: white;
 
-    font-size: 9px;
+    background: black;
 
-    line-height: 15px;
+    border: 3px solid white;
 
-    text-align: left;
+    text-decoration: none;
 
-    text-shadow:
-
-        2px 2px 0 black,
-
-        -2px 0 #ff00ff;
-
-}
-
-
-.susie-arrow {
-
-    color: #00ffff;
-
-    font-size: 20px;
-
-}
-
-
-/* =====================================================
-   GARBATOS
-===================================================== */
-
-.glitch-scribbles {
-
-    position: absolute;
-
-    top: 8px;
-
-    left: 8px;
-
-    z-index: 3;
-
-    color: #00ffff;
-
-    font-size: 8px;
-
-    line-height: 18px;
-
-    text-shadow:
-
-        2px 2px 0 #ff00ff;
-
-}
-
-
-/* =====================================================
-   GIF SUSIE
-
-   SIN ROTACIONES NI ESPEJOS
-===================================================== */
-
-#susieGif {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 22px;
-
-    z-index: 2;
-
-    width: 155px;
-
-    max-height: 145px;
-
-    height: auto;
-
-    transform:
-        translateX(-50%);
-
-}
-
-
-/* =====================================================
-   NOMBRE SUSIE
-===================================================== */
-
-.susie-name {
-
-    position: absolute;
-
-    left: 10px;
-
-    bottom: 7px;
-
-    z-index: 4;
-
-    color: white;
+    font-family:
+        'Press Start 2P',
+        cursive;
 
     font-size: 10px;
 
-    text-shadow:
+}
 
-        3px 0 #ff00ff,
 
-        -3px 0 #00ffff;
+#secretRoomButton:hover {
+
+    background: #333;
 
 }
 
 
 /* =====================================================
-   GLITCH SUSIE
+   TROFEO
 ===================================================== */
 
-#susieGlitch::before {
+#achievementButton {
 
-    content: "";
+    position: fixed;
 
-    position: absolute;
+    top: 20px;
 
-    top: 0;
+    left: 20px;
 
-    left: 0;
+    z-index: 2000;
 
-    width: 100%;
+    width: 50px;
 
-    height: 100%;
+    height: 50px;
 
-    background:
+    font-size: 25px;
 
-        repeating-linear-gradient(
-            0deg,
+    background: black;
 
-            transparent 0px,
+    border: 3px solid white;
 
-            transparent 5px,
-
-            rgba(255,255,255,0.04) 6px,
-
-            transparent 8px
-        );
-
-    pointer-events: none;
-
-    z-index: 6;
+    cursor: pointer;
 
 }
 
 
 /* =====================================================
-   LÍNEA DE GLITCH
-===================================================== */
-
-#susieGlitch::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    top: 40%;
-
-    width: 100%;
-
-    height: 4px;
-
-    background: white;
-
-    opacity: 0.6;
-
-    animation:
-        susieGlitchLine
-        1.4s
-        infinite;
-
-    z-index: 7;
-
-}
-
-
-@keyframes susieGlitchLine {
-
-    0% {
-
-        top: 10%;
-
-        opacity: 0;
-
-    }
-
-    25% {
-
-        top: 70%;
-
-        opacity: 0.7;
-
-    }
-
-    50% {
-
-        top: 30%;
-
-        opacity: 0;
-
-    }
-
-    75% {
-
-        top: 85%;
-
-        opacity: 0.6;
-
-    }
-
-    100% {
-
-        top: 10%;
-
-        opacity: 0;
-
-    }
-
-}
-
-
-/* =====================================================
-   LLUVIA PIPIS
+   LLUVIA DE PIPIS
 ===================================================== */
 
 #pipisRain {
 
     position: fixed;
 
-    top: 0;
-
-    left: 0;
+    inset: 0;
 
     width: 100vw;
 
     height: 100vh;
 
-    z-index: 9999;
-
     pointer-events: none;
 
     overflow: hidden;
 
+    z-index: 900;
+
 }
 
+
+/* =====================================================
+   PIPIS INDIVIDUAL
+===================================================== */
 
 .pipis-rain {
 
@@ -695,15 +317,9 @@ h1 {
 
     top: -150px;
 
-    left: 0;
-
-    width: 60px;
-
     height: auto;
 
-    margin: 0;
-
-    padding: 0;
+    pointer-events: none;
 
     animation-name:
         pipisFall;
@@ -718,7 +334,7 @@ h1 {
 
 
 /* =====================================================
-   ANIMACIÓN PIPIS
+   ANIMACION PIPIS
 ===================================================== */
 
 @keyframes pipisFall {
@@ -734,7 +350,9 @@ h1 {
     100% {
 
         transform:
-            translateY(120vh)
+            translateY(
+                calc(100vh + 200px)
+            )
             rotate(720deg);
 
     }
@@ -743,191 +361,207 @@ h1 {
 
 
 /* =====================================================
-   CELULAR
+   SUSIE
 ===================================================== */
 
-@media (max-width: 700px) {
-
-
-    h1 {
-
-        font-size: 18px;
-
-    }
-
-
-    #secretRoomButton {
-
-        font-size: 7px;
-
-        padding: 8px;
-
-    }
-
-
-    #musicBox {
-
-        right: 10px;
-
-        bottom: 10px;
-
-        width: 170px;
-
-    }
-
-
-    #dancingSpamton {
-
-        width: 100px;
-
-    }
-
-
-    #musicButton {
-
-        font-size: 7px;
-
-        padding: 9px;
-
-    }
-
-
-    #susieGlitch {
-
-        left: 10px;
-
-        bottom: 10px;
-
-        width: 180px;
-
-        height: 165px;
-
-    }
-
-
-    #susieGif {
-
-        width: 120px;
-
-    }
-
-
-    .susie-caption {
-
-        width: 190px;
-
-        font-size: 7px;
-
-    }
-
-
-    #pipisButton {
-
-        font-size: 14px;
-
-        padding: 15px 25px;
-
-       /* =====================================================
-   GATO SAGRADO DE SUSIE
-===================================================== */
-
-#sacredCatEvent {
+#susieGlitch {
 
     position: fixed;
 
-    top: 50%;
-    left: 50%;
+    left: 20px;
 
-    transform: translate(-50%, -50%) scale(0.5);
+    bottom: 20px;
 
-    width: min(650px, 90vw);
+    z-index: 400;
 
-    padding: 25px;
+    width: 190px;
 
-    background: #000;
+    padding: 10px;
 
-    border: 5px solid white;
+    background: rgba(
+        0,
+        0,
+        0,
+        0.75
+    );
+
+    border:
+        3px solid white;
 
     box-shadow:
-        10px 10px 0 #ff00ff,
-        -10px -10px 0 #00ffff;
+        5px 5px 0 #ff00ff,
+        -5px -5px 0 #00ffff;
 
-    text-align: center;
+}
 
-    z-index: 99999;
 
-    opacity: 0;
+.susie-caption {
 
-    visibility: hidden;
+    color: white;
 
-    pointer-events: none;
+    font-size: 10px;
 
-    transition:
-        opacity 0.15s,
-        transform 0.15s;
+    line-height: 1.5;
+
+}
+
+
+.susie-arrow {
+
+    color: #00ffff;
+
+    font-size: 20px;
+
+}
+
+
+.glitch-scribbles {
+
+    color: #ff00ff;
+
+    font-size: 8px;
+
+    margin:
+        8px 0;
+
+    line-height: 1.7;
+
+}
+
+
+#susieGif {
+
+    width: 150px;
+
+    height: auto;
+
+}
+
+
+.susie-name {
+
+    color: white;
+
+    font-size: 10px;
+
+    margin-top: 5px;
 
 }
 
 
 /* =====================================================
-   MOSTRAR GATO
+   GATO SAGRADO
+===================================================== */
+
+/*
+   MUY IMPORTANTE:
+
+   El evento comienza con:
+   display: none;
+
+   Por lo tanto NO puede aparecer al
+   cargar la página.
+*/
+
+#sacredCatEvent {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(0.7);
+
+    width:
+        min(
+            650px,
+            90vw
+        );
+
+    max-height: 90vh;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: black;
+
+    border:
+        5px solid white;
+
+    box-shadow:
+        10px 10px 0 #ff00ff,
+        -10px -10px 0 #00ffff;
+
+    z-index: 99999;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   GATO VISIBLE
 ===================================================== */
 
 #sacredCatEvent.sacred-cat-visible {
 
     opacity: 1;
 
-    visibility: visible;
-
     transform:
-        translate(-50%, -50%)
+        translate(
+            -50%,
+            -50%
+        )
         scale(1);
 
-}
-
-
-/* =====================================================
-   FOTO
-===================================================== */
-
-#sacredCat {
-
-    display: block;
-
-    width: min(500px, 80vw);
-
-    max-height: 55vh;
-
-    object-fit: contain;
-
-    margin: 20px auto;
-
-    image-rendering: auto;
-
-    border: 4px solid white;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
 
 }
 
 
 /* =====================================================
-   TEXTO SPAMTON
+   TEXTO DEL GATO
 ===================================================== */
 
 #sacredCatText {
 
+    width: 100%;
+
+    color: white;
+
     font-family:
         'Press Start 2P',
-        monospace;
+        cursive;
 
-    font-size: clamp(
-        14px,
-        2.5vw,
-        28px
-    );
+    font-size:
+        clamp(
+            13px,
+            2.2vw,
+            25px
+        );
 
     line-height: 1.8;
 
-    color: white;
+    text-align: center;
 
     text-shadow:
         3px 3px #ff00ff,
@@ -937,58 +571,103 @@ h1 {
 
 
 /* =====================================================
-   GLITCH
+   IMAGEN DEL GATO
 ===================================================== */
 
-#sacredCatGlitch {
+#sacredCat {
 
-    font-family:
-        'Press Start 2P',
-        monospace;
+    display: block;
 
-    font-size: 12px;
+    width:
+        min(
+            450px,
+            75vw
+        );
 
-    color: #00ffff;
+    max-height: 55vh;
 
-    margin-bottom: 10px;
+    object-fit: contain;
 
-    animation:
-        sacredGlitch 0.15s infinite;
+    margin-top: 20px;
+
+    border:
+        4px solid white;
 
 }
 
 
 /* =====================================================
-   EFECTO GLITCH
+   TEXTO GLITCH
+===================================================== */
+
+#sacredCatGlitch {
+
+    color: #00ffff;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+
+    animation:
+        sacredGlitch
+        0.12s
+        infinite;
+
+}
+
+
+/* =====================================================
+   GLITCH
 ===================================================== */
 
 @keyframes sacredGlitch {
 
     0% {
-        transform: translateX(0);
+
+        transform:
+            translateX(0);
+
     }
 
     25% {
-        transform: translateX(-5px);
+
+        transform:
+            translateX(-5px);
+
     }
 
     50% {
-        transform: translateX(5px);
+
+        transform:
+            translateX(5px);
+
     }
 
     75% {
-        transform: translateX(-3px);
+
+        transform:
+            translateX(-3px);
+
     }
 
     100% {
-        transform: translateX(0);
+
+        transform:
+            translateX(0);
+
     }
 
 }
 
 
 /* =====================================================
-   GLITCH DE TODA LA PANTALLA
+   GLITCH DE PANTALLA
 ===================================================== */
 
 body.sacred-cat-glitch::after {
@@ -1008,11 +687,18 @@ body.sacred-cat-glitch::after {
             0deg,
             transparent 0px,
             transparent 3px,
-            rgba(255,255,255,0.08) 4px
+            rgba(
+                255,
+                255,
+                255,
+                0.08
+            ) 4px
         );
 
     animation:
-        screenGlitch 0.12s infinite;
+        screenGlitch
+        0.12s
+        infinite;
 
 }
 
@@ -1020,15 +706,105 @@ body.sacred-cat-glitch::after {
 @keyframes screenGlitch {
 
     0% {
+
         opacity: 0.2;
+
     }
 
     50% {
+
         opacity: 0.7;
+
     }
 
     100% {
+
         opacity: 0.2;
+
+    }
+
+}
+
+
+/* =====================================================
+   MODO BIG SHOT
+===================================================== */
+
+body.big-shot-mode {
+
+    background-color: black;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (
+    max-width: 700px
+) {
+
+    #musicBox {
+
+        right: 10px;
+
+        bottom: 10px;
+
+    }
+
+
+    #dancingSpamton {
+
+        width: 90px;
+
+    }
+
+
+    #musicButton {
+
+        font-size: 8px;
+
+        padding: 9px;
+
+    }
+
+
+    #susieGlitch {
+
+        left: 10px;
+
+        bottom: 10px;
+
+        width: 130px;
+
+    }
+
+
+    #susieGif {
+
+        width: 110px;
+
+    }
+
+
+    #secretRoomButton {
+
+        right: 10px;
+
+        top: 10px;
+
+        font-size: 8px;
+
+    }
+
+
+    #sacredCatEvent {
+
+        width: 90vw;
+
+        padding: 15px;
+
     }
 
 }
