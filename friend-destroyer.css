@@ -1,1 +1,851 @@
+/* =====================================================
+   FUENTE
+===================================================== */
 
+@import url(
+    'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
+);
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+}
+
+
+/* =====================================================
+   FONDO
+===================================================== */
+
+body {
+
+    background-image:
+        url("spamton-cielo.png");
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+}
+
+
+/* =====================================================
+   PANTALLA INICIO
+===================================================== */
+
+#startScreen {
+
+    position:
+        fixed;
+
+    inset: 0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+
+    z-index:
+        9999;
+
+}
+
+
+.startBox {
+
+    width:
+        500px;
+
+    max-width:
+        90%;
+
+    padding:
+        35px;
+
+    text-align:
+        center;
+
+    color:
+        white;
+
+    background:
+        rgba(0, 0, 0, 0.90);
+
+    border:
+        4px solid white;
+
+    box-shadow:
+        10px 10px 0 #ff00ff,
+        -8px -8px 0 #00ffff;
+
+}
+
+
+.startBox h1 {
+
+    font-size:
+        28px;
+
+    line-height:
+        1.6;
+
+}
+
+
+.warning {
+
+    color:
+        #ff00ff;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.startBox p {
+
+    font-size:
+        12px;
+
+    line-height:
+        2;
+
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+button,
+.backButton {
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    background:
+        #000;
+
+    color:
+        white;
+
+    border:
+        3px solid white;
+
+    padding:
+        15px 20px;
+
+    cursor:
+        pointer;
+
+    text-decoration:
+        none;
+
+    display:
+        inline-block;
+
+    box-shadow:
+        5px 5px 0 #ff00ff;
+
+}
+
+
+button:hover,
+.backButton:hover {
+
+    background:
+        #ff00ff;
+
+    color:
+        #000;
+
+}
+
+
+#startButton {
+
+    margin-top:
+        20px;
+
+}
+
+
+/* =====================================================
+   JUEGO
+===================================================== */
+
+#game {
+
+    display:
+        none;
+
+    width:
+        100vw;
+
+    height:
+        100vh;
+
+    position:
+        relative;
+
+}
+
+
+/* =====================================================
+   HUD
+===================================================== */
+
+#hud {
+
+    position:
+        absolute;
+
+    top:
+        15px;
+
+    left:
+        15px;
+
+    right:
+        15px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    z-index:
+        5000;
+
+}
+
+
+.hudBox {
+
+    background:
+        rgba(0, 0, 0, 0.85);
+
+    color:
+        white;
+
+    border:
+        3px solid white;
+
+    padding:
+        12px 18px;
+
+    font-size:
+        12px;
+
+    box-shadow:
+        4px 4px 0 #ff00ff;
+
+}
+
+
+/* =====================================================
+   ÁREA DEL JUEGO
+===================================================== */
+
+#gameArea {
+
+    position:
+        absolute;
+
+    width:
+        850px;
+
+    height:
+        600px;
+
+    max-width:
+        90vw;
+
+    max-height:
+        80vh;
+
+    left:
+        50%;
+
+    top:
+        52%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(0, 0, 0, 0.62);
+
+    border:
+        5px solid white;
+
+    box-shadow:
+        12px 12px 0 #ff00ff,
+        -8px -8px 0 #00ffff;
+
+}
+
+
+/* =====================================================
+   PLATAFORMA
+===================================================== */
+
+#platform {
+
+    position:
+        absolute;
+
+    left:
+        5%;
+
+    right:
+        5%;
+
+    bottom:
+        5%;
+
+    height:
+        18%;
+
+    background:
+        rgba(0, 0, 0, 0.75);
+
+    border:
+        3px solid #222;
+
+}
+
+
+/* =====================================================
+   SPAMTON
+===================================================== */
+
+#player {
+
+    position:
+        absolute;
+
+    width:
+        85px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    z-index:
+        1000;
+
+    user-select:
+        none;
+
+}
+
+
+.playerHit {
+
+    animation:
+        playerDamage
+        0.15s
+        linear;
+
+}
+
+
+@keyframes playerDamage {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateX(-8px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateX(8px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%);
+    }
+
+}
+
+
+/* =====================================================
+   FRIEND
+===================================================== */
+
+.friend {
+
+    position:
+        absolute;
+
+    width:
+        55px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    z-index:
+        500;
+
+    image-rendering:
+        pixelated;
+
+}
+
+
+.friend-red {
+
+    filter:
+        hue-rotate(
+            320deg
+        )
+        saturate(
+            3
+        );
+
+    width:
+        62px;
+
+}
+
+
+.friend-glitch {
+
+    width:
+        65px;
+
+    animation:
+        glitchFriend
+        0.2s
+        infinite;
+
+}
+
+
+@keyframes glitchFriend {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateX(-2px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateX(3px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateX(-2px);
+    }
+
+}
+
+
+/* =====================================================
+   BOSS
+===================================================== */
+
+.boss {
+
+    width:
+        170px !important;
+
+    filter:
+        contrast(1.3)
+        saturate(1.5);
+
+    animation:
+        bossGlitch
+        0.5s
+        infinite;
+
+}
+
+
+@keyframes bossGlitch {
+
+    0% {
+        transform:
+            translate(-50%, -50%);
+    }
+
+    25% {
+        transform:
+            translate(-52%, -50%);
+    }
+
+    50% {
+        transform:
+            translate(-48%, -50%);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%);
+    }
+
+}
+
+
+/* =====================================================
+   PIPIS / BALAS
+===================================================== */
+
+.bullet {
+
+    position:
+        absolute;
+
+    width:
+        28px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    z-index:
+        800;
+
+}
+
+
+.healingPipis {
+
+    position:
+        absolute;
+
+    width:
+        45px;
+
+    animation:
+        pipisFall
+        4s
+        linear;
+
+    z-index:
+        2000;
+
+}
+
+
+@keyframes pipisFall {
+
+    from {
+
+        top:
+            -10%;
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    to {
+
+        top:
+            110%;
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   TRIÁNGULOS
+===================================================== */
+
+.triangle {
+
+    position:
+        absolute;
+
+    width:
+        0;
+
+    height:
+        0;
+
+    border-left:
+        16px solid transparent;
+
+    border-right:
+        16px solid transparent;
+
+    border-bottom:
+        30px solid black;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    z-index:
+        1500;
+
+}
+
+
+/* =====================================================
+   EVENTO
+===================================================== */
+
+#eventMessage {
+
+    position:
+        fixed;
+
+    left:
+        50%;
+
+    top:
+        20%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    padding:
+        20px;
+
+    background:
+        #000;
+
+    color:
+        white;
+
+    border:
+        4px solid #ff00ff;
+
+    box-shadow:
+        6px 6px 0 #00ffff;
+
+    font-size:
+        18px;
+
+    text-align:
+        center;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        9000;
+
+}
+
+
+#eventMessage.show {
+
+    opacity:
+        1;
+
+}
+
+
+/* =====================================================
+   LOGROS
+===================================================== */
+
+.achievementPopup {
+
+    position:
+        fixed;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(0.5);
+
+    width:
+        500px;
+
+    max-width:
+        90vw;
+
+    padding:
+        30px;
+
+    background:
+        #000;
+
+    color:
+        white;
+
+    border:
+        5px solid white;
+
+    box-shadow:
+        12px 12px 0 #ff00ff,
+        -8px -8px 0 #00ffff;
+
+    text-align:
+        center;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.8;
+
+    opacity:
+        0;
+
+    z-index:
+        10000;
+
+    transition:
+        0.4s;
+
+}
+
+
+.achievementPopup.show {
+
+    opacity:
+        1;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(1);
+
+}
+
+
+.achievementSusie {
+
+    display:
+        block;
+
+    width:
+        180px;
+
+    max-height:
+        180px;
+
+    object-fit:
+        contain;
+
+    margin:
+        20px auto 0;
+
+    image-rendering:
+        pixelated;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (
+    max-width: 900px
+) {
+
+    #gameArea {
+
+        width:
+            90vw;
+
+        height:
+            70vh;
+
+    }
+
+
+    .startBox h1 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .hudBox {
+
+        font-size:
+            8px;
+
+        padding:
+            8px;
+
+    }
+
+}
