@@ -149,6 +149,62 @@ h1 {
         3px 3px 0 #ff00ff;
 }
 
+```css
+
+/* =====================================================
+   BOTÓN FRIEND DESTROYER
+====================================================== */
+
+#friendDestroyerButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    z-index: 10000;
+
+    display: block;
+
+    padding: 12px 18px;
+
+    background: #111;
+    color: white;
+
+    border: 3px solid white;
+
+    text-decoration: none;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 #000;
+
+    transition:
+        transform 0.1s,
+        background 0.1s;
+}
+
+#friendDestroyerButton:hover {
+    background: #333;
+
+    transform:
+        translate(2px, 2px);
+
+    box-shadow:
+        2px 2px 0 #000;
+}
+
+#friendDestroyerButton:active {
+    transform:
+        translate(4px, 4px);
+
+    box-shadow:
+        none;
+}
+```
+
 
 /* =========================================================
    MUSICA
