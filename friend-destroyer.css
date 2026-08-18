@@ -31,6 +31,8 @@ body {
         'Press Start 2P',
         cursive;
 
+    touch-action: none;
+
 }
 
 
@@ -147,6 +149,14 @@ body {
 }
 
 
+.mobileInfo {
+
+    display:
+        none;
+
+}
+
+
 /* =====================================================
    BOTONES
 ===================================================== */
@@ -227,6 +237,33 @@ button:hover,
 
 
 /* =====================================================
+   BOTÓN SALIR
+===================================================== */
+
+#exitGameButton {
+
+    position:
+        fixed;
+
+    top:
+        15px;
+
+    left:
+        15px;
+
+    z-index:
+        10000;
+
+    font-size:
+        10px;
+
+    padding:
+        10px 12px;
+
+}
+
+
+/* =====================================================
    HUD
 ===================================================== */
 
@@ -239,7 +276,7 @@ button:hover,
         15px;
 
     left:
-        15px;
+        180px;
 
     right:
         15px;
@@ -249,6 +286,9 @@ button:hover,
 
     justify-content:
         space-between;
+
+    gap:
+        10px;
 
     z-index:
         5000;
@@ -382,36 +422,78 @@ button:hover,
     user-select:
         none;
 
+    pointer-events:
+        none;
+
+    image-rendering:
+        pixelated;
+
 }
 
 
-.playerHit {
+#player.facing-right {
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scaleX(1);
+
+}
+
+
+#player.facing-left {
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scaleX(-1);
+
+}
+
+
+/* =====================================================
+   DAÑO / PARPADEO ROJO
+===================================================== */
+
+.playerDamageFlash {
 
     animation:
-        playerDamage
-        0.15s
-        linear;
+        playerRedFlash
+        0.30s
+        linear
+        infinite;
 
 }
 
 
-@keyframes playerDamage {
+@keyframes playerRedFlash {
 
     0% {
-        transform:
-            translate(-50%, -50%)
-            translateX(-8px);
+
+        filter:
+            brightness(1);
+
     }
 
     50% {
-        transform:
-            translate(-50%, -50%)
-            translateX(8px);
+
+        filter:
+            brightness(2)
+            sepia(1)
+            saturate(8)
+            hue-rotate(320deg);
+
     }
 
     100% {
-        transform:
-            translate(-50%, -50%);
+
+        filter:
+            brightness(1);
+
     }
 
 }
@@ -440,6 +522,9 @@ button:hover,
 
     image-rendering:
         pixelated;
+
+    user-select:
+        none;
 
 }
 
@@ -473,24 +558,47 @@ button:hover,
 }
 
 
+.friend.hit {
+
+    filter:
+        brightness(2);
+
+}
+
+
 @keyframes glitchFriend {
 
     0% {
+
         transform:
-            translate(-50%, -50%)
-            translateX(-2px);
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-3px);
+
     }
 
     50% {
+
         transform:
-            translate(-50%, -50%)
-            translateX(3px);
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(4px);
+
     }
 
     100% {
+
         transform:
-            translate(-50%, -50%)
-            translateX(-2px);
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-3px);
+
     }
 
 }
@@ -520,23 +628,43 @@ button:hover,
 @keyframes bossGlitch {
 
     0% {
+
         transform:
-            translate(-50%, -50%);
+            translate(
+                -50%,
+                -50%
+            );
+
     }
 
     25% {
+
         transform:
-            translate(-52%, -50%);
+            translate(
+                -52%,
+                -50%
+            );
+
     }
 
     50% {
+
         transform:
-            translate(-48%, -50%);
+            translate(
+                -48%,
+                -50%
+            );
+
     }
 
     100% {
+
         transform:
-            translate(-50%, -50%);
+            translate(
+                -50%,
+                -50%
+            );
+
     }
 
 }
@@ -563,6 +691,12 @@ button:hover,
     z-index:
         800;
 
+    pointer-events:
+        none;
+
+    image-rendering:
+        pixelated;
+
 }
 
 
@@ -581,6 +715,9 @@ button:hover,
 
     z-index:
         2000;
+
+    pointer-events:
+        none;
 
 }
 
@@ -788,6 +925,14 @@ button:hover,
 }
 
 
+.achievementPopup.achievementHide {
+
+    opacity:
+        0;
+
+}
+
+
 .achievementSusie {
 
     display:
@@ -812,6 +957,181 @@ button:hover,
 
 
 /* =====================================================
+   CONTROLES CELULAR
+===================================================== */
+
+#mobileControls {
+
+    display:
+        none;
+
+    position:
+        fixed;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        20px;
+
+    height:
+        150px;
+
+    z-index:
+        10000;
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+#joystick {
+
+    position:
+        absolute;
+
+    left:
+        25px;
+
+    bottom:
+        0;
+
+    width:
+        120px;
+
+    height:
+        120px;
+
+    border:
+        4px solid white;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(0, 0, 0, 0.65);
+
+    box-shadow:
+        5px 5px 0 #ff00ff;
+
+    pointer-events:
+        auto;
+
+    touch-action:
+        none;
+
+}
+
+
+#joystickKnob {
+
+    position:
+        absolute;
+
+    width:
+        50px;
+
+    height:
+        50px;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    margin-left:
+        -25px;
+
+    margin-top:
+        -25px;
+
+    border:
+        3px solid white;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255, 0, 255, 0.75);
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =====================================================
+   BOTÓN DISPARO CELULAR
+===================================================== */
+
+#shootButton {
+
+    position:
+        absolute;
+
+    right:
+        30px;
+
+    bottom:
+        5px;
+
+    width:
+        115px;
+
+    height:
+        115px;
+
+    border:
+        4px solid white;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(0, 0, 0, 0.85);
+
+    color:
+        white;
+
+    font-size:
+        12px;
+
+    box-shadow:
+        6px 6px 0 #ff00ff;
+
+    pointer-events:
+        auto;
+
+    touch-action:
+        none;
+
+}
+
+
+#shootButton:active {
+
+    transform:
+        scale(0.92);
+
+    background:
+        #ff00ff;
+
+    color:
+        #000;
+
+}
+
+
+/* =====================================================
    RESPONSIVE
 ===================================================== */
 
@@ -819,13 +1139,41 @@ button:hover,
     max-width: 900px
 ) {
 
-    #gameArea {
+    .mobileInfo {
+
+        display:
+            block;
+
+        font-size:
+            9px !important;
+
+        color:
+            #00ffff;
+
+    }
+
+
+    #startScreen {
+
+        overflow:
+            auto;
+
+        padding:
+            15px;
+
+    }
+
+
+    .startBox {
 
         width:
-            90vw;
+            100%;
 
-        height:
-            70vh;
+        max-width:
+            450px;
+
+        padding:
+            20px;
 
     }
 
@@ -838,13 +1186,272 @@ button:hover,
     }
 
 
+    .startBox p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    #gameArea {
+
+        width:
+            94vw;
+
+        height:
+            68vh;
+
+        max-width:
+            none;
+
+        max-height:
+            none;
+
+        top:
+            50%;
+
+    }
+
+
+    #hud {
+
+        left:
+            10px;
+
+        right:
+            10px;
+
+        top:
+            8px;
+
+        gap:
+            4px;
+
+    }
+
+
     .hudBox {
+
+        font-size:
+            7px;
+
+        padding:
+            7px 6px;
+
+        box-shadow:
+            3px 3px 0 #ff00ff;
+
+    }
+
+
+    #exitGameButton {
+
+        top:
+            auto;
+
+        bottom:
+            10px;
+
+        left:
+            50%;
+
+        transform:
+            translateX(-50%);
 
         font-size:
             8px;
 
         padding:
-            8px;
+            9px 10px;
+
+        z-index:
+            11000;
+
+    }
+
+
+    #mobileControls {
+
+        display:
+            block;
+
+    }
+
+
+    #player {
+
+        width:
+            70px;
+
+    }
+
+
+    .friend {
+
+        width:
+            48px;
+
+    }
+
+
+    .friend-red {
+
+        width:
+            55px;
+
+    }
+
+
+    .friend-glitch {
+
+        width:
+            58px;
+
+    }
+
+
+    .boss {
+
+        width:
+            130px !important;
+
+    }
+
+
+    .bullet {
+
+        width:
+            24px;
+
+    }
+
+
+    .eventMessage {
+
+        font-size:
+            12px;
+
+    }
+
+
+    #eventMessage {
+
+        width:
+            85vw;
+
+        font-size:
+            11px;
+
+        padding:
+            14px;
+
+    }
+
+
+    .achievementPopup {
+
+        width:
+            85vw;
+
+        padding:
+            20px;
+
+        font-size:
+            11px;
+
+    }
+
+
+    .achievementSusie {
+
+        width:
+            120px;
+
+        max-height:
+            120px;
+
+    }
+
+}
+
+
+/* =====================================================
+   PANTALLAS MUY PEQUEÑAS
+===================================================== */
+
+@media (
+    max-width: 500px
+) {
+
+    #gameArea {
+
+        width:
+            96vw;
+
+        height:
+            60vh;
+
+    }
+
+
+    #hud {
+
+        flex-wrap:
+            wrap;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .hudBox {
+
+        font-size:
+            6px;
+
+        padding:
+            6px 5px;
+
+    }
+
+
+    #joystick {
+
+        width:
+            105px;
+
+        height:
+            105px;
+
+        left:
+            15px;
+
+    }
+
+
+    #shootButton {
+
+        width:
+            100px;
+
+        height:
+            100px;
+
+        right:
+            15px;
+
+        font-size:
+            10px;
+
+    }
+
+
+    #mobileControls {
+
+        bottom:
+            12px;
 
     }
 
