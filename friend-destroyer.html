@@ -1,1 +1,1933 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FRIEND DESTROYER</title>
+
+    <link
+        rel="stylesheet"
+        href="friend-destroyer.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PANTALLA DE INICIO
+===================================================== -->
+
+<div id="startScreen">
+
+    <div class="startBox">
+
+        <div class="warning">
+            !!! WARNING !!!
+        </div>
+
+        <h1>
+            FRIEND DESTROYER
+        </h1>
+
+        <p>
+            DESTROY THEM ALL.
+        </p>
+
+        <p>
+            W A S D = MOVE
+        </p>
+
+        <p>
+            Z = SHOOT
+        </p>
+
+        <button id="startButton">
+            [ START GAME ]
+        </button>
+
+        <br><br>
+
+        <a
+            href="index.html"
+            class="backButton"
+        >
+            [ BACK TO SPAMTON SHOP ]
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JUEGO
+===================================================== -->
+
+<div id="game">
+
+
+    <!-- HUD -->
+
+    <div id="hud">
+
+        <div class="hudBox">
+
+            HP:
+            <span id="playerHP">
+                450
+            </span>
+            / 450
+
+        </div>
+
+
+        <div class="hudBox">
+
+            KILLS:
+            <span id="killCounter">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="hudBox">
+
+            TIME:
+            <span id="timer">
+                00:00
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ÁREA DEL JUEGO
+    ================================================== -->
+
+    <div id="gameArea">
+
+
+        <!-- PLATAFORMA -->
+
+        <div id="platform"></div>
+
+
+        <!-- SPAMTON -->
+
+        <img
+            src="spamton-gun-game.gif"
+            id="player"
+            class="gameSprite"
+            alt="Spamton"
+        >
+
+
+        <!-- CONTENEDOR FRIENDS -->
+
+        <div id="friends"></div>
+
+
+        <!-- CONTENEDOR PIPIS -->
+
+        <div id="pipisRain"></div>
+
+
+        <!-- BALAS -->
+
+        <div id="bullets"></div>
+
+
+        <!-- TRIÁNGULOS -->
+
+        <div id="triangles"></div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MENSAJE DE EVENTO
+    ================================================== -->
+
+    <div id="eventMessage"></div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     SONIDOS
+===================================================== -->
+
+<audio
+    id="gameMusic"
+    src="big-shot.mp3"
+    loop
+    preload="auto"
+></audio>
+
+
+<audio
+    id="friendLaugh"
+    src="friend-laugh.mp3"
+    preload="auto"
+></audio>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const startButton =
+    document.getElementById("startButton");
+
+const game =
+    document.getElementById("game");
+
+const gameArea =
+    document.getElementById("gameArea");
+
+const player =
+    document.getElementById("player");
+
+const friendsContainer =
+    document.getElementById("friends");
+
+const bulletsContainer =
+    document.getElementById("bullets");
+
+const trianglesContainer =
+    document.getElementById("triangles");
+
+const pipisContainer =
+    document.getElementById("pipisRain");
+
+const playerHPText =
+    document.getElementById("playerHP");
+
+const killCounterText =
+    document.getElementById("killCounter");
+
+const timerText =
+    document.getElementById("timer");
+
+const eventMessage =
+    document.getElementById("eventMessage");
+
+const gameMusic =
+    document.getElementById("gameMusic");
+
+const friendLaugh =
+    document.getElementById("friendLaugh");
+
+
+
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
+
+const MAX_HP = 450;
+
+let playerHP = MAX_HP;
+
+let kills = 0;
+
+let gameRunning = false;
+
+let gameTime = 0;
+
+let timerInterval = null;
+
+let spawnTimeout = null;
+
+let keys = {};
+
+let bullets = [];
+
+let friends = [];
+
+let bossActive = false;
+
+let lastTime = 0;
+
+
+
+/* =====================================================
+   POSICIÓN DEL JUGADOR
+===================================================== */
+
+let playerX = 50;
+
+let playerY = 50;
+
+
+
+/* =====================================================
+   VELOCIDAD
+===================================================== */
+
+const PLAYER_SPEED = 4;
+
+
+
+/* =====================================================
+   TECLADO
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        keys[event.key.toLowerCase()] = true;
+
+
+        /*
+         * Z dispara
+         */
+
+        if (
+            event.key.toLowerCase() === "z"
+            &&
+            gameRunning
+        ) {
+
+            shoot();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    function(event) {
+
+        keys[event.key.toLowerCase()] = false;
+
+    }
+);
+
+
+
+/* =====================================================
+   INICIAR JUEGO
+===================================================== */
+
+startButton.addEventListener(
+    "click",
+    function() {
+
+        startGame();
+
+    }
+);
+
+
+
+function startGame() {
+
+    startScreen.style.display =
+        "none";
+
+    game.style.display =
+        "block";
+
+
+    gameRunning =
+        true;
+
+
+    playerHP =
+        MAX_HP;
+
+
+    kills =
+        0;
+
+
+    gameTime =
+        0;
+
+
+    bossActive =
+        false;
+
+
+    updateHUD();
+
+
+    /*
+     * Música
+     */
+
+    gameMusic.volume =
+        0.40;
+
+
+    gameMusic.currentTime =
+        0;
+
+
+    gameMusic.play()
+        .catch(
+            function(error) {
+
+                console.log(
+                    "La música necesita interacción:",
+                    error
+                );
+
+            }
+        );
+
+
+    /*
+     * Temporizador
+     */
+
+    timerInterval =
+        setInterval(
+            function() {
+
+                if (!gameRunning) {
+                    return;
+                }
+
+                gameTime++;
+
+                updateTimer();
+
+            },
+            1000
+        );
+
+
+    /*
+     * Primer Friend
+     */
+
+    scheduleFriendSpawn();
+
+
+    /*
+     * Bucle
+     */
+
+    lastTime =
+        performance.now();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+
+/* =====================================================
+   BUCLE PRINCIPAL
+===================================================== */
+
+function gameLoop(time) {
+
+    if (!gameRunning) {
+        return;
+    }
+
+
+    const delta =
+        time - lastTime;
+
+
+    lastTime =
+        time;
+
+
+    movePlayer();
+
+    updateBullets(delta);
+
+    updateFriends(delta);
+
+    updateTriangles(delta);
+
+    checkCollisions();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
+
+}
+
+
+
+/* =====================================================
+   MOVER JUGADOR
+===================================================== */
+
+function movePlayer() {
+
+    if (keys["w"]) {
+
+        playerY -=
+            PLAYER_SPEED;
+
+    }
+
+    if (keys["s"]) {
+
+        playerY +=
+            PLAYER_SPEED;
+
+    }
+
+    if (keys["a"]) {
+
+        playerX -=
+            PLAYER_SPEED;
+
+    }
+
+    if (keys["d"]) {
+
+        playerX +=
+            PLAYER_SPEED;
+
+    }
+
+
+    /*
+     * Límites
+     */
+
+    playerX =
+        Math.max(
+            5,
+            Math.min(
+                95,
+                playerX
+            )
+        );
+
+
+    playerY =
+        Math.max(
+            8,
+            Math.min(
+                92,
+                playerY
+            )
+        );
+
+
+    player.style.left =
+        playerX + "%";
+
+
+    player.style.top =
+        playerY + "%";
+
+}
+
+
+
+/* =====================================================
+   DISPARAR PIPIS
+===================================================== */
+
+function shoot() {
+
+    const bullet =
+        document.createElement("img");
+
+
+    bullet.src =
+        "pipis.gif";
+
+
+    bullet.className =
+        "bullet";
+
+
+    bullet.style.left =
+        playerX + "%";
+
+
+    bullet.style.top =
+        playerY + "%";
+
+
+    /*
+     * Dispara hacia arriba
+     */
+
+    bullet.dataset.x =
+        playerX;
+
+    bullet.dataset.y =
+        playerY;
+
+
+    bulletsContainer.appendChild(
+        bullet
+    );
+
+
+    bullets.push(
+        bullet
+    );
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR BALAS
+===================================================== */
+
+function updateBullets() {
+
+    for (
+        let i = bullets.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const bullet =
+            bullets[i];
+
+
+        let y =
+            parseFloat(
+                bullet.dataset.y
+            );
+
+
+        y -= 1.5;
+
+
+        bullet.dataset.y =
+            y;
+
+
+        bullet.style.top =
+            y + "%";
+
+
+        /*
+         * Eliminar si sale
+         */
+
+        if (y < -10) {
+
+            bullet.remove();
+
+            bullets.splice(
+                i,
+                1
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SPAWN FRIEND
+===================================================== */
+
+function scheduleFriendSpawn() {
+
+    if (!gameRunning) {
+        return;
+    }
+
+
+    /*
+     * Mínimo 1 segundo
+     */
+
+    const delay =
+        Math.random() * 2000 + 1000;
+
+
+    spawnTimeout =
+        setTimeout(
+            function() {
+
+                spawnFriend();
+
+                scheduleFriendSpawn();
+
+            },
+            delay
+        );
+
+}
+
+
+
+/* =====================================================
+   CREAR FRIEND
+===================================================== */
+
+function spawnFriend() {
+
+    if (!gameRunning) {
+        return;
+    }
+
+
+    /*
+     * Cada 100 kills aparece
+     * el siguiente nivel de enemigo.
+     */
+
+    let type =
+        "normal";
+
+
+    if (kills >= 1000) {
+
+        type =
+            "glitch";
+
+    }
+    else if (kills >= 100) {
+
+        type =
+            Math.random() < 0.35
+                ? "red"
+                : "normal";
+
+    }
+
+
+    const friend =
+        document.createElement("img");
+
+
+    friend.src =
+        "friend-sprite.gif";
+
+
+    friend.className =
+        "friend";
+
+
+    friend.classList.add(
+        "friend-" + type
+    );
+
+
+    /*
+     * Posición aleatoria
+     */
+
+    const x =
+        Math.random() * 80 + 10;
+
+
+    const y =
+        Math.random() * 70 + 10;
+
+
+    friend.style.left =
+        x + "%";
+
+
+    friend.style.top =
+        y + "%";
+
+
+    /*
+     * Datos
+     */
+
+    let hp =
+        20;
+
+
+    let speed =
+        0.025;
+
+
+    if (type === "red") {
+
+        hp =
+            45;
+
+        speed =
+            0.040;
+
+    }
+
+
+    if (type === "glitch") {
+
+        hp =
+            70;
+
+        speed =
+            0.050;
+
+    }
+
+
+    friend.dataset.hp =
+        hp;
+
+
+    friend.dataset.x =
+        x;
+
+
+    friend.dataset.y =
+        y;
+
+
+    friend.dataset.type =
+        type;
+
+
+    friendsContainer.appendChild(
+        friend
+    );
+
+
+    friends.push(
+        friend
+    );
+
+
+    /*
+     * Boss después de 100 kills
+     */
+
+    if (
+        kills >= 100
+        &&
+        !bossActive
+    ) {
+
+        spawnBoss();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   BOSS
+===================================================== */
+
+function spawnBoss() {
+
+    if (bossActive) {
+        return;
+    }
+
+
+    bossActive =
+        true;
+
+
+    showEvent(
+        "!!! BOSS FRIEND !!!"
+    );
+
+
+    const boss =
+        document.createElement("img");
+
+
+    boss.src =
+        "friend-sprite.gif";
+
+
+    boss.className =
+        "friend boss";
+
+
+    boss.style.left =
+        "50%";
+
+
+    boss.style.top =
+        "15%";
+
+
+    boss.dataset.hp =
+        500;
+
+
+    boss.dataset.x =
+        50;
+
+
+    boss.dataset.y =
+        15;
+
+
+    boss.dataset.type =
+        "boss";
+
+
+    friendsContainer.appendChild(
+        boss
+    );
+
+
+    friends.push(
+        boss
+    );
+
+}
+
+
+
+/* =====================================================
+   MOVER FRIENDS
+===================================================== */
+
+function updateFriends() {
+
+    for (
+        let i = friends.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const friend =
+            friends[i];
+
+
+        let x =
+            parseFloat(
+                friend.dataset.x
+            );
+
+
+        let y =
+            parseFloat(
+                friend.dataset.y
+            );
+
+
+        const type =
+            friend.dataset.type;
+
+
+        /*
+         * Acercarse a Spamton
+         */
+
+        const dx =
+            playerX - x;
+
+
+        const dy =
+            playerY - y;
+
+
+        const distance =
+            Math.sqrt(
+                dx * dx +
+                dy * dy
+            );
+
+
+        let speed =
+            0.025;
+
+
+        if (type === "red") {
+
+            speed =
+                0.040;
+
+        }
+
+
+        if (type === "glitch") {
+
+            speed =
+                0.050;
+
+        }
+
+
+        if (type === "boss") {
+
+            speed =
+                0.008;
+
+        }
+
+
+        if (distance > 5) {
+
+            x +=
+                (dx / distance)
+                * speed;
+
+            y +=
+                (dy / distance)
+                * speed;
+
+        }
+        else {
+
+            /*
+             * Golpe al jugador
+             */
+
+            damagePlayer(10);
+
+        }
+
+
+        friend.dataset.x =
+            x;
+
+
+        friend.dataset.y =
+            y;
+
+
+        friend.style.left =
+            x + "%";
+
+
+        friend.style.top =
+            y + "%";
+
+
+        /*
+         * Boss lanza triángulos
+         */
+
+        if (
+            type === "boss"
+            ||
+            type === "glitch"
+        ) {
+
+            if (
+                Math.random() < 0.015
+            ) {
+
+                spawnTriangle(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TRIÁNGULOS
+===================================================== */
+
+function spawnTriangle(
+    x,
+    y
+) {
+
+    const triangle =
+        document.createElement("div");
+
+
+    triangle.className =
+        "triangle";
+
+
+    triangle.style.left =
+        x + "%";
+
+
+    triangle.style.top =
+        y + "%";
+
+
+    triangle.dataset.x =
+        x;
+
+
+    triangle.dataset.y =
+        y;
+
+
+    trianglesContainer.appendChild(
+        triangle
+    );
+
+}
+
+
+
+/* =====================================================
+   MOVER TRIÁNGULOS
+===================================================== */
+
+function updateTriangles() {
+
+    const triangleList =
+        document.querySelectorAll(
+            ".triangle"
+        );
+
+
+    triangleList.forEach(
+        function(triangle) {
+
+            let x =
+                parseFloat(
+                    triangle.dataset.x
+                );
+
+
+            let y =
+                parseFloat(
+                    triangle.dataset.y
+                );
+
+
+            /*
+             * Buscar jugador
+             */
+
+            const dx =
+                playerX - x;
+
+
+            const dy =
+                playerY - y;
+
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            if (distance > 0) {
+
+                x +=
+                    (dx / distance)
+                    * 0.08;
+
+
+                y +=
+                    (dy / distance)
+                    * 0.08;
+
+            }
+
+
+            triangle.dataset.x =
+                x;
+
+
+            triangle.dataset.y =
+                y;
+
+
+            triangle.style.left =
+                x + "%";
+
+
+            triangle.style.top =
+                y + "%";
+
+
+            if (
+                distance < 5
+            ) {
+
+                damagePlayer(15);
+
+                triangle.remove();
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   COLISIONES
+===================================================== */
+
+function checkCollisions() {
+
+    bullets.forEach(
+        function(bullet) {
+
+            const bulletX =
+                parseFloat(
+                    bullet.dataset.x
+                );
+
+
+            const bulletY =
+                parseFloat(
+                    bullet.dataset.y
+                );
+
+
+            friends.forEach(
+                function(friend) {
+
+                    const friendX =
+                        parseFloat(
+                            friend.dataset.x
+                        );
+
+
+                    const friendY =
+                        parseFloat(
+                            friend.dataset.y
+                        );
+
+
+                    const distance =
+                        Math.sqrt(
+                            Math.pow(
+                                bulletX -
+                                friendX,
+                                2
+                            )
+                            +
+                            Math.pow(
+                                bulletY -
+                                friendY,
+                                2
+                            )
+                        );
+
+
+                    if (
+                        distance < 7
+                    ) {
+
+                        hitFriend(
+                            friend,
+                            bullet
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   GOLPEAR FRIEND
+===================================================== */
+
+function hitFriend(
+    friend,
+    bullet
+) {
+
+    /*
+     * Eliminar pipis
+     */
+
+    bullet.remove();
+
+
+    const bulletIndex =
+        bullets.indexOf(
+            bullet
+        );
+
+
+    if (
+        bulletIndex !== -1
+    ) {
+
+        bullets.splice(
+            bulletIndex,
+            1
+        );
+
+    }
+
+
+    /*
+     * Daño
+     */
+
+    let hp =
+        parseInt(
+            friend.dataset.hp
+        );
+
+
+    hp -=
+        10;
+
+
+    friend.dataset.hp =
+        hp;
+
+
+    /*
+     * Efecto de golpe
+     */
+
+    friend.classList.add(
+        "hit"
+    );
+
+
+    setTimeout(
+        function() {
+
+            friend.classList.remove(
+                "hit"
+            );
+
+        },
+        100
+    );
+
+
+    /*
+     * Murió
+     */
+
+    if (hp <= 0) {
+
+        killFriend(
+            friend
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MATAR FRIEND
+===================================================== */
+
+function killFriend(
+    friend
+) {
+
+    /*
+     * Risa
+     */
+
+    friendLaugh.currentTime =
+        0;
+
+
+    friendLaugh.volume =
+        0.20;
+
+
+    friendLaugh.play()
+        .catch(
+            function() {}
+        );
+
+
+    /*
+     * Kill
+     */
+
+    kills++;
+
+
+    updateHUD();
+
+
+    /*
+     * Quitar friend
+     */
+
+    const index =
+        friends.indexOf(
+            friend
+        );
+
+
+    if (
+        index !== -1
+    ) {
+
+        friends.splice(
+            index,
+            1
+        );
+
+    }
+
+
+    friend.remove();
+
+
+    /*
+     * LOGROS
+     */
+
+    checkAchievements();
+
+}
+
+
+
+/* =====================================================
+   DAÑO AL JUGADOR
+===================================================== */
+
+function damagePlayer(
+    amount
+) {
+
+    playerHP -=
+        amount;
+
+
+    if (
+        playerHP < 0
+    ) {
+
+        playerHP =
+            0;
+
+    }
+
+
+    updateHUD();
+
+
+    player.classList.add(
+        "playerHit"
+    );
+
+
+    setTimeout(
+        function() {
+
+            player.classList.remove(
+                "playerHit"
+            );
+
+        },
+        150
+    );
+
+
+    if (
+        playerHP <= 0
+    ) {
+
+        gameOver();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LLUVIA DE PIPIS
+===================================================== */
+
+function pipisRainEvent() {
+
+    showEvent(
+        "!!! PIPIS RAIN !!!"
+    );
+
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const pipis =
+            document.createElement(
+                "img"
+            );
+
+
+        pipis.src =
+            "pipis.gif";
+
+
+        pipis.className =
+            "healingPipis";
+
+
+        pipis.style.left =
+            Math.random() * 100
+            + "%";
+
+
+        pipis.style.top =
+            "-10%";
+
+
+        pipisContainer.appendChild(
+            pipis
+        );
+
+
+        setTimeout(
+            function() {
+
+                pipis.remove();
+
+            },
+            4000
+        );
+
+    }
+
+
+    /*
+     * Curación
+     */
+
+    playerHP +=
+        100;
+
+
+    if (
+        playerHP > MAX_HP
+    ) {
+
+        playerHP =
+            MAX_HP;
+
+    }
+
+
+    updateHUD();
+
+}
+
+
+
+/* =====================================================
+   EVENTOS ALEATORIOS
+===================================================== */
+
+setInterval(
+    function() {
+
+        if (
+            !gameRunning
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * 15% de probabilidad
+         */
+
+        if (
+            Math.random() < 0.15
+        ) {
+
+            pipisRainEvent();
+
+        }
+
+    },
+    15000
+);
+
+
+
+/* =====================================================
+   LOGROS
+===================================================== */
+
+function checkAchievements() {
+
+
+    /*
+     * 100 KILLS
+     */
+
+    if (
+        kills >= 100
+        &&
+        localStorage.getItem(
+            "friendAchievement100"
+        ) !== "true"
+    ) {
+
+        localStorage.setItem(
+            "friendAchievement100",
+            "true"
+        );
+
+
+        showAchievement(
+            "WOW! CONSEGUISTE 100 KILLS!"
+        );
+
+    }
+
+
+    /*
+     * 1000 KILLS
+     */
+
+    if (
+        kills >= 1000
+        &&
+        localStorage.getItem(
+            "friendAchievement1000"
+        ) !== "true"
+    ) {
+
+        localStorage.setItem(
+            "friendAchievement1000",
+            "true"
+        );
+
+
+        showAchievement(
+            "WOW! CONSEGUISTE 1000 KILLS!",
+            true
+        );
+
+    }
+
+
+    /*
+     * 10000 KILLS
+     */
+
+    if (
+        kills >= 10000
+        &&
+        localStorage.getItem(
+            "friendAchievement10000"
+        ) !== "true"
+    ) {
+
+        localStorage.setItem(
+            "friendAchievement10000",
+            "true"
+        );
+
+
+        showAchievement(
+            "GRACIAS POR JUGAR Y PROBAR LA PAGINA DE SPAMTON, CON AMOR NOELIA"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MENSAJE DE LOGRO
+===================================================== */
+
+function showAchievement(
+    message,
+    susie = false
+) {
+
+    const box =
+        document.createElement(
+            "div"
+        );
+
+
+    box.className =
+        "achievementPopup";
+
+
+    box.innerHTML = "";
+
+
+    const title =
+        document.createElement(
+            "div"
+        );
+
+
+    title.textContent =
+        message;
+
+
+    box.appendChild(
+        title
+    );
+
+
+    /*
+     * Susie
+     */
+
+    if (susie) {
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            "susie-eating-pancakes.gif";
+
+
+        image.className =
+            "achievementSusie";
+
+
+        box.appendChild(
+            image
+        );
+
+    }
+
+
+    document.body.appendChild(
+        box
+    );
+
+
+    setTimeout(
+        function() {
+
+            box.classList.add(
+                "show"
+            );
+
+        },
+        50
+    );
+
+
+    setTimeout(
+        function() {
+
+            box.classList.remove(
+                "show"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    box.remove();
+
+                },
+                500
+            );
+
+        },
+        5000
+    );
+
+}
+
+
+
+/* =====================================================
+   HUD
+===================================================== */
+
+function updateHUD() {
+
+    playerHPText.textContent =
+        playerHP;
+
+
+    killCounterText.textContent =
+        kills;
+
+}
+
+
+
+/* =====================================================
+   TEMPORIZADOR
+===================================================== */
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(
+            gameTime / 60
+        );
+
+
+    const seconds =
+        gameTime % 60;
+
+
+    timerText.textContent =
+        String(minutes).padStart(
+            2,
+            "0"
+        )
+        +
+        ":"
+        +
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+
+/* =====================================================
+   MENSAJE DE EVENTO
+===================================================== */
+
+function showEvent(
+    text
+) {
+
+    eventMessage.textContent =
+        text;
+
+
+    eventMessage.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function() {
+
+            eventMessage.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+
+/* =====================================================
+   GAME OVER
+===================================================== */
+
+function gameOver() {
+
+    gameRunning =
+        false;
+
+
+    clearInterval(
+        timerInterval
+    );
+
+
+    clearTimeout(
+        spawnTimeout
+    );
+
+
+    gameMusic.pause();
+
+
+    showEvent(
+        "GAME OVER"
+    );
+
+
+    setTimeout(
+        function() {
+
+            startScreen.style.display =
+                "flex";
+
+
+            game.style.display =
+                "none";
+
+
+            startButton.textContent =
+                "[ TRY AGAIN ]";
+
+        },
+        2500
+    );
+
+}
+
+
+</script>
+
+</body>
+
+</html>
