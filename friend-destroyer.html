@@ -51,11 +51,29 @@
             Z = SHOOT
         </p>
 
-        <button id="startButton">
+        <div class="startStats">
+
+            <div>
+                TOTAL KILLS:
+                <span id="startTotalKills">
+                    0
+                </span>
+            </div>
+
+        </div>
+
+
+        <button
+            id="startButton"
+            type="button"
+        >
             [ START GAME ]
         </button>
 
-        <br><br>
+
+        <br>
+        <br>
+
 
         <a
             href="index.html"
@@ -77,24 +95,44 @@
 <div id="game">
 
 
-    <!-- HUD -->
+    <!-- =================================================
+         BOTÓN PARA SALIR
+    ================================================== -->
+
+    <button
+        id="exitGameButton"
+        type="button"
+    >
+        [ EXIT GAME ]
+    </button>
+
+
+
+    <!-- =================================================
+         HUD
+    ================================================== -->
 
     <div id="hud">
+
 
         <div class="hudBox">
 
             HP:
+
             <span id="playerHP">
                 450
             </span>
+
             / 450
 
         </div>
 
 
+
         <div class="hudBox">
 
             KILLS:
+
             <span id="killCounter">
                 0
             </span>
@@ -102,14 +140,29 @@
         </div>
 
 
+
+        <div class="hudBox totalKillsBox">
+
+            TOTAL KILLS:
+
+            <span id="totalKillCounter">
+                0
+            </span>
+
+        </div>
+
+
+
         <div class="hudBox">
 
             TIME:
+
             <span id="timer">
                 00:00
             </span>
 
         </div>
+
 
     </div>
 
@@ -127,6 +180,7 @@
         <div id="platform"></div>
 
 
+
         <!-- SPAMTON -->
 
         <img
@@ -137,19 +191,23 @@
         >
 
 
-        <!-- CONTENEDOR FRIENDS -->
+
+        <!-- FRIENDS -->
 
         <div id="friends"></div>
 
 
-        <!-- CONTENEDOR PIPIS -->
+
+        <!-- PIPIS -->
 
         <div id="pipisRain"></div>
+
 
 
         <!-- BALAS -->
 
         <div id="bullets"></div>
+
 
 
         <!-- TRIÁNGULOS -->
@@ -173,7 +231,7 @@
 
 
 <!-- =====================================================
-     SONIDOS
+     MÚSICA
 ===================================================== -->
 
 <audio
@@ -184,6 +242,11 @@
 ></audio>
 
 
+
+<!-- =====================================================
+     RISA FRIEND
+===================================================== -->
+
 <audio
     id="friendLaugh"
     src="friend-laugh.mp3"
@@ -192,12 +255,7 @@
 
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
-
 
 /* =====================================================
    ELEMENTOS
@@ -208,6 +266,9 @@ const startScreen =
 
 const startButton =
     document.getElementById("startButton");
+
+const exitGameButton =
+    document.getElementById("exitGameButton");
 
 const game =
     document.getElementById("game");
@@ -236,6 +297,12 @@ const playerHPText =
 const killCounterText =
     document.getElementById("killCounter");
 
+const totalKillCounterText =
+    document.getElementById("totalKillCounter");
+
+const startTotalKillsText =
+    document.getElementById("startTotalKills");
+
 const timerText =
     document.getElementById("timer");
 
@@ -256,9 +323,35 @@ const friendLaugh =
 
 const MAX_HP = 450;
 
+const PLAYER_SPEED = 0.35;
+
+const BULLET_SPEED = 1.6;
+
+const FRIEND_DAMAGE = 10;
+
+const FRIEND_SHOT_DAMAGE = 10;
+
+
+/* =====================================================
+   ESTADO DEL JUEGO
+===================================================== */
+
 let playerHP = MAX_HP;
 
 let kills = 0;
+
+
+/*
+ * TOTAL DE KILLS PERMANENTE
+ */
+
+let totalKills =
+    parseInt(
+        localStorage.getItem(
+            "friendTotalKills"
+        )
+    ) || 0;
+
 
 let gameRunning = false;
 
@@ -267,6 +360,10 @@ let gameTime = 0;
 let timerInterval = null;
 
 let spawnTimeout = null;
+
+let gameLoopId = null;
+
+let eventInterval = null;
 
 let keys = {};
 
@@ -278,23 +375,66 @@ let bossActive = false;
 
 let lastTime = 0;
 
-
-
-/* =====================================================
-   POSICIÓN DEL JUGADOR
-===================================================== */
-
 let playerX = 50;
 
-let playerY = 50;
+let playerY = 75;
+
+let shootCooldown = false;
 
 
 
 /* =====================================================
-   VELOCIDAD
+   POSICIÓN INICIAL
 ===================================================== */
 
-const PLAYER_SPEED = 4;
+function resetPlayerPosition() {
+
+    playerX = 50;
+
+    playerY = 75;
+
+    player.style.left =
+        playerX + "%";
+
+    player.style.top =
+        playerY + "%";
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR TOTAL EN PANTALLA
+===================================================== */
+
+function updateTotalKillsDisplay() {
+
+    totalKillCounterText.textContent =
+        totalKills;
+
+    startTotalKillsText.textContent =
+        totalKills;
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR HUD
+===================================================== */
+
+function updateHUD() {
+
+    playerHPText.textContent =
+        playerHP;
+
+    killCounterText.textContent =
+        kills;
+
+    totalKillCounterText.textContent =
+        totalKills;
+
+}
 
 
 
@@ -306,16 +446,18 @@ document.addEventListener(
     "keydown",
     function(event) {
 
-        keys[event.key.toLowerCase()] = true;
+        const key =
+            event.key.toLowerCase();
+
+        keys[key] = true;
 
 
         /*
-         * Z dispara
+         * Z = DISPARAR
          */
 
         if (
-            event.key.toLowerCase() === "z"
-            &&
+            key === "z" &&
             gameRunning
         ) {
 
@@ -323,15 +465,38 @@ document.addEventListener(
 
         }
 
+
+        /*
+         * Evitar scroll con teclas
+         */
+
+        if (
+            [
+                "w",
+                "a",
+                "s",
+                "d",
+                "z"
+            ].includes(key)
+        ) {
+
+            event.preventDefault();
+
+        }
+
     }
 );
+
 
 
 document.addEventListener(
     "keyup",
     function(event) {
 
-        keys[event.key.toLowerCase()] = false;
+        const key =
+            event.key.toLowerCase();
+
+        keys[key] = false;
 
     }
 );
@@ -339,7 +504,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   INICIAR JUEGO
+   BOTÓN START
 ===================================================== */
 
 startButton.addEventListener(
@@ -353,10 +518,22 @@ startButton.addEventListener(
 
 
 
+/* =====================================================
+   INICIAR JUEGO
+===================================================== */
+
 function startGame() {
+
+    /*
+     * Limpiar estado anterior
+     */
+
+    clearGame();
+
 
     startScreen.style.display =
         "none";
+
 
     game.style.display =
         "block";
@@ -382,27 +559,33 @@ function startGame() {
         false;
 
 
+    resetPlayerPosition();
+
+
     updateHUD();
+
+    updateTotalKillsDisplay();
 
 
     /*
      * Música
+     *
+     * El usuario acaba de pulsar START,
+     * por lo que el navegador permite reproducirla.
      */
 
     gameMusic.volume =
         0.40;
 
-
     gameMusic.currentTime =
         0;
-
 
     gameMusic.play()
         .catch(
             function(error) {
 
                 console.log(
-                    "La música necesita interacción:",
+                    "No se pudo iniciar Big Shot:",
                     error
                 );
 
@@ -432,10 +615,40 @@ function startGame() {
 
 
     /*
-     * Primer Friend
+     * Friends
      */
 
     scheduleFriendSpawn();
+
+
+    /*
+     * Eventos aleatorios
+     */
+
+    eventInterval =
+        setInterval(
+            function() {
+
+                if (!gameRunning) {
+                    return;
+                }
+
+
+                /*
+                 * 15% de probabilidad
+                 */
+
+                if (
+                    Math.random() < 0.15
+                ) {
+
+                    pipisRainEvent();
+
+                }
+
+            },
+            15000
+        );
 
 
     /*
@@ -446,9 +659,166 @@ function startGame() {
         performance.now();
 
 
-    requestAnimationFrame(
-        gameLoop
+    gameLoopId =
+        requestAnimationFrame(
+            gameLoop
+        );
+
+}
+
+
+
+/* =====================================================
+   SALIR DEL JUEGO
+===================================================== */
+
+exitGameButton.addEventListener(
+    "click",
+    function() {
+
+        exitGame();
+
+    }
+);
+
+
+
+function exitGame() {
+
+    gameRunning =
+        false;
+
+
+    /*
+     * Detener temporizadores
+     */
+
+    clearInterval(
+        timerInterval
     );
+
+    clearInterval(
+        eventInterval
+    );
+
+    clearTimeout(
+        spawnTimeout
+    );
+
+
+    /*
+     * Detener música
+     */
+
+    gameMusic.pause();
+
+    gameMusic.currentTime =
+        0;
+
+
+    /*
+     * Limpiar juego
+     */
+
+    clearGame();
+
+
+    /*
+     * Volver a Spamton Shop
+     */
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =====================================================
+   LIMPIAR JUEGO
+===================================================== */
+
+function clearGame() {
+
+    clearTimeout(
+        spawnTimeout
+    );
+
+
+    /*
+     * Eliminar Friends
+     */
+
+    friends.forEach(
+        function(friend) {
+
+            if (
+                friend.parentNode
+            ) {
+
+                friend.remove();
+
+            }
+
+        }
+    );
+
+
+    friends =
+        [];
+
+
+    /*
+     * Eliminar balas
+     */
+
+    bullets.forEach(
+        function(bullet) {
+
+            if (
+                bullet.parentNode
+            ) {
+
+                bullet.remove();
+
+            }
+
+        }
+    );
+
+
+    bullets =
+        [];
+
+
+    /*
+     * Eliminar triángulos
+     */
+
+    document
+        .querySelectorAll(".triangle")
+        .forEach(
+            function(triangle) {
+
+                triangle.remove();
+
+            }
+        );
+
+
+    /*
+     * Eliminar Pipis
+     */
+
+    document
+        .querySelectorAll(".healingPipis")
+        .forEach(
+            function(pipis) {
+
+                pipis.remove();
+
+            }
+        );
 
 }
 
@@ -484,9 +854,10 @@ function gameLoop(time) {
     checkCollisions();
 
 
-    requestAnimationFrame(
-        gameLoop
-    );
+    gameLoopId =
+        requestAnimationFrame(
+            gameLoop
+        );
 
 }
 
@@ -505,6 +876,7 @@ function movePlayer() {
 
     }
 
+
     if (keys["s"]) {
 
         playerY +=
@@ -512,12 +884,14 @@ function movePlayer() {
 
     }
 
+
     if (keys["a"]) {
 
         playerX -=
             PLAYER_SPEED;
 
     }
+
 
     if (keys["d"]) {
 
@@ -543,9 +917,9 @@ function movePlayer() {
 
     playerY =
         Math.max(
-            8,
+            10,
             Math.min(
-                92,
+                90,
                 playerY
             )
         );
@@ -553,7 +927,6 @@ function movePlayer() {
 
     player.style.left =
         playerX + "%";
-
 
     player.style.top =
         playerY + "%";
@@ -568,8 +941,34 @@ function movePlayer() {
 
 function shoot() {
 
+    if (
+        shootCooldown
+    ) {
+
+        return;
+
+    }
+
+
+    shootCooldown =
+        true;
+
+
+    setTimeout(
+        function() {
+
+            shootCooldown =
+                false;
+
+        },
+        100
+    );
+
+
     const bullet =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
 
 
     bullet.src =
@@ -580,23 +979,26 @@ function shoot() {
         "bullet";
 
 
-    bullet.style.left =
-        playerX + "%";
-
-
-    bullet.style.top =
-        playerY + "%";
-
-
-    /*
-     * Dispara hacia arriba
-     */
-
-    bullet.dataset.x =
+    const x =
         playerX;
 
+
+    const y =
+        playerY - 5;
+
+
+    bullet.dataset.x =
+        x;
+
     bullet.dataset.y =
-        playerY;
+        y;
+
+
+    bullet.style.left =
+        x + "%";
+
+    bullet.style.top =
+        y + "%";
 
 
     bulletsContainer.appendChild(
@@ -634,7 +1036,8 @@ function updateBullets() {
             );
 
 
-        y -= 1.5;
+        y -=
+            BULLET_SPEED;
 
 
         bullet.dataset.y =
@@ -646,10 +1049,12 @@ function updateBullets() {
 
 
         /*
-         * Eliminar si sale
+         * Fuera de pantalla
          */
 
-        if (y < -10) {
+        if (
+            y < -10
+        ) {
 
             bullet.remove();
 
@@ -667,7 +1072,7 @@ function updateBullets() {
 
 
 /* =====================================================
-   SPAWN FRIEND
+   PROGRAMAR FRIEND
 ===================================================== */
 
 function scheduleFriendSpawn() {
@@ -678,16 +1083,23 @@ function scheduleFriendSpawn() {
 
 
     /*
-     * Mínimo 1 segundo
+     * Entre 1 y 3 segundos
      */
 
     const delay =
-        Math.random() * 2000 + 1000;
+        Math.random() *
+        2000 +
+        1000;
 
 
     spawnTimeout =
         setTimeout(
             function() {
+
+                if (!gameRunning) {
+                    return;
+                }
+
 
                 spawnFriend();
 
@@ -712,22 +1124,29 @@ function spawnFriend() {
     }
 
 
-    /*
-     * Cada 100 kills aparece
-     * el siguiente nivel de enemigo.
-     */
-
     let type =
         "normal";
 
 
-    if (kills >= 1000) {
+    /*
+     * Los tipos dependen
+     * de las kills de la partida.
+     */
+
+    if (
+        kills >= 1000
+    ) {
 
         type =
-            "glitch";
+            Math.random() < 0.45
+                ? "glitch"
+                : "red";
 
     }
-    else if (kills >= 100) {
+
+    else if (
+        kills >= 100
+    ) {
 
         type =
             Math.random() < 0.35
@@ -738,7 +1157,9 @@ function spawnFriend() {
 
 
     const friend =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
 
 
     friend.src =
@@ -755,15 +1176,19 @@ function spawnFriend() {
 
 
     /*
-     * Posición aleatoria
+     * Posición
      */
 
     const x =
-        Math.random() * 80 + 10;
+        Math.random() *
+        80 +
+        10;
 
 
     const y =
-        Math.random() * 70 + 10;
+        Math.random() *
+        65 +
+        10;
 
 
     friend.style.left =
@@ -775,35 +1200,29 @@ function spawnFriend() {
 
 
     /*
-     * Datos
+     * Vida
      */
 
     let hp =
         20;
 
 
-    let speed =
-        0.025;
-
-
-    if (type === "red") {
+    if (
+        type === "red"
+    ) {
 
         hp =
             45;
 
-        speed =
-            0.040;
-
     }
 
 
-    if (type === "glitch") {
+    if (
+        type === "glitch"
+    ) {
 
         hp =
             70;
-
-        speed =
-            0.050;
 
     }
 
@@ -835,12 +1254,11 @@ function spawnFriend() {
 
 
     /*
-     * Boss después de 100 kills
+     * Boss a las 100 kills
      */
 
     if (
-        kills >= 100
-        &&
+        kills >= 100 &&
         !bossActive
     ) {
 
@@ -853,7 +1271,7 @@ function spawnFriend() {
 
 
 /* =====================================================
-   BOSS
+   CREAR BOSS
 ===================================================== */
 
 function spawnBoss() {
@@ -873,7 +1291,9 @@ function spawnBoss() {
 
 
     const boss =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
 
 
     boss.src =
@@ -937,6 +1357,20 @@ function updateFriends() {
             friends[i];
 
 
+        if (
+            !friend.parentNode
+        ) {
+
+            friends.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
         let x =
             parseFloat(
                 friend.dataset.x
@@ -952,10 +1386,6 @@ function updateFriends() {
         const type =
             friend.dataset.type;
 
-
-        /*
-         * Acercarse a Spamton
-         */
 
         const dx =
             playerX - x;
@@ -976,7 +1406,9 @@ function updateFriends() {
             0.025;
 
 
-        if (type === "red") {
+        if (
+            type === "red"
+        ) {
 
             speed =
                 0.040;
@@ -984,7 +1416,9 @@ function updateFriends() {
         }
 
 
-        if (type === "glitch") {
+        if (
+            type === "glitch"
+        ) {
 
             speed =
                 0.050;
@@ -992,7 +1426,9 @@ function updateFriends() {
         }
 
 
-        if (type === "boss") {
+        if (
+            type === "boss"
+        ) {
 
             speed =
                 0.008;
@@ -1000,24 +1436,32 @@ function updateFriends() {
         }
 
 
-        if (distance > 5) {
+        if (
+            distance > 5
+        ) {
 
             x +=
-                (dx / distance)
-                * speed;
+                (
+                    dx /
+                    distance
+                ) *
+                speed;
+
 
             y +=
-                (dy / distance)
-                * speed;
+                (
+                    dy /
+                    distance
+                ) *
+                speed;
 
         }
+
         else {
 
-            /*
-             * Golpe al jugador
-             */
-
-            damagePlayer(10);
+            damagePlayer(
+                FRIEND_DAMAGE
+            );
 
         }
 
@@ -1039,17 +1483,17 @@ function updateFriends() {
 
 
         /*
-         * Boss lanza triángulos
+         * Glitch y Boss lanzan triángulos
          */
 
         if (
-            type === "boss"
-            ||
+            type === "boss" ||
             type === "glitch"
         ) {
 
             if (
-                Math.random() < 0.015
+                Math.random() <
+                0.015
             ) {
 
                 spawnTriangle(
@@ -1077,7 +1521,9 @@ function spawnTriangle(
 ) {
 
     const triangle =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     triangle.className =
@@ -1109,7 +1555,7 @@ function spawnTriangle(
 
 
 /* =====================================================
-   MOVER TRIÁNGULOS
+   ACTUALIZAR TRIÁNGULOS
 ===================================================== */
 
 function updateTriangles() {
@@ -1135,10 +1581,6 @@ function updateTriangles() {
                 );
 
 
-            /*
-             * Buscar jugador
-             */
-
             const dx =
                 playerX - x;
 
@@ -1154,16 +1596,24 @@ function updateTriangles() {
                 );
 
 
-            if (distance > 0) {
+            if (
+                distance > 0
+            ) {
 
                 x +=
-                    (dx / distance)
-                    * 0.08;
+                    (
+                        dx /
+                        distance
+                    ) *
+                    0.08;
 
 
                 y +=
-                    (dy / distance)
-                    * 0.08;
+                    (
+                        dy /
+                        distance
+                    ) *
+                    0.08;
 
             }
 
@@ -1188,7 +1638,10 @@ function updateTriangles() {
                 distance < 5
             ) {
 
-                damagePlayer(15);
+                damagePlayer(
+                    15
+                );
+
 
                 triangle.remove();
 
@@ -1207,68 +1660,111 @@ function updateTriangles() {
 
 function checkCollisions() {
 
-    bullets.forEach(
-        function(bullet) {
+    for (
+        let b = bullets.length - 1;
+        b >= 0;
+        b--
+    ) {
 
-            const bulletX =
-                parseFloat(
-                    bullet.dataset.x
-                );
-
-
-            const bulletY =
-                parseFloat(
-                    bullet.dataset.y
-                );
+        const bullet =
+            bullets[b];
 
 
-            friends.forEach(
-                function(friend) {
+        if (
+            !bullet.parentNode
+        ) {
 
-                    const friendX =
-                        parseFloat(
-                            friend.dataset.x
-                        );
-
-
-                    const friendY =
-                        parseFloat(
-                            friend.dataset.y
-                        );
-
-
-                    const distance =
-                        Math.sqrt(
-                            Math.pow(
-                                bulletX -
-                                friendX,
-                                2
-                            )
-                            +
-                            Math.pow(
-                                bulletY -
-                                friendY,
-                                2
-                            )
-                        );
-
-
-                    if (
-                        distance < 7
-                    ) {
-
-                        hitFriend(
-                            friend,
-                            bullet
-                        );
-
-                    }
-
-                }
+            bullets.splice(
+                b,
+                1
             );
 
+            continue;
+
         }
-    );
+
+
+        const bulletX =
+            parseFloat(
+                bullet.dataset.x
+            );
+
+
+        const bulletY =
+            parseFloat(
+                bullet.dataset.y
+            );
+
+
+        for (
+            let f = friends.length - 1;
+            f >= 0;
+            f--
+        ) {
+
+            const friend =
+                friends[f];
+
+
+            if (
+                !friend.parentNode
+            ) {
+
+                friends.splice(
+                    f,
+                    1
+                );
+
+                continue;
+
+            }
+
+
+            const friendX =
+                parseFloat(
+                    friend.dataset.x
+                );
+
+
+            const friendY =
+                parseFloat(
+                    friend.dataset.y
+                );
+
+
+            const distance =
+                Math.sqrt(
+                    Math.pow(
+                        bulletX -
+                        friendX,
+                        2
+                    )
+                    +
+                    Math.pow(
+                        bulletY -
+                        friendY,
+                        2
+                    )
+                );
+
+
+            if (
+                distance < 7
+            ) {
+
+                hitFriend(
+                    friend,
+                    bullet
+                );
+
+
+                break;
+
+            }
+
+        }
+
+    }
 
 }
 
@@ -1284,11 +1780,8 @@ function hitFriend(
 ) {
 
     /*
-     * Eliminar pipis
+     * Eliminar bala
      */
-
-    bullet.remove();
-
 
     const bulletIndex =
         bullets.indexOf(
@@ -1308,6 +1801,9 @@ function hitFriend(
     }
 
 
+    bullet.remove();
+
+
     /*
      * Daño
      */
@@ -1319,7 +1815,7 @@ function hitFriend(
 
 
     hp -=
-        10;
+        FRIEND_SHOT_DAMAGE;
 
 
     friend.dataset.hp =
@@ -1327,7 +1823,7 @@ function hitFriend(
 
 
     /*
-     * Efecto de golpe
+     * Efecto visual
      */
 
     friend.classList.add(
@@ -1348,10 +1844,12 @@ function hitFriend(
 
 
     /*
-     * Murió
+     * Muerte
      */
 
-    if (hp <= 0) {
+    if (
+        hp <= 0
+    ) {
 
         killFriend(
             friend
@@ -1390,17 +1888,33 @@ function killFriend(
 
 
     /*
-     * Kill
+     * Kill de partida
      */
 
     kills++;
 
 
+    /*
+     * Kill acumulada
+     */
+
+    totalKills++;
+
+
+    localStorage.setItem(
+        "friendTotalKills",
+        totalKills
+    );
+
+
     updateHUD();
 
 
+    updateTotalKillsDisplay();
+
+
     /*
-     * Quitar friend
+     * Eliminar Friend
      */
 
     const index =
@@ -1425,7 +1939,7 @@ function killFriend(
 
 
     /*
-     * LOGROS
+     * Logros
      */
 
     checkAchievements();
@@ -1442,6 +1956,11 @@ function damagePlayer(
     amount
 ) {
 
+    if (!gameRunning) {
+        return;
+    }
+
+
     playerHP -=
         amount;
 
@@ -1457,6 +1976,14 @@ function damagePlayer(
 
 
     updateHUD();
+
+
+    player.classList.remove(
+        "playerHit"
+    );
+
+
+    void player.offsetWidth;
 
 
     player.classList.add(
@@ -1494,6 +2021,11 @@ function damagePlayer(
 
 function pipisRainEvent() {
 
+    if (!gameRunning) {
+        return;
+    }
+
+
     showEvent(
         "!!! PIPIS RAIN !!!"
     );
@@ -1520,12 +2052,15 @@ function pipisRainEvent() {
 
 
         pipis.style.left =
-            Math.random() * 100
-            + "%";
+            Math.random() *
+            100 +
+            "%";
 
 
-        pipis.style.top =
-            "-10%";
+        pipis.style.animationDelay =
+            Math.random() *
+            1.5 +
+            "s";
 
 
         pipisContainer.appendChild(
@@ -1536,10 +2071,16 @@ function pipisRainEvent() {
         setTimeout(
             function() {
 
-                pipis.remove();
+                if (
+                    pipis.parentNode
+                ) {
+
+                    pipis.remove();
+
+                }
 
             },
-            4000
+            5000
         );
 
     }
@@ -1570,40 +2111,6 @@ function pipisRainEvent() {
 
 
 /* =====================================================
-   EVENTOS ALEATORIOS
-===================================================== */
-
-setInterval(
-    function() {
-
-        if (
-            !gameRunning
-        ) {
-
-            return;
-
-        }
-
-
-        /*
-         * 15% de probabilidad
-         */
-
-        if (
-            Math.random() < 0.15
-        ) {
-
-            pipisRainEvent();
-
-        }
-
-    },
-    15000
-);
-
-
-
-/* =====================================================
    LOGROS
 ===================================================== */
 
@@ -1615,8 +2122,7 @@ function checkAchievements() {
      */
 
     if (
-        kills >= 100
-        &&
+        totalKills >= 100 &&
         localStorage.getItem(
             "friendAchievement100"
         ) !== "true"
@@ -1635,13 +2141,13 @@ function checkAchievements() {
     }
 
 
+
     /*
      * 1000 KILLS
      */
 
     if (
-        kills >= 1000
-        &&
+        totalKills >= 1000 &&
         localStorage.getItem(
             "friendAchievement1000"
         ) !== "true"
@@ -1661,13 +2167,13 @@ function checkAchievements() {
     }
 
 
+
     /*
      * 10000 KILLS
      */
 
     if (
-        kills >= 10000
-        &&
+        totalKills >= 10000 &&
         localStorage.getItem(
             "friendAchievement10000"
         ) !== "true"
@@ -1708,13 +2214,14 @@ function showAchievement(
         "achievementPopup";
 
 
-    box.innerHTML = "";
-
-
     const title =
         document.createElement(
             "div"
         );
+
+
+    title.className =
+        "achievementText";
 
 
     title.textContent =
@@ -1727,10 +2234,12 @@ function showAchievement(
 
 
     /*
-     * Susie
+     * Imagen de Susie
      */
 
-    if (susie) {
+    if (
+        susie
+    ) {
 
         const image =
             document.createElement(
@@ -1762,19 +2271,7 @@ function showAchievement(
         function() {
 
             box.classList.add(
-                "show"
-            );
-
-        },
-        50
-    );
-
-
-    setTimeout(
-        function() {
-
-            box.classList.remove(
-                "show"
+                "achievementHide"
             );
 
 
@@ -1796,17 +2293,42 @@ function showAchievement(
 
 
 /* =====================================================
-   HUD
+   MENSAJE DE EVENTO
 ===================================================== */
 
-function updateHUD() {
-
-    playerHPText.textContent =
-        playerHP;
+let eventMessageTimeout =
+    null;
 
 
-    killCounterText.textContent =
-        kills;
+function showEvent(
+    message
+) {
+
+    eventMessage.textContent =
+        message;
+
+
+    eventMessage.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        eventMessageTimeout
+    );
+
+
+    eventMessageTimeout =
+        setTimeout(
+            function() {
+
+                eventMessage.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
 
 }
 
@@ -1829,49 +2351,19 @@ function updateTimer() {
 
 
     timerText.textContent =
-        String(minutes).padStart(
-            2,
-            "0"
-        )
+        String(minutes)
+            .padStart(
+                2,
+                "0"
+            )
         +
         ":"
         +
-        String(seconds).padStart(
-            2,
-            "0"
-        );
-
-}
-
-
-
-/* =====================================================
-   MENSAJE DE EVENTO
-===================================================== */
-
-function showEvent(
-    text
-) {
-
-    eventMessage.textContent =
-        text;
-
-
-    eventMessage.classList.add(
-        "show"
-    );
-
-
-    setTimeout(
-        function() {
-
-            eventMessage.classList.remove(
-                "show"
+        String(seconds)
+            .padStart(
+                2,
+                "0"
             );
-
-        },
-        2500
-    );
 
 }
 
@@ -1892,6 +2384,11 @@ function gameOver() {
     );
 
 
+    clearInterval(
+        eventInterval
+    );
+
+
     clearTimeout(
         spawnTimeout
     );
@@ -1908,25 +2405,42 @@ function gameOver() {
     setTimeout(
         function() {
 
-            startScreen.style.display =
-                "flex";
-
-
             game.style.display =
                 "none";
 
 
-            startButton.textContent =
-                "[ TRY AGAIN ]";
+            startScreen.style.display =
+                "flex";
+
+
+            startTotalKillsText.textContent =
+                totalKills;
+
+
+            updateTotalKillsDisplay();
+
 
         },
-        2500
+        2000
     );
 
 }
 
 
+
+/* =====================================================
+   ESTADO INICIAL
+===================================================== */
+
+updateTotalKillsDisplay();
+
+updateHUD();
+
+resetPlayerPosition();
+
+
 </script>
+
 
 </body>
 
