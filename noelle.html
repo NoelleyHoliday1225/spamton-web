@@ -37,18 +37,6 @@
 
 
 <!-- =====================================================
-     AUDIO NOELLE
-===================================================== -->
-
-<audio
-    id="noelleMusic"
-    src="noelle.mp3"
-    preload="auto"
->
-</audio>
-
-
-<!-- =====================================================
      CONTENIDO
 ===================================================== -->
 
@@ -71,7 +59,7 @@
 
 
     <!-- =================================================
-         GIF PRINCIPAL
+         NOELLE
     ================================================== -->
 
     <img
@@ -86,7 +74,6 @@
     ================================================== -->
 
     <div id="noelleGallery">
-
 
         <div class="noelleFrame">
 
@@ -117,13 +104,12 @@
 
         </div>
 
-
     </div>
 
 
     <!-- =================================================
          BOTON PROCEED
-===================================================== -->
+    ================================================== -->
 
     <button
         id="proceedButton"
@@ -134,8 +120,8 @@
 
 
     <!-- =================================================
-         BOTON NIEVE
-===================================================== -->
+         NIEVE
+    ================================================== -->
 
     <button
         id="snowButton"
@@ -144,10 +130,6 @@
         [ SNOW ]
     </button>
 
-
-    <!-- =================================================
-         REGRESAR
-===================================================== -->
 
     <a
         href="index.html"
@@ -158,6 +140,18 @@
 
 
 </main>
+
+
+<!-- =====================================================
+     AUDIO NOELLE
+===================================================== -->
+
+<audio
+    id="noelleMusic"
+    src="noelle.mp3"
+    preload="auto"
+    loop
+></audio>
 
 
 <script>
@@ -232,7 +226,76 @@ createSnow();
 
 
 /* =====================================================
-   BOTON NIEVE
+   PROCEED
+===================================================== */
+
+const proceedButton =
+    document.getElementById(
+        "proceedButton"
+    );
+
+
+const noelleMusic =
+    document.getElementById(
+        "noelleMusic"
+    );
+
+
+noelleMusic.volume =
+    0.40;
+
+
+proceedButton.addEventListener(
+    "click",
+    function () {
+
+        if (
+            noelleMusic.paused
+        ) {
+
+            noelleMusic.currentTime =
+                0;
+
+
+            noelleMusic.play()
+                .then(
+                    function () {
+
+                        proceedButton.textContent =
+                            "[ NOELLE MUSIC ON ]";
+
+                    }
+                )
+                .catch(
+                    function () {
+
+                        proceedButton.textContent =
+                            "[ PLAY AGAIN ]";
+
+                    }
+                );
+
+        }
+
+        else {
+
+            noelleMusic.pause();
+
+            noelleMusic.currentTime =
+                0;
+
+
+            proceedButton.textContent =
+                "[ PROCEED ]";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NIEVE EXTRA
 ===================================================== */
 
 const snowButton =
@@ -252,65 +315,23 @@ snowButton.addEventListener(
 
 
 /* =====================================================
-   NOELLE MP3
+   RETURN
 ===================================================== */
 
-const proceedButton =
+const backButton =
     document.getElementById(
-        "proceedButton"
+        "backButton"
     );
 
 
-const noelleMusic =
-    document.getElementById(
-        "noelleMusic"
-    );
-
-
-noelleMusic.volume =
-    0.50;
-
-
-proceedButton.addEventListener(
+backButton.addEventListener(
     "click",
     function () {
 
+        noelleMusic.pause();
+
         noelleMusic.currentTime =
             0;
-
-
-        noelleMusic.play()
-            .then(
-                function () {
-
-                    proceedButton.textContent =
-                        "[ PLAYING... ]";
-
-                }
-            )
-            .catch(
-                function () {
-
-                    proceedButton.textContent =
-                        "[ CLICK AGAIN ]";
-
-                }
-            );
-
-    }
-);
-
-
-/* =====================================================
-   CUANDO TERMINE LA MUSICA
-===================================================== */
-
-noelleMusic.addEventListener(
-    "ended",
-    function () {
-
-        proceedButton.textContent =
-            "[ PROCEED ]";
 
     }
 );
