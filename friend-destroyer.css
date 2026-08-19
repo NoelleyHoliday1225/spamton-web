@@ -8,33 +8,36 @@
 ===================================================== */
 
 * {
-    box-sizing: border-box;
+    box-sizing:
+        border-box;
 }
 
 
 html,
 body {
 
-    margin: 0;
+    margin:
+        0;
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100%;
+    height:
+        100%;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     font-family:
         'Press Start 2P',
         cursive;
 
-    touch-action: none;
-
-    user-select: none;
-
-    -webkit-user-select: none;
-
 }
 
+
+/* =====================================================
+   FONDO
+===================================================== */
 
 body {
 
@@ -50,50 +53,61 @@ body {
     background-repeat:
         no-repeat;
 
+    color:
+        white;
+
 }
 
 
-
 /* =====================================================
-   PANTALLA INICIO
+   INICIO
 ===================================================== */
 
 #startScreen {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
-        rgba(0, 0, 0, 0.35);
+        rgba(0,0,0,0.45);
 
-    z-index: 9999;
+    z-index:
+        9999;
 
 }
 
 
 .startBox {
 
-    width: 500px;
+    width:
+        520px;
 
-    max-width: 90%;
+    max-width:
+        90vw;
 
-    padding: 35px;
+    padding:
+        35px;
 
-    text-align: center;
-
-    color: white;
+    text-align:
+        center;
 
     background:
-        rgba(0, 0, 0, 0.92);
+        rgba(0,0,0,0.94);
 
-    border: 4px solid white;
+    border:
+        4px solid white;
 
     box-shadow:
         10px 10px 0 #ff00ff,
@@ -104,39 +118,46 @@ body {
 
 .startBox h1 {
 
-    font-size: 28px;
+    font-size:
+        28px;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 
 }
 
 
 .warning {
 
-    color: #ff00ff;
+    color:
+        #ff00ff;
 
-    margin-bottom: 20px;
+    margin-bottom:
+        20px;
 
 }
 
 
 .startBox p {
 
-    font-size: 12px;
+    font-size:
+        11px;
 
-    line-height: 2;
+    line-height:
+        2;
 
 }
 
 
 .startStats {
 
-    margin-top: 25px;
+    margin:
+        20px 0;
 
-    margin-bottom: 10px;
+    font-size:
+        12px;
 
 }
-
 
 
 /* =====================================================
@@ -153,17 +174,23 @@ button,
     background:
         #000;
 
-    color: white;
+    color:
+        white;
 
-    border: 3px solid white;
+    border:
+        3px solid white;
 
-    padding: 15px 20px;
+    padding:
+        14px 18px;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    display: inline-block;
+    display:
+        inline-block;
 
     box-shadow:
         5px 5px 0 #ff00ff;
@@ -177,17 +204,10 @@ button:hover,
     background:
         #ff00ff;
 
-    color: #000;
+    color:
+        #000;
 
 }
-
-
-#startButton {
-
-    margin-top: 20px;
-
-}
-
 
 
 /* =====================================================
@@ -196,38 +216,46 @@ button:hover,
 
 #game {
 
-    display: none;
+    display:
+        none;
 
-    width: 100vw;
+    width:
+        100vw;
 
-    height: 100vh;
+    height:
+        100vh;
 
-    position: relative;
+    position:
+        relative;
 
 }
 
 
-
 /* =====================================================
-   BOTÓN SALIR
+   EXIT
 ===================================================== */
 
 #exitGameButton {
 
-    position: absolute;
+    position:
+        fixed;
 
-    top: 15px;
+    top:
+        15px;
 
-    right: 15px;
+    right:
+        15px;
 
-    z-index: 6000;
+    z-index:
+        7000;
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    padding: 10px 12px;
+    padding:
+        10px;
 
 }
-
 
 
 /* =====================================================
@@ -236,21 +264,29 @@ button:hover,
 
 #hud {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 15px;
+    top:
+        15px;
 
-    left: 15px;
+    left:
+        15px;
 
-    right: 170px;
+    right:
+        130px;
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    z-index: 5000;
+    z-index:
+        5000;
 
 }
 
@@ -258,15 +294,19 @@ button:hover,
 .hudBox {
 
     background:
-        rgba(0, 0, 0, 0.88);
+        rgba(0,0,0,0.88);
 
-    color: white;
+    color:
+        white;
 
-    border: 3px solid white;
+    border:
+        3px solid white;
 
-    padding: 12px 15px;
+    padding:
+        10px 13px;
 
-    font-size: 11px;
+    font-size:
+        10px;
 
     box-shadow:
         4px 4px 0 #ff00ff;
@@ -274,26 +314,32 @@ button:hover,
 }
 
 
-
 /* =====================================================
-   ÁREA DEL JUEGO
+   ÁREA
 ===================================================== */
 
 #gameArea {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 850px;
+    width:
+        900px;
 
-    height: 600px;
+    height:
+        620px;
 
-    max-width: 92vw;
+    max-width:
+        92vw;
 
-    max-height: 78vh;
+    max-height:
+        78vh;
 
-    left: 50%;
+    left:
+        50%;
 
-    top: 53%;
+    top:
+        52%;
 
     transform:
         translate(
@@ -301,12 +347,14 @@ button:hover,
             -50%
         );
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     background:
-        rgba(0, 0, 0, 0.65);
+        rgba(0,0,0,0.68);
 
-    border: 5px solid white;
+    border:
+        5px solid white;
 
     box-shadow:
         12px 12px 0 #ff00ff,
@@ -315,30 +363,34 @@ button:hover,
 }
 
 
-
 /* =====================================================
    PLATAFORMA
 ===================================================== */
 
 #platform {
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 5%;
+    left:
+        5%;
 
-    right: 5%;
+    right:
+        5%;
 
-    bottom: 5%;
+    bottom:
+        5%;
 
-    height: 18%;
+    height:
+        18%;
 
     background:
-        rgba(0, 0, 0, 0.75);
+        rgba(0,0,0,0.75);
 
-    border: 3px solid #222;
+    border:
+        3px solid #222;
 
 }
-
 
 
 /* =====================================================
@@ -347,9 +399,11 @@ button:hover,
 
 #player {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 120px;
+    width:
+        115px;
 
     transform:
         translate(
@@ -357,11 +411,14 @@ button:hover,
             -50%
         );
 
-    z-index: 3000;
+    z-index:
+        3000;
 
-    image-rendering: pixelated;
+    user-select:
+        none;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
 }
 
@@ -369,67 +426,38 @@ button:hover,
 .playerHit {
 
     animation:
-        playerDamage
-        0.3s
-        linear;
+        damageFlash
+        0.15s
+        steps(2)
+        infinite;
+
+    filter:
+        brightness(2)
+        sepia(1)
+        saturate(8)
+        hue-rotate(310deg);
 
 }
 
 
-@keyframes playerDamage {
+@keyframes damageFlash {
 
     0% {
-
-        opacity: 1;
-
-        filter:
-            brightness(1)
-            saturate(1);
-
-    }
-
-    25% {
-
-        opacity: 0.35;
-
-        filter:
-            brightness(3)
-            saturate(4);
-
+        opacity:
+            1;
     }
 
     50% {
-
-        opacity: 1;
-
-        filter:
-            brightness(1)
-            saturate(1);
-
-    }
-
-    75% {
-
-        opacity: 0.35;
-
-        filter:
-            brightness(3)
-            saturate(4);
-
+        opacity:
+            0.2;
     }
 
     100% {
-
-        opacity: 1;
-
-        filter:
-            brightness(1)
-            saturate(1);
-
+        opacity:
+            1;
     }
 
 }
-
 
 
 /* =====================================================
@@ -438,9 +466,11 @@ button:hover,
 
 .friend {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 82px;
+    width:
+        82px;
 
     transform:
         translate(
@@ -448,30 +478,31 @@ button:hover,
             -50%
         );
 
-    z-index: 2000;
+    z-index:
+        2000;
 
-    image-rendering: pixelated;
-
-    pointer-events: none;
+    image-rendering:
+        pixelated;
 
 }
 
 
 .friend-red {
 
-    width: 90px;
+    width:
+        92px;
 
     filter:
         hue-rotate(320deg)
-        saturate(3)
-        brightness(1.1);
+        saturate(3);
 
 }
 
 
 .friend-glitch {
 
-    width: 94px;
+    width:
+        96px;
 
     animation:
         glitchFriend
@@ -484,62 +515,33 @@ button:hover,
 @keyframes glitchFriend {
 
     0% {
-
         transform:
             translate(-50%, -50%)
             translateX(-4px);
-
-        filter:
-            hue-rotate(0deg);
-
-    }
-
-    25% {
-
-        transform:
-            translate(-50%, -50%)
-            translateX(5px);
-
-        filter:
-            hue-rotate(90deg);
-
     }
 
     50% {
-
-        transform:
-            translate(-50%, -50%)
-            translateX(-5px);
-
-        filter:
-            hue-rotate(180deg);
-
-    }
-
-    75% {
-
         transform:
             translate(-50%, -50%)
             translateX(4px);
-
-        filter:
-            hue-rotate(270deg);
-
     }
 
     100% {
-
         transform:
             translate(-50%, -50%)
             translateX(-4px);
-
-        filter:
-            hue-rotate(360deg);
-
     }
 
 }
 
+
+.friend.hit {
+
+    filter:
+        brightness(2)
+        contrast(2);
+
+}
 
 
 /* =====================================================
@@ -548,7 +550,8 @@ button:hover,
 
 .boss {
 
-    width: 220px !important;
+    width:
+        210px !important;
 
     filter:
         contrast(1.3)
@@ -556,7 +559,7 @@ button:hover,
 
     animation:
         bossGlitch
-        0.5s
+        0.35s
         infinite;
 
 }
@@ -565,168 +568,204 @@ button:hover,
 @keyframes bossGlitch {
 
     0% {
-
         transform:
             translate(-50%, -50%);
-
-    }
-
-    25% {
-
-        transform:
-            translate(-53%, -50%);
-
     }
 
     50% {
-
         transform:
-            translate(-47%, -50%);
-
-    }
-
-    75% {
-
-        transform:
-            translate(-52%, -50%);
-
+            translate(-53%, -50%);
     }
 
     100% {
-
         transform:
             translate(-50%, -50%);
-
     }
 
 }
 
 
-
 /* =====================================================
-   PIPIS / BALAS
+   BALAS
 ===================================================== */
 
 .bullet {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 42px;
+    width:
+        38px;
+
+    height:
+        38px;
+
+    object-fit:
+        contain;
 
     transform:
-        translate(
-            -50%,
-            -50%
-        );
+        translate(-50%, -50%);
 
-    z-index: 3500;
+    z-index:
+        2500;
 
-    image-rendering: pixelated;
-
-    pointer-events: none;
+    image-rendering:
+        pixelated;
 
 }
 
 
-
 /* =====================================================
-   PIPIS CURACIÓN
+   POWER UPS
+   TODOS USAN pipis.gif
 ===================================================== */
 
-.healingPipis {
+.powerUp {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 55px;
+    width:
+        55px;
+
+    height:
+        55px;
+
+    object-fit:
+        contain;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index:
+        2800;
+
+    image-rendering:
+        pixelated;
 
     animation:
-        pipisFall
-        4s
-        linear;
+        powerUpFloat
+        0.7s
+        steps(2)
+        infinite;
 
-    z-index: 4000;
-
-    pointer-events: none;
-
-}
-
-
-@keyframes pipisFall {
-
-    from {
-
-        top: -10%;
-
-        transform:
-            rotate(0deg);
-
-    }
-
-    to {
-
-        top: 110%;
-
-        transform:
-            rotate(360deg);
-
-    }
+    cursor:
+        pointer;
 
 }
 
 
+/* VERDE = VIDA */
 
-/* =====================================================
-   TRIÁNGULOS
-===================================================== */
-
-.triangle {
-
-    position: absolute;
-
-    width: 0;
-
-    height: 0;
-
-    border-left:
-        17px solid transparent;
-
-    border-right:
-        17px solid transparent;
-
-    border-bottom:
-        34px solid black;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
-
-    z-index: 3600;
+.powerUp-green {
 
     filter:
-        drop-shadow(
-            0 0 4px #ff00ff
-        );
+        hue-rotate(90deg)
+        saturate(5)
+        brightness(1.2);
 
 }
 
 
+/* ROJO = TRIPLE DISPARO */
+
+.powerUp-red {
+
+    filter:
+        hue-rotate(315deg)
+        saturate(5)
+        brightness(1.2);
+
+}
+
+
+/* GLITCH */
+
+.powerUp-glitch {
+
+    filter:
+        hue-rotate(180deg)
+        saturate(7)
+        contrast(2);
+
+    animation:
+        powerGlitch
+        0.12s
+        infinite;
+
+}
+
+
+@keyframes powerUpFloat {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-4px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateY(4px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-4px);
+    }
+
+}
+
+
+@keyframes powerGlitch {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateX(-4px);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateX(4px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateX(-4px);
+    }
+
+}
+
 
 /* =====================================================
-   COLAS GLITCH
+   TRIANGULOS / COLAS
 ===================================================== */
 
-.glitchTrail {
+.triangle,
+.glitchTail {
 
-    position: absolute;
+    position:
+        absolute;
 
-    width: 20px;
+    width:
+        0;
 
-    height: 20px;
+    height:
+        0;
 
-    background:
-        #00ffff;
+    border-left:
+        13px solid transparent;
+
+    border-right:
+        13px solid transparent;
+
+    border-bottom:
+        25px solid black;
 
     transform:
         translate(
@@ -734,208 +773,24 @@ button:hover,
             -50%
         );
 
-    opacity: 0.65;
-
-    z-index: 1000;
-
-    pointer-events: none;
-
-    animation:
-        trailFade
-        0.35s
-        linear
-        forwards;
+    z-index:
+        2600;
 
 }
 
 
-@keyframes trailFade {
+.glitchTail {
 
-    from {
+    border-left-width:
+        7px;
 
-        opacity: 0.7;
+    border-right-width:
+        7px;
 
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            scale(1);
-
-    }
-
-    to {
-
-        opacity: 0;
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            scale(0);
-
-    }
+    border-bottom:
+        14px solid #ff00ff;
 
 }
-
-
-
-/* =====================================================
-   CONTROLES
-===================================================== */
-
-#mobileControls {
-
-    position: fixed;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: 20px;
-
-    height: 190px;
-
-    z-index: 8000;
-
-    pointer-events: none;
-
-}
-
-
-
-/* =====================================================
-   JOYSTICK
-===================================================== */
-
-#joystick {
-
-    position: absolute;
-
-    left: 25px;
-
-    bottom: 15px;
-
-    width: 150px;
-
-    height: 150px;
-
-    pointer-events: auto;
-
-    touch-action: none;
-
-}
-
-
-#joystickBase {
-
-    position: absolute;
-
-    width: 150px;
-
-    height: 150px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(0, 0, 0, 0.75);
-
-    border: 4px solid white;
-
-    box-shadow:
-        6px 6px 0 #ff00ff,
-        -4px -4px 0 #00ffff;
-
-    touch-action: none;
-
-}
-
-
-#joystickStick {
-
-    position: absolute;
-
-    width: 65px;
-
-    height: 65px;
-
-    left: 50%;
-
-    top: 50%;
-
-    margin-left: -32.5px;
-
-    margin-top: -32.5px;
-
-    border-radius: 50%;
-
-    background:
-        #111;
-
-    border: 4px solid white;
-
-    box-shadow:
-        3px 3px 0 #ff00ff;
-
-    pointer-events: none;
-
-}
-
-
-
-/* =====================================================
-   BOTÓN ATAQUE
-===================================================== */
-
-#attackButton {
-
-    position: absolute;
-
-    right: 30px;
-
-    bottom: 25px;
-
-    width: 135px;
-
-    height: 85px;
-
-    border-radius: 12px;
-
-    padding: 0;
-
-    font-size: 14px;
-
-    background:
-        #000;
-
-    color: white;
-
-    border: 4px solid white;
-
-    box-shadow:
-        7px 7px 0 #ff00ff;
-
-    pointer-events: auto;
-
-    touch-action: none;
-
-}
-
-
-#attackButton:active {
-
-    transform:
-        translate(
-            4px,
-            4px
-        );
-
-    box-shadow:
-        3px 3px 0 #00ffff;
-
-}
-
 
 
 /* =====================================================
@@ -944,11 +799,14 @@ button:hover,
 
 #eventMessage {
 
-    position: fixed;
+    position:
+        fixed;
 
-    left: 50%;
+    left:
+        50%;
 
-    top: 20%;
+    top:
+        20%;
 
     transform:
         translate(
@@ -956,347 +814,327 @@ button:hover,
             -50%
         );
 
-    padding: 20px;
+    padding:
+        20px;
 
-    background: #000;
+    background:
+        #000;
 
-    color: white;
+    color:
+        white;
 
-    border: 4px solid #ff00ff;
+    border:
+        4px solid #ff00ff;
 
     box-shadow:
         6px 6px 0 #00ffff;
 
-    font-size: 16px;
+    font-size:
+        16px;
 
-    text-align: center;
+    text-align:
+        center;
 
-    opacity: 0;
+    opacity:
+        0;
 
-    pointer-events: none;
+    pointer-events:
+        none;
 
-    z-index: 9000;
+    z-index:
+        9000;
 
 }
 
 
 #eventMessage.show {
 
-    opacity: 1;
+    opacity:
+        1;
 
 }
 
 
-
 /* =====================================================
-   LOGROS
+   CONTROLES
+   PC + MOBILE
 ===================================================== */
 
-.achievementPopup {
+#mobileControls {
 
-    position: fixed;
+    position:
+        fixed;
 
-    left: 50%;
+    left:
+        30px;
 
-    top: 50%;
+    bottom:
+        25px;
 
-    transform:
-        translate(
-            -50%,
-            -50%
-        )
-        scale(0.5);
+    z-index:
+        8000;
 
-    width: 500px;
+    display:
+        flex;
 
-    max-width: 90vw;
+    align-items:
+        center;
 
-    padding: 30px;
+    gap:
+        25px;
 
-    background: #000;
+}
 
-    color: white;
 
-    border: 5px solid white;
+#joystick {
+
+    width:
+        125px;
+
+    height:
+        125px;
+
+    border:
+        4px solid white;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(0,0,0,0.65);
 
     box-shadow:
-        12px 12px 0 #ff00ff,
-        -8px -8px 0 #00ffff;
+        5px 5px 0 #ff00ff;
 
-    text-align: center;
+    touch-action:
+        none;
 
-    font-size: 16px;
+    display:
+        flex;
 
-    line-height: 1.8;
+    align-items:
+        center;
 
-    opacity: 0;
-
-    z-index: 10000;
-
-    transition:
-        0.4s;
+    justify-content:
+        center;
 
 }
 
 
-.achievementPopup.show {
+#joystickKnob {
 
-    opacity: 1;
+    width:
+        55px;
+
+    height:
+        55px;
+
+    border:
+        3px solid white;
+
+    border-radius:
+        50%;
+
+    background:
+        #111;
+
+    pointer-events:
+        none;
+
+}
+
+
+#attackButton {
+
+    width:
+        115px;
+
+    height:
+        70px;
+
+    padding:
+        0;
+
+    font-size:
+        12px;
+
+    background:
+        #000;
+
+    border:
+        4px solid white;
+
+    box-shadow:
+        6px 6px 0 #ff00ff;
+
+    touch-action:
+        manipulation;
+
+}
+
+
+#attackButton:active {
 
     transform:
-        translate(
-            -50%,
-            -50%
-        )
-        scale(1);
+        translate(3px,3px);
+
+    box-shadow:
+        2px 2px 0 #00ffff;
 
 }
-
-
-.achievementCharacter {
-
-    display: block;
-
-    width: 180px;
-
-    max-height: 180px;
-
-    object-fit: contain;
-
-    margin: 20px auto 0;
-
-    image-rendering: pixelated;
-
-}
-
 
 
 /* =====================================================
-   PC
-===================================================== */
-
-@media (min-width: 901px) {
-
-    #mobileControls {
-
-        /*
-         * Se muestran también en PC
-         * para que ambos puedan disparar.
-         */
-
-        display: block;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   TABLET / CELULAR
+   RESPONSIVE
 ===================================================== */
 
 @media (max-width: 900px) {
 
     #gameArea {
 
-        width: 94vw;
+        width:
+            94vw;
 
-        height: 65vh;
-
-        max-height: none;
-
-        top: 48%;
-
-    }
-
-
-    #player {
-
-        width: 100px;
-
-    }
-
-
-    .friend {
-
-        width: 70px;
-
-    }
-
-
-    .friend-red {
-
-        width: 78px;
-
-    }
-
-
-    .friend-glitch {
-
-        width: 82px;
-
-    }
-
-
-    .boss {
-
-        width: 175px !important;
+        height:
+            70vh;
 
     }
 
 
     #hud {
 
-        top: 8px;
+        left:
+            8px;
 
-        left: 8px;
+        right:
+            8px;
 
-        right: 8px;
+        top:
+            8px;
 
-        flex-wrap: wrap;
+        flex-wrap:
+            wrap;
 
-        justify-content: center;
+        justify-content:
+            center;
 
     }
 
 
     .hudBox {
 
-        font-size: 7px;
+        font-size:
+            7px;
 
-        padding: 7px 8px;
+        padding:
+            7px;
 
     }
 
 
     #exitGameButton {
 
-        top: auto;
+        top:
+            8px;
 
-        bottom: 195px;
+        right:
+            8px;
 
-        right: 10px;
+        font-size:
+            7px;
 
-        font-size: 7px;
-
-        padding: 8px;
-
-    }
-
-
-    #joystick {
-
-        left: 15px;
-
-        bottom: 10px;
-
-        width: 130px;
-
-        height: 130px;
-
-    }
-
-
-    #joystickBase {
-
-        width: 130px;
-
-        height: 130px;
-
-    }
-
-
-    #attackButton {
-
-        right: 15px;
-
-        bottom: 20px;
-
-        width: 120px;
-
-        height: 75px;
-
-        font-size: 10px;
-
-    }
-
-
-    .startBox {
-
-        padding: 22px;
-
-    }
-
-
-    .startBox h1 {
-
-        font-size: 19px;
-
-    }
-
-
-    .startBox p {
-
-        font-size: 9px;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   CELULARES PEQUEÑOS
-===================================================== */
-
-@media (max-width: 500px) {
-
-    #joystick {
-
-        width: 110px;
-
-        height: 110px;
-
-    }
-
-
-    #joystickBase {
-
-        width: 110px;
-
-        height: 110px;
-
-    }
-
-
-    #joystickStick {
-
-        width: 55px;
-
-        height: 55px;
-
-        margin-left: -27.5px;
-
-        margin-top: -27.5px;
-
-    }
-
-
-    #attackButton {
-
-        width: 105px;
-
-        height: 68px;
-
-        font-size: 8px;
+        padding:
+            8px;
 
     }
 
 
     #mobileControls {
 
-        bottom: 5px;
+        left:
+            15px;
+
+        bottom:
+            15px;
+
+        gap:
+            15px;
+
+    }
+
+
+    #joystick {
+
+        width:
+            105px;
+
+        height:
+            105px;
+
+    }
+
+
+    #joystickKnob {
+
+        width:
+            48px;
+
+        height:
+            48px;
+
+    }
+
+
+    #attackButton {
+
+        width:
+            100px;
+
+        height:
+            60px;
+
+        font-size:
+            9px;
+
+    }
+
+
+    #player {
+
+        width:
+            95px;
+
+    }
+
+
+    .friend {
+
+        width:
+            70px;
+
+    }
+
+
+    .friend-red {
+
+        width:
+            78px;
+
+    }
+
+
+    .friend-glitch {
+
+        width:
+            82px;
+
+    }
+
+
+    .boss {
+
+        width:
+            170px !important;
 
     }
 
