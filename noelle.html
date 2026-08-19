@@ -69,7 +69,7 @@
 
 
     <!-- =================================================
-         3 GIFS NUEVOS
+         GALERIA
     ================================================== -->
 
     <div id="noelleGallery">
@@ -107,7 +107,7 @@
 
 
     <!-- =================================================
-         COPOS
+         NIEVE
     ================================================== -->
 
     <button
@@ -129,6 +129,27 @@
 
 
 <script>
+
+/* =====================================================
+   BLOQUEO SECRETO
+===================================================== */
+
+const noelleUnlocked =
+    localStorage.getItem(
+        "noelleSecretUnlocked"
+    );
+
+
+if (
+    noelleUnlocked !== "true"
+) {
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
 
 /* =====================================================
    NIEVE
@@ -199,7 +220,7 @@ createSnow();
 
 
 /* =====================================================
-   BOTON NIEVE
+   BOTÓN NIEVE
 ===================================================== */
 
 const snowButton =
@@ -210,7 +231,7 @@ const snowButton =
 
 snowButton.addEventListener(
     "click",
-    function () {
+    function() {
 
         createSnow(40);
 
