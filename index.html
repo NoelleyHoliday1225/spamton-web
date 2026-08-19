@@ -17,402 +17,6 @@
         href="style.css"
     >
 
-    <style>
-
-        /* =====================================================
-           PARCHE DE BOTONES DEL MENÚ
-        ===================================================== */
-
-        #musicBox {
-
-            position: fixed !important;
-
-            left: 50% !important;
-
-            right: auto !important;
-
-            bottom: 25px !important;
-
-            transform: translateX(-50%) !important;
-
-            width: auto !important;
-
-            display: flex !important;
-
-            flex-direction: column !important;
-
-            align-items: center !important;
-
-            justify-content: center !important;
-
-            z-index: 9000 !important;
-
-        }
-
-
-        #musicButton {
-
-            position: relative !important;
-
-            left: auto !important;
-
-            right: auto !important;
-
-            margin: 0 auto !important;
-
-            transform: none !important;
-
-        }
-
-
-        #dancingSpamton {
-
-            display: block !important;
-
-            margin: 0 auto 8px auto !important;
-
-        }
-
-
-        /* =====================================================
-           FRIEND DESTROYER
-        ===================================================== */
-
-        #friendDestroyerButton {
-
-            position: fixed;
-
-            top: 20px;
-
-            left: 20px;
-
-            z-index: 8000;
-
-        }
-
-
-        /* =====================================================
-           TROFEOS
-        ===================================================== */
-
-        #achievements {
-
-            position: fixed;
-
-            top: 20px;
-
-            right: 20px;
-
-            display: flex;
-
-            flex-direction: row;
-
-            gap: 8px;
-
-            z-index: 8000;
-
-        }
-
-
-        .achievement {
-
-            display: none;
-
-            width: 55px;
-
-            height: 55px;
-
-            padding: 0;
-
-            margin: 0;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 25px;
-
-        }
-
-
-        /* =====================================================
-           MENÚ DE PERSONAJES
-        ===================================================== */
-
-        #characterMenu {
-
-            position: fixed;
-
-            left: 50%;
-
-            top: 50%;
-
-            transform: translate(-50%, -50%);
-
-            width: 90%;
-
-            max-width: 650px;
-
-            padding: 25px;
-
-            background: rgba(0, 0, 0, 0.94);
-
-            border: 4px solid white;
-
-            box-shadow:
-                8px 8px 0 #ff00ff,
-                -6px -6px 0 #00ffff;
-
-            color: white;
-
-            text-align: center;
-
-            z-index: 10000;
-
-            display: none;
-
-        }
-
-
-        #characterMenu.show {
-
-            display: block;
-
-        }
-
-
-        #characterMenu h2 {
-
-            margin-top: 0;
-
-            font-size: 20px;
-
-        }
-
-
-        #characterButtons {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            margin-top: 20px;
-
-        }
-
-
-        .characterButton {
-
-            min-width: 180px;
-
-        }
-
-
-        .characterLocked {
-
-            opacity: 0.45;
-
-            cursor: not-allowed;
-
-        }
-
-
-        #closeCharacterMenu {
-
-            margin-top: 20px;
-
-        }
-
-
-        /* =====================================================
-           MENSAJE DE DESBLOQUEO
-        ===================================================== */
-
-        #unlockMessage {
-
-            position: fixed;
-
-            left: 50%;
-
-            top: 50%;
-
-            transform: translate(-50%, -50%);
-
-            width: 90%;
-
-            max-width: 600px;
-
-            padding: 30px;
-
-            background: #000;
-
-            color: white;
-
-            border: 5px solid white;
-
-            box-shadow:
-                10px 10px 0 #ff00ff,
-                -7px -7px 0 #00ffff;
-
-            text-align: center;
-
-            z-index: 20000;
-
-            display: none;
-
-        }
-
-
-        #unlockMessage.show {
-
-            display: block;
-
-        }
-
-
-        #unlockMessage img {
-
-            display: block;
-
-            max-width: 180px;
-
-            max-height: 180px;
-
-            margin: 20px auto;
-
-            image-rendering: pixelated;
-
-        }
-
-
-        /* =====================================================
-           MODO BERDLY
-        ===================================================== */
-
-        body.berdly-mode {
-
-            background-size: cover !important;
-
-            background-position: center !important;
-
-            background-repeat: no-repeat !important;
-
-        }
-
-
-        /* =====================================================
-           MODO SUSIE
-        ===================================================== */
-
-        body.susie-mode {
-
-            background-size: cover !important;
-
-            background-position: center !important;
-
-            background-repeat: no-repeat !important;
-
-        }
-
-
-        /* =====================================================
-           MODO NOELLE
-        ===================================================== */
-
-        body.noelle-mode {
-
-            background-size: cover !important;
-
-            background-position: center !important;
-
-            background-repeat: no-repeat !important;
-
-        }
-
-
-        /* =====================================================
-           BOTÓN DE PERSONAJES
-        ===================================================== */
-
-        #characterMenuButton {
-
-            position: fixed;
-
-            left: 20px;
-
-            top: 70px;
-
-            z-index: 8000;
-
-        }
-
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        @media (max-width: 700px) {
-
-            #achievements {
-
-                top: 10px;
-
-                right: 10px;
-
-            }
-
-
-            .achievement {
-
-                width: 45px;
-
-                height: 45px;
-
-                font-size: 20px;
-
-            }
-
-
-            #friendDestroyerButton {
-
-                top: 10px;
-
-                left: 10px;
-
-                font-size: 9px;
-
-                padding: 10px;
-
-            }
-
-
-            #characterMenuButton {
-
-                left: 10px;
-
-                top: 60px;
-
-                font-size: 9px;
-
-                padding: 10px;
-
-            }
-
-
-            #musicBox {
-
-                bottom: 15px !important;
-
-            }
-
-        }
-
-    </style>
-
 </head>
 
 
@@ -420,49 +24,98 @@
 
 
 <!-- =====================================================
-     BOTÓN FRIEND DESTROYER
+     BOTONES PRINCIPALES
 ===================================================== -->
 
-<a
-    href="friend-destroyer.html"
-    id="friendDestroyerButton"
->
-    [ FRIEND DESTROYER ]
-</a>
+<div id="topButtons">
+
+    <a
+        href="friend-destroyer.html"
+        id="friendDestroyerButton"
+    >
+        [ FRIEND DESTROYER ]
+    </a>
+
+
+    <a
+        href="secret-pipis.html"
+        id="secretRoomButton"
+    >
+        [ SECRET PIPIS ]
+    </a>
+
+</div>
 
 
 
 <!-- =====================================================
-     BOTÓN MENÚ DE PERSONAJES
-===================================================== -->
-
-<button
-    id="characterMenuButton"
-    type="button"
->
-    [ CHARACTERS ]
-</button>
-
-
-
-<!-- =====================================================
-     SALA SECRETA
-===================================================== -->
-
-<a
-    href="secret-pipis.html"
-    id="secretRoomButton"
->
-    [ SECRET PIPIS ]
-</a>
-
-
-
-<!-- =====================================================
-     TROFEOS
+     LOGROS
 ===================================================== -->
 
 <div id="achievements">
+
+
+    <!-- BERDLY - 100 KILLS -->
+
+    <button
+        id="achievementBerdly"
+        class="achievement"
+        type="button"
+        title="Berdly - 100 Kills"
+    >
+
+        <span class="achievementIcon">
+            🏆
+        </span>
+
+        <span class="achievementLabel">
+            BERDLY
+        </span>
+
+    </button>
+
+
+
+    <!-- SUSIE - 1000 KILLS -->
+
+    <button
+        id="achievementSusie"
+        class="achievement"
+        type="button"
+        title="Susie - 1,000 Kills"
+    >
+
+        <span class="achievementIcon">
+            🏆
+        </span>
+
+        <span class="achievementLabel">
+            SUSIE
+        </span>
+
+    </button>
+
+
+
+    <!-- NOELLE - 10000 KILLS -->
+
+    <button
+        id="achievementNoelle"
+        class="achievement"
+        type="button"
+        title="Noelle - 10,000 Kills"
+    >
+
+        <span class="achievementIcon">
+            🏆
+        </span>
+
+        <span class="achievementLabel">
+            NOELLE
+        </span>
+
+    </button>
+
 
 
     <!-- BIG SHOT -->
@@ -471,10 +124,19 @@
         id="achievementBigShot"
         class="achievement"
         type="button"
-        title="Big Shot!"
+        title="BIG SHOT!"
     >
-        🏆
+
+        <span class="achievementIcon">
+            💥
+        </span>
+
+        <span class="achievementLabel">
+            BIG SHOT
+        </span>
+
     </button>
+
 
 
     <!-- GATO -->
@@ -485,43 +147,15 @@
         type="button"
         title="Gato Sagrado de Susie"
     >
-        🐱
-    </button>
 
+        <span class="achievementIcon">
+            🐱
+        </span>
 
-    <!-- BERDLY -->
+        <span class="achievementLabel">
+            CAT
+        </span>
 
-    <button
-        id="achievementBerdly"
-        class="achievement"
-        type="button"
-        title="100 Kills - Berdly"
-    >
-        🐦
-    </button>
-
-
-    <!-- SUSIE -->
-
-    <button
-        id="achievementSusie"
-        class="achievement"
-        type="button"
-        title="1000 Kills - Susie"
-    >
-        🦖
-    </button>
-
-
-    <!-- NOELLE -->
-
-    <button
-        id="achievementNoelle"
-        class="achievement"
-        type="button"
-        title="10000 Kills - Noelle"
-    >
-        🦌
     </button>
 
 
@@ -530,7 +164,7 @@
 
 
 <!-- =====================================================
-     TÍTULO
+     TITULO
 ===================================================== -->
 
 <h1>
@@ -540,7 +174,7 @@
 
 
 <!-- =====================================================
-     SPAMTON PRINCIPAL
+     PERSONAJE PRINCIPAL
 ===================================================== -->
 
 <img
@@ -553,7 +187,17 @@
 
 
 <!-- =====================================================
-     BOTÓN PIPIS
+     NOMBRE DEL PERSONAJE
+===================================================== -->
+
+<div id="characterName">
+    SPAMTON
+</div>
+
+
+
+<!-- =====================================================
+     PIPIS
 ===================================================== -->
 
 <button
@@ -565,10 +209,6 @@
 
 
 
-<!-- =====================================================
-     SONIDO PIPIS
-===================================================== -->
-
 <audio
     id="pipisSound"
     src="pipis.mp3"
@@ -578,7 +218,7 @@
 
 
 <!-- =====================================================
-     MÚSICA NORMAL
+     MUSICA NORMAL
 ===================================================== -->
 
 <audio
@@ -591,7 +231,7 @@
 
 
 <!-- =====================================================
-     MÚSICA BIG SHOT
+     BIG SHOT
 ===================================================== -->
 
 <audio
@@ -604,12 +244,12 @@
 
 
 <!-- =====================================================
-     MÚSICA BERDLY
+     MUSICA BERDLY
 ===================================================== -->
 
 <audio
     id="berdlyMusic"
-    src="berdly-musica.mp3"
+    src="berdly.mp3"
     preload="auto"
     loop
 ></audio>
@@ -617,12 +257,12 @@
 
 
 <!-- =====================================================
-     MÚSICA SUSIE
+     MUSICA SUSIE
 ===================================================== -->
 
 <audio
     id="susieMusic"
-    src="susie-musica.mp3"
+    src="susie.mp3"
     preload="auto"
     loop
 ></audio>
@@ -630,12 +270,12 @@
 
 
 <!-- =====================================================
-     MÚSICA NOELLE
+     MUSICA NOELLE
 ===================================================== -->
 
 <audio
     id="noelleMusic"
-    src="noelle-musica.mp3"
+    src="noelle.mp3"
     preload="auto"
     loop
 ></audio>
@@ -643,18 +283,16 @@
 
 
 <!-- =====================================================
-     CAJA DE MÚSICA
+     CAJA DE MUSICA
 ===================================================== -->
 
 <div id="musicBox">
-
 
     <img
         src="spamton-dancing.gif"
         alt="Spamton bailando"
         id="dancingSpamton"
     >
-
 
     <button
         id="musicButton"
@@ -663,17 +301,15 @@
         [ TURN ON THE MUSIC ]
     </button>
 
-
 </div>
 
 
 
 <!-- =====================================================
-     SUSIE PANCAKES
+     SUSIE
 ===================================================== -->
 
 <div id="susieGlitch">
-
 
     <div class="susie-caption">
 
@@ -709,18 +345,15 @@
 
 
     <div class="susie-name">
-
         S U S I E
-
     </div>
-
 
 </div>
 
 
 
 <!-- =====================================================
-     LLUVIA DE PIPIS / GATOS
+     LLUVIA
 ===================================================== -->
 
 <div id="pipisRain"></div>
@@ -728,16 +361,13 @@
 
 
 <!-- =====================================================
-     MENSAJE GATO
+     MENSAJE DEL GATO
 ===================================================== -->
 
 <div id="catDiscovery">
 
-
     <div class="catDiscoveryGlitch">
-
         [[ !! SPECIAL DEAL !! ]]
-
     </div>
 
 
@@ -762,1565 +392,896 @@
         id="catDiscoveryImage"
     >
 
-
 </div>
 
 
 
 <!-- =====================================================
-     MENÚ DE PERSONAJES
+     MENSAJE DE PERSONAJE
 ===================================================== -->
 
-<div id="characterMenu">
+<div id="characterMessage">
 
-
-    <h2>
-        [[ CHARACTER SELECT ]]
-    </h2>
-
-
-    <p>
-        DESBLOQUEA NUEVOS PERSONAJES
-        DESTRUYENDO FRIENDS.
-    </p>
-
-
-    <div id="characterButtons">
-
-
-        <!-- SPAMTON -->
-
-        <button
-            class="characterButton"
-            id="selectSpamton"
-            type="button"
-        >
-            [ SPAMTON ]
-        </button>
-
-
-        <!-- BIG SHOT -->
-
-        <button
-            class="characterButton"
-            id="selectBigShot"
-            type="button"
-        >
-            [ BIG SHOT ]
-        </button>
-
-
-        <!-- BERDLY -->
-
-        <button
-            class="characterButton"
-            id="selectBerdly"
-            type="button"
-        >
-            [ BERDLY ]
-        </button>
-
-
-        <!-- SUSIE -->
-
-        <button
-            class="characterButton"
-            id="selectSusie"
-            type="button"
-        >
-            [ SUSIE ]
-        </button>
-
-
-        <!-- NOELLE -->
-
-        <button
-            class="characterButton"
-            id="selectNoelle"
-            type="button"
-        >
-            [ NOELLE ]
-        </button>
-
-
+    <div id="characterMessageTitle">
+        CHARACTER UNLOCKED!
     </div>
 
+    <div id="characterMessageName">
+        BERDLY
+    </div>
 
-    <button
-        id="closeCharacterMenu"
-        type="button"
-    >
-        [ CLOSE ]
-    </button>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     MENSAJE DE DESBLOQUEO
-===================================================== -->
-
-<div id="unlockMessage">
-
-    <div id="unlockMessageText"></div>
-
-    <img
-        id="unlockMessageImage"
-        src=""
-        alt=""
-    >
+    <div id="characterMessageKills">
+        100 KILLS
+    </div>
 
 </div>
 
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script>
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const pipisButton =
+    document.getElementById("pipisButton");
+
+const pipisSound =
+    document.getElementById("pipisSound");
+
+const pipisRain =
+    document.getElementById("pipisRain");
+
+const normalMusic =
+    document.getElementById("normalMusic");
+
+const bigShotMusic =
+    document.getElementById("bigShotMusic");
+
+const berdlyMusic =
+    document.getElementById("berdlyMusic");
+
+const susieMusic =
+    document.getElementById("susieMusic");
+
+const noelleMusic =
+    document.getElementById("noelleMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const mainSpamton =
+    document.getElementById("mainSpamton");
+
+const characterName =
+    document.getElementById("characterName");
+
+const achievementBerdly =
+    document.getElementById("achievementBerdly");
+
+const achievementSusie =
+    document.getElementById("achievementSusie");
+
+const achievementNoelle =
+    document.getElementById("achievementNoelle");
+
+const achievementBigShot =
+    document.getElementById("achievementBigShot");
+
+const achievementCat =
+    document.getElementById("achievementCat");
+
+const catDiscovery =
+    document.getElementById("catDiscovery");
+
+const characterMessage =
+    document.getElementById("characterMessage");
+
+const characterMessageName =
+    document.getElementById("characterMessageName");
+
+const characterMessageKills =
+    document.getElementById("characterMessageKills");
 
 
-        /* =================================================
-           ELEMENTOS
-        ================================================= */
 
-        const pipisButton =
-            document.getElementById(
-                "pipisButton"
+/* =====================================================
+   ESTADO
+===================================================== */
+
+let musicIsPlaying = false;
+
+let currentMode = "normal";
+
+
+
+/* =====================================================
+   LOGROS
+===================================================== */
+
+let berdlyUnlocked =
+    localStorage.getItem(
+        "friendAchievement100"
+    ) === "true";
+
+
+let susieUnlocked =
+    localStorage.getItem(
+        "friendAchievement1000"
+    ) === "true";
+
+
+let noelleUnlocked =
+    localStorage.getItem(
+        "friendAchievement10000"
+    ) === "true";
+
+
+let bigShotUnlocked =
+    localStorage.getItem(
+        "spamtonBigShotAchievement"
+    ) === "true";
+
+
+let catUnlocked =
+    localStorage.getItem(
+        "spamtonSacredCatAchievement"
+    ) === "true";
+
+
+
+/* =====================================================
+   MOSTRAR LOGROS
+===================================================== */
+
+function updateAchievements() {
+
+    achievementBerdly.style.display =
+        berdlyUnlocked
+            ? "flex"
+            : "none";
+
+
+    achievementSusie.style.display =
+        susieUnlocked
+            ? "flex"
+            : "none";
+
+
+    achievementNoelle.style.display =
+        noelleUnlocked
+            ? "flex"
+            : "none";
+
+
+    achievementBigShot.style.display =
+        bigShotUnlocked
+            ? "flex"
+            : "none";
+
+
+    achievementCat.style.display =
+        catUnlocked
+            ? "flex"
+            : "none";
+
+}
+
+
+updateAchievements();
+
+
+
+/* =====================================================
+   CONFIGURACIÓN DE PERSONAJES
+===================================================== */
+
+const characters = {
+
+    berdly: {
+
+        name: "BERDLY",
+
+        sprite: "berdly-idle.gif",
+
+        background:
+            "berdly-background.gif",
+
+        music:
+            berdlyMusic,
+
+        kills: "100 KILLS"
+
+    },
+
+
+    susie: {
+
+        name: "SUSIE",
+
+        sprite: "susie-idle.gif",
+
+        background:
+            "susie-background.gif",
+
+        music:
+            susieMusic,
+
+        kills: "1,000 KILLS"
+
+    },
+
+
+    noelle: {
+
+        name: "NOELLE",
+
+        sprite: "noelle-idle.gif",
+
+        background:
+            "noelle-background.gif",
+
+        music:
+            noelleMusic,
+
+        kills: "10,000 KILLS"
+
+    }
+
+};
+
+
+
+/* =====================================================
+   DETENER TODA LA MUSICA
+===================================================== */
+
+function stopAllMusic() {
+
+    normalMusic.pause();
+
+    bigShotMusic.pause();
+
+    berdlyMusic.pause();
+
+    susieMusic.pause();
+
+    noelleMusic.pause();
+
+    musicIsPlaying =
+        false;
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR BOTON
+===================================================== */
+
+function updateMusicButton() {
+
+    if (
+        musicIsPlaying
+    ) {
+
+        if (
+            currentMode === "bigshot"
+        ) {
+
+            musicButton.textContent =
+                "[ TURN OFF THE BIG SHOT ]";
+
+        }
+
+        else {
+
+            musicButton.textContent =
+                "[ TURN OFF THE MUSIC ]";
+
+        }
+
+    }
+
+    else {
+
+        if (
+            currentMode === "bigshot"
+        ) {
+
+            musicButton.textContent =
+                "[ TURN ON THE BIG SHOT! ]";
+
+        }
+
+        else {
+
+            musicButton.textContent =
+                "[ TURN ON THE MUSIC ]";
+
+        }
+
+    }
+
+}
+
+
+
+/* =====================================================
+   REPRODUCIR MUSICA
+===================================================== */
+
+function playMusic(audio) {
+
+    stopAllMusic();
+
+    audio.volume =
+        0.40;
+
+    audio.currentTime =
+        0;
+
+    const promise =
+        audio.play();
+
+
+    if (
+        promise &&
+        promise.then
+    ) {
+
+        promise.then(
+            function() {
+
+                musicIsPlaying =
+                    true;
+
+                updateMusicButton();
+
+            }
+        )
+        .catch(
+            function(error) {
+
+                console.log(
+                    "No se pudo reproducir:",
+                    error
+                );
+
+                musicIsPlaying =
+                    false;
+
+                updateMusicButton();
+
+            }
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CAMBIAR PERSONAJE
+===================================================== */
+
+function activateCharacter(
+    character
+) {
+
+    const data =
+        characters[character];
+
+
+    if (!data) {
+        return;
+    }
+
+
+    document.body.classList.remove(
+        "big-shot-mode"
+    );
+
+
+    document.body.classList.add(
+        "character-mode"
+    );
+
+
+    document.body.style.backgroundImage =
+        "url('" +
+        data.background +
+        "')";
+
+
+    mainSpamton.src =
+        data.sprite;
+
+
+    characterName.textContent =
+        data.name;
+
+
+    currentMode =
+        character;
+
+
+    if (
+        musicIsPlaying
+    ) {
+
+        playMusic(
+            data.music
+        );
+
+    }
+
+
+    updateMusicButton();
+
+}
+
+
+
+/* =====================================================
+   BIG SHOT
+===================================================== */
+
+function activateBigShot() {
+
+    currentMode =
+        "bigshot";
+
+
+    document.body.classList.remove(
+        "character-mode"
+    );
+
+
+    document.body.classList.add(
+        "big-shot-mode"
+    );
+
+
+    document.body.style.backgroundImage =
+        "url('spamton-neo-background.gif')";
+
+
+    mainSpamton.src =
+        "spamton-neo.gif";
+
+
+    characterName.textContent =
+        "BIG SHOT!";
+
+
+    if (
+        musicIsPlaying
+    ) {
+
+        playMusic(
+            bigShotMusic
+        );
+
+    }
+
+
+    updateMusicButton();
+
+}
+
+
+
+/* =====================================================
+   VOLVER A SPAMTON
+===================================================== */
+
+function activateNormal() {
+
+    currentMode =
+        "normal";
+
+
+    document.body.classList.remove(
+        "character-mode"
+    );
+
+
+    document.body.classList.remove(
+        "big-shot-mode"
+    );
+
+
+    document.body.style.backgroundImage =
+        "url('spamton-cielo.png')";
+
+
+    mainSpamton.src =
+        "spamton-idle.gif";
+
+
+    characterName.textContent =
+        "SPAMTON";
+
+
+    if (
+        musicIsPlaying
+    ) {
+
+        playMusic(
+            normalMusic
+        );
+
+    }
+
+
+    updateMusicButton();
+
+}
+
+
+
+/* =====================================================
+   BOTON DE MUSICA
+===================================================== */
+
+musicButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+
+        if (
+            musicIsPlaying
+        ) {
+
+            stopAllMusic();
+
+            updateMusicButton();
+
+            return;
+
+        }
+
+
+        if (
+            currentMode === "bigshot"
+        ) {
+
+            playMusic(
+                bigShotMusic
+            );
+
+        }
+
+        else if (
+            currentMode === "berdly"
+        ) {
+
+            playMusic(
+                berdlyMusic
+            );
+
+        }
+
+        else if (
+            currentMode === "susie"
+        ) {
+
+            playMusic(
+                susieMusic
+            );
+
+        }
+
+        else if (
+            currentMode === "noelle"
+        ) {
+
+            playMusic(
+                noelleMusic
+            );
+
+        }
+
+        else {
+
+            playMusic(
+                normalMusic
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   TROFEO BERDLY
+===================================================== */
+
+achievementBerdly.addEventListener(
+    "click",
+    function() {
+
+        activateCharacter(
+            "berdly"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   TROFEO SUSIE
+===================================================== */
+
+achievementSusie.addEventListener(
+    "click",
+    function() {
+
+        activateCharacter(
+            "susie"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   TROFEO NOELLE
+===================================================== */
+
+achievementNoelle.addEventListener(
+    "click",
+    function() {
+
+        activateCharacter(
+            "noelle"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   TROFEO BIG SHOT
+===================================================== */
+
+achievementBigShot.addEventListener(
+    "click",
+    function() {
+
+        if (
+            currentMode === "bigshot"
+        ) {
+
+            activateNormal();
+
+        }
+
+        else {
+
+            activateBigShot();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   TROFEO GATO
+===================================================== */
+
+achievementCat.addEventListener(
+    "click",
+    function() {
+
+        catDiscovery.classList.add(
+            "show"
+        );
+
+
+        setTimeout(
+            function() {
+
+                catDiscovery.classList.remove(
+                    "show"
+                );
+
+            },
+            5000
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   CREAR PIPIS
+===================================================== */
+
+function createPipis() {
+
+    for (
+        let i = 0;
+        i < 25;
+        i++
+    ) {
+
+        const pipis =
+            document.createElement("img");
+
+
+        pipis.src =
+            "pipis.gif";
+
+
+        pipis.className =
+            "pipis-rain";
+
+
+        const size =
+            Math.floor(
+                Math.random() * 60
+            ) + 40;
+
+
+        pipis.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        pipis.style.width =
+            size + "px";
+
+
+        pipis.style.animationDuration =
+            Math.random() * 2 + 2 +
+            "s";
+
+
+        pipis.style.animationDelay =
+            Math.random() * 0.8 +
+            "s";
+
+
+        pipisRain.appendChild(
+            pipis
+        );
+
+
+        setTimeout(
+            function() {
+
+                if (
+                    pipis.parentNode
+                ) {
+
+                    pipis.remove();
+
+                }
+
+            },
+            6000
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   BOTON PIPIS
+===================================================== */
+
+pipisButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+
+        pipisSound.currentTime =
+            0;
+
+
+        pipisSound.play()
+            .catch(
+                function() {}
             );
 
 
-        const pipisSound =
-            document.getElementById(
-                "pipisSound"
-            );
+        createPipis();
 
-
-        const pipisRain =
-            document.getElementById(
-                "pipisRain"
-            );
-
-
-        const normalMusic =
-            document.getElementById(
-                "normalMusic"
-            );
-
-
-        const bigShotMusic =
-            document.getElementById(
-                "bigShotMusic"
-            );
-
-
-        const berdlyMusic =
-            document.getElementById(
-                "berdlyMusic"
-            );
-
-
-        const susieMusic =
-            document.getElementById(
-                "susieMusic"
-            );
-
-
-        const noelleMusic =
-            document.getElementById(
-                "noelleMusic"
-            );
-
-
-        const musicButton =
-            document.getElementById(
-                "musicButton"
-            );
-
-
-        const mainSpamton =
-            document.getElementById(
-                "mainSpamton"
-            );
-
-
-        const achievementBigShot =
-            document.getElementById(
-                "achievementBigShot"
-            );
-
-
-        const achievementCat =
-            document.getElementById(
-                "achievementCat"
-            );
-
-
-        const achievementBerdly =
-            document.getElementById(
-                "achievementBerdly"
-            );
-
-
-        const achievementSusie =
-            document.getElementById(
-                "achievementSusie"
-            );
-
-
-        const achievementNoelle =
-            document.getElementById(
-                "achievementNoelle"
-            );
-
-
-        const secretRoomButton =
-            document.getElementById(
-                "secretRoomButton"
-            );
-
-
-        const catDiscovery =
-            document.getElementById(
-                "catDiscovery"
-            );
-
-
-        const characterMenu =
-            document.getElementById(
-                "characterMenu"
-            );
-
-
-        const characterMenuButton =
-            document.getElementById(
-                "characterMenuButton"
-            );
-
-
-        const closeCharacterMenu =
-            document.getElementById(
-                "closeCharacterMenu"
-            );
-
-
-        const unlockMessage =
-            document.getElementById(
-                "unlockMessage"
-            );
-
-
-        const unlockMessageText =
-            document.getElementById(
-                "unlockMessageText"
-            );
-
-
-        const unlockMessageImage =
-            document.getElementById(
-                "unlockMessageImage"
-            );
+    }
+);
 
 
 
-        /* =================================================
-           VOLUMEN
-        ================================================= */
+/* =====================================================
+   ACTUALIZACIÓN AUTOMÁTICA DE LOGROS
+===================================================== */
 
-        normalMusic.volume = 0.40;
+setInterval(
+    function() {
 
-        bigShotMusic.volume = 0.40;
-
-        berdlyMusic.volume = 0.40;
-
-        susieMusic.volume = 0.40;
-
-        noelleMusic.volume = 0.40;
-
-        pipisSound.volume = 0.70;
+        const newBerdly =
+            localStorage.getItem(
+                "friendAchievement100"
+            ) === "true";
 
 
-
-        /* =================================================
-           ESTADO
-        ================================================= */
-
-        let currentMusic = null;
-
-        let currentCharacter = "spamton";
-
-        let bigShotMode = false;
+        const newSusie =
+            localStorage.getItem(
+                "friendAchievement1000"
+            ) === "true";
 
 
+        const newNoelle =
+            localStorage.getItem(
+                "friendAchievement10000"
+            ) === "true";
 
-        /* =================================================
-           LOGROS
-        ================================================= */
 
-        let bigShotUnlocked =
+        const newBigShot =
             localStorage.getItem(
                 "spamtonBigShotAchievement"
             ) === "true";
 
 
-        let catUnlocked =
-            localStorage.getItem(
-                "spamtonSacredCatAchievement"
-            ) === "true";
-
-
-        let berdlyUnlocked =
-            localStorage.getItem(
-                "friendAchievement100"
-            ) === "true";
-
-
-        let susieUnlocked =
-            localStorage.getItem(
-                "friendAchievement1000"
-            ) === "true";
-
-
-        let noelleUnlocked =
-            localStorage.getItem(
-                "friendAchievement10000"
-            ) === "true";
-
-
-
-        /* =================================================
-           ACTUALIZAR DESBLOQUEOS
-        ================================================= */
-
-        function updateUnlocks() {
-
-
-            /*
-             * BIG SHOT
-             */
-
-            if (bigShotUnlocked) {
-
-                achievementBigShot.style.display =
-                    "flex";
-
-                secretRoomButton.style.display =
-                    "none";
-
-            } else {
-
-                achievementBigShot.style.display =
-                    "none";
-
-            }
-
-
-            /*
-             * GATO
-             */
-
-            if (catUnlocked) {
-
-                achievementCat.style.display =
-                    "flex";
-
-            } else {
-
-                achievementCat.style.display =
-                    "none";
-
-            }
-
-
-            /*
-             * BERDLY
-             */
-
-            if (berdlyUnlocked) {
-
-                achievementBerdly.style.display =
-                    "flex";
-
-            } else {
-
-                achievementBerdly.style.display =
-                    "none";
-
-            }
-
-
-            /*
-             * SUSIE
-             */
-
-            if (susieUnlocked) {
-
-                achievementSusie.style.display =
-                    "flex";
-
-            } else {
-
-                achievementSusie.style.display =
-                    "none";
-
-            }
-
-
-            /*
-             * NOELLE
-             */
-
-            if (noelleUnlocked) {
-
-                achievementNoelle.style.display =
-                    "flex";
-
-            } else {
-
-                achievementNoelle.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        updateUnlocks();
-
-
-
-        /* =================================================
-           DETENER TODA LA MÚSICA
-        ================================================= */
-
-        function stopAllMusic() {
-
-
-            normalMusic.pause();
-
-            bigShotMusic.pause();
-
-            berdlyMusic.pause();
-
-            susieMusic.pause();
-
-            noelleMusic.pause();
-
-
-            currentMusic = null;
-
-
-            updateMusicButton();
-
-        }
-
-
-
-        /* =================================================
-           REPRODUCIR MÚSICA
-        ================================================= */
-
-        function playMusic(audio) {
-
-
-            stopAllMusic();
-
-
-            audio.currentTime = 0;
-
-
-            const promise =
-                audio.play();
-
-
-            if (
-                promise !== undefined
-            ) {
-
-                promise
-                    .then(
-                        function () {
-
-                            currentMusic =
-                                audio;
-
-                            updateMusicButton();
-
-                        }
-                    )
-                    .catch(
-                        function (error) {
-
-                            console.log(
-                                "No se pudo reproducir la música:",
-                                error
-                            );
-
-                            currentMusic =
-                                null;
-
-                            updateMusicButton();
-
-                        }
-                    );
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           BOTÓN DE MÚSICA
-        ================================================= */
-
-        function updateMusicButton() {
-
-
-            if (
-                currentMusic
-            ) {
-
-                if (
-                    currentMusic ===
-                    bigShotMusic
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN OFF BIG SHOT ]";
-
-                }
-
-                else if (
-                    currentMusic ===
-                    berdlyMusic
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN OFF BERDLY ]";
-
-                }
-
-                else if (
-                    currentMusic ===
-                    susieMusic
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN OFF SUSIE ]";
-
-                }
-
-                else if (
-                    currentMusic ===
-                    noelleMusic
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN OFF NOELLE ]";
-
-                }
-
-                else {
-
-                    musicButton.textContent =
-                        "[ TURN OFF THE MUSIC ]";
-
-                }
-
-            }
-
-            else {
-
-                if (
-                    currentCharacter ===
-                    "bigshot"
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN ON BIG SHOT ]";
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "berdly"
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN ON BERDLY ]";
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "susie"
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN ON SUSIE ]";
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "noelle"
-                ) {
-
-                    musicButton.textContent =
-                        "[ TURN ON NOELLE ]";
-
-                }
-
-                else {
-
-                    musicButton.textContent =
-                        "[ TURN ON THE MUSIC ]";
-
-                }
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           BOTÓN DE MÚSICA
-        ================================================= */
-
-        musicButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-
-                if (
-                    currentMusic
-                ) {
-
-                    stopAllMusic();
-
-                    return;
-
-                }
-
-
-                if (
-                    currentCharacter ===
-                    "bigshot"
-                ) {
-
-                    playMusic(
-                        bigShotMusic
-                    );
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "berdly"
-                ) {
-
-                    playMusic(
-                        berdlyMusic
-                    );
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "susie"
-                ) {
-
-                    playMusic(
-                        susieMusic
-                    );
-
-                }
-
-                else if (
-                    currentCharacter ===
-                    "noelle"
-                ) {
-
-                    playMusic(
-                        noelleMusic
-                    );
-
-                }
-
-                else {
-
-                    playMusic(
-                        normalMusic
-                    );
-
-                }
-
-            }
-        );
-
-
-
-        /* =================================================
-           PIPIS
-        ================================================= */
-
-        function createPipis() {
-
-
-            for (
-                let i = 0;
-                i < 25;
-                i++
-            ) {
-
-
-                const pipis =
-                    document.createElement(
-                        "img"
-                    );
-
-
-                pipis.src =
-                    "pipis.gif";
-
-
-                pipis.className =
-                    "pipis-rain";
-
-
-                const size =
-                    Math.floor(
-                        Math.random() * 60
-                    ) + 40;
-
-
-                pipis.style.left =
-                    Math.random() * 100 +
-                    "vw";
-
-
-                pipis.style.width =
-                    size +
-                    "px";
-
-
-                pipis.style.animationDuration =
-                    Math.random() * 2 +
-                    2 +
-                    "s";
-
-
-                pipis.style.animationDelay =
-                    Math.random() * 0.8 +
-                    "s";
-
-
-                pipisRain.appendChild(
-                    pipis
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        if (
-                            pipis.parentNode
-                        ) {
-
-                            pipis.remove();
-
-                        }
-
-                    },
-                    6000
-                );
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           GATO
-        ================================================= */
-
-        function createCatRain() {
-
-
-            for (
-                let i = 0;
-                i < 25;
-                i++
-            ) {
-
-
-                const cat =
-                    document.createElement(
-                        "img"
-                    );
-
-
-                cat.src =
-                    "gato.png";
-
-
-                cat.className =
-                    "cat-rain";
-
-
-                cat.style.left =
-                    Math.random() * 100 +
-                    "vw";
-
-
-                cat.style.width =
-                    Math.floor(
-                        Math.random() * 55
-                    ) + 45 +
-                    "px";
-
-
-                cat.style.animationDuration =
-                    Math.random() * 2 +
-                    2 +
-                    "s";
-
-
-                cat.style.animationDelay =
-                    Math.random() * 0.8 +
-                    "s";
-
-
-                pipisRain.appendChild(
-                    cat
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        if (
-                            cat.parentNode
-                        ) {
-
-                            cat.remove();
-
-                        }
-
-                    },
-                    6000
-                );
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           DESCUBRIR GATO
-        ================================================= */
-
-        function discoverCat() {
-
-
-            catUnlocked =
-                true;
-
-
-            localStorage.setItem(
-                "spamtonSacredCatAchievement",
-                "true"
-            );
-
-
-            updateUnlocks();
-
-
-            catDiscovery.classList.add(
-                "show"
-            );
-
-
-            setTimeout(
-                function () {
-
-                    catDiscovery.classList.remove(
-                        "show"
-                    );
-
-                },
-                5000
-            );
-
-
-            createCatRain();
-
-        }
-
-
-
-        /* =================================================
-           BOTÓN PIPIS
-        ================================================= */
-
-        pipisButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-
-                pipisSound.currentTime =
-                    0;
-
-
-                pipisSound.play()
-                    .catch(
-                        function () {}
-                    );
-
-
-                /*
-                 * SOLO 1% DE GATO
-                 */
-
-                if (
-                    Math.random() <
-                    0.01
-                ) {
-
-
-                    if (
-                        !catUnlocked
-                    ) {
-
-                        discoverCat();
-
-                    }
-
-                    else {
-
-                        createCatRain();
-
-                    }
-
-
-                    return;
-
-                }
-
-
-                createPipis();
-
-            }
-        );
-
-
-
-        /* =================================================
-           APLICAR PERSONAJE
-        ================================================= */
-
-        function selectCharacter(
-            character
+        if (
+            newBerdly !== berdlyUnlocked ||
+            newSusie !== susieUnlocked ||
+            newNoelle !== noelleUnlocked ||
+            newBigShot !== bigShotUnlocked
         ) {
 
+            berdlyUnlocked =
+                newBerdly;
 
-            document.body.classList.remove(
-                "big-shot-mode",
-                "berdly-mode",
-                "susie-mode",
-                "noelle-mode"
-            );
+            susieUnlocked =
+                newSusie;
 
+            noelleUnlocked =
+                newNoelle;
 
-            bigShotMode =
-                false;
-
-
-            currentCharacter =
-                character;
+            bigShotUnlocked =
+                newBigShot;
 
 
-            /*
-             * SPAMTON
-             */
-
-            if (
-                character ===
-                "spamton"
-            ) {
-
-                mainSpamton.src =
-                    "spamton-idle.gif";
-
-            }
-
-
-            /*
-             * BIG SHOT
-             */
-
-            else if (
-                character ===
-                "bigshot"
-            ) {
-
-                document.body.classList.add(
-                    "big-shot-mode"
-                );
-
-
-                mainSpamton.src =
-                    "spamton-neo.gif";
-
-            }
-
-
-            /*
-             * BERDLY
-             */
-
-            else if (
-                character ===
-                "berdly"
-            ) {
-
-                if (
-                    !berdlyUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                document.body.classList.add(
-                    "berdly-mode"
-                );
-
-
-                document.body.style.backgroundImage =
-                    'url("berdly-background.png")';
-
-
-                mainSpamton.src =
-                    "berdly-sprite-idle.gif";
-
-            }
-
-
-            /*
-             * SUSIE
-             */
-
-            else if (
-                character ===
-                "susie"
-            ) {
-
-                if (
-                    !susieUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                document.body.classList.add(
-                    "susie-mode"
-                );
-
-
-                document.body.style.backgroundImage =
-                    'url("susie-background.png")';
-
-
-                mainSpamton.src =
-                    "susie-sprite-idle.gif";
-
-            }
-
-
-            /*
-             * NOELLE
-             */
-
-            else if (
-                character ===
-                "noelle"
-            ) {
-
-                if (
-                    !noelleUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                document.body.classList.add(
-                    "noelle-mode"
-                );
-
-
-                document.body.style.backgroundImage =
-                    'url("noelle-background.png")';
-
-
-                mainSpamton.src =
-                    "noelle-sprite-idle.gif";
-
-            }
-
-
-            /*
-             * Volver a música detenida
-             */
-
-            stopAllMusic();
-
-
-            updateMusicButton();
+            updateAchievements();
 
         }
 
+    },
+    1000
+);
 
 
-        /* =================================================
-           RESTAURAR FONDO SPAMTON
-        ================================================= */
 
-        function restoreSpamtonBackground() {
+/* =====================================================
+   ESTADO INICIAL
+===================================================== */
 
+updateAchievements();
 
-            document.body.style.backgroundImage =
-                'url("spamton-cielo.png")';
-
-        }
-
-
-
-        /* =================================================
-           MENÚ DE PERSONAJES
-        ================================================= */
-
-        characterMenuButton.addEventListener(
-            "click",
-            function () {
-
-                characterMenu.classList.add(
-                    "show"
-                );
-
-            }
-        );
-
-
-        closeCharacterMenu.addEventListener(
-            "click",
-            function () {
-
-                characterMenu.classList.remove(
-                    "show"
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           SELECCIONAR SPAMTON
-        ================================================= */
-
-        document
-            .getElementById(
-                "selectSpamton"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    restoreSpamtonBackground();
-
-                    selectCharacter(
-                        "spamton"
-                    );
-
-                    characterMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           SELECCIONAR BIG SHOT
-        ================================================= */
-
-        document
-            .getElementById(
-                "selectBigShot"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        !bigShotUnlocked
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    restoreSpamtonBackground();
-
-                    selectCharacter(
-                        "bigshot"
-                    );
-
-                    characterMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           SELECCIONAR BERDLY
-        ================================================= */
-
-        document
-            .getElementById(
-                "selectBerdly"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        !berdlyUnlocked
-                    ) {
-
-                        alert(
-                            "BERDLY SE DESBLOQUEA AL CONSEGUIR 100 KILLS."
-                        );
-
-                        return;
-
-                    }
-
-
-                    selectCharacter(
-                        "berdly"
-                    );
-
-
-                    characterMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           SELECCIONAR SUSIE
-        ================================================= */
-
-        document
-            .getElementById(
-                "selectSusie"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        !susieUnlocked
-                    ) {
-
-                        alert(
-                            "SUSIE SE DESBLOQUEA AL CONSEGUIR 1000 KILLS."
-                        );
-
-                        return;
-
-                    }
-
-
-                    selectCharacter(
-                        "susie"
-                    );
-
-
-                    characterMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           SELECCIONAR NOELLE
-        ================================================= */
-
-        document
-            .getElementById(
-                "selectNoelle"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        !noelleUnlocked
-                    ) {
-
-                        alert(
-                            "NOELLE SE DESBLOQUEA AL CONSEGUIR 10000 KILLS."
-                        );
-
-                        return;
-
-                    }
-
-
-                    selectCharacter(
-                        "noelle"
-                    );
-
-
-                    characterMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-            );
-
-
-
-        /* =================================================
-           TROFEO BIG SHOT
-        ================================================= */
-
-        achievementBigShot.addEventListener(
-            "click",
-            function () {
-
-
-                if (
-                    !bigShotUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                restoreSpamtonBackground();
-
-
-                selectCharacter(
-                    "bigshot"
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           TROFEO GATO
-        ================================================= */
-
-        achievementCat.addEventListener(
-            "click",
-            function () {
-
-
-                if (
-                    !catUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                catDiscovery.classList.add(
-                    "show"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        catDiscovery.classList.remove(
-                            "show"
-                        );
-
-                    },
-                    5000
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           TROFEO BERDLY
-        ================================================= */
-
-        achievementBerdly.addEventListener(
-            "click",
-            function () {
-
-
-                if (
-                    !berdlyUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                selectCharacter(
-                    "berdly"
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           TROFEO SUSIE
-        ================================================= */
-
-        achievementSusie.addEventListener(
-            "click",
-            function () {
-
-
-                if (
-                    !susieUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                selectCharacter(
-                    "susie"
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           TROFEO NOELLE
-        ================================================= */
-
-        achievementNoelle.addEventListener(
-            "click",
-            function () {
-
-
-                if (
-                    !noelleUnlocked
-                ) {
-
-                    return;
-
-                }
-
-
-                selectCharacter(
-                    "noelle"
-                );
-
-            }
-        );
-
-
-
-        /* =================================================
-           COMPROBAR LOGROS AL CARGAR
-        ================================================= */
-
-        /*
-         * Esto es importante:
-         *
-         * Si ya tenías 100 kills antes de instalar
-         * este nuevo index.html, el juego ya dejó
-         * guardado:
-         *
-         * friendAchievement100 = true
-         *
-         * Por eso ahora Berdly aparecerá automáticamente.
-         */
-
-
-        berdlyUnlocked =
-            localStorage.getItem(
-                "friendAchievement100"
-            ) === "true";
-
-
-        susieUnlocked =
-            localStorage.getItem(
-                "friendAchievement1000"
-            ) === "true";
-
-
-        noelleUnlocked =
-            localStorage.getItem(
-                "friendAchievement10000"
-            ) === "true";
-
-
-        updateUnlocks();
-
-
-        updateMusicButton();
-
-
-    });
+updateMusicButton();
 
 </script>
 
