@@ -3,9 +3,9 @@
 );
 
 
-/* =====================================================
+/* =========================================================
    GENERAL
-===================================================== */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -16,11 +16,9 @@ html,
 body {
 
     margin: 0;
-
     padding: 0;
 
     width: 100%;
-
     min-height: 100%;
 
     overflow-x: hidden;
@@ -32,14 +30,51 @@ body {
 
     min-height: 100vh;
 
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    text-align: center;
+
+    color: white;
+
+    position: relative;
+
+    background-color: #000;
+
     background-image:
         url("spamton-cielo.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    transition:
+        background-image 0.5s ease;
+
+}
+
+
+/* =========================================================
+   BIG SHOT
+========================================================= */
+
+body.big-shot-mode {
+
+    background-color: #05000a;
+
+    background-image:
+        url("spamton-neo-background.gif");
 
     background-size:
         cover;
 
     background-position:
-        center;
+        center center;
 
     background-repeat:
         no-repeat;
@@ -47,157 +82,48 @@ body {
     background-attachment:
         fixed;
 
-    background-color:
-        #050505;
-
-    font-family:
-        'Press Start 2P',
-        cursive;
-
-    color:
-        white;
-
-    text-align:
-        center;
-
-    position:
-        relative;
-
-    transition:
-        background-image 0.4s ease;
-
 }
 
 
-/* =====================================================
-   BOTONES SUPERIORES
-===================================================== */
+/* =========================================================
+   FILTRO BIG SHOT
+========================================================= */
 
-#topButtons {
+body.big-shot-mode::before {
 
-    position:
-        fixed;
+    content: "";
 
-    top:
-        20px;
+    position: fixed;
 
-    right:
-        20px;
-
-    z-index:
-        10000;
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        flex-end;
-
-    gap:
-        12px;
-
-}
-
-
-#friendDestroyerButton,
-#secretRoomButton {
-
-    position:
-        relative;
-
-    width:
-        max-content;
-
-    min-width:
-        190px;
-
-    height:
-        auto;
-
-    padding:
-        12px 15px;
+    inset: 0;
 
     background:
-        #050505;
+        rgba(0, 0, 0, 0.20);
 
-    color:
-        white;
+    pointer-events: none;
 
-    border:
-        3px solid white;
-
-    text-decoration:
-        none;
-
-    font-family:
-        'Press Start 2P',
-        cursive;
-
-    font-size:
-        9px;
-
-    line-height:
-        1.5;
-
-    text-align:
-        center;
-
-    box-shadow:
-        5px 5px 0 #ff00ff;
-
-    cursor:
-        pointer;
-
-    transition:
-        transform 0.1s,
-        background 0.1s,
-        box-shadow 0.1s;
+    z-index: 1;
 
 }
 
 
-#friendDestroyerButton:hover,
-#secretRoomButton:hover {
+body > * {
 
-    background:
-        #ff00ff;
+    position: relative;
 
-    color:
-        #000;
-
-    transform:
-        translate(-2px, -2px);
-
-    box-shadow:
-        7px 7px 0 #00ffff;
+    z-index: 5;
 
 }
 
 
-#friendDestroyerButton:active,
-#secretRoomButton:active {
-
-    transform:
-        translate(3px, 3px);
-
-    box-shadow:
-        2px 2px 0 #ff00ff;
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    TITULO
-===================================================== */
+========================================================= */
 
 h1 {
 
     margin:
-        30px 0 10px;
+        25px 0 0;
 
     font-size:
         38px;
@@ -209,42 +135,21 @@ h1 {
         4px 4px 0 #000,
         -2px -2px 0 #ff00ff;
 
-    position:
-        relative;
-
-    z-index:
-        10;
-
 }
 
 
-#characterName {
-
-    position:
-        relative;
-
-    z-index:
-        10;
-
-    margin:
-        0 auto 10px;
-
-    font-size:
-        14px;
-
-    color:
-        #00ffff;
+body.big-shot-mode h1 {
 
     text-shadow:
-        3px 3px 0 #000;
+        4px 4px 0 #ff00ff,
+        -4px -4px 0 #00ffff;
 
 }
 
 
-
-/* =====================================================
+/* =========================================================
    SPAMTON
-===================================================== */
+========================================================= */
 
 .main-spamton {
 
@@ -252,25 +157,16 @@ h1 {
         block;
 
     width:
-        300px;
+        260px;
 
     max-width:
-        55vw;
-
-    max-height:
-        45vh;
-
-    object-fit:
-        contain;
+        45vw;
 
     margin:
-        25px auto 15px;
+        45px auto 20px;
 
     image-rendering:
         pixelated;
-
-    position:
-        relative;
 
     z-index:
         10;
@@ -278,10 +174,9 @@ h1 {
 }
 
 
-
-/* =====================================================
+/* =========================================================
    PIPIS
-===================================================== */
+========================================================= */
 
 #pipisButton {
 
@@ -321,6 +216,98 @@ h1 {
 
 #pipisButton:hover {
 
+    transform:
+        translate(-2px, -2px);
+
+    box-shadow:
+        9px 9px 0 #00ffff;
+
+}
+
+
+#pipisButton:active {
+
+    transform:
+        translate(4px, 4px);
+
+    box-shadow:
+        3px 3px 0 #ff00ff;
+
+}
+
+
+/* =========================================================
+   FRIEND DESTROYER
+========================================================= */
+
+#friendDestroyerButton {
+
+    position:
+        fixed;
+
+    top:
+        20px;
+
+    right:
+        20px;
+
+    z-index:
+        1000;
+
+    display:
+        inline-flex;
+
+    width:
+        auto;
+
+    min-width:
+        0;
+
+    height:
+        auto;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        12px 15px;
+
+    background:
+        #111;
+
+    color:
+        white;
+
+    border:
+        3px solid white;
+
+    text-decoration:
+        none;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.3;
+
+    white-space:
+        nowrap;
+
+    box-shadow:
+        4px 4px 0 #ff00ff;
+
+}
+
+
+#friendDestroyerButton:hover {
+
     background:
         #ff00ff;
 
@@ -333,10 +320,74 @@ h1 {
 }
 
 
+/* =========================================================
+   SALA SECRETA
+========================================================= */
 
-/* =====================================================
+#secretRoomButton {
+
+    position:
+        fixed;
+
+    top:
+        20px;
+
+    right:
+        210px;
+
+    z-index:
+        1000;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        12px 15px;
+
+    color:
+        white;
+
+    background:
+        black;
+
+    border:
+        3px solid white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        10px;
+
+    white-space:
+        nowrap;
+
+    box-shadow:
+        5px 5px 0 #ff00ff;
+
+}
+
+
+#secretRoomButton:hover {
+
+    background:
+        #ff00ff;
+
+    color:
+        #000;
+
+}
+
+
+/* =========================================================
    LOGROS
-===================================================== */
+========================================================= */
 
 #achievements {
 
@@ -350,19 +401,13 @@ h1 {
         20px;
 
     z-index:
-        9000;
+        1100;
 
     display:
         flex;
 
-    flex-wrap:
-        wrap;
-
     gap:
         8px;
-
-    width:
-        240px;
 
 }
 
@@ -373,13 +418,13 @@ h1 {
         none;
 
     width:
-        70px;
+        48px;
 
     height:
-        70px;
+        48px;
 
-    padding:
-        5px;
+    flex:
+        0 0 48px;
 
     align-items:
         center;
@@ -387,8 +432,11 @@ h1 {
     justify-content:
         center;
 
-    flex-direction:
-        column;
+    padding:
+        0;
+
+    font-size:
+        23px;
 
     background:
         #000;
@@ -402,12 +450,11 @@ h1 {
     cursor:
         pointer;
 
+    text-decoration:
+        none;
+
     box-shadow:
         4px 4px 0 #ff00ff;
-
-    font-family:
-        'Press Start 2P',
-        cursive;
 
 }
 
@@ -415,40 +462,17 @@ h1 {
 .achievement:hover {
 
     transform:
-        scale(1.08);
+        scale(1.1);
 
     box-shadow:
-        5px 5px 0 #00ffff;
+        4px 4px 0 #00ffff;
 
 }
 
 
-.achievementIcon {
-
-    font-size:
-        25px;
-
-}
-
-
-.achievementLabel {
-
-    font-size:
-        7px;
-
-    margin-top:
-        5px;
-
-    line-height:
-        1.3;
-
-}
-
-
-
-/* =====================================================
-   CAJA DE MUSICA
-===================================================== */
+/* =========================================================
+   MUSICA
+========================================================= */
 
 #musicBox {
 
@@ -456,13 +480,13 @@ h1 {
         fixed;
 
     right:
-        25px;
+        30px;
 
     bottom:
-        20px;
+        25px;
 
     z-index:
-        8000;
+        1200;
 
     display:
         flex;
@@ -479,13 +503,22 @@ h1 {
     gap:
         8px;
 
+    width:
+        250px;
+
 }
 
 
 #dancingSpamton {
 
+    display:
+        block;
+
     width:
-        145px;
+        150px;
+
+    margin:
+        0 auto;
 
     image-rendering:
         pixelated;
@@ -495,27 +528,33 @@ h1 {
 
 #musicButton {
 
+    display:
+        block;
+
     width:
-        250px;
+        auto;
+
+    margin:
+        0 auto;
 
     font-family:
         'Press Start 2P',
         cursive;
 
     font-size:
-        10px;
+        12px;
 
     color:
         white;
 
     background:
-        #000;
+        black;
 
     border:
         3px solid white;
 
     padding:
-        13px 10px;
+        14px 18px;
 
     cursor:
         pointer;
@@ -523,16 +562,13 @@ h1 {
     box-shadow:
         5px 5px 0 #ff00ff;
 
+    white-space:
+        nowrap;
+
 }
 
 
 #musicButton:hover {
-
-    background:
-        #ff00ff;
-
-    color:
-        #000;
 
     box-shadow:
         5px 5px 0 #00ffff;
@@ -540,10 +576,126 @@ h1 {
 }
 
 
+#musicButton.music-on {
 
-/* =====================================================
-   PIPIS RAIN
-===================================================== */
+    border-color:
+        #00ffff;
+
+    box-shadow:
+        5px 5px 0 #00ffff;
+
+}
+
+
+/* =========================================================
+   SUSIE
+========================================================= */
+
+#susieGlitch {
+
+    position:
+        fixed;
+
+    left:
+        20px;
+
+    bottom:
+        20px;
+
+    width:
+        205px;
+
+    padding:
+        12px;
+
+    background:
+        rgba(20,20,20,0.90);
+
+    border:
+        4px solid #00ffff;
+
+    box-shadow:
+        6px 6px 0 #ff00ff;
+
+    z-index:
+        100;
+
+}
+
+
+.susie-caption {
+
+    font-size:
+        11px;
+
+    line-height:
+        1.5;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.susie-arrow {
+
+    color:
+        #00ffff;
+
+    font-size:
+        18px;
+
+}
+
+
+.glitch-scribbles {
+
+    font-size:
+        8px;
+
+    line-height:
+        1.5;
+
+    color:
+        #ff00ff;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+#susieGif {
+
+    width:
+        145px;
+
+    max-width:
+        100%;
+
+    image-rendering:
+        pixelated;
+
+}
+
+
+.susie-name {
+
+    margin-top:
+        5px;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        5px;
+
+}
+
+
+/* =========================================================
+   LLUVIA PIPIS
+========================================================= */
 
 #pipisRain {
 
@@ -617,108 +769,56 @@ h1 {
 }
 
 
+/* =========================================================
+   GATOS
+========================================================= */
 
-/* =====================================================
-   SUSIE
-===================================================== */
-
-#susieGlitch {
+.cat-rain {
 
     position:
-        fixed;
+        absolute;
 
-    left:
-        20px;
+    top:
+        -150px;
 
-    bottom:
-        20px;
-
-    width:
-        205px;
-
-    padding:
-        12px;
-
-    background:
-        rgba(20,20,20,0.90);
-
-    border:
-        4px solid #00ffff;
-
-    box-shadow:
-        6px 6px 0 #ff00ff;
-
-    z-index:
-        300;
-
-}
-
-
-#susieGif {
-
-    width:
-        145px;
+    max-width:
+        110px;
 
     image-rendering:
         pixelated;
 
-}
-
-
-.susie-caption {
-
-    font-size:
-        10px;
-
-    line-height:
-        1.5;
+    animation:
+        catFall
+        linear
+        forwards;
 
 }
 
 
-.susie-arrow {
+@keyframes catFall {
 
-    color:
-        #00ffff;
+    0% {
 
-    font-size:
-        18px;
+        transform:
+            translateY(-150px)
+            rotate(-20deg);
 
-}
+    }
 
+    100% {
 
-.glitch-scribbles {
+        transform:
+            translateY(115vh)
+            rotate(360deg);
 
-    font-size:
-        8px;
-
-    color:
-        #ff00ff;
-
-    margin:
-        8px 0;
+    }
 
 }
 
 
-.susie-name {
-
-    margin-top:
-        5px;
-
-    font-size:
-        11px;
-
-    letter-spacing:
-        5px;
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    MENSAJE GATO
-===================================================== */
+========================================================= */
 
 #catDiscovery {
 
@@ -742,7 +842,7 @@ h1 {
         25px;
 
     background:
-        rgba(0,0,0,0.94);
+        rgba(0,0,0,0.95);
 
     border:
         5px solid white;
@@ -752,7 +852,7 @@ h1 {
         -7px -7px 0 #00ffff;
 
     z-index:
-        20000;
+        5000;
 
     opacity:
         0;
@@ -778,10 +878,21 @@ h1 {
 }
 
 
+.catDiscoveryGlitch {
+
+    color:
+        #00ffff;
+
+    margin-bottom:
+        20px;
+
+}
+
+
 .catDiscoveryText {
 
     font-size:
-        18px;
+        20px;
 
     line-height:
         1.7;
@@ -791,11 +902,14 @@ h1 {
 
 #catDiscoveryImage {
 
+    display:
+        block;
+
     width:
         180px;
 
-    margin-top:
-        20px;
+    margin:
+        20px auto 0;
 
     image-rendering:
         pixelated;
@@ -803,134 +917,29 @@ h1 {
 }
 
 
-
-/* =====================================================
-   MENSAJE DE PERSONAJE
-===================================================== */
-
-#characterMessage {
-
-    position:
-        fixed;
-
-    left:
-        50%;
-
-    top:
-        50%;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0);
-
-    padding:
-        30px;
-
-    background:
-        #000;
-
-    border:
-        5px solid white;
-
-    box-shadow:
-        10px 10px 0 #ff00ff,
-        -7px -7px 0 #00ffff;
-
-    z-index:
-        20000;
-
-    opacity:
-        0;
-
-    pointer-events:
-        none;
-
-}
-
-
-#characterMessage.show {
-
-    transform:
-        translate(-50%, -50%)
-        scale(1);
-
-    opacity:
-        1;
-
-}
-
-
-
-/* =====================================================
-   BIG SHOT
-===================================================== */
-
-body.big-shot-mode {
-
-    background-color:
-        #05000a;
-
-    background-size:
-        cover;
-
-    background-position:
-        center;
-
-    background-repeat:
-        no-repeat;
-
-}
-
-
-body.big-shot-mode h1 {
-
-    text-shadow:
-        4px 4px 0 #ff00ff,
-        -4px -4px 0 #00ffff;
-
-}
-
-
-body.big-shot-mode #characterName {
-
-    color:
-        #ff00ff;
-
-}
-
-
-body.big-shot-mode #musicButton {
-
-    border-color:
-        #ff00ff;
-
-    box-shadow:
-        5px 5px 0 #00ffff;
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    RESPONSIVE
-===================================================== */
+========================================================= */
 
-@media (
-    max-width: 700px
-) {
+@media (max-width: 700px) {
 
     h1 {
 
         font-size:
             22px;
 
-        margin-top:
-            20px;
+    }
+
+
+    .main-spamton {
+
+        width:
+            210px;
 
     }
 
 
-    #topButtons {
+    #friendDestroyerButton {
 
         top:
             10px;
@@ -938,14 +947,22 @@ body.big-shot-mode #musicButton {
         right:
             10px;
 
+        font-size:
+            7px;
+
+        padding:
+            9px;
+
     }
 
 
-    #friendDestroyerButton,
     #secretRoomButton {
 
-        min-width:
-            150px;
+        top:
+            55px;
+
+        right:
+            10px;
 
         font-size:
             7px;
@@ -958,14 +975,14 @@ body.big-shot-mode #musicButton {
 
     #achievements {
 
-        left:
-            10px;
-
         top:
             10px;
 
-        width:
-            170px;
+        left:
+            10px;
+
+        gap:
+            4px;
 
     }
 
@@ -973,15 +990,13 @@ body.big-shot-mode #musicButton {
     .achievement {
 
         width:
-            50px;
+            40px;
 
         height:
-            50px;
+            40px;
 
-    }
-
-
-    .achievementIcon {
+        flex-basis:
+            40px;
 
         font-size:
             18px;
@@ -989,32 +1004,19 @@ body.big-shot-mode #musicButton {
     }
 
 
-    .achievementLabel {
-
-        font-size:
-            5px;
-
-    }
-
-
-    .main-spamton {
-
-        width:
-            230px;
-
-        max-width:
-            60vw;
-
-    }
-
-
     #musicBox {
 
         right:
-            10px;
+            50%;
 
         bottom:
             10px;
+
+        transform:
+            translateX(50%);
+
+        width:
+            auto;
 
     }
 
@@ -1029,47 +1031,19 @@ body.big-shot-mode #musicButton {
 
     #musicButton {
 
-        width:
-            190px;
-
         font-size:
-            7px;
+            8px;
 
         padding:
-            10px 5px;
+            10px;
 
     }
 
 
     #susieGlitch {
 
-        width:
-            145px;
-
-        left:
-            8px;
-
-        bottom:
-            8px;
-
-        padding:
-            7px;
-
-    }
-
-
-    #susieGif {
-
-        width:
-            105px;
-
-    }
-
-
-    #pipisButton {
-
-        font-size:
-            12px;
+        display:
+            none;
 
     }
 
