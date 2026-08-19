@@ -1,1 +1,553 @@
+@import url(
+    'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
+);
 
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+
+    width: 100%;
+
+    min-height: 100%;
+
+    overflow-x: hidden;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background-color: #050509;
+
+    color: white;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow-x: hidden;
+
+}
+
+
+/* =====================================================
+   FONDO MOVIENDOSE
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: -8%;
+
+    z-index: -3;
+
+    background-image:
+        url("noelle-background.gif");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transform:
+        translateX(
+            var(--backgroundMove, 0%)
+        )
+        scale(1.08);
+
+    filter:
+        brightness(0.65)
+        contrast(1.1);
+
+    transition:
+        transform 0.1s linear;
+
+}
+
+
+/* =====================================================
+   FILTRO OSCURO
+===================================================== */
+
+#darkOverlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 20, 0.45);
+
+    pointer-events: none;
+
+    z-index: 1;
+
+}
+
+
+/* =====================================================
+   NIEVE
+===================================================== */
+
+#snowContainer {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 20;
+
+}
+
+
+.snowflake {
+
+    position: absolute;
+
+    top: -20px;
+
+    background: white;
+
+    opacity: 0.8;
+
+    image-rendering: pixelated;
+
+    animation:
+        snowFall
+        linear
+        forwards;
+
+}
+
+
+@keyframes snowFall {
+
+    0% {
+
+        transform:
+            translateY(-30px)
+            rotate(0deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(110vh)
+            rotate(180deg);
+
+    }
+
+}
+
+
+.snowflake.burst {
+
+    opacity: 1;
+
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+#noellePage {
+
+    position: relative;
+
+    z-index: 10;
+
+    min-height: 100vh;
+
+    padding:
+        20px
+        20px
+        80px;
+
+}
+
+
+/* =====================================================
+   PROCEED
+===================================================== */
+
+#proceedTitle {
+
+    margin:
+        25px
+        0
+        15px;
+
+    font-size:
+        clamp(
+            30px,
+            6vw,
+            70px
+        );
+
+    color: white;
+
+    letter-spacing:
+        10px;
+
+    text-shadow:
+        0 0 10px rgba(
+            255,
+            255,
+            255,
+            0.5
+        );
+
+}
+
+
+/* =====================================================
+   SUBTITULO
+===================================================== */
+
+#subtitle {
+
+    font-size:
+        clamp(
+            10px,
+            2vw,
+            16px
+        );
+
+    letter-spacing:
+        5px;
+
+    opacity:
+        0.75;
+
+    margin-bottom:
+        25px;
+
+}
+
+
+/* =====================================================
+   NOELLE PRINCIPAL
+===================================================== */
+
+#noelleMain {
+
+    width:
+        min(
+            400px,
+            70vw
+        );
+
+    margin:
+        0 auto
+        25px;
+
+    min-height:
+        300px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+#noelleMainImage {
+
+    width:
+        min(
+            350px,
+            65vw
+        );
+
+    max-height:
+        400px;
+
+    object-fit:
+        contain;
+
+    image-rendering:
+        pixelated;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(
+                255,
+                255,
+                255,
+                0.25
+            )
+        );
+
+}
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+#noelleGallery {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    flex-wrap:
+        wrap;
+
+    margin:
+        20px auto 35px;
+
+    width:
+        min(
+            900px,
+            95vw
+        );
+
+}
+
+
+.noelleCard {
+
+    width:
+        220px;
+
+    height:
+        180px;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.65
+        );
+
+    border:
+        3px solid white;
+
+    box-shadow:
+        6px 6px 0
+        rgba(
+            120,
+            180,
+            255,
+            0.5
+        );
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    overflow:
+        hidden;
+
+    transition:
+        transform
+        0.2s;
+
+}
+
+
+.noelleCard:hover {
+
+    transform:
+        translateY(-8px)
+        rotate(-2deg);
+
+}
+
+
+.noelleCard img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        contain;
+
+    image-rendering:
+        pixelated;
+
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+#pipisButton,
+#backButton {
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size:
+        13px;
+
+    color:
+        white;
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.85
+        );
+
+    border:
+        3px solid white;
+
+    padding:
+        15px 22px;
+
+    cursor:
+        pointer;
+
+    text-decoration:
+        none;
+
+    display:
+        inline-block;
+
+    margin:
+        5px;
+
+    box-shadow:
+        5px 5px 0
+        #888;
+
+}
+
+
+#pipisButton:hover,
+#backButton:hover {
+
+    background:
+        white;
+
+    color:
+        black;
+
+    box-shadow:
+        5px 5px 0
+        #aaa;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (
+    max-width: 700px
+) {
+
+    #noellePage {
+
+        padding:
+            10px
+            10px
+            50px;
+
+    }
+
+
+    #proceedTitle {
+
+        letter-spacing:
+            5px;
+
+    }
+
+
+    #noelleMain {
+
+        min-height:
+            230px;
+
+    }
+
+
+    #noelleGallery {
+
+        gap:
+            12px;
+
+    }
+
+
+    .noelleCard {
+
+        width:
+            145px;
+
+        height:
+            130px;
+
+    }
+
+
+    #pipisButton,
+    #backButton {
+
+        font-size:
+            9px;
+
+        padding:
+            12px 15px;
+
+    }
+
+}
