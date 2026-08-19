@@ -21,11 +21,6 @@
 
 <body>
 
-
-<!-- =====================================================
-     INICIO
-===================================================== -->
-
 <div id="startScreen">
 
     <div class="startBox">
@@ -80,10 +75,6 @@
 </div>
 
 
-<!-- =====================================================
-     JUEGO
-===================================================== -->
-
 <div id="game">
 
     <button
@@ -93,10 +84,6 @@
         [ EXIT ]
     </button>
 
-
-    <!-- =================================================
-         HUD
-    ================================================== -->
 
     <div id="hud">
 
@@ -132,10 +119,6 @@
     </div>
 
 
-    <!-- =================================================
-         ÁREA
-    ================================================== -->
-
     <div id="gameArea">
 
         <div id="platform"></div>
@@ -148,8 +131,6 @@
 
         <div id="friends"></div>
 
-        <div id="pipisRain"></div>
-
         <div id="bullets"></div>
 
         <div id="triangles"></div>
@@ -158,10 +139,6 @@
 
     </div>
 
-
-    <!-- =================================================
-         CONTROLES
-    ================================================== -->
 
     <div id="mobileControls">
 
@@ -185,10 +162,6 @@
 
 </div>
 
-
-<!-- =====================================================
-     AUDIO
-===================================================== -->
 
 <audio
     id="gameMusic"
@@ -285,11 +258,16 @@ const PLAYER_SPEED = 0.38;
 
 const BULLET_SPEED = 1.8;
 
-const NORMAL_DAMAGE = 10;
 
-const RED_DAMAGE = 15;
+/*
+   DAÑO REDUCIDO
+*/
 
-const GLITCH_DAMAGE = 20;
+const NORMAL_DAMAGE = 4;
+
+const RED_DAMAGE = 6;
+
+const GLITCH_DAMAGE = 8;
 
 
 /* =====================================================
@@ -357,6 +335,84 @@ let joystickDY = 0;
 
 
 /* =====================================================
+   CÓDIGO SECRETO NOELLE
+   1225
+===================================================== */
+
+let secretCode =
+    "";
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key =
+            event.key;
+
+        if (
+            /^[0-9]$/.test(key)
+        ) {
+
+            secretCode += key;
+
+            if (
+                secretCode.length > 4
+            ) {
+
+                secretCode =
+                    secretCode.slice(-4);
+
+            }
+
+
+            if (
+                secretCode === "1225"
+            ) {
+
+                unlockNoelle();
+
+                secretCode = "";
+
+            }
+
+        }
+
+    }
+);
+
+
+function unlockNoelle() {
+
+    localStorage.setItem(
+        "noelleSecretUnlocked",
+        "true"
+    );
+
+    localStorage.setItem(
+        "friendAchievement10000",
+        "true"
+    );
+
+
+    /*
+       No modificamos realmente las kills
+       visuales del jugador.
+    */
+
+    showEvent(
+        "!!! NOELLE HOLIDAY UNLOCKED !!!"
+    );
+
+
+    /*
+       Permite entrar directamente a Noelle
+       si luego existe un enlace.
+    */
+
+}
+
+
+/* =====================================================
    LOGROS
 ===================================================== */
 
@@ -421,11 +477,56 @@ function resetPlayerPosition() {
 
     playerY = 75;
 
+    aimX = 0;
+
+    aimY = -1;
+
     player.style.left =
         playerX + "%";
 
     player.style.top =
         playerY + "%";
+
+    facePlayer(
+        aimX,
+        aimY
+    );
+
+}
+
+
+/* =====================================================
+   DIRECCIÓN VISUAL
+===================================================== */
+
+function facePlayer(
+    dx,
+    dy
+) {
+
+    if (dx < -0.15) {
+
+        player.classList.add(
+            "facing-left"
+        );
+
+        player.classList.remove(
+            "facing-right"
+        );
+
+    }
+
+    else if (dx > 0.15) {
+
+        player.classList.add(
+            "facing-right"
+        );
+
+        player.classList.remove(
+            "facing-left"
+        );
+
+    }
 
 }
 
@@ -522,6 +623,12 @@ function startGame() {
     eventActive =
         false;
 
+    player.dataset.redPower =
+        "false";
+
+    player.dataset.glitchPower =
+        "false";
+
     resetPlayerPosition();
 
     updateHUD();
@@ -560,6 +667,7 @@ function startGame() {
     schedulePowerUp();
 
     scheduleEvent();
+
 
     lastTime =
         performance.now();
@@ -601,6 +709,10 @@ function exitGame() {
 
     clearTimeout(
         eventTimeout
+    );
+
+    cancelAnimationFrame(
+        gameLoopId
     );
 
     gameMusic.pause();
@@ -660,13 +772,18 @@ function clearGame() {
 
     powerUps = [];
 
-    friendsContainer.innerHTML = "";
 
-    bulletsContainer.innerHTML = "";
+    friendsContainer.innerHTML =
+        "";
 
-    trianglesContainer.innerHTML = "";
+    bulletsContainer.innerHTML =
+        "";
 
-    powerUpsContainer.innerHTML = "";
+    trianglesContainer.innerHTML =
+        "";
+
+    powerUpsContainer.innerHTML =
+        "";
 
 }
 
@@ -681,11 +798,13 @@ function gameLoop(time) {
         return;
     }
 
+
     const delta =
         time - lastTime;
 
     lastTime =
         time;
+
 
     movePlayer();
 
@@ -698,6 +817,7 @@ function gameLoop(time) {
     updatePowerUps();
 
     checkCollisions();
+
 
     gameLoopId =
         requestAnimationFrame(
@@ -764,6 +884,12 @@ function movePlayer() {
         aimX = dx;
         aimY = dy;
 
+
+        facePlayer(
+            dx,
+            dy
+        );
+
     }
 
 
@@ -798,6 +924,7 @@ function movePlayer() {
 
 /* =====================================================
    DISPARAR
+   8 DIRECCIONES
 ===================================================== */
 
 function shoot() {
@@ -826,41 +953,62 @@ function shoot() {
     );
 
 
+    /*
+       Si no hay dirección,
+       dispara hacia arriba.
+    */
+
+    let directionX =
+        aimX;
+
+    let directionY =
+        aimY;
+
+
+    if (
+        directionX === 0 &&
+        directionY === 0
+    ) {
+
+        directionY = -1;
+
+    }
+
+
     const redPower =
         player.dataset.redPower === "true";
 
 
     if (redPower) {
 
+        const left =
+            rotateVector(
+                directionX,
+                directionY,
+                -0.22
+            );
+
+        const right =
+            rotateVector(
+                directionX,
+                directionY,
+                0.22
+            );
+
+
         createBullet(
-            aimX,
-            aimY
+            directionX,
+            directionY
         );
 
         createBullet(
-            rotateVector(
-                aimX,
-                aimY,
-                -0.22
-            ).x,
-            rotateVector(
-                aimX,
-                aimY,
-                -0.22
-            ).y
+            left.x,
+            left.y
         );
 
         createBullet(
-            rotateVector(
-                aimX,
-                aimY,
-                0.22
-            ).x,
-            rotateVector(
-                aimX,
-                aimY,
-                0.22
-            ).y
+            right.x,
+            right.y
         );
 
     }
@@ -868,8 +1016,8 @@ function shoot() {
     else {
 
         createBullet(
-            aimX,
-            aimY
+            directionX,
+            directionY
         );
 
     }
@@ -926,7 +1074,6 @@ function createBullet(
     bullet.src =
         "pipis.gif";
 
-
     bullet.className =
         "bullet";
 
@@ -971,7 +1118,6 @@ function createBullet(
         bullet
     );
 
-
     bullets.push(
         bullet
     );
@@ -994,6 +1140,7 @@ function updateBullets() {
         const bullet =
             bullets[i];
 
+
         let x =
             parseFloat(
                 bullet.dataset.x
@@ -1003,6 +1150,7 @@ function updateBullets() {
             parseFloat(
                 bullet.dataset.y
             );
+
 
         const dx =
             parseFloat(
@@ -1060,7 +1208,7 @@ function updateBullets() {
 
 
 /* =====================================================
-   SPAWN FRIEND DESDE LOS BORDES
+   SPAWN FRIEND
 ===================================================== */
 
 function scheduleFriendSpawn() {
@@ -1161,8 +1309,7 @@ function spawnFriend() {
 
     if (side === 0) {
 
-        x =
-            -8;
+        x = -8;
 
         y =
             Math.random() * 90 +
@@ -1172,8 +1319,7 @@ function spawnFriend() {
 
     else if (side === 1) {
 
-        x =
-            108;
+        x = 108;
 
         y =
             Math.random() * 90 +
@@ -1187,8 +1333,7 @@ function spawnFriend() {
             Math.random() * 90 +
             5;
 
-        y =
-            -8;
+        y = -8;
 
     }
 
@@ -1198,8 +1343,7 @@ function spawnFriend() {
             Math.random() * 90 +
             5;
 
-        y =
-            108;
+        y = 108;
 
     }
 
@@ -1214,8 +1358,8 @@ function spawnFriend() {
         type;
 
 
-    let hp =
-        20;
+    let hp = 20;
+
 
     if (type === "red") {
         hp = 45;
@@ -1391,11 +1535,9 @@ function updateFriends() {
             speed = 0.055;
         }
 
-
         if (type === "glitch") {
             speed = 0.075;
         }
-
 
         if (type === "boss") {
             speed = 0.020;
@@ -1423,18 +1565,26 @@ function updateFriends() {
 
 
             if (type === "red") {
+
                 damage =
                     RED_DAMAGE;
+
             }
+
 
             if (type === "glitch") {
+
                 damage =
                     GLITCH_DAMAGE;
+
             }
 
+
             if (type === "boss") {
+
                 damage =
-                    20;
+                    8;
+
             }
 
 
@@ -1526,7 +1676,6 @@ function spawnTail(
         tail
     );
 
-
     triangles.push(
         tail
     );
@@ -1535,8 +1684,7 @@ function spawnTail(
 
 
 /* =====================================================
-   TRIANGULOS / COLAS
-   YA NO PERSIGUEN AL JUGADOR
+   TRIÁNGULOS
 ===================================================== */
 
 function updateTriangles() {
@@ -1633,7 +1781,7 @@ function updateTriangles() {
         ) {
 
             damagePlayer(
-                15
+                5
             );
 
             triangle.remove();
@@ -1716,8 +1864,7 @@ function checkCollisions() {
                         bulletX -
                         friendX,
                         2
-                    )
-                    +
+                    ) +
                     Math.pow(
                         bulletY -
                         friendY,
@@ -1811,7 +1958,7 @@ function hitFriend(
 
 
     setTimeout(
-        function () {
+        function() {
 
             friend.classList.remove(
                 "hit"
@@ -1851,7 +1998,7 @@ function killFriend(
 
     friendLaugh.play()
         .catch(
-            function () {}
+            function() {}
         );
 
 
@@ -1859,9 +2006,12 @@ function killFriend(
 
     totalKills++;
 
+
     saveKills();
 
     updateHUD();
+
+    checkAchievements();
 
 
     const index =
@@ -1881,9 +2031,6 @@ function killFriend(
 
 
     friend.remove();
-
-
-    checkAchievements();
 
 }
 
@@ -1982,25 +2129,25 @@ function damagePlayer(
 
 
     setTimeout(
-        function () {
+        function() {
 
             player.classList.remove(
                 "playerHit"
             );
 
         },
-        3000
+        300
     );
 
 
     setTimeout(
-        function () {
+        function() {
 
             damageCooldown =
                 false;
 
         },
-        3000
+        700
     );
 
 
@@ -2017,7 +2164,6 @@ function damagePlayer(
 
 /* =====================================================
    POWER UPS
-   TODOS USAN pipis.gif
 ===================================================== */
 
 function schedulePowerUp() {
@@ -2029,7 +2175,7 @@ function schedulePowerUp() {
 
     powerUpTimeout =
         setTimeout(
-            function () {
+            function() {
 
                 spawnPowerUp();
 
@@ -2108,21 +2254,23 @@ function spawnPowerUp() {
         powerUp
     );
 
-
     powerUps.push(
         powerUp
     );
 
 
     setTimeout(
-        function () {
+        function() {
 
             const index =
                 powerUps.indexOf(
                     powerUp
                 );
 
-            if (index !== -1) {
+
+            if (
+                index !== -1
+            ) {
 
                 powerUps.splice(
                     index,
@@ -2130,6 +2278,7 @@ function spawnPowerUp() {
                 );
 
             }
+
 
             powerUp.remove();
 
@@ -2242,7 +2391,7 @@ function activatePowerUp(
 
 
         setTimeout(
-            function () {
+            function() {
 
                 player.dataset.redPower =
                     "false";
@@ -2268,7 +2417,7 @@ function activatePowerUp(
 
 
         setTimeout(
-            function () {
+            function() {
 
                 player.dataset.glitchPower =
                     "false";
@@ -2286,7 +2435,7 @@ function activatePowerUp(
 
 
 /* =====================================================
-   EVENTO FRIEND RUSH
+   FRIEND RUSH
 ===================================================== */
 
 function scheduleEvent() {
@@ -2298,7 +2447,7 @@ function scheduleEvent() {
 
     eventTimeout =
         setTimeout(
-            function () {
+            function() {
 
                 startFriendRush();
 
@@ -2334,7 +2483,7 @@ function startFriendRush() {
     ) {
 
         setTimeout(
-            function () {
+            function() {
 
                 if (gameRunning) {
 
@@ -2350,7 +2499,7 @@ function startFriendRush() {
 
 
     setTimeout(
-        function () {
+        function() {
 
             eventActive =
                 false;
@@ -2377,6 +2526,7 @@ function showEvent(
     eventMessage.textContent =
         message;
 
+
     eventMessage.classList.add(
         "show"
     );
@@ -2389,7 +2539,7 @@ function showEvent(
 
     eventMessageTimeout =
         setTimeout(
-            function () {
+            function() {
 
                 eventMessage.classList.remove(
                     "show"
@@ -2443,7 +2593,7 @@ function gameOver() {
 
 
     setTimeout(
-        function () {
+        function() {
 
             game.style.display =
                 "none";
@@ -2531,6 +2681,31 @@ function updateJoystick(
         dy / max;
 
 
+    /*
+       El joystick también controla
+       hacia dónde dispara Spamton.
+    */
+
+    if (
+        Math.abs(joystickDX) > 0.1 ||
+        Math.abs(joystickDY) > 0.1
+    ) {
+
+        aimX =
+            joystickDX;
+
+        aimY =
+            joystickDY;
+
+
+        facePlayer(
+            aimX,
+            aimY
+        );
+
+    }
+
+
     joystickKnob.style.transform =
         `translate(${dx}px, ${dy}px)`;
 
@@ -2551,6 +2726,7 @@ function releaseJoystick() {
     joystickDY =
         0;
 
+
     joystickKnob.style.transform =
         "translate(0,0)";
 
@@ -2569,9 +2745,11 @@ joystick.addEventListener(
         joystickPointerId =
             event.pointerId;
 
+
         joystick.setPointerCapture(
             event.pointerId
         );
+
 
         updateJoystick(
             event.clientX,
@@ -2596,7 +2774,9 @@ joystick.addEventListener(
 
         }
 
+
         event.preventDefault();
+
 
         updateJoystick(
             event.clientX,
@@ -2620,8 +2800,7 @@ joystick.addEventListener(
 
 
 /* =====================================================
-   BOTON ATAQUE
-   FUNCIONA PC + MOBILE
+   BOTÓN ATAQUE
 ===================================================== */
 
 attackButton.addEventListener(
