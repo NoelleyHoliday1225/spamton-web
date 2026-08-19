@@ -21,19 +21,10 @@
 
 <body>
 
-
-<!-- =====================================================
-     TITULO
-===================================================== -->
-
 <h1 id="mainTitle">
     HEY EVERY !!
 </h1>
 
-
-<!-- =====================================================
-     FRIEND DESTROYER
-===================================================== -->
 
 <a
     href="friend-destroyer.html"
@@ -42,10 +33,6 @@
     [ FRIEND DESTROYER ]
 </a>
 
-
-<!-- =====================================================
-     SALA SECRETA
-===================================================== -->
 
 <a
     href="secret-pipis.html"
@@ -61,9 +48,6 @@
 
 <div id="achievements">
 
-
-    <!-- BERDLY -->
-
     <button
         id="achievementBerdly"
         class="achievement"
@@ -73,8 +57,6 @@
         🐦
     </button>
 
-
-    <!-- SUSIE -->
 
     <button
         id="achievementSusie"
@@ -86,8 +68,6 @@
     </button>
 
 
-    <!-- NOELLE -->
-
     <a
         href="noelle.html"
         id="achievementNoelle"
@@ -97,8 +77,6 @@
         ❄️
     </a>
 
-
-    <!-- BIG SHOT -->
 
     <button
         id="achievementBigShot"
@@ -110,8 +88,6 @@
     </button>
 
 
-    <!-- GATO -->
-
     <button
         id="achievementCat"
         class="achievement"
@@ -120,94 +96,6 @@
     >
         🐱
     </button>
-
-</div>
-
-
-<!-- =====================================================
-     MENU BERDLY
-===================================================== -->
-
-<div
-    id="berdlyMenu"
-    class="achievementMenu"
->
-
-    <div class="achievementMenuBox">
-
-        <div class="achievementMenuIcon">
-            🐦
-        </div>
-
-        <h2>
-            BERDLY
-        </h2>
-
-        <p>
-            ACHIEVEMENT UNLOCKED
-        </p>
-
-        <p>
-            100 FRIENDS DESTROYED
-        </p>
-
-        <p class="achievementMenuSmall">
-            THE BLUE BIRD HAS NOTICED YOU.
-        </p>
-
-        <button
-            id="closeBerdly"
-            class="closeAchievement"
-            type="button"
-        >
-            [ CLOSE ]
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     MENU SUSIE
-===================================================== -->
-
-<div
-    id="susieMenu"
-    class="achievementMenu"
->
-
-    <div class="achievementMenuBox">
-
-        <div class="achievementMenuIcon">
-            🥞
-        </div>
-
-        <h2>
-            SUSIE
-        </h2>
-
-        <p>
-            ACHIEVEMENT UNLOCKED
-        </p>
-
-        <p>
-            1000 FRIENDS DESTROYED
-        </p>
-
-        <p class="achievementMenuSmall">
-            SUSIE IS PROBABLY STILL EATING PANCAKES.
-        </p>
-
-        <button
-            id="closeSusie"
-            class="closeAchievement"
-            type="button"
-        >
-            [ CLOSE ]
-        </button>
-
-    </div>
 
 </div>
 
@@ -224,10 +112,6 @@
 >
 
 
-<!-- =====================================================
-     PIPIS
-===================================================== -->
-
 <button
     id="pipisButton"
     type="button"
@@ -243,10 +127,6 @@
 ></audio>
 
 
-<!-- =====================================================
-     MUSICA NORMAL
-===================================================== -->
-
 <audio
     id="normalMusic"
     src="want-to-be-a.mp3"
@@ -254,10 +134,6 @@
     loop
 ></audio>
 
-
-<!-- =====================================================
-     BIG SHOT
-===================================================== -->
 
 <audio
     id="bigShotMusic"
@@ -267,8 +143,24 @@
 ></audio>
 
 
+<audio
+    id="berdlyMusic"
+    src="berdly-musica.mp3"
+    preload="auto"
+    loop
+></audio>
+
+
+<audio
+    id="susieMusic"
+    src="susie-musica.mp3"
+    preload="auto"
+    loop
+></audio>
+
+
 <!-- =====================================================
-     CONTROL MUSICA
+     MUSICA
 ===================================================== -->
 
 <div id="musicBox">
@@ -296,37 +188,23 @@
 <div id="susieGlitch">
 
     <div class="susie-caption">
-
-        <span class="susie-arrow">
-            ↘
-        </span>
-
+        <span class="susie-arrow">↘</span>
         SUSIE COMIENDO PANCAKES
-
     </div>
-
 
     <div class="glitch-scribbles">
-
         /// !!! ///
-
         <br>
-
         PANCAKES???
-
         <br>
-
         !! ?? ##
-
     </div>
-
 
     <img
         src="susie-eating-pancakes.gif"
         id="susieGif"
         alt="Susie"
     >
-
 
     <div class="susie-name">
         S U S I E
@@ -352,27 +230,85 @@
         [[ !! SPECIAL DEAL !! ]]
     </div>
 
-
     <div class="catDiscoveryText">
 
         HAS ENCONTRADO AL
-
         <br>
-
         [[ GATO ]]
-
         <br>
-
         SAGRADO DE SUSIE!!
 
     </div>
-
 
     <img
         src="gato.png"
         id="catDiscoveryImage"
         alt="Gato"
     >
+
+</div>
+
+
+<!-- =====================================================
+     MENU DE PERSONAJES
+===================================================== -->
+
+<div
+    id="characterMenu"
+    class="character-menu"
+>
+
+    <div
+        id="characterBackground"
+        class="character-background"
+    ></div>
+
+
+    <div class="character-content">
+
+        <div
+            id="characterWarning"
+            class="character-warning"
+        >
+            // SYSTEM ACCESS //
+        </div>
+
+
+        <h2 id="characterTitle">
+            CHARACTER
+        </h2>
+
+
+        <img
+            id="characterImage"
+            src=""
+            alt="Character"
+        >
+
+
+        <div
+            id="characterName"
+            class="character-name"
+        >
+        </div>
+
+
+        <button
+            id="characterMusicButton"
+            type="button"
+        >
+            [ MUSIC ]
+        </button>
+
+
+        <button
+            id="characterCloseButton"
+            type="button"
+        >
+            [ CLOSE ]
+        </button>
+
+    </div>
 
 </div>
 
@@ -413,6 +349,16 @@ document.addEventListener(
                 "bigShotMusic"
             );
 
+        const berdlyMusic =
+            document.getElementById(
+                "berdlyMusic"
+            );
+
+        const susieMusic =
+            document.getElementById(
+                "susieMusic"
+            );
+
         const musicButton =
             document.getElementById(
                 "musicButton"
@@ -450,31 +396,49 @@ document.addEventListener(
             );
 
 
-        const berdlyMenu =
-            document.getElementById(
-                "berdlyMenu"
-            );
-
-        const susieMenu =
-            document.getElementById(
-                "susieMenu"
-            );
-
-
-        const closeBerdly =
-            document.getElementById(
-                "closeBerdly"
-            );
-
-        const closeSusie =
-            document.getElementById(
-                "closeSusie"
-            );
-
-
         const catDiscovery =
             document.getElementById(
                 "catDiscovery"
+            );
+
+
+        /* =================================================
+           MENU PERSONAJES
+        ================================================= */
+
+        const characterMenu =
+            document.getElementById(
+                "characterMenu"
+            );
+
+        const characterBackground =
+            document.getElementById(
+                "characterBackground"
+            );
+
+        const characterImage =
+            document.getElementById(
+                "characterImage"
+            );
+
+        const characterTitle =
+            document.getElementById(
+                "characterTitle"
+            );
+
+        const characterName =
+            document.getElementById(
+                "characterName"
+            );
+
+        const characterMusicButton =
+            document.getElementById(
+                "characterMusicButton"
+            );
+
+        const characterCloseButton =
+            document.getElementById(
+                "characterCloseButton"
             );
 
 
@@ -483,9 +447,9 @@ document.addEventListener(
         ================================================= */
 
         normalMusic.volume = 0.40;
-
         bigShotMusic.volume = 0.40;
-
+        berdlyMusic.volume = 0.40;
+        susieMusic.volume = 0.40;
         pipisSound.volume = 0.70;
 
 
@@ -497,193 +461,185 @@ document.addEventListener(
 
         let bigShotMode = false;
 
+        let currentCharacterMusic = null;
 
-        /* =================================================
-           LOGROS
-        ================================================= */
-
-        const berdlyUnlocked =
-            localStorage.getItem(
-                "friendAchievement100"
-            ) === "true";
-
-
-        const susieUnlocked =
-            localStorage.getItem(
-                "friendAchievement1000"
-            ) === "true";
-
-
-        const noelleUnlocked =
-            localStorage.getItem(
-                "friendAchievement10000"
-            ) === "true";
-
-
-        const bigShotUnlocked =
-            localStorage.getItem(
-                "spamtonBigShotAchievement"
-            ) === "true";
-
-
-        const catUnlocked =
-            localStorage.getItem(
-                "spamtonSacredCatAchievement"
-            ) === "true";
+        let currentCharacter = null;
 
 
         /* =================================================
-           MOSTRAR LOGROS
+           DESBLOQUEOS
         ================================================= */
 
-        if (berdlyUnlocked) {
+        function refreshAchievements() {
+
+            const berdlyUnlocked =
+                localStorage.getItem(
+                    "friendAchievement100"
+                ) === "true";
+
+
+            const susieUnlocked =
+                localStorage.getItem(
+                    "friendAchievement1000"
+                ) === "true";
+
+
+            const noelleUnlocked =
+                localStorage.getItem(
+                    "friendAchievement10000"
+                ) === "true";
+
+
+            const bigShotUnlocked =
+                localStorage.getItem(
+                    "spamtonBigShotAchievement"
+                ) === "true";
+
+
+            const catUnlocked =
+                localStorage.getItem(
+                    "spamtonSacredCatAchievement"
+                ) === "true";
+
 
             achievementBerdly.style.display =
-                "flex";
+                berdlyUnlocked
+                ? "flex"
+                : "none";
 
-        }
-
-
-        if (susieUnlocked) {
 
             achievementSusie.style.display =
-                "flex";
+                susieUnlocked
+                ? "flex"
+                : "none";
 
-        }
-
-
-        if (noelleUnlocked) {
 
             achievementNoelle.style.display =
-                "flex";
+                noelleUnlocked
+                ? "flex"
+                : "none";
 
-        }
-
-
-        if (bigShotUnlocked) {
 
             achievementBigShot.style.display =
-                "flex";
+                bigShotUnlocked
+                ? "flex"
+                : "none";
 
-        }
-
-
-        if (catUnlocked) {
 
             achievementCat.style.display =
-                "flex";
+                catUnlocked
+                ? "flex"
+                : "none";
+
+        }
+
+
+        refreshAchievements();
+
+
+        /* =================================================
+           DETENER TODA LA MUSICA
+        ================================================= */
+
+        function stopAllMusic() {
+
+            normalMusic.pause();
+            bigShotMusic.pause();
+            berdlyMusic.pause();
+            susieMusic.pause();
+
+
+            normalMusic.currentTime = 0;
+            bigShotMusic.currentTime = 0;
+            berdlyMusic.currentTime = 0;
+            susieMusic.currentTime = 0;
+
+
+            musicIsPlaying = false;
+
+            currentCharacterMusic = null;
+
+            musicButton.classList.remove(
+                "music-on"
+            );
 
         }
 
 
         /* =================================================
-           MENU BERDLY
+           MUSICA NORMAL
         ================================================= */
 
-        achievementBerdly.addEventListener(
-            "click",
-            function (event) {
+        function playNormalMusic() {
 
-                event.preventDefault();
+            stopAllMusic();
 
-                event.stopPropagation();
+            const promise =
+                normalMusic.play();
 
-                berdlyMenu.classList.add(
-                    "show"
+            if (promise) {
+
+                promise.then(
+                    function () {
+
+                        musicIsPlaying = true;
+
+                        updateMusicButton();
+
+                    }
+                ).catch(
+                    function () {
+
+                        musicIsPlaying = false;
+
+                        updateMusicButton();
+
+                    }
                 );
 
             }
-        );
 
-
-        closeBerdly.addEventListener(
-            "click",
-            function () {
-
-                berdlyMenu.classList.remove(
-                    "show"
-                );
-
-            }
-        );
+        }
 
 
         /* =================================================
-           MENU SUSIE
+           BIG SHOT
         ================================================= */
 
-        achievementSusie.addEventListener(
-            "click",
-            function (event) {
+        function playBigShotMusic() {
 
-                event.preventDefault();
+            stopAllMusic();
 
-                event.stopPropagation();
+            const promise =
+                bigShotMusic.play();
 
-                susieMenu.classList.add(
-                    "show"
+            if (promise) {
+
+                promise.then(
+                    function () {
+
+                        musicIsPlaying = true;
+
+                        updateMusicButton();
+
+                    }
+                ).catch(
+                    function () {
+
+                        musicIsPlaying = false;
+
+                        updateMusicButton();
+
+                    }
                 );
 
             }
-        );
 
-
-        closeSusie.addEventListener(
-            "click",
-            function () {
-
-                susieMenu.classList.remove(
-                    "show"
-                );
-
-            }
-        );
+        }
 
 
         /* =================================================
-           CERRAR MENUS AL HACER CLICK AFUERA
-        ================================================= */
-
-        berdlyMenu.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    berdlyMenu
-                ) {
-
-                    berdlyMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-
-            }
-        );
-
-
-        susieMenu.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target ===
-                    susieMenu
-                ) {
-
-                    susieMenu.classList.remove(
-                        "show"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =================================================
-           MUSICA
+           BOTON MUSICA
         ================================================= */
 
         function updateMusicButton() {
@@ -709,128 +665,11 @@ document.addEventListener(
         }
 
 
-        function stopAllMusic() {
-
-            normalMusic.pause();
-
-            bigShotMusic.pause();
-
-            normalMusic.currentTime =
-                0;
-
-            bigShotMusic.currentTime =
-                0;
-
-            musicIsPlaying =
-                false;
-
-            musicButton.classList.remove(
-                "music-on"
-            );
-
-            updateMusicButton();
-
-        }
-
-
-        function playNormalMusic() {
-
-            bigShotMusic.pause();
-
-            bigShotMusic.currentTime =
-                0;
-
-            normalMusic.volume =
-                0.40;
-
-
-            const promise =
-                normalMusic.play();
-
-
-            if (promise) {
-
-                promise.then(
-                    function () {
-
-                        musicIsPlaying =
-                            true;
-
-                        musicButton.classList.add(
-                            "music-on"
-                        );
-
-                        updateMusicButton();
-
-                    }
-                ).catch(
-                    function () {
-
-                        musicIsPlaying =
-                            false;
-
-                        updateMusicButton();
-
-                    }
-                );
-
-            }
-
-        }
-
-
-        function playBigShotMusic() {
-
-            normalMusic.pause();
-
-            normalMusic.currentTime =
-                0;
-
-            bigShotMusic.volume =
-                0.40;
-
-
-            const promise =
-                bigShotMusic.play();
-
-
-            if (promise) {
-
-                promise.then(
-                    function () {
-
-                        musicIsPlaying =
-                            true;
-
-                        musicButton.classList.add(
-                            "music-on"
-                        );
-
-                        updateMusicButton();
-
-                    }
-                ).catch(
-                    function () {
-
-                        musicIsPlaying =
-                            false;
-
-                        updateMusicButton();
-
-                    }
-                );
-
-            }
-
-        }
-
-
         musicButton.addEventListener(
             "click",
             function (event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
 
@@ -838,21 +677,22 @@ document.addEventListener(
 
                     stopAllMusic();
 
+                    updateMusicButton();
+
+                    return;
+
+                }
+
+
+                if (bigShotMode) {
+
+                    playBigShotMusic();
+
                 }
 
                 else {
 
-                    if (bigShotMode) {
-
-                        playBigShotMusic();
-
-                    }
-
-                    else {
-
-                        playNormalMusic();
-
-                    }
+                    playNormalMusic();
 
                 }
 
@@ -861,7 +701,7 @@ document.addEventListener(
 
 
         /* =================================================
-           BIG SHOT
+           BIG SHOT MODE
         ================================================= */
 
         achievementBigShot.addEventListener(
@@ -885,8 +725,6 @@ document.addEventListener(
 
                     if (musicIsPlaying) {
 
-                        stopAllMusic();
-
                         playBigShotMusic();
 
                     }
@@ -906,8 +744,6 @@ document.addEventListener(
 
                     if (musicIsPlaying) {
 
-                        stopAllMusic();
-
                         playNormalMusic();
 
                     }
@@ -916,6 +752,253 @@ document.addEventListener(
 
 
                 updateMusicButton();
+
+            }
+        );
+
+
+        /* =================================================
+           MENU BERDLY
+        ================================================= */
+
+        achievementBerdly.addEventListener(
+            "click",
+            function () {
+
+                openCharacterMenu(
+                    "BERDLY",
+                    "berdly-sprite-idle.gif",
+                    "berdly-background.png",
+                    berdlyMusic
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           MENU SUSIE
+        ================================================= */
+
+        achievementSusie.addEventListener(
+            "click",
+            function () {
+
+                openCharacterMenu(
+                    "SUSIE",
+                    "susie-sprite-idle.gif",
+                    "susie-background.png",
+                    susieMusic
+                );
+
+            }
+        );
+
+
+        /* =================================================
+           ABRIR MENU
+        ================================================= */
+
+        function openCharacterMenu(
+            name,
+            image,
+            background,
+            music
+        ) {
+
+            currentCharacter =
+                name;
+
+            currentCharacterMusic =
+                music;
+
+
+            stopAllMusic();
+
+
+            characterTitle.textContent =
+                "PROCEED";
+
+
+            characterName.textContent =
+                name;
+
+
+            characterImage.src =
+                image;
+
+
+            characterBackground.style.backgroundImage =
+                "url('" +
+                background +
+                "')";
+
+
+            characterMenu.classList.add(
+                "active"
+            );
+
+
+            characterMusicButton.textContent =
+                "[ PLAY MUSIC ]";
+
+        }
+
+
+        /* =================================================
+           MUSICA DEL PERSONAJE
+        ================================================= */
+
+        characterMusicButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+
+                if (!currentCharacterMusic) {
+                    return;
+                }
+
+
+                if (
+                    !currentCharacterMusic.paused
+                ) {
+
+                    currentCharacterMusic.pause();
+
+                    currentCharacterMusic.currentTime =
+                        0;
+
+                    characterMusicButton.textContent =
+                        "[ PLAY MUSIC ]";
+
+                    return;
+
+                }
+
+
+                stopAllMusic();
+
+
+                currentCharacterMusic =
+                    currentCharacter === "BERDLY"
+                    ? berdlyMusic
+                    : susieMusic;
+
+
+                currentCharacterMusic.play()
+                    .then(
+                        function () {
+
+                            characterMusicButton.textContent =
+                                "[ STOP MUSIC ]";
+
+                        }
+                    )
+                    .catch(
+                        function () {
+
+                            characterMusicButton.textContent =
+                                "[ PLAY MUSIC ]";
+
+                        }
+                    );
+
+            }
+        );
+
+
+        /* =================================================
+           CLOSE — ARREGLADO
+        ================================================= */
+
+        characterCloseButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                closeCharacterMenu();
+
+            }
+        );
+
+
+        function closeCharacterMenu() {
+
+            characterMenu.classList.remove(
+                "active"
+            );
+
+
+            if (currentCharacterMusic) {
+
+                currentCharacterMusic.pause();
+
+                currentCharacterMusic.currentTime =
+                    0;
+
+            }
+
+
+            currentCharacterMusic =
+                null;
+
+            currentCharacter =
+                null;
+
+
+            characterImage.src =
+                "";
+
+            characterBackground.style.backgroundImage =
+                "none";
+
+        }
+
+
+        /* =================================================
+           CERRAR HACIENDO CLICK FUERA
+        ================================================= */
+
+        characterMenu.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target ===
+                    characterMenu
+                ) {
+
+                    closeCharacterMenu();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           ESC PARA CERRAR
+        ================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    characterMenu.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeCharacterMenu();
+
+                }
 
             }
         );
@@ -997,7 +1080,6 @@ document.addEventListener(
             function (event) {
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
 
@@ -1110,7 +1192,13 @@ document.addEventListener(
             "dblclick",
             function () {
 
-                if (!catUnlocked) {
+                const alreadyUnlocked =
+                    localStorage.getItem(
+                        "spamtonSacredCatAchievement"
+                    ) === "true";
+
+
+                if (!alreadyUnlocked) {
 
                     discoverCat();
 
@@ -1121,8 +1209,7 @@ document.addEventListener(
 
 
         /* =================================================
-           CODIGO CREADOR
-           1 2 2 5
+           CODIGO DEL CREADOR
         ================================================= */
 
         let creatorCode = "";
@@ -1176,23 +1263,14 @@ document.addEventListener(
                         );
 
 
-                        achievementBerdly.style.display =
-                            "flex";
+                        refreshAchievements();
 
 
-                        achievementSusie.style.display =
-                            "flex";
+                        creatorCode = "";
 
-
-                        achievementNoelle.style.display =
-                            "flex";
-
-
-                        creatorCode =
-                            "";
 
                         alert(
-                            "NOELLE HOLIDAY DESBLOQUEADA."
+                            "BERDLY, SUSIE Y NOELLE DESBLOQUEADOS."
                         );
 
                     }
@@ -1202,10 +1280,6 @@ document.addEventListener(
             }
         );
 
-
-        /* =================================================
-           ESTADO INICIAL
-        ================================================= */
 
         updateMusicButton();
 
