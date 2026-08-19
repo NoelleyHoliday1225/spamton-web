@@ -854,6 +854,7 @@ body.big-shot-mode #musicButton.music-on {
     image-rendering: pixelated;
 }
 
+
 /* =====================================================
    MENUS DE LOGROS
 ===================================================== */
@@ -1027,13 +1028,315 @@ body.big-shot-mode #musicButton.music-on {
 
 
 /* =========================================================
-   ASEGURAR QUE LOS ENLACES SEAN CLICKEABLES
+   ENLACES CLICKEABLES
 ========================================================= */
 
 #friendDestroyerButton,
 #secretRoomButton,
 #achievementNoelle {
     pointer-events: auto;
+}
+
+
+/* =========================================================
+   MENU BERDLY / SUSIE
+========================================================= */
+
+#characterMenu {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 99999;
+
+    background:
+        rgba(0,0,0,0.82);
+
+    padding: 20px;
+
+}
+
+
+#characterMenu.active {
+
+    display: flex;
+
+}
+
+
+.character-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    filter:
+        brightness(0.35);
+
+    pointer-events: none;
+
+}
+
+
+.character-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(
+        700px,
+        92vw
+    );
+
+    min-height: 500px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    border:
+        4px solid white;
+
+    box-shadow:
+        8px 8px 0
+        #6475ff;
+
+}
+
+
+/* =========================================================
+   ADVERTENCIA
+========================================================= */
+
+.character-warning {
+
+    color:
+        #bfc9ff;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        4px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+/* =========================================================
+   TITULO PERSONAJE
+========================================================= */
+
+#characterTitle {
+
+    margin:
+        0 0 15px;
+
+    font-size:
+        clamp(
+            28px,
+            6vw,
+            55px
+        );
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   IMAGEN PERSONAJE
+========================================================= */
+
+#characterImage {
+
+    width:
+        250px;
+
+    height:
+        250px;
+
+    object-fit:
+        contain;
+
+    image-rendering:
+        pixelated;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,255,255,0.5)
+        );
+
+}
+
+
+/* =========================================================
+   NOMBRE PERSONAJE
+========================================================= */
+
+.character-name {
+
+    margin:
+        15px 0 25px;
+
+    font-size:
+        18px;
+
+    letter-spacing:
+        6px;
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   BOTONES DEL MENU
+========================================================= */
+
+#characterMusicButton,
+#characterCloseButton {
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size:
+        10px;
+
+    color:
+        white;
+
+    background:
+        rgba(0,0,0,0.85);
+
+    border:
+        3px solid white;
+
+    padding:
+        14px 20px;
+
+    cursor:
+        pointer;
+
+    margin:
+        6px;
+
+    box-shadow:
+        5px 5px 0
+        #6475ff;
+
+    position: relative;
+
+    z-index: 10;
+
+    pointer-events: auto;
+
+}
+
+
+#characterMusicButton:hover,
+#characterCloseButton:hover {
+
+    background:
+        white;
+
+    color:
+        black;
+
+}
+
+
+#characterCloseButton {
+
+    border-color:
+        #ff6b6b;
+
+    box-shadow:
+        5px 5px 0
+        #ff3333;
+
+}
+
+
+#characterCloseButton:hover {
+
+    background:
+        #ff6b6b;
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width: 700px
+) {
+
+    .character-content {
+
+        min-height:
+            440px;
+
+        padding:
+            20px;
+
+    }
+
+
+    #characterImage {
+
+        width:
+            190px;
+
+        height:
+            190px;
+
+    }
+
+
+    .character-name {
+
+        font-size:
+            13px;
+
+    }
+
 }
 
 
@@ -1162,279 +1465,6 @@ body.big-shot-mode #musicButton.music-on {
 
     .catDiscoveryText {
         font-size: 14px;
-    }
-
-}
-
-/* =====================================================
-   MENU BERDLY / SUSIE
-===================================================== */
-
-#characterMenu {
-
-    position: fixed;
-
-    inset: 0;
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    z-index: 99999;
-
-    background:
-        rgba(0,0,0,0.82);
-
-    padding: 20px;
-
-}
-
-
-#characterMenu.active {
-
-    display: flex;
-
-}
-
-
-.character-background {
-
-    position: absolute;
-
-    inset: 0;
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    filter:
-        brightness(0.35);
-
-}
-
-
-.character-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    width: min(
-        700px,
-        92vw
-    );
-
-    min-height: 500px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 30px;
-
-    background:
-        rgba(0,0,0,0.75);
-
-    border:
-        4px solid white;
-
-    box-shadow:
-        8px 8px 0
-        #6475ff;
-
-}
-
-
-.character-warning {
-
-    color:
-        #bfc9ff;
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        4px;
-
-    margin-bottom:
-        20px;
-
-}
-
-
-#characterTitle {
-
-    margin:
-        0 0 15px;
-
-    font-size:
-        clamp(
-            28px,
-            6vw,
-            55px
-        );
-
-    color:
-        white;
-
-}
-
-
-#characterImage {
-
-    width:
-        250px;
-
-    height:
-        250px;
-
-    object-fit:
-        contain;
-
-    image-rendering:
-        pixelated;
-
-    filter:
-        drop-shadow(
-            0 0 15px
-            rgba(255,255,255,0.5)
-        );
-
-}
-
-
-.character-name {
-
-    margin:
-        15px 0 25px;
-
-    font-size:
-        18px;
-
-    letter-spacing:
-        6px;
-
-    color:
-        white;
-
-}
-
-
-#characterMusicButton,
-#characterCloseButton {
-
-    font-family:
-        'Press Start 2P',
-        cursive;
-
-    font-size:
-        10px;
-
-    color:
-        white;
-
-    background:
-        rgba(0,0,0,0.85);
-
-    border:
-        3px solid white;
-
-    padding:
-        14px 20px;
-
-    cursor:
-        pointer;
-
-    margin:
-        6px;
-
-    box-shadow:
-        5px 5px 0
-        #6475ff;
-
-}
-
-
-#characterMusicButton:hover,
-#characterCloseButton:hover {
-
-    background:
-        white;
-
-    color:
-        black;
-
-}
-
-
-#characterCloseButton {
-
-    border-color:
-        #ff6b6b;
-
-    box-shadow:
-        5px 5px 0
-        #ff3333;
-
-}
-
-
-#characterCloseButton:hover {
-
-    background:
-        #ff6b6b;
-
-    color:
-        white;
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (
-    max-width: 700px
-) {
-
-    .character-content {
-
-        min-height:
-            440px;
-
-        padding:
-            20px;
-
-    }
-
-
-    #characterImage {
-
-        width:
-            190px;
-
-        height:
-            190px;
-
-    }
-
-
-    .character-name {
-
-        font-size:
-            13px;
-
     }
 
 }
