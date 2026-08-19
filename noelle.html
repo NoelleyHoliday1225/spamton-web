@@ -37,10 +37,23 @@
 
 
 <!-- =====================================================
+     AUDIO NOELLE
+===================================================== -->
+
+<audio
+    id="noelleMusic"
+    src="noelle.mp3"
+    preload="auto"
+>
+</audio>
+
+
+<!-- =====================================================
      CONTENIDO
 ===================================================== -->
 
 <main id="noelleMenu">
+
 
     <div id="noelleWarning">
         // SYSTEM ACCESS //
@@ -74,6 +87,7 @@
 
     <div id="noelleGallery">
 
+
         <div class="noelleFrame">
 
             <img
@@ -103,12 +117,25 @@
 
         </div>
 
+
     </div>
 
 
     <!-- =================================================
-         NIEVE
-    ================================================== -->
+         BOTON PROCEED
+===================================================== -->
+
+    <button
+        id="proceedButton"
+        type="button"
+    >
+        [ PROCEED ]
+    </button>
+
+
+    <!-- =================================================
+         BOTON NIEVE
+===================================================== -->
 
     <button
         id="snowButton"
@@ -118,6 +145,10 @@
     </button>
 
 
+    <!-- =================================================
+         REGRESAR
+===================================================== -->
+
     <a
         href="index.html"
         id="backButton"
@@ -125,30 +156,11 @@
         [ RETURN ]
     </a>
 
+
 </main>
 
 
 <script>
-
-/* =====================================================
-   BLOQUEO SECRETO
-===================================================== */
-
-const noelleUnlocked =
-    localStorage.getItem(
-        "noelleSecretUnlocked"
-    );
-
-
-if (
-    noelleUnlocked !== "true"
-) {
-
-    window.location.replace(
-        "index.html"
-    );
-
-}
 
 
 /* =====================================================
@@ -220,7 +232,7 @@ createSnow();
 
 
 /* =====================================================
-   BOTÓN NIEVE
+   BOTON NIEVE
 ===================================================== */
 
 const snowButton =
@@ -231,9 +243,74 @@ const snowButton =
 
 snowButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         createSnow(40);
+
+    }
+);
+
+
+/* =====================================================
+   NOELLE MP3
+===================================================== */
+
+const proceedButton =
+    document.getElementById(
+        "proceedButton"
+    );
+
+
+const noelleMusic =
+    document.getElementById(
+        "noelleMusic"
+    );
+
+
+noelleMusic.volume =
+    0.50;
+
+
+proceedButton.addEventListener(
+    "click",
+    function () {
+
+        noelleMusic.currentTime =
+            0;
+
+
+        noelleMusic.play()
+            .then(
+                function () {
+
+                    proceedButton.textContent =
+                        "[ PLAYING... ]";
+
+                }
+            )
+            .catch(
+                function () {
+
+                    proceedButton.textContent =
+                        "[ CLICK AGAIN ]";
+
+                }
+            );
+
+    }
+);
+
+
+/* =====================================================
+   CUANDO TERMINE LA MUSICA
+===================================================== */
+
+noelleMusic.addEventListener(
+    "ended",
+    function () {
+
+        proceedButton.textContent =
+            "[ PROCEED ]";
 
     }
 );
