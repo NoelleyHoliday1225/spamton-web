@@ -1,1 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NOELLE HOLIDAY</title>
+
+    <link
+        rel="stylesheet"
+        href="noelle.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     FILTRO OSCURO
+===================================================== -->
+
+<div id="darkOverlay"></div>
+
+
+<!-- =====================================================
+     NIEVE
+===================================================== -->
+
+<div id="snowContainer"></div>
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
+<main id="noellePage">
+
+
+    <!-- =================================================
+         TITULO
+    ================================================== -->
+
+    <h1 id="proceedTitle">
+        PROCEED
+    </h1>
+
+
+    <div id="subtitle">
+        NOELLE HOLIDAY
+    </div>
+
+
+    <!-- =================================================
+         NOELLE PRINCIPAL
+    ================================================== -->
+
+    <div id="noelleMain">
+
+        <img
+            src="noelle-1.gif"
+            alt="Noelle"
+            id="noelleMainImage"
+        >
+
+    </div>
+
+
+    <!-- =================================================
+         TRES IMAGENES EXTRA
+    ================================================== -->
+
+    <div id="noelleGallery">
+
+
+        <div class="noelleCard">
+
+            <img
+                src="noelle-2.gif"
+                alt="Noelle"
+            >
+
+        </div>
+
+
+        <div class="noelleCard">
+
+            <img
+                src="noelle-3.gif"
+                alt="Noelle"
+            >
+
+        </div>
+
+
+        <div class="noelleCard">
+
+            <img
+                src="noelle-1.gif"
+                alt="Noelle"
+            >
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         BOTON
+    ================================================== -->
+
+    <button
+        id="pipisButton"
+        type="button"
+    >
+        [ PROCEED ]
+    </button>
+
+
+    <!-- =================================================
+         REGRESAR
+    ================================================== -->
+
+    <a
+        href="index.html"
+        id="backButton"
+    >
+        [ BACK ]
+    </a>
+
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+   NIEVE
+===================================================== */
+
+const snowContainer =
+    document.getElementById(
+        "snowContainer"
+    );
+
+
+function createSnow() {
+
+    const snow =
+        document.createElement(
+            "div"
+        );
+
+    snow.className =
+        "snowflake";
+
+
+    const size =
+        Math.random() * 7 + 4;
+
+
+    snow.style.width =
+        size + "px";
+
+    snow.style.height =
+        size + "px";
+
+
+    snow.style.left =
+        Math.random() * 100 + "vw";
+
+
+    snow.style.animationDuration =
+        Math.random() * 5 + 5 + "s";
+
+
+    snow.style.animationDelay =
+        Math.random() * 5 + "s";
+
+
+    snowContainer.appendChild(
+        snow
+    );
+
+
+    setTimeout(
+        function() {
+
+            if (
+                snow.parentNode
+            ) {
+
+                snow.remove();
+
+            }
+
+        },
+        11000
+    );
+
+}
+
+
+for (
+    let i = 0;
+    i < 90;
+    i++
+) {
+
+    createSnow();
+
+}
+
+
+setInterval(
+    function() {
+
+        createSnow();
+
+    },
+    150
+);
+
+
+
+/* =====================================================
+   BOTON PROCEED
+===================================================== */
+
+const pipisButton =
+    document.getElementById(
+        "pipisButton"
+    );
+
+
+pipisButton.addEventListener(
+    "click",
+    function() {
+
+        /*
+         * Gran cantidad de nieve
+         */
+
+        for (
+            let i = 0;
+            i < 50;
+            i++
+        ) {
+
+            const snow =
+                document.createElement(
+                    "div"
+                );
+
+            snow.className =
+                "snowflake burst";
+
+
+            const size =
+                Math.random() * 9 + 4;
+
+
+            snow.style.width =
+                size + "px";
+
+            snow.style.height =
+                size + "px";
+
+
+            snow.style.left =
+                Math.random() * 100 + "vw";
+
+
+            snow.style.animationDuration =
+                Math.random() * 2 + 2 + "s";
+
+
+            snowContainer.appendChild(
+                snow
+            );
+
+
+            setTimeout(
+                function() {
+
+                    snow.remove();
+
+                },
+                5000
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   BALANCEO DEL FONDO
+===================================================== */
+
+let backgroundAngle = 0;
+
+function moveBackground() {
+
+    backgroundAngle += 0.02;
+
+    const movement =
+        Math.sin(
+            backgroundAngle
+        ) * 0.8;
+
+
+    document.body.style.setProperty(
+        "--backgroundMove",
+        movement + "%"
+    );
+
+}
+
+
+setInterval(
+    moveBackground,
+    30
+);
+
+
+
+/* =====================================================
+   CAMBIO AUTOMATICO DE NOELLE
+===================================================== */
+
+const noelleImages = [
+    "noelle-1.gif",
+    "noelle-2.gif",
+    "noelle-3.gif"
+];
+
+
+const mainImage =
+    document.getElementById(
+        "noelleMainImage"
+    );
+
+
+let noelleIndex = 0;
+
+
+setInterval(
+    function() {
+
+        noelleIndex++;
+
+        if (
+            noelleIndex >=
+            noelleImages.length
+        ) {
+
+            noelleIndex = 0;
+
+        }
+
+
+        mainImage.src =
+            noelleImages[
+                noelleIndex
+            ];
+
+    },
+    6000
+);
+
+
+</script>
+
+
+</body>
+
+</html>
