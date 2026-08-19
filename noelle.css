@@ -2,54 +2,39 @@
     'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
 );
 
-
 /* =====================================================
    GENERAL
 ===================================================== */
 
 * {
-
-    box-sizing:
-        border-box;
-
+    box-sizing: border-box;
 }
-
 
 html,
 body {
 
-    margin:
-        0;
+    margin: 0;
 
-    width:
-        100%;
+    width: 100%;
+    height: 100%;
 
-    height:
-        100%;
-
-    overflow:
-        hidden;
+    overflow: hidden;
 
 }
 
-
 body {
 
-    background:
-        #080b14;
+    background: #080b14;
 
-    color:
-        white;
+    color: white;
 
     font-family:
         'Press Start 2P',
         cursive;
 
-    position:
-        relative;
+    position: relative;
 
 }
-
 
 /* =====================================================
    FONDO
@@ -57,29 +42,22 @@ body {
 
 body::before {
 
-    content:
-        "";
+    content: "";
 
-    position:
-        fixed;
+    position: fixed;
 
-    inset:
-        -5%;
+    inset: -5%;
 
     background-image:
         url("noelle-background.gif");
 
-    background-size:
-        cover;
+    background-size: cover;
 
-    background-position:
-        center;
+    background-position: center;
 
-    background-repeat:
-        no-repeat;
+    background-repeat: no-repeat;
 
-    z-index:
-        0;
+    z-index: 0;
 
     animation:
         backgroundSway
@@ -88,7 +66,6 @@ body::before {
         infinite;
 
 }
-
 
 @keyframes backgroundSway {
 
@@ -118,30 +95,24 @@ body::before {
 
 }
 
-
 /* =====================================================
    OSCURECER
 ===================================================== */
 
 #darkOverlay {
 
-    position:
-        fixed;
+    position: fixed;
 
-    inset:
-        0;
+    inset: 0;
 
     background:
         rgba(0,0,0,0.55);
 
-    z-index:
-        1;
+    z-index: 1;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
 }
-
 
 /* =====================================================
    NIEVE
@@ -149,40 +120,29 @@ body::before {
 
 #snow {
 
-    position:
-        fixed;
+    position: fixed;
 
-    inset:
-        0;
+    inset: 0;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
-    z-index:
-        10;
+    z-index: 10;
 
 }
 
-
 .snowflake {
 
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        -20px;
+    top: -20px;
 
-    background:
-        white;
+    background: white;
 
-    opacity:
-        0.75;
+    opacity: 0.75;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
     animation:
         snowFall
@@ -190,7 +150,6 @@ body::before {
         infinite;
 
 }
-
 
 @keyframes snowFall {
 
@@ -212,42 +171,31 @@ body::before {
 
 }
 
-
 /* =====================================================
    MENU
 ===================================================== */
 
 #noelleMenu {
 
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        20;
+    z-index: 20;
 
-    width:
-        100%;
+    width: 100%;
 
-    min-height:
-        100vh;
+    min-height: 100vh;
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        30px;
+    padding: 30px;
 
 }
-
 
 /* =====================================================
    WARNING
@@ -255,20 +203,15 @@ body::before {
 
 #noelleWarning {
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    letter-spacing:
-        4px;
+    letter-spacing: 4px;
 
-    margin-bottom:
-        20px;
+    margin-bottom: 20px;
 
-    color:
-        #bfc9ff;
+    color: #bfc9ff;
 
 }
-
 
 /* =====================================================
    PROCEED
@@ -286,14 +229,11 @@ h1 {
             80px
         );
 
-    letter-spacing:
-        10px;
+    letter-spacing: 10px;
 
-    color:
-        #e7eaff;
+    color: #e7eaff;
 
-    font-weight:
-        normal;
+    font-weight: normal;
 
     text-shadow:
         0 0 15px
@@ -301,27 +241,21 @@ h1 {
 
 }
 
-
 /* =====================================================
    NOMBRE
 ===================================================== */
 
 #noelleLine {
 
-    font-size:
-        13px;
+    font-size: 13px;
 
-    letter-spacing:
-        5px;
+    letter-spacing: 5px;
 
-    margin-bottom:
-        15px;
+    margin-bottom: 15px;
 
-    color:
-        #cfd6ff;
+    color: #cfd6ff;
 
 }
-
 
 /* =====================================================
    NOELLE PRINCIPAL
@@ -329,20 +263,15 @@ h1 {
 
 #noelleMain {
 
-    width:
-        220px;
+    width: 220px;
 
-    max-width:
-        45vw;
+    max-width: 45vw;
 
-    max-height:
-        30vh;
+    max-height: 30vh;
 
-    object-fit:
-        contain;
+    object-fit: contain;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
     margin:
         10px 0 15px;
@@ -355,47 +284,36 @@ h1 {
 
 }
 
-
 /* =====================================================
    GALERIA
 ===================================================== */
 
 #noelleGallery {
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    gap:
-        18px;
+    gap: 18px;
 
     margin:
         10px 0 20px;
 
 }
 
-
 .noelleFrame {
 
-    width:
-        130px;
+    width: 130px;
 
-    height:
-        110px;
+    height: 110px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
     background:
         rgba(0,0,0,0.55);
@@ -408,28 +326,20 @@ h1 {
         4px 4px 0
         rgba(100,120,255,0.35);
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
 }
-
 
 .noelleFrame img {
 
-    width:
-        100%;
+    width: 100%;
+    height: 100%;
 
-    height:
-        100%;
+    object-fit: contain;
 
-    object-fit:
-        contain;
-
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
 }
-
 
 /* =====================================================
    BOTONES
@@ -442,107 +352,82 @@ h1 {
         'Press Start 2P',
         cursive;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    color:
-        white;
+    color: white;
 
     background:
         rgba(0,0,0,0.75);
 
-    border:
-        3px solid white;
+    border: 3px solid white;
 
     padding:
         12px 18px;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     box-shadow:
         5px 5px 0
         #6475ff;
 
-    margin:
-        5px;
+    margin: 5px;
 
 }
-
 
 #snowButton:hover,
 #backButton:hover {
 
-    background:
-        white;
+    background: white;
 
-    color:
-        #000;
+    color: #000;
 
 }
-
 
 /* =====================================================
    MOBILE
 ===================================================== */
 
-@media (
-    max-width: 700px
-) {
+@media (max-width: 700px) {
 
     #noelleMenu {
 
-        padding:
-            15px;
+        padding: 15px;
 
     }
-
 
     h1 {
 
-        font-size:
-            34px;
+        font-size: 34px;
 
-        letter-spacing:
-            5px;
+        letter-spacing: 5px;
 
     }
-
 
     #noelleMain {
 
-        width:
-            170px;
+        width: 170px;
 
     }
-
 
     #noelleGallery {
 
-        gap:
-            6px;
+        gap: 6px;
 
     }
-
 
     .noelleFrame {
 
-        width:
-            95px;
+        width: 95px;
 
-        height:
-            80px;
+        height: 80px;
 
     }
 
-
     #noelleLine {
 
-        font-size:
-            9px;
+        font-size: 9px;
 
     }
 
