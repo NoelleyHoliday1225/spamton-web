@@ -1,7 +1,3 @@
-/* =====================================================
-   FUENTE
-===================================================== */
-
 @import url(
     'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
 );
@@ -13,7 +9,6 @@
 
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -37,79 +32,57 @@ body {
 }
 
 
-/* =====================================================
-   FONDO
-===================================================== */
-
 body {
 
-    background-image:
-        url("spamton-cielo.png");
-
-    background-size:
-        cover;
-
-    background-position:
-        center;
-
-    background-repeat:
+    background:
+        url("spamton-cielo.png")
+        center / cover
         no-repeat;
+
+    color: white;
 
 }
 
 
 
 /* =====================================================
-   PANTALLA DE INICIO
+   INICIO
 ===================================================== */
 
 #startScreen {
 
-    position:
-        fixed;
+    position: fixed;
 
     inset: 0;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
     background:
-        rgba(0, 0, 0, 0.35);
+        rgba(0,0,0,0.45);
 
-    z-index:
-        9999;
+    z-index: 99999;
 
 }
 
 
 .startBox {
 
-    width:
-        520px;
+    width: 520px;
 
-    max-width:
-        90%;
+    max-width: 90vw;
 
-    padding:
-        35px;
+    padding: 35px;
 
-    text-align:
-        center;
-
-    color:
-        white;
+    text-align: center;
 
     background:
-        rgba(0, 0, 0, 0.92);
+        rgba(0,0,0,0.94);
 
-    border:
-        4px solid white;
+    border: 4px solid white;
 
     box-shadow:
         10px 10px 0 #ff00ff,
@@ -118,35 +91,38 @@ body {
 }
 
 
-.startBox h1 {
+.warning {
 
-    font-size:
-        28px;
+    color: #ff00ff;
 
-    line-height:
-        1.6;
+    margin-bottom: 15px;
 
 }
 
 
-.warning {
+.startBox h1 {
 
-    color:
-        #ff00ff;
+    font-size: 28px;
 
-    margin-bottom:
-        20px;
+    line-height: 1.5;
 
 }
 
 
 .startBox p {
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    line-height:
-        2;
+    line-height: 2;
+
+}
+
+
+.startStats {
+
+    margin: 25px 0;
+
+    font-size: 11px;
 
 }
 
@@ -163,32 +139,22 @@ button,
         'Press Start 2P',
         cursive;
 
-    background:
-        #000;
+    color: white;
 
-    color:
-        white;
+    background: black;
 
-    border:
-        3px solid white;
+    border: 3px solid white;
 
-    padding:
-        15px 20px;
+    padding: 14px 18px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    display:
-        inline-block;
+    display: inline-block;
 
     box-shadow:
         5px 5px 0 #ff00ff;
-
-    user-select:
-        none;
 
 }
 
@@ -196,19 +162,20 @@ button,
 button:hover,
 .backButton:hover {
 
-    background:
-        #ff00ff;
+    background: #ff00ff;
 
-    color:
-        #000;
+    color: black;
 
 }
 
 
-#startButton {
+button:active {
 
-    margin-top:
-        20px;
+    transform:
+        translate(
+            3px,
+            3px
+        );
 
 }
 
@@ -220,17 +187,15 @@ button:hover,
 
 #game {
 
-    display:
-        none;
+    display: none;
 
-    width:
-        100vw;
+    position: fixed;
 
-    height:
-        100vh;
+    inset: 0;
 
-    position:
-        relative;
+    width: 100vw;
+
+    height: 100vh;
 
 }
 
@@ -242,23 +207,17 @@ button:hover,
 
 #exitGameButton {
 
-    position:
-        fixed;
+    position: fixed;
 
-    top:
-        12px;
+    top: 15px;
 
-    right:
-        12px;
+    right: 15px;
 
-    z-index:
-        7000;
+    z-index: 10000;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    padding:
-        10px;
+    padding: 10px 14px;
 
 }
 
@@ -270,29 +229,21 @@ button:hover,
 
 #hud {
 
-    position:
-        absolute;
+    position: absolute;
 
-    top:
-        15px;
+    top: 15px;
 
-    left:
-        15px;
+    left: 15px;
 
-    right:
-        15px;
+    right: 160px;
 
-    display:
-        flex;
+    display: flex;
 
-    justify-content:
-        space-between;
+    flex-wrap: wrap;
 
-    gap:
-        8px;
+    gap: 10px;
 
-    z-index:
-        5000;
+    z-index: 9000;
 
 }
 
@@ -300,19 +251,13 @@ button:hover,
 .hudBox {
 
     background:
-        rgba(0, 0, 0, 0.88);
+        rgba(0,0,0,0.88);
 
-    color:
-        white;
+    border: 3px solid white;
 
-    border:
-        3px solid white;
+    padding: 10px 13px;
 
-    padding:
-        12px 16px;
-
-    font-size:
-        11px;
+    font-size: 10px;
 
     box-shadow:
         4px 4px 0 #ff00ff;
@@ -322,31 +267,16 @@ button:hover,
 
 
 /* =====================================================
-   ÁREA DEL JUEGO
+   GAME AREA
 ===================================================== */
 
 #gameArea {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        900px;
+    left: 50%;
 
-    height:
-        650px;
-
-    max-width:
-        92vw;
-
-    max-height:
-        78vh;
-
-    left:
-        50%;
-
-    top:
-        52%;
+    top: 52%;
 
     transform:
         translate(
@@ -354,21 +284,26 @@ button:hover,
             -50%
         );
 
-    overflow:
-        hidden;
+    width: min(
+        1000px,
+        92vw
+    );
+
+    height: min(
+        680px,
+        78vh
+    );
+
+    overflow: hidden;
 
     background:
-        rgba(0, 0, 0, 0.64);
+        rgba(0,0,0,0.68);
 
-    border:
-        5px solid white;
+    border: 5px solid white;
 
     box-shadow:
         12px 12px 0 #ff00ff,
         -8px -8px 0 #00ffff;
-
-    touch-action:
-        none;
 
 }
 
@@ -380,26 +315,20 @@ button:hover,
 
 #platform {
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        5%;
+    left: 4%;
 
-    right:
-        5%;
+    right: 4%;
 
-    bottom:
-        5%;
+    bottom: 4%;
 
-    height:
-        18%;
+    height: 14%;
 
     background:
-        rgba(0, 0, 0, 0.75);
+        rgba(0,0,0,0.65);
 
-    border:
-        3px solid #222;
+    border: 3px solid #222;
 
 }
 
@@ -411,14 +340,9 @@ button:hover,
 
 #player {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        120px;
-
-    max-width:
-        none;
+    width: 120px;
 
     transform:
         translate(
@@ -426,32 +350,23 @@ button:hover,
             -50%
         );
 
-    z-index:
-        1000;
+    z-index: 5000;
 
-    user-select:
-        none;
+    image-rendering: pixelated;
 
-    pointer-events:
-        none;
+    user-select: none;
 
-    image-rendering:
-        pixelated;
+    pointer-events: none;
 
 }
 
-
-
-/* =====================================================
-   DAÑO SPAMTON
-===================================================== */
 
 .playerHit {
 
     animation:
         playerDamage
-        0.4s
-        steps(4);
+        0.25s
+        linear;
 
 }
 
@@ -459,42 +374,24 @@ button:hover,
 @keyframes playerDamage {
 
     0% {
-
         filter:
-            brightness(1);
-
-    }
-
-    25% {
-
-        filter:
-            brightness(3)
-            sepia(1)
-            hue-rotate(290deg);
-
+            brightness(1)
+            saturate(1);
     }
 
     50% {
-
         filter:
-            brightness(1);
-
-    }
-
-    75% {
-
-        filter:
-            brightness(3)
-            sepia(1)
-            hue-rotate(290deg);
-
+            brightness(2)
+            saturate(5)
+            drop-shadow(
+                0 0 10px red
+            );
     }
 
     100% {
-
         filter:
-            brightness(1);
-
+            brightness(1)
+            saturate(1);
     }
 
 }
@@ -502,16 +399,14 @@ button:hover,
 
 
 /* =====================================================
-   FRIEND
+   FRIENDS
 ===================================================== */
 
 .friend {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        80px;
+    width: 78px;
 
     transform:
         translate(
@@ -519,45 +414,38 @@ button:hover,
             -50%
         );
 
-    z-index:
-        500;
+    z-index: 3000;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
-    user-select:
-        none;
-
-    pointer-events:
-        none;
+    user-select: none;
 
 }
 
 
 .friend-red {
 
-    filter:
-        hue-rotate(
-            320deg
-        )
-        saturate(
-            4
-        );
+    width: 88px;
 
-    width:
-        88px;
+    filter:
+        hue-rotate(320deg)
+        saturate(3);
 
 }
 
 
 .friend-glitch {
 
-    width:
-        94px;
+    width: 92px;
+
+    filter:
+        hue-rotate(90deg)
+        saturate(4)
+        contrast(1.5);
 
     animation:
         glitchFriend
-        0.16s
+        0.15s
         infinite;
 
 }
@@ -566,172 +454,61 @@ button:hover,
 @keyframes glitchFriend {
 
     0% {
-
         transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(-5px);
-
-        filter:
-            hue-rotate(0deg)
-            saturate(2);
-
-    }
-
-    25% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(6px);
-
-        filter:
-            hue-rotate(90deg)
-            saturate(5);
-
+            translate(-50%,-50%)
+            translateX(-4px);
     }
 
     50% {
-
         transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(-3px);
-
-        filter:
-            hue-rotate(180deg)
-            saturate(4);
-
-    }
-
-    75% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(5px);
-
-        filter:
-            hue-rotate(270deg)
-            saturate(5);
-
+            translate(-50%,-50%)
+            translateX(4px);
     }
 
     100% {
-
         transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(-5px);
-
-        filter:
-            hue-rotate(360deg)
-            saturate(3);
-
+            translate(-50%,-50%)
+            translateX(-4px);
     }
 
 }
 
 
+.friend.boss {
 
-/* =====================================================
-   BOSS
-===================================================== */
-
-.boss {
-
-    width:
-        220px !important;
+    width: 210px;
 
     filter:
         contrast(1.4)
-        saturate(1.7);
-
-    animation:
-        bossGlitch
-        0.45s
-        infinite;
-
-}
-
-
-@keyframes bossGlitch {
-
-    0% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            );
-
-    }
-
-    25% {
-
-        transform:
-            translate(
-                -53%,
-                -50%
-            );
-
-    }
-
-    50% {
-
-        transform:
-            translate(
-                -47%,
-                -50%
-            );
-
-    }
-
-    75% {
-
-        transform:
-            translate(
-                -52%,
-                -50%
-            );
-
-    }
-
-    100% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            );
-
-    }
+        saturate(1.5);
 
 }
 
 
 
 /* =====================================================
-   BALAS PIPIS
+   FRIEND HIT
+===================================================== */
+
+.friend.hit {
+
+    filter:
+        brightness(3)
+        saturate(5);
+
+}
+
+
+
+/* =====================================================
+   BALAS
 ===================================================== */
 
 .bullet {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        38px;
+    width: 36px;
 
     transform:
         translate(
@@ -739,27 +516,9 @@ button:hover,
             -50%
         );
 
-    z-index:
-        800;
+    z-index: 4000;
 
-    image-rendering:
-        pixelated;
-
-    pointer-events:
-        none;
-
-}
-
-
-.tripleBullet {
-
-    filter:
-        hue-rotate(
-            25deg
-        )
-        saturate(
-            2
-        );
+    image-rendering: pixelated;
 
 }
 
@@ -771,11 +530,9 @@ button:hover,
 
 .powerUp {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        52px;
+    width: 58px;
 
     transform:
         translate(
@@ -783,65 +540,46 @@ button:hover,
             -50%
         );
 
-    z-index:
-        2500;
+    z-index: 4500;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
-    pointer-events:
-        none;
+    cursor: pointer;
 
     animation:
         powerUpFloat
-        0.8s
-        steps(3)
-        infinite;
+        0.7s
+        infinite
+        alternate;
 
 }
 
 
-.power-green {
-
-    /*
-     * Mismo pipis.gif,
-     * convertido visualmente a verde.
-     */
+.powerUpGreen {
 
     filter:
-        hue-rotate(
-            90deg
-        )
-        saturate(
-            5
-        )
-        brightness(
-            1.2
+        hue-rotate(90deg)
+        saturate(5)
+        brightness(1.2)
+        drop-shadow(
+            0 0 8px #00ff00
         );
 
 }
 
 
-.power-glitch {
-
-    /*
-     * Mismo pipis.gif,
-     * convertido visualmente en glitch.
-     */
+.powerUpGlitch {
 
     filter:
-        hue-rotate(
-            270deg
-        )
-        saturate(
-            5
-        )
-        contrast(
-            2
+        hue-rotate(170deg)
+        saturate(6)
+        contrast(1.8)
+        drop-shadow(
+            0 0 10px #00ffff
         );
 
     animation:
-        glitchPower
+        powerGlitch
         0.12s
         infinite;
 
@@ -850,96 +588,45 @@ button:hover,
 
 @keyframes powerUpFloat {
 
-    0% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateY(0);
-
-    }
-
-    50% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateY(-10px);
-
-    }
-
-    100% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateY(0);
-
-    }
-
-}
-
-
-@keyframes glitchPower {
-
-    0% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(-5px);
-
-    }
-
-    25% {
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            translateX(5px);
-
-    }
-
-    50% {
-
+    from {
         transform:
             translate(
                 -50%,
                 -50%
             )
             translateY(-4px);
-
     }
 
-    75% {
-
+    to {
         transform:
             translate(
                 -50%,
                 -50%
             )
-            translateX(-4px);
+            translateY(4px);
+    }
 
+}
+
+
+@keyframes powerGlitch {
+
+    0% {
+        transform:
+            translate(-50%,-50%)
+            translateX(-4px);
+    }
+
+    50% {
+        transform:
+            translate(-50%,-50%)
+            translateX(4px);
     }
 
     100% {
-
         transform:
-            translate(
-                -50%,
-                -50%
-            );
-
+            translate(-50%,-50%)
+            translateX(-3px);
     }
 
 }
@@ -947,51 +634,64 @@ button:hover,
 
 
 /* =====================================================
-   PIPIS DE CURACIÓN / EVENTO
+   COLA GLITCH
 ===================================================== */
 
-.healingPipis {
+.glitchTail {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        50px;
+    width: 20px;
+
+    height: 20px;
+
+    background:
+        #00ffff;
+
+    border: 2px solid white;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        rotate(45deg);
+
+    opacity: 0.8;
+
+    z-index: 2500;
 
     animation:
-        pipisFall
-        4s
-        linear;
-
-    z-index:
-        2000;
-
-    pointer-events:
-        none;
+        tailDisappear
+        0.5s
+        linear
+        forwards;
 
 }
 
 
-@keyframes pipisFall {
+@keyframes tailDisappear {
 
     from {
-
-        top:
-            -10%;
-
+        opacity: 0.8;
         transform:
-            rotate(0deg);
-
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1)
+            rotate(45deg);
     }
 
     to {
-
-        top:
-            110%;
-
+        opacity: 0;
         transform:
-            rotate(360deg);
-
+            translate(
+                -50%,
+                -50%
+            )
+            scale(0.2)
+            rotate(180deg);
     }
 
 }
@@ -1004,14 +704,11 @@ button:hover,
 
 .triangle {
 
-    position:
-        absolute;
+    position: absolute;
 
-    width:
-        0;
+    width: 0;
 
-    height:
-        0;
+    height: 0;
 
     border-left:
         18px solid transparent;
@@ -1020,7 +717,7 @@ button:hover,
         18px solid transparent;
 
     border-bottom:
-        35px solid black;
+        34px solid black;
 
     transform:
         translate(
@@ -1028,209 +725,76 @@ button:hover,
             -50%
         );
 
-    z-index:
-        1500;
-
-    pointer-events:
-        none;
+    z-index: 3500;
 
 }
 
 
 
 /* =====================================================
-   COLA GLITCH
-===================================================== */
-
-.glitchTail {
-
-    position:
-        absolute;
-
-    width:
-        18px;
-
-    height:
-        18px;
-
-    background:
-        black;
-
-    border:
-        2px solid #ff00ff;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        )
-        rotate(45deg);
-
-    z-index:
-        450;
-
-    opacity:
-        0.8;
-
-    pointer-events:
-        none;
-
-    animation:
-        tailFade
-        0.7s
-        linear forwards;
-
-}
-
-
-@keyframes tailFade {
-
-    0% {
-
-        opacity:
-            0.9;
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            scale(1)
-            rotate(45deg);
-
-    }
-
-    100% {
-
-        opacity:
-            0;
-
-        transform:
-            translate(
-                -50%,
-                -50%
-            )
-            scale(0.2)
-            rotate(180deg);
-
-    }
-
-}
-
-
-
-/* =====================================================
-   BOTÓN SHOOT
-   FUNCIONA EN PC Y MOBILE
-===================================================== */
-
-#shootButton {
-
-    position:
-        absolute;
-
-    right:
-        25px;
-
-    bottom:
-        25px;
-
-    z-index:
-        6000;
-
-    width:
-        150px;
-
-    height:
-        65px;
-
-    font-size:
-        12px;
-
-    touch-action:
-        none;
-
-}
-
-
-
-/* =====================================================
-   CONTROLES MOBILE
+   JOYSTICK
 ===================================================== */
 
 #mobileControls {
 
-    position:
-        absolute;
+    position: fixed;
 
-    inset:
-        0;
+    left: 25px;
 
-    z-index:
-        5500;
+    bottom: 25px;
 
-    pointer-events:
-        none;
+    z-index: 15000;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
 
 }
 
 
-#joystick {
+.joystick {
 
-    position:
-        absolute;
+    width: 125px;
 
-    left:
-        25px;
+    height: 125px;
 
-    bottom:
-        25px;
-
-    width:
-        135px;
-
-    height:
-        135px;
-
-    border:
-        4px solid white;
-
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
         rgba(
             0,
             0,
             0,
-            0.55
+            0.65
         );
 
-    pointer-events:
-        auto;
+    border: 4px solid white;
 
-    touch-action:
-        none;
+    box-shadow:
+        6px 6px 0 #ff00ff;
+
+    position: relative;
+
+    touch-action: none;
 
 }
 
 
-#joystickKnob {
+.joystickStick {
 
-    position:
-        absolute;
+    position: absolute;
 
-    left:
-        50%;
+    left: 50%;
 
-    top:
-        50%;
+    top: 50%;
 
-    width:
-        58px;
+    width: 55px;
 
-    height:
-        58px;
+    height: 55px;
+
+    border-radius: 50%;
 
     transform:
         translate(
@@ -1238,85 +802,50 @@ button:hover,
             -50%
         );
 
-    border:
-        4px solid white;
-
-    border-radius:
-        50%;
-
     background:
-        rgba(
-            255,
-            0,
-            255,
-            0.75
-        );
+        #ff00ff;
 
-    pointer-events:
-        none;
+    border: 3px solid white;
+
+    pointer-events: none;
 
 }
 
 
-#mobileShoot {
+#fireButton {
 
-    position:
-        absolute;
+    width: 110px;
 
-    right:
-        25px;
+    height: 75px;
 
-    bottom:
-        105px;
+    padding: 5px;
 
-    width:
-        75px;
+    font-size: 10px;
 
-    height:
-        75px;
+    background:
+        #050505;
 
     border:
         4px solid white;
 
-    border-radius:
-        50%;
-
-    background:
-        #000;
-
-    color:
-        white;
-
-    font-size:
-        20px;
-
-    padding:
-        0;
-
-    pointer-events:
-        auto;
-
-    touch-action:
-        none;
+    box-shadow:
+        6px 6px 0 #00ffff;
 
 }
 
 
 
 /* =====================================================
-   MENSAJE EVENTO
+   MENSAJE
 ===================================================== */
 
 #eventMessage {
 
-    position:
-        fixed;
+    position: fixed;
 
-    left:
-        50%;
+    left: 50%;
 
-    top:
-        20%;
+    top: 20%;
 
     transform:
         translate(
@@ -1324,43 +853,31 @@ button:hover,
             -50%
         );
 
-    padding:
-        20px;
+    padding: 20px;
 
-    background:
-        #000;
+    background: black;
 
-    color:
-        white;
-
-    border:
-        4px solid #ff00ff;
+    border: 4px solid #ff00ff;
 
     box-shadow:
         6px 6px 0 #00ffff;
 
-    font-size:
-        17px;
+    font-size: 16px;
 
-    text-align:
-        center;
+    text-align: center;
 
-    opacity:
-        0;
+    opacity: 0;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
-    z-index:
-        9000;
+    z-index: 20000;
 
 }
 
 
 #eventMessage.show {
 
-    opacity:
-        1;
+    opacity: 1;
 
 }
 
@@ -1372,14 +889,11 @@ button:hover,
 
 .achievementPopup {
 
-    position:
-        fixed;
+    position: fixed;
 
-    left:
-        50%;
+    left: 50%;
 
-    top:
-        50%;
+    top: 50%;
 
     transform:
         translate(
@@ -1388,53 +902,39 @@ button:hover,
         )
         scale(0.5);
 
-    width:
-        500px;
+    width: 520px;
 
-    max-width:
-        90vw;
+    max-width: 90vw;
 
-    padding:
-        30px;
+    padding: 30px;
 
-    background:
-        #000;
+    background: black;
 
-    color:
-        white;
-
-    border:
-        5px solid white;
+    border: 5px solid white;
 
     box-shadow:
-        12px 12px 0 #ff00ff,
+        10px 10px 0 #ff00ff,
         -8px -8px 0 #00ffff;
 
-    text-align:
-        center;
+    text-align: center;
 
-    font-size:
-        18px;
+    line-height: 1.8;
 
-    line-height:
-        1.8;
+    font-size: 15px;
 
-    opacity:
-        0;
+    opacity: 0;
 
-    z-index:
-        10000;
+    z-index: 30000;
 
     transition:
-        0.4s;
+        0.35s;
 
 }
 
 
 .achievementPopup.show {
 
-    opacity:
-        1;
+    opacity: 1;
 
     transform:
         translate(
@@ -1448,23 +948,16 @@ button:hover,
 
 .achievementCharacter {
 
-    display:
-        block;
+    display: block;
 
-    width:
-        190px;
+    width: 180px;
 
-    max-height:
-        190px;
-
-    object-fit:
-        contain;
+    max-width: 70vw;
 
     margin:
         20px auto 0;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
 }
 
@@ -1475,244 +968,133 @@ button:hover,
 ===================================================== */
 
 @media (
-    max-width: 900px
+    max-width: 700px
 ) {
+
+    #gameArea {
+
+        width: 94vw;
+
+        height: 68vh;
+
+        top: 48%;
+
+    }
+
 
     #hud {
 
-        top:
-            8px;
+        top: 8px;
 
-        left:
-            8px;
+        left: 8px;
 
-        right:
-            8px;
+        right: 8px;
 
-        flex-wrap:
-            wrap;
-
-        justify-content:
-            center;
+        gap: 5px;
 
     }
 
 
     .hudBox {
 
-        font-size:
-            7px;
+        font-size: 7px;
 
-        padding:
-            7px 9px;
-
-    }
-
-
-    #gameArea {
-
-        width:
-            94vw;
-
-        height:
-            72vh;
-
-        max-height:
-            72vh;
-
-    }
-
-
-    #player {
-
-        width:
-            105px;
-
-    }
-
-
-    .friend {
-
-        width:
-            70px;
-
-    }
-
-
-    .friend-red {
-
-        width:
-            78px;
-
-    }
-
-
-    .friend-glitch {
-
-        width:
-            84px;
-
-    }
-
-
-    .boss {
-
-        width:
-            180px !important;
-
-    }
-
-
-    #shootButton {
-
-        display:
-            none;
-
-    }
-
-
-    #mobileShoot {
-
-        display:
-            block;
-
-    }
-
-
-    #joystick {
-
-        display:
-            block;
-
-    }
-
-}
-
-
-@media (
-    min-width: 901px
-) {
-
-    #mobileControls {
-
-        display:
-            none;
-
-    }
-
-
-    #shootButton {
-
-        display:
-            block;
-
-    }
-
-}
-
-
-@media (
-    max-width: 600px
-) {
-
-    .startBox {
-
-        padding:
-            22px;
-
-    }
-
-
-    .startBox h1 {
-
-        font-size:
-            19px;
-
-    }
-
-
-    .startBox p {
-
-        font-size:
-            8px;
+        padding: 7px;
 
     }
 
 
     #exitGameButton {
 
-        font-size:
-            7px;
+        top: 8px;
 
-        padding:
-            8px;
+        right: 8px;
 
-    }
+        font-size: 7px;
 
-
-    #gameArea {
-
-        top:
-            53%;
-
-        height:
-            68vh;
+        padding: 8px;
 
     }
 
 
-    #joystick {
+    #player {
 
-        width:
-            115px;
-
-        height:
-            115px;
-
-        left:
-            15px;
-
-        bottom:
-            15px;
+        width: 90px;
 
     }
 
 
-    #joystickKnob {
+    .friend {
 
-        width:
-            50px;
-
-        height:
-            50px;
+        width: 60px;
 
     }
 
 
-    #mobileShoot {
+    .friend-red {
 
-        right:
-            15px;
+        width: 68px;
 
-        bottom:
-            90px;
+    }
 
-        width:
-            68px;
 
-        height:
-            68px;
+    .friend-glitch {
+
+        width: 72px;
+
+    }
+
+
+    .friend.boss {
+
+        width: 150px;
+
+    }
+
+
+    #mobileControls {
+
+        left: 15px;
+
+        bottom: 15px;
+
+        gap: 15px;
+
+    }
+
+
+    .joystick {
+
+        width: 105px;
+
+        height: 105px;
+
+    }
+
+
+    .joystickStick {
+
+        width: 45px;
+
+        height: 45px;
+
+    }
+
+
+    #fireButton {
+
+        width: 90px;
+
+        height: 65px;
+
+        font-size: 8px;
 
     }
 
 
     .achievementPopup {
 
-        font-size:
-            12px;
-
-        padding:
-            20px;
+        font-size: 10px;
 
     }
 
