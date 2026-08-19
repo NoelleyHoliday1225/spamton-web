@@ -1,26 +1,23 @@
+```css
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 
 /* =========================================================
-   PAGINA PRINCIPAL
+   GENERAL
 ========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
-
 html,
 body {
     margin: 0;
     padding: 0;
-
     width: 100%;
     min-height: 100%;
-
     overflow-x: hidden;
 }
-
 
 body {
     min-height: 100vh;
@@ -47,17 +44,92 @@ body {
 
 
 /* =========================================================
+   BOTÓN FRIEND DESTROYER
+========================================================= */
+
+#friendDestroyerButton {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    z-index: 10000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 18px;
+
+    background: #111;
+
+    color: white;
+
+    border: 3px solid white;
+
+    text-decoration: none;
+
+    font-family: 'Press Start 2P', cursive;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    box-shadow:
+        4px 4px 0 #ff00ff;
+
+    pointer-events: auto;
+
+    transition:
+        transform 0.1s,
+        background 0.1s,
+        box-shadow 0.1s;
+}
+
+#friendDestroyerButton:hover {
+    background: #ff00ff;
+
+    color: black;
+
+    transform:
+        translate(-2px, -2px);
+
+    box-shadow:
+        6px 6px 0 #00ffff;
+}
+
+#friendDestroyerButton:active {
+    transform:
+        translate(3px, 3px);
+
+    box-shadow:
+        1px 1px 0 #00ffff;
+}
+
+
+/* =========================================================
    MODO BIG SHOT
 ========================================================= */
 
 body.big-shot-mode {
-    background-image: url("spamton-neo-background.gif");
+    background-image:
+        url("spamton-neo-background.gif");
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size:
+        cover;
 
-    background-color: #05000a;
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    background-attachment:
+        fixed;
+
+    background-color:
+        #05000a;
 }
 
 
@@ -83,13 +155,14 @@ h1 {
 
 
 /* =========================================================
-   SPAMTON PRINCIPAL
+   SPAMTON
 ========================================================= */
 
 .main-spamton {
     display: block;
 
     width: 260px;
+
     max-width: 45vw;
 
     margin: 45px auto 20px auto;
@@ -103,15 +176,17 @@ h1 {
 
 
 /* =========================================================
-   BOTON PIPIS
+   PIPIS
 ========================================================= */
 
 #pipisButton {
     position: relative;
 
-    z-index: 20;
+    z-index: 2000;
 
-    font-family: 'Press Start 2P', cursive;
+    font-family:
+        'Press Start 2P',
+        cursive;
 
     font-size: 18px;
 
@@ -133,90 +208,35 @@ h1 {
         box-shadow 0.08s;
 }
 
-
 #pipisButton:hover {
-    transform: translate(-2px, -2px);
+    transform:
+        translate(-2px, -2px);
 
     box-shadow:
         9px 9px 0 #00ffff;
 }
 
-
 #pipisButton:active {
-    transform: translate(4px, 4px);
+    transform:
+        translate(4px, 4px);
 
     box-shadow:
         3px 3px 0 #ff00ff;
 }
 
-```css
-
-/* =====================================================
-   BOTÓN FRIEND DESTROYER
-====================================================== */
-
-#friendDestroyerButton {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-
-    z-index: 10000;
-
-    display: block;
-
-    padding: 12px 18px;
-
-    background: #111;
-    color: white;
-
-    border: 3px solid white;
-
-    text-decoration: none;
-
-    font-family: 'Press Start 2P', cursive;
-    font-size: 11px;
-
-    cursor: pointer;
-
-    box-shadow:
-        4px 4px 0 #000;
-
-    transition:
-        transform 0.1s,
-        background 0.1s;
-}
-
-#friendDestroyerButton:hover {
-    background: #333;
-
-    transform:
-        translate(2px, 2px);
-
-    box-shadow:
-        2px 2px 0 #000;
-}
-
-#friendDestroyerButton:active {
-    transform:
-        translate(4px, 4px);
-
-    box-shadow:
-        none;
-}
-```
-
 
 /* =========================================================
-   MUSICA
+   CAJA DE MÚSICA
 ========================================================= */
 
 #musicBox {
     position: fixed;
 
     right: 30px;
+
     bottom: 25px;
 
-    z-index: 100;
+    z-index: 9000;
 
     display: flex;
 
@@ -224,19 +244,39 @@ h1 {
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
+
+    width: 260px;
+
+    text-align: center;
+
+    pointer-events: auto;
 }
 
 
 #dancingSpamton {
+    display: block;
+
     width: 150px;
 
+    height: auto;
+
     image-rendering: pixelated;
+
+    pointer-events: none;
 }
 
 
 #musicButton {
-    font-family: 'Press Start 2P', cursive;
+    display: block;
+
+    margin: 0 auto;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
 
     font-size: 14px;
 
@@ -252,6 +292,10 @@ h1 {
 
     box-shadow:
         5px 5px 0 #ff00ff;
+
+    white-space: nowrap;
+
+    pointer-events: auto;
 }
 
 
@@ -262,7 +306,8 @@ h1 {
 
 
 #musicButton.music-on {
-    border-color: #00ffff;
+    border-color:
+        #00ffff;
 
     box-shadow:
         5px 5px 0 #00ffff;
@@ -276,10 +321,11 @@ h1 {
 #secretRoomButton {
     position: fixed;
 
-    top: 20px;
+    top: 75px;
+
     right: 20px;
 
-    z-index: 200;
+    z-index: 9000;
 
     padding: 12px;
 
@@ -295,10 +341,15 @@ h1 {
 
     box-shadow:
         5px 5px 0 #ff00ff;
+
+    pointer-events: auto;
 }
 
-
 #secretRoomButton:hover {
+    background: #ff00ff;
+
+    color: black;
+
     box-shadow:
         5px 5px 0 #00ffff;
 }
@@ -312,13 +363,16 @@ h1 {
     position: fixed;
 
     top: 20px;
+
     left: 20px;
 
-    z-index: 300;
+    z-index: 9000;
 
     display: flex;
 
     gap: 8px;
+
+    align-items: center;
 }
 
 
@@ -326,9 +380,11 @@ h1 {
     display: none;
 
     width: 48px;
+
     height: 48px;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 0;
@@ -345,9 +401,9 @@ h1 {
         4px 4px 0 #ff00ff;
 }
 
-
 .achievement:hover {
-    transform: scale(1.1);
+    transform:
+        scale(1.1);
 
     box-shadow:
         4px 4px 0 #00ffff;
@@ -364,6 +420,7 @@ h1 {
     inset: 0;
 
     width: 100%;
+
     height: 100%;
 
     pointer-events: none;
@@ -385,11 +442,14 @@ h1 {
 
     image-rendering: pixelated;
 
-    animation-name: pipisFall;
+    animation-name:
+        pipisFall;
 
-    animation-timing-function: linear;
+    animation-timing-function:
+        linear;
 
-    animation-fill-mode: forwards;
+    animation-fill-mode:
+        forwards;
 
     pointer-events: none;
 }
@@ -427,11 +487,14 @@ h1 {
 
     image-rendering: pixelated;
 
-    animation-name: catFall;
+    animation-name:
+        catFall;
 
-    animation-timing-function: linear;
+    animation-timing-function:
+        linear;
 
-    animation-fill-mode: forwards;
+    animation-fill-mode:
+        forwards;
 
     pointer-events: none;
 }
@@ -471,15 +534,18 @@ h1 {
     position: fixed;
 
     left: 20px;
+
     bottom: 20px;
 
     width: 205px;
 
     padding: 12px;
 
-    background: rgba(20, 20, 20, 0.90);
+    background:
+        rgba(20, 20, 20, 0.90);
 
-    border: 4px solid #00ffff;
+    border:
+        4px solid #00ffff;
 
     box-shadow:
         6px 6px 0 #ff00ff;
@@ -545,19 +611,23 @@ h1 {
     position: fixed;
 
     top: 50%;
+
     left: 50%;
 
     transform:
         translate(-50%, -50%)
         scale(0);
 
-    width: min(600px, 90vw);
+    width:
+        min(600px, 90vw);
 
     padding: 25px;
 
-    background: rgba(0, 0, 0, 0.92);
+    background:
+        rgba(0, 0, 0, 0.92);
 
-    border: 5px solid white;
+    border:
+        5px solid white;
 
     box-shadow:
         10px 10px 0 #ff00ff,
@@ -633,10 +703,21 @@ body.big-shot-mode h1 {
 
 
 body.big-shot-mode #musicButton {
-    border-color: #ff00ff;
+    border-color:
+        #ff00ff;
 
     box-shadow:
         5px 5px 0 #00ffff;
+}
+
+
+/* =========================================================
+   EVITAR ELEMENTOS INVISIBLES BLOQUEANDO CLICS
+========================================================= */
+
+#pipisRain,
+.cat-rain {
+    pointer-events: none;
 }
 
 
@@ -648,17 +729,49 @@ body.big-shot-mode #musicButton {
 
     h1 {
         font-size: 22px;
+
+        margin-top: 15px;
     }
 
 
     .main-spamton {
         width: 210px;
+
+        margin-top: 30px;
+    }
+
+
+    #friendDestroyerButton {
+        top: 10px;
+
+        right: 10px;
+
+        font-size: 8px;
+
+        padding: 9px 10px;
+    }
+
+
+    #secretRoomButton {
+        top: 60px;
+
+        right: 10px;
+
+        font-size: 8px;
+
+        padding: 9px;
     }
 
 
     #musicBox {
-        right: 10px;
+        right: 50%;
+
         bottom: 10px;
+
+        transform:
+            translateX(50%);
+
+        width: min(90vw, 320px);
     }
 
 
@@ -671,34 +784,32 @@ body.big-shot-mode #musicButton {
         font-size: 9px;
 
         padding: 10px;
+
+        max-width: 90vw;
+
+        white-space: normal;
     }
 
 
     #susieGlitch {
         left: 10px;
+
         bottom: 10px;
 
         width: 165px;
     }
 
 
-    #secretRoomButton {
-        right: 10px;
-        top: 10px;
-
-        font-size: 8px;
-    }
-
-
     .achievement {
         width: 42px;
+
         height: 42px;
 
         font-size: 20px;
     }
 
 
-    #catDiscoveryText {
+    .catDiscoveryText {
         font-size: 14px;
     }
 
