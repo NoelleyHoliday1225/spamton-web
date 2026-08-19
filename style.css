@@ -1,6 +1,4 @@
-@import url(
-    'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
-);
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 
 /* =========================================================
@@ -11,10 +9,8 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
-
     margin: 0;
     padding: 0;
 
@@ -22,17 +18,12 @@ body {
     min-height: 100%;
 
     overflow-x: hidden;
-
 }
 
-
 body {
-
     min-height: 100vh;
 
-    font-family:
-        'Press Start 2P',
-        cursive;
+    font-family: 'Press Start 2P', cursive;
 
     text-align: center;
 
@@ -42,8 +33,7 @@ body {
 
     background-color: #000;
 
-    background-image:
-        url("spamton-cielo.png");
+    background-image: url("spamton-cielo.png");
 
     background-size: cover;
 
@@ -54,34 +44,46 @@ body {
     background-attachment: fixed;
 
     transition:
-        background-image 0.5s ease;
-
+        background-image 0.5s ease,
+        background-color 0.5s ease;
 }
 
 
 /* =========================================================
-   BIG SHOT
+   CAPA OSCURA NORMAL
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.08);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   MODO BIG SHOT
 ========================================================= */
 
 body.big-shot-mode {
-
     background-color: #05000a;
 
-    background-image:
-        url("spamton-neo-background.gif");
+    background-image: url("spamton-neo-background.gif");
 
-    background-size:
-        cover;
+    background-size: cover;
 
-    background-position:
-        center center;
+    background-position: center center;
 
-    background-repeat:
-        no-repeat;
+    background-repeat: no-repeat;
 
-    background-attachment:
-        fixed;
-
+    background-attachment: fixed;
 }
 
 
@@ -90,7 +92,6 @@ body.big-shot-mode {
 ========================================================= */
 
 body.big-shot-mode::before {
-
     content: "";
 
     position: fixed;
@@ -103,16 +104,17 @@ body.big-shot-mode::before {
     pointer-events: none;
 
     z-index: 1;
-
 }
 
 
-body > * {
+/* =========================================================
+   CONTENIDO SOBRE EL FONDO
+========================================================= */
 
+body > * {
     position: relative;
 
     z-index: 5;
-
 }
 
 
@@ -121,118 +123,95 @@ body > * {
 ========================================================= */
 
 h1 {
+    margin: 25px 0 0;
 
-    margin:
-        25px 0 0;
+    font-size: 38px;
 
-    font-size:
-        38px;
-
-    color:
-        white;
+    color: white;
 
     text-shadow:
         4px 4px 0 #000,
         -2px -2px 0 #ff00ff;
 
+    position: relative;
+
+    z-index: 10;
 }
 
 
 body.big-shot-mode h1 {
-
     text-shadow:
         4px 4px 0 #ff00ff,
         -4px -4px 0 #00ffff;
-
 }
 
 
 /* =========================================================
-   SPAMTON
+   SPAMTON PRINCIPAL
 ========================================================= */
 
 .main-spamton {
+    display: block;
 
-    display:
-        block;
+    width: 260px;
 
-    width:
-        260px;
+    max-width: 45vw;
 
-    max-width:
-        45vw;
+    margin: 45px auto 20px auto;
 
-    margin:
-        45px auto 20px;
+    image-rendering: pixelated;
 
-    image-rendering:
-        pixelated;
+    position: relative;
 
-    z-index:
-        10;
-
+    z-index: 10;
 }
 
 
 /* =========================================================
-   PIPIS
+   BOTON PIPIS
 ========================================================= */
 
 #pipisButton {
+    position: relative;
 
-    position:
-        relative;
+    z-index: 20;
 
-    z-index:
-        20;
+    font-family: 'Press Start 2P', cursive;
 
-    font-family:
-        'Press Start 2P',
-        cursive;
+    font-size: 18px;
 
-    font-size:
-        18px;
+    color: white;
 
-    color:
-        white;
+    background: #050505;
 
-    background:
-        #050505;
+    border: 4px solid white;
 
-    border:
-        4px solid white;
+    padding: 16px 25px;
 
-    padding:
-        16px 25px;
-
-    cursor:
-        pointer;
+    cursor: pointer;
 
     box-shadow:
         7px 7px 0 #ff00ff;
 
+    transition:
+        transform 0.08s,
+        box-shadow 0.08s;
 }
 
 
 #pipisButton:hover {
-
-    transform:
-        translate(-2px, -2px);
+    transform: translate(-2px, -2px);
 
     box-shadow:
         9px 9px 0 #00ffff;
-
 }
 
 
 #pipisButton:active {
-
-    transform:
-        translate(4px, 4px);
+    transform: translate(4px, 4px);
 
     box-shadow:
         3px 3px 0 #ff00ff;
-
 }
 
 
@@ -241,82 +220,75 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #friendDestroyerButton {
+    position: fixed;
 
-    position:
-        fixed;
+    top: 20px;
 
-    top:
-        20px;
+    right: 20px;
 
-    right:
-        20px;
+    z-index: 3000;
 
-    z-index:
-        1000;
+    display: inline-flex;
 
-    display:
-        inline-flex;
+    width: max-content;
 
-    width:
-        auto;
+    max-width: 230px;
 
-    min-width:
-        0;
+    min-width: 0;
 
-    height:
-        auto;
+    height: auto;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    padding:
-        12px 15px;
+    padding: 12px 15px;
 
-    background:
-        #111;
+    background: #111;
 
-    color:
-        white;
+    color: white;
 
-    border:
-        3px solid white;
+    border: 3px solid white;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    font-family:
-        'Press Start 2P',
-        cursive;
+    font-family: 'Press Start 2P', cursive;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    line-height:
-        1.3;
+    line-height: 1.3;
 
-    white-space:
-        nowrap;
+    white-space: nowrap;
 
     box-shadow:
         4px 4px 0 #ff00ff;
 
+    transition:
+        transform 0.1s,
+        background 0.1s,
+        color 0.1s;
 }
 
 
 #friendDestroyerButton:hover {
+    background: #ff00ff;
 
-    background:
-        #ff00ff;
-
-    color:
-        #000;
+    color: #000;
 
     transform:
         translate(-2px, -2px);
 
+    box-shadow:
+        6px 6px 0 #00ffff;
+}
+
+
+#friendDestroyerButton:active {
+    transform:
+        translate(2px, 2px);
+
+    box-shadow:
+        2px 2px 0 #000;
 }
 
 
@@ -325,63 +297,68 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #secretRoomButton {
+    position: fixed;
 
-    position:
-        fixed;
+    top: 20px;
 
-    top:
-        20px;
+    right: 230px;
 
-    right:
-        210px;
+    z-index: 3000;
 
-    z-index:
-        1000;
+    display: inline-flex;
 
-    display:
-        inline-flex;
+    width: max-content;
 
-    align-items:
-        center;
+    max-width: 200px;
 
-    justify-content:
-        center;
+    align-items: center;
 
-    padding:
-        12px 15px;
+    justify-content: center;
 
-    color:
-        white;
+    padding: 12px 15px;
 
-    background:
-        black;
+    color: white;
 
-    border:
-        3px solid white;
+    background: #000;
 
-    text-decoration:
-        none;
+    border: 3px solid white;
 
-    font-size:
-        10px;
+    text-decoration: none;
 
-    white-space:
-        nowrap;
+    font-family: 'Press Start 2P', cursive;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+
+    white-space: nowrap;
 
     box-shadow:
         5px 5px 0 #ff00ff;
 
+    transition:
+        transform 0.1s,
+        background 0.1s,
+        color 0.1s;
 }
 
 
 #secretRoomButton:hover {
+    background: #ff00ff;
 
-    background:
-        #ff00ff;
+    color: #000;
 
-    color:
-        #000;
+    transform:
+        translate(-2px, -2px);
 
+    box-shadow:
+        7px 7px 0 #00ffff;
+}
+
+
+#secretRoomButton:active {
+    transform:
+        translate(2px, 2px);
 }
 
 
@@ -390,83 +367,87 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #achievements {
+    position: fixed;
 
-    position:
-        fixed;
+    top: 20px;
 
-    top:
-        20px;
+    left: 20px;
 
-    left:
-        20px;
+    z-index: 4000;
 
-    z-index:
-        1100;
+    display: flex;
 
-    display:
-        flex;
+    gap: 8px;
 
-    gap:
-        8px;
-
+    align-items: center;
 }
 
 
 .achievement {
+    display: none;
 
-    display:
-        none;
+    width: 48px;
 
-    width:
-        48px;
+    height: 48px;
 
-    height:
-        48px;
+    flex: 0 0 48px;
 
-    flex:
-        0 0 48px;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    padding: 0;
 
-    padding:
-        0;
+    font-size: 23px;
 
-    font-size:
-        23px;
+    line-height: 1;
 
-    background:
-        #000;
+    background: #000;
 
-    color:
-        white;
+    color: white;
 
-    border:
-        3px solid white;
+    border: 3px solid white;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
     box-shadow:
         4px 4px 0 #ff00ff;
 
+    transition:
+        transform 0.1s,
+        box-shadow 0.1s;
 }
 
 
 .achievement:hover {
-
     transform:
         scale(1.1);
 
     box-shadow:
         4px 4px 0 #00ffff;
+}
 
+
+.achievement:active {
+    transform:
+        scale(0.95);
+}
+
+
+/* =========================================================
+   LOGRO NOELLE
+========================================================= */
+
+#achievementNoelle {
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    text-decoration: none;
 }
 
 
@@ -475,115 +456,123 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #musicBox {
+    position: fixed;
 
-    position:
-        fixed;
+    right: 30px;
 
-    right:
-        30px;
+    bottom: 25px;
 
-    bottom:
-        25px;
+    z-index: 4500;
 
-    z-index:
-        1200;
+    display: flex;
 
-    display:
-        flex;
+    flex-direction: column;
 
-    flex-direction:
-        column;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: center;
 
-    justify-content:
-        center;
+    gap: 8px;
 
-    gap:
-        8px;
+    width: 250px;
 
-    width:
-        250px;
-
+    pointer-events: auto;
 }
 
 
 #dancingSpamton {
+    display: block;
 
-    display:
-        block;
+    width: 150px;
 
-    width:
-        150px;
+    height: auto;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
+    pointer-events: none;
 }
 
 
 #musicButton {
+    display: block;
 
-    display:
-        block;
+    width: max-content;
 
-    width:
-        auto;
+    max-width: 100%;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    font-family:
-        'Press Start 2P',
-        cursive;
+    font-family: 'Press Start 2P', cursive;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
-    color:
-        white;
+    color: white;
 
-    background:
-        black;
+    background: #000;
 
-    border:
-        3px solid white;
+    border: 3px solid white;
 
-    padding:
-        14px 18px;
+    padding: 14px 18px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
     box-shadow:
         5px 5px 0 #ff00ff;
 
-    white-space:
-        nowrap;
+    white-space: nowrap;
 
+    transition:
+        transform 0.1s,
+        box-shadow 0.1s,
+        border-color 0.1s;
 }
 
 
 #musicButton:hover {
+    transform:
+        translate(-2px, -2px);
 
     box-shadow:
-        5px 5px 0 #00ffff;
+        7px 7px 0 #00ffff;
+}
 
+
+#musicButton:active {
+    transform:
+        translate(2px, 2px);
+
+    box-shadow:
+        2px 2px 0 #ff00ff;
 }
 
 
 #musicButton.music-on {
-
-    border-color:
-        #00ffff;
+    border-color: #00ffff;
 
     box-shadow:
         5px 5px 0 #00ffff;
+}
 
+
+/* =========================================================
+   BIG SHOT - BOTON MUSICA
+========================================================= */
+
+body.big-shot-mode #musicButton {
+    border-color: #ff00ff;
+
+    box-shadow:
+        5px 5px 0 #00ffff;
+}
+
+
+body.big-shot-mode #musicButton.music-on {
+    border-color: #00ffff;
+
+    box-shadow:
+        6px 6px 0 #ff00ff;
 }
 
 
@@ -592,178 +581,134 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #susieGlitch {
+    position: fixed;
 
-    position:
-        fixed;
+    left: 20px;
 
-    left:
-        20px;
+    bottom: 20px;
 
-    bottom:
-        20px;
+    width: 205px;
 
-    width:
-        205px;
-
-    padding:
-        12px;
+    padding: 12px;
 
     background:
-        rgba(20,20,20,0.90);
+        rgba(20, 20, 20, 0.90);
 
-    border:
-        4px solid #00ffff;
+    border: 4px solid #00ffff;
 
     box-shadow:
         6px 6px 0 #ff00ff;
 
-    z-index:
-        100;
-
+    z-index: 100;
 }
 
 
 .susie-caption {
+    font-size: 11px;
 
-    font-size:
-        11px;
+    line-height: 1.5;
 
-    line-height:
-        1.5;
+    color: white;
 
-    margin-bottom:
-        8px;
-
+    margin-bottom: 8px;
 }
 
 
 .susie-arrow {
+    color: #00ffff;
 
-    color:
-        #00ffff;
-
-    font-size:
-        18px;
-
+    font-size: 18px;
 }
 
 
 .glitch-scribbles {
+    font-size: 8px;
 
-    font-size:
-        8px;
+    line-height: 1.5;
 
-    line-height:
-        1.5;
+    color: #ff00ff;
 
-    color:
-        #ff00ff;
-
-    margin-bottom:
-        8px;
-
+    margin-bottom: 8px;
 }
 
 
 #susieGif {
+    width: 145px;
 
-    width:
-        145px;
+    max-width: 100%;
 
-    max-width:
-        100%;
-
-    image-rendering:
-        pixelated;
-
+    image-rendering: pixelated;
 }
 
 
 .susie-name {
+    margin-top: 5px;
 
-    margin-top:
-        5px;
+    font-size: 11px;
 
-    font-size:
-        11px;
+    color: white;
 
-    letter-spacing:
-        5px;
-
+    letter-spacing: 5px;
 }
 
 
 /* =========================================================
-   LLUVIA PIPIS
+   LLUVIA DE PIPIS
 ========================================================= */
 
 #pipisRain {
+    position: fixed;
 
-    position:
-        fixed;
+    inset: 0;
 
-    inset:
-        0;
+    width: 100%;
 
-    width:
-        100%;
+    height: 100%;
 
-    height:
-        100%;
+    pointer-events: none;
 
-    pointer-events:
-        none;
+    overflow: hidden;
 
-    overflow:
-        hidden;
-
-    z-index:
-        500;
-
+    z-index: 500;
 }
 
 
 .pipis-rain {
+    position: absolute;
 
-    position:
-        absolute;
+    top: -120px;
 
-    top:
-        -120px;
+    height: auto;
 
-    height:
-        auto;
+    max-width: 100px;
 
-    max-width:
-        100px;
+    image-rendering: pixelated;
 
-    image-rendering:
-        pixelated;
+    animation-name:
+        pipisFall;
 
-    animation:
-        pipisFall
-        linear
+    animation-timing-function:
+        linear;
+
+    animation-fill-mode:
         forwards;
 
+    pointer-events: none;
 }
 
 
 @keyframes pipisFall {
 
-    from {
-
+    0% {
         transform:
             translateY(-150px)
             rotate(0deg);
-
     }
 
-    to {
-
+    100% {
         transform:
             translateY(115vh)
             rotate(720deg);
-
     }
 
 }
@@ -774,43 +719,50 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 .cat-rain {
+    position: absolute;
 
-    position:
-        absolute;
+    top: -150px;
 
-    top:
-        -150px;
+    height: auto;
 
-    max-width:
-        110px;
+    max-width: 110px;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
 
-    animation:
-        catFall
-        linear
+    animation-name:
+        catFall;
+
+    animation-timing-function:
+        linear;
+
+    animation-fill-mode:
         forwards;
 
+    pointer-events: none;
 }
 
 
 @keyframes catFall {
 
     0% {
-
         transform:
             translateY(-150px)
-            rotate(-20deg);
+            rotate(-20deg)
+            scale(0.8);
+    }
 
+    50% {
+        transform:
+            translateY(55vh)
+            rotate(180deg)
+            scale(1);
     }
 
     100% {
-
         transform:
             translateY(115vh)
-            rotate(360deg);
-
+            rotate(360deg)
+            scale(0.9);
     }
 
 }
@@ -821,15 +773,11 @@ body.big-shot-mode h1 {
 ========================================================= */
 
 #catDiscovery {
+    position: fixed;
 
-    position:
-        fixed;
+    top: 50%;
 
-    top:
-        50%;
-
-    left:
-        50%;
+    left: 50%;
 
     transform:
         translate(-50%, -50%)
@@ -838,82 +786,83 @@ body.big-shot-mode h1 {
     width:
         min(600px, 90vw);
 
-    padding:
-        25px;
+    padding: 25px;
 
     background:
-        rgba(0,0,0,0.95);
+        rgba(0, 0, 0, 0.95);
 
-    border:
-        5px solid white;
+    border: 5px solid white;
 
     box-shadow:
         10px 10px 0 #ff00ff,
         -7px -7px 0 #00ffff;
 
-    z-index:
-        5000;
+    z-index: 5000;
 
-    opacity:
-        0;
+    opacity: 0;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     transition:
-        0.2s;
-
+        transform 0.2s steps(3),
+        opacity 0.2s;
 }
 
 
 #catDiscovery.show {
-
     transform:
         translate(-50%, -50%)
         scale(1);
 
-    opacity:
-        1;
-
+    opacity: 1;
 }
 
 
 .catDiscoveryGlitch {
+    font-size: 14px;
 
-    color:
-        #00ffff;
+    color: #00ffff;
 
-    margin-bottom:
-        20px;
+    margin-bottom: 20px;
 
+    text-shadow:
+        3px 0 #ff00ff;
 }
 
 
 .catDiscoveryText {
+    font-size: 20px;
 
-    font-size:
-        20px;
+    line-height: 1.7;
 
-    line-height:
-        1.7;
+    color: white;
 
+    text-shadow:
+        4px 4px 0 #ff00ff;
 }
 
 
 #catDiscoveryImage {
+    display: block;
 
-    display:
-        block;
+    width: 180px;
 
-    width:
-        180px;
+    max-width: 70vw;
 
-    margin:
-        20px auto 0;
+    margin: 20px auto 0;
 
-    image-rendering:
-        pixelated;
+    image-rendering: pixelated;
+}
 
+
+/* =========================================================
+   ASEGURAR QUE LOS ENLACES SEAN CLICKEABLES
+========================================================= */
+
+#friendDestroyerButton,
+#secretRoomButton,
+#achievementNoelle {
+    pointer-events: auto;
 }
 
 
@@ -924,127 +873,166 @@ body.big-shot-mode h1 {
 @media (max-width: 700px) {
 
     h1 {
+        font-size: 22px;
 
-        font-size:
-            22px;
-
+        margin-top: 20px;
     }
 
 
     .main-spamton {
+        width: 210px;
 
-        width:
-            210px;
+        max-width: 60vw;
 
+        margin-top: 35px;
     }
 
 
     #friendDestroyerButton {
+        top: 10px;
 
-        top:
-            10px;
+        right: 10px;
 
-        right:
-            10px;
+        max-width: 150px;
 
-        font-size:
-            7px;
+        font-size: 7px;
 
-        padding:
-            9px;
-
+        padding: 9px;
     }
 
 
     #secretRoomButton {
+        top: 55px;
 
-        top:
-            55px;
+        right: 10px;
 
-        right:
-            10px;
+        max-width: 150px;
 
-        font-size:
-            7px;
+        font-size: 7px;
 
-        padding:
-            9px;
-
+        padding: 9px;
     }
 
 
     #achievements {
+        top: 10px;
 
-        top:
-            10px;
+        left: 10px;
 
-        left:
-            10px;
+        gap: 4px;
 
-        gap:
-            4px;
+        max-width: calc(100vw - 20px);
 
+        flex-wrap: wrap;
     }
 
 
     .achievement {
+        width: 40px;
 
-        width:
-            40px;
+        height: 40px;
 
-        height:
-            40px;
+        flex-basis: 40px;
 
-        flex-basis:
-            40px;
-
-        font-size:
-            18px;
-
+        font-size: 18px;
     }
 
 
     #musicBox {
+        right: 50%;
 
-        right:
-            50%;
-
-        bottom:
-            10px;
+        bottom: 10px;
 
         transform:
             translateX(50%);
 
-        width:
-            auto;
+        width: auto;
 
+        max-width: 95vw;
     }
 
 
     #dancingSpamton {
-
-        width:
-            90px;
-
+        width: 90px;
     }
 
 
     #musicButton {
+        font-size: 8px;
 
-        font-size:
-            8px;
+        padding: 10px;
 
-        padding:
-            10px;
+        max-width: 95vw;
 
+        overflow: hidden;
+
+        text-overflow: ellipsis;
     }
 
 
     #susieGlitch {
+        display: none;
+    }
 
-        display:
-            none;
 
+    #pipisButton {
+        font-size: 13px;
+
+        padding: 13px 18px;
+    }
+
+
+    #catDiscovery {
+        width: 90vw;
+
+        padding: 18px;
+    }
+
+
+    .catDiscoveryText {
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLAS MUY PEQUEÑAS
+========================================================= */
+
+@media (max-width: 420px) {
+
+    #friendDestroyerButton {
+        max-width: 125px;
+
+        font-size: 6px;
+
+        padding: 8px;
+    }
+
+
+    #secretRoomButton {
+        max-width: 125px;
+
+        font-size: 6px;
+
+        padding: 8px;
+    }
+
+
+    .achievement {
+        width: 36px;
+
+        height: 36px;
+
+        flex-basis: 36px;
+
+        font-size: 16px;
+    }
+
+
+    #musicButton {
+        font-size: 7px;
     }
 
 }
