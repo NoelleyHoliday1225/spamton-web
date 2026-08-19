@@ -160,7 +160,7 @@
 
 
 <!-- =====================================================
-     MUSICA
+     MUSICA NORMAL
 ===================================================== -->
 
 <div id="musicBox">
@@ -297,7 +297,7 @@
             id="characterMusicButton"
             type="button"
         >
-            [ MUSIC ]
+            [ PLAY MUSIC ]
         </button>
 
 
@@ -539,6 +539,11 @@ document.addEventListener(
 
         /* =================================================
            DETENER TODA LA MUSICA
+           
+           IMPORTANTE:
+           NO borramos currentCharacterMusic aquí.
+           Esto permite que el botón PLAY MUSIC de
+           Berdly/Susie siga sabiendo qué canción usar.
         ================================================= */
 
         function stopAllMusic() {
@@ -557,7 +562,6 @@ document.addEventListener(
 
             musicIsPlaying = false;
 
-            currentCharacterMusic = null;
 
             musicButton.classList.remove(
                 "music-on"
@@ -574,8 +578,10 @@ document.addEventListener(
 
             stopAllMusic();
 
+
             const promise =
                 normalMusic.play();
+
 
             if (promise) {
 
@@ -584,6 +590,10 @@ document.addEventListener(
 
                         musicIsPlaying = true;
 
+                        musicButton.classList.add(
+                            "music-on"
+                        );
+
                         updateMusicButton();
 
                     }
@@ -591,6 +601,10 @@ document.addEventListener(
                     function () {
 
                         musicIsPlaying = false;
+
+                        musicButton.classList.remove(
+                            "music-on"
+                        );
 
                         updateMusicButton();
 
@@ -610,8 +624,10 @@ document.addEventListener(
 
             stopAllMusic();
 
+
             const promise =
                 bigShotMusic.play();
+
 
             if (promise) {
 
@@ -620,6 +636,10 @@ document.addEventListener(
 
                         musicIsPlaying = true;
 
+                        musicButton.classList.add(
+                            "music-on"
+                        );
+
                         updateMusicButton();
 
                     }
@@ -627,6 +647,10 @@ document.addEventListener(
                     function () {
 
                         musicIsPlaying = false;
+
+                        musicButton.classList.remove(
+                            "music-on"
+                        );
 
                         updateMusicButton();
 
@@ -639,7 +663,7 @@ document.addEventListener(
 
 
         /* =================================================
-           BOTON MUSICA
+           BOTON MUSICA PRINCIPAL
         ================================================= */
 
         function updateMusicButton() {
@@ -763,7 +787,11 @@ document.addEventListener(
 
         achievementBerdly.addEventListener(
             "click",
-            function () {
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
 
                 openCharacterMenu(
                     "BERDLY",
@@ -782,7 +810,11 @@ document.addEventListener(
 
         achievementSusie.addEventListener(
             "click",
-            function () {
+            function (event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
 
                 openCharacterMenu(
                     "SUSIE",
@@ -809,6 +841,11 @@ document.addEventListener(
             currentCharacter =
                 name;
 
+
+            /*
+             * GUARDAMOS LA MUSICA ANTES DE DETENER
+             * LAS DEMAS.
+             */
             currentCharacterMusic =
                 music;
 
@@ -847,6 +884,8 @@ document.addEventListener(
 
         /* =================================================
            MUSICA DEL PERSONAJE
+           
+           ESTA ES LA PARTE PRINCIPALMENTE CORREGIDA.
         ================================================= */
 
         characterMusicButton.addEventListener(
@@ -857,38 +896,74 @@ document.addEventListener(
                 event.stopPropagation();
 
 
-                if (!currentCharacterMusic) {
+                /*
+                 * Si no hay personaje seleccionado,
+                 * no hacemos nada.
+                 */
+                if (!currentCharacter) {
                     return;
                 }
 
 
-                if (
-                    !currentCharacterMusic.paused
-                ) {
-
-                    currentCharacterMusic.pause();
-
-                    currentCharacterMusic.currentTime =
-                        0;
-
-                    characterMusicButton.textContent =
-                        "[ PLAY MUSIC ]";
-
-                    return;
-
-                }
-
-
-                stopAllMusic();
-
-
-                currentCharacterMusic =
+                /*
+                 * Determinamos directamente qué música
+                 * corresponde al personaje.
+                 *
+                 * Así no dependemos de que
+                 * currentCharacterMusic haya sobrevivido
+                 * a stopAllMusic().
+                 */
+                const selectedMusic =
                     currentCharacter === "BERDLY"
                     ? berdlyMusic
                     : susieMusic;
 
 
-                currentCharacterMusic.play()
+                /*
+                 * Si esta música ya está sonando,
+                 * la detenemos.
+                 */
+                if (
+                    !selectedMusic.paused
+                ) {
+
+                    selectedMusic.pause();
+
+                    selectedMusic.currentTime =
+                        0;
+
+
+                    characterMusicButton.textContent =
+                        "[ PLAY MUSIC ]";
+
+
+                    return;
+
+                }
+
+
+                /*
+                 * Guardamos la referencia correcta.
+                 */
+                currentCharacterMusic =
+                    selectedMusic;
+
+
+                /*
+                 * Detenemos cualquier otra música.
+                 */
+                stopAllMusic();
+
+
+                /*
+                 * IMPORTANTE:
+                 * stopAllMusic() ya no borra
+                 * currentCharacterMusic.
+                 */
+
+
+                currentCharacterMusic
+                    .play()
                     .then(
                         function () {
 
@@ -898,7 +973,13 @@ document.addEventListener(
                         }
                     )
                     .catch(
-                        function () {
+                        function (error) {
+
+                            console.error(
+                                "No se pudo reproducir la música:",
+                                error
+                            );
+
 
                             characterMusicButton.textContent =
                                 "[ PLAY MUSIC ]";
@@ -911,7 +992,7 @@ document.addEventListener(
 
 
         /* =================================================
-           CLOSE — ARREGLADO
+           CLOSE
         ================================================= */
 
         characterCloseButton.addEventListener(
@@ -920,6 +1001,7 @@ document.addEventListener(
 
                 event.preventDefault();
                 event.stopPropagation();
+
 
                 closeCharacterMenu();
 
@@ -934,6 +1016,9 @@ document.addEventListener(
             );
 
 
+            /*
+             * Detenemos cualquier música del personaje.
+             */
             if (currentCharacterMusic) {
 
                 currentCharacterMusic.pause();
@@ -944,15 +1029,33 @@ document.addEventListener(
             }
 
 
+            /*
+             * Por seguridad también detenemos
+             * cualquier otra música.
+             */
+            berdlyMusic.pause();
+            susieMusic.pause();
+
+
+            berdlyMusic.currentTime = 0;
+            susieMusic.currentTime = 0;
+
+
             currentCharacterMusic =
                 null;
+
 
             currentCharacter =
                 null;
 
 
+            characterMusicButton.textContent =
+                "[ PLAY MUSIC ]";
+
+
             characterImage.src =
                 "";
+
 
             characterBackground.style.backgroundImage =
                 "none";
@@ -1280,6 +1383,10 @@ document.addEventListener(
             }
         );
 
+
+        /* =================================================
+           INICIO
+        ================================================= */
 
         updateMusicButton();
 
