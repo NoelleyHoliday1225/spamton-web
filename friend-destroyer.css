@@ -1,3 +1,7 @@
+/* =====================================================
+   FUENTE
+===================================================== */
+
 @import url(
     'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
 );
@@ -19,6 +23,7 @@ body {
     margin: 0;
 
     width: 100%;
+
     height: 100%;
 
     overflow: hidden;
@@ -32,56 +37,79 @@ body {
 }
 
 
+/* =====================================================
+   FONDO
+===================================================== */
+
 body {
 
-    background:
-        url("spamton-cielo.png")
-        center / cover
-        no-repeat;
+    background-image:
+        url("spamton-cielo.png");
 
-    color: white;
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
 
 }
 
 
+
 /* =====================================================
-   PANTALLA INICIO
+   PANTALLA DE INICIO
 ===================================================== */
 
 #startScreen {
 
-    position: fixed;
+    position:
+        fixed;
 
     inset: 0;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
-        rgba(0,0,0,.45);
+        rgba(0, 0, 0, 0.35);
 
-    z-index: 99999;
+    z-index:
+        9999;
 
 }
 
 
 .startBox {
 
-    width: 520px;
+    width:
+        520px;
 
-    max-width: 90vw;
+    max-width:
+        90%;
 
-    padding: 35px;
+    padding:
+        35px;
 
-    text-align: center;
+    text-align:
+        center;
+
+    color:
+        white;
 
     background:
-        rgba(0,0,0,.94);
+        rgba(0, 0, 0, 0.92);
 
-    border: 4px solid white;
+    border:
+        4px solid white;
 
     box-shadow:
         10px 10px 0 #ff00ff,
@@ -90,40 +118,38 @@ body {
 }
 
 
-.warning {
+.startBox h1 {
 
-    color: #ff00ff;
+    font-size:
+        28px;
 
-    margin-bottom: 15px;
+    line-height:
+        1.6;
 
 }
 
 
-.startBox h1 {
+.warning {
 
-    font-size: 28px;
+    color:
+        #ff00ff;
 
-    line-height: 1.5;
+    margin-bottom:
+        20px;
 
 }
 
 
 .startBox p {
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    line-height: 2;
-
-}
-
-
-.startStats {
-
-    margin: 25px 0;
-
-    font-size: 12px;
+    line-height:
+        2;
 
 }
+
 
 
 /* =====================================================
@@ -147,7 +173,7 @@ button,
         3px solid white;
 
     padding:
-        14px 18px;
+        15px 20px;
 
     cursor:
         pointer;
@@ -160,6 +186,9 @@ button,
 
     box-shadow:
         5px 5px 0 #ff00ff;
+
+    user-select:
+        none;
 
 }
 
@@ -176,15 +205,13 @@ button:hover,
 }
 
 
-button:active {
+#startButton {
 
-    transform:
-        translate(
-            3px,
-            3px
-        );
+    margin-top:
+        20px;
 
 }
+
 
 
 /* =====================================================
@@ -196,43 +223,45 @@ button:active {
     display:
         none;
 
-    position:
-        fixed;
-
-    inset:
-        0;
-
     width:
         100vw;
 
     height:
         100vh;
 
+    position:
+        relative;
+
 }
 
 
+
 /* =====================================================
-   SALIR
+   BOTÓN SALIR
 ===================================================== */
 
 #exitGameButton {
 
     position:
-        absolute;
+        fixed;
 
     top:
-        15px;
+        12px;
 
     right:
-        15px;
+        12px;
 
     z-index:
-        9000;
+        7000;
 
     font-size:
         10px;
 
+    padding:
+        10px;
+
 }
+
 
 
 /* =====================================================
@@ -251,16 +280,19 @@ button:active {
         15px;
 
     right:
-        140px;
+        15px;
 
     display:
         flex;
 
+    justify-content:
+        space-between;
+
     gap:
-        10px;
+        8px;
 
     z-index:
-        8000;
+        5000;
 
 }
 
@@ -268,13 +300,16 @@ button:active {
 .hudBox {
 
     background:
-        rgba(0,0,0,.88);
+        rgba(0, 0, 0, 0.88);
+
+    color:
+        white;
 
     border:
         3px solid white;
 
     padding:
-        10px 14px;
+        12px 16px;
 
     font-size:
         11px;
@@ -285,8 +320,9 @@ button:active {
 }
 
 
+
 /* =====================================================
-   ÁREA DE JUEGO
+   ÁREA DEL JUEGO
 ===================================================== */
 
 #gameArea {
@@ -298,13 +334,13 @@ button:active {
         900px;
 
     height:
-        620px;
+        650px;
 
     max-width:
-        94vw;
+        92vw;
 
     max-height:
-        82vh;
+        78vh;
 
     left:
         50%;
@@ -322,7 +358,7 @@ button:active {
         hidden;
 
     background:
-        rgba(0,0,0,.68);
+        rgba(0, 0, 0, 0.64);
 
     border:
         5px solid white;
@@ -331,7 +367,11 @@ button:active {
         12px 12px 0 #ff00ff,
         -8px -8px 0 #00ffff;
 
+    touch-action:
+        none;
+
 }
+
 
 
 /* =====================================================
@@ -344,24 +384,25 @@ button:active {
         absolute;
 
     left:
-        4%;
+        5%;
 
     right:
-        4%;
+        5%;
 
     bottom:
-        4%;
+        5%;
 
     height:
         18%;
 
     background:
-        rgba(0,0,0,.65);
+        rgba(0, 0, 0, 0.75);
 
     border:
         3px solid #222;
 
 }
+
 
 
 /* =====================================================
@@ -377,7 +418,7 @@ button:active {
         120px;
 
     max-width:
-        16%;
+        none;
 
     transform:
         translate(
@@ -386,7 +427,7 @@ button:active {
         );
 
     z-index:
-        4000;
+        1000;
 
     user-select:
         none;
@@ -400,12 +441,17 @@ button:active {
 }
 
 
+
+/* =====================================================
+   DAÑO SPAMTON
+===================================================== */
+
 .playerHit {
 
     animation:
         playerDamage
-        .3s
-        linear;
+        0.4s
+        steps(4);
 
 }
 
@@ -413,27 +459,50 @@ button:active {
 @keyframes playerDamage {
 
     0% {
+
         filter:
             brightness(1);
+
     }
 
-    50% {
+    25% {
+
         filter:
             brightness(3)
             sepia(1)
-            hue-rotate(300deg);
+            hue-rotate(290deg);
+
+    }
+
+    50% {
+
+        filter:
+            brightness(1);
+
+    }
+
+    75% {
+
+        filter:
+            brightness(3)
+            sepia(1)
+            hue-rotate(290deg);
+
     }
 
     100% {
+
         filter:
             brightness(1);
+
     }
 
 }
 
 
+
 /* =====================================================
-   FRIENDS
+   FRIEND
 ===================================================== */
 
 .friend {
@@ -444,9 +513,6 @@ button:active {
     width:
         80px;
 
-    max-width:
-        11%;
-
     transform:
         translate(
             -50%,
@@ -454,7 +520,7 @@ button:active {
         );
 
     z-index:
-        3000;
+        500;
 
     image-rendering:
         pixelated;
@@ -462,20 +528,24 @@ button:active {
     user-select:
         none;
 
+    pointer-events:
+        none;
+
 }
 
 
 .friend-red {
 
-    width:
-        90px;
-
-    max-width:
-        12%;
-
     filter:
-        hue-rotate(320deg)
-        saturate(3);
+        hue-rotate(
+            320deg
+        )
+        saturate(
+            4
+        );
+
+    width:
+        88px;
 
 }
 
@@ -483,34 +553,12 @@ button:active {
 .friend-glitch {
 
     width:
-        100px;
-
-    max-width:
-        13%;
-
-    filter:
-        contrast(1.5)
-        saturate(2);
+        94px;
 
     animation:
         glitchFriend
-        .18s
+        0.16s
         infinite;
-
-}
-
-
-.boss {
-
-    width:
-        190px !important;
-
-    max-width:
-        22% !important;
-
-    filter:
-        contrast(1.4)
-        saturate(1.5);
 
 }
 
@@ -518,36 +566,163 @@ button:active {
 @keyframes glitchFriend {
 
     0% {
+
         transform:
-            translate(-50%,-50%)
-            translateX(-4px);
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-5px);
+
+        filter:
+            hue-rotate(0deg)
+            saturate(2);
+
+    }
+
+    25% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(6px);
+
+        filter:
+            hue-rotate(90deg)
+            saturate(5);
+
     }
 
     50% {
+
         transform:
-            translate(-50%,-50%)
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-3px);
+
+        filter:
+            hue-rotate(180deg)
+            saturate(4);
+
+    }
+
+    75% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
             translateX(5px);
+
+        filter:
+            hue-rotate(270deg)
+            saturate(5);
+
     }
 
     100% {
+
         transform:
-            translate(-50%,-50%)
-            translateX(-4px);
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-5px);
+
+        filter:
+            hue-rotate(360deg)
+            saturate(3);
+
     }
 
 }
 
 
-.hit {
+
+/* =====================================================
+   BOSS
+===================================================== */
+
+.boss {
+
+    width:
+        220px !important;
 
     filter:
-        brightness(3);
+        contrast(1.4)
+        saturate(1.7);
+
+    animation:
+        bossGlitch
+        0.45s
+        infinite;
 
 }
 
 
+@keyframes bossGlitch {
+
+    0% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+    25% {
+
+        transform:
+            translate(
+                -53%,
+                -50%
+            );
+
+    }
+
+    50% {
+
+        transform:
+            translate(
+                -47%,
+                -50%
+            );
+
+    }
+
+    75% {
+
+        transform:
+            translate(
+                -52%,
+                -50%
+            );
+
+    }
+
+    100% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+}
+
+
+
 /* =====================================================
-   BALAS
+   BALAS PIPIS
 ===================================================== */
 
 .bullet {
@@ -565,19 +740,33 @@ button:active {
         );
 
     z-index:
-        3500;
-
-    pointer-events:
-        none;
+        800;
 
     image-rendering:
         pixelated;
 
+    pointer-events:
+        none;
+
 }
 
 
+.tripleBullet {
+
+    filter:
+        hue-rotate(
+            25deg
+        )
+        saturate(
+            2
+        );
+
+}
+
+
+
 /* =====================================================
-   PIPIS POWER UPS
+   POWER UPS
 ===================================================== */
 
 .powerUp {
@@ -586,7 +775,7 @@ button:active {
         absolute;
 
     width:
-        58px;
+        52px;
 
     transform:
         translate(
@@ -595,51 +784,218 @@ button:active {
         );
 
     z-index:
-        5000;
+        2500;
 
     image-rendering:
         pixelated;
 
+    pointer-events:
+        none;
+
     animation:
-        powerFloat
-        .8s
-        infinite
-        alternate;
+        powerUpFloat
+        0.8s
+        steps(3)
+        infinite;
 
 }
 
 
-.greenPower {
+.power-green {
+
+    /*
+     * Mismo pipis.gif,
+     * convertido visualmente a verde.
+     */
 
     filter:
-        hue-rotate(90deg)
-        saturate(2);
+        hue-rotate(
+            90deg
+        )
+        saturate(
+            5
+        )
+        brightness(
+            1.2
+        );
 
 }
 
 
-.glitchPower {
+.power-glitch {
+
+    /*
+     * Mismo pipis.gif,
+     * convertido visualmente en glitch.
+     */
 
     filter:
-        contrast(1.5)
-        saturate(2);
+        hue-rotate(
+            270deg
+        )
+        saturate(
+            5
+        )
+        contrast(
+            2
+        );
+
+    animation:
+        glitchPower
+        0.12s
+        infinite;
 
 }
 
 
-@keyframes powerFloat {
+@keyframes powerUpFloat {
+
+    0% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateY(-10px);
+
+    }
+
+    100% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes glitchPower {
+
+    0% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-5px);
+
+    }
+
+    25% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(5px);
+
+    }
+
+    50% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateY(-4px);
+
+    }
+
+    75% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            translateX(-4px);
+
+    }
+
+    100% {
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   PIPIS DE CURACIÓN / EVENTO
+===================================================== */
+
+.healingPipis {
+
+    position:
+        absolute;
+
+    width:
+        50px;
+
+    animation:
+        pipisFall
+        4s
+        linear;
+
+    z-index:
+        2000;
+
+    pointer-events:
+        none;
+
+}
+
+
+@keyframes pipisFall {
 
     from {
-        margin-top:
-            -5px;
+
+        top:
+            -10%;
+
+        transform:
+            rotate(0deg);
+
     }
 
     to {
-        margin-top:
-            5px;
+
+        top:
+            110%;
+
+        transform:
+            rotate(360deg);
+
     }
 
 }
+
 
 
 /* =====================================================
@@ -658,13 +1014,13 @@ button:active {
         0;
 
     border-left:
-        13px solid transparent;
+        18px solid transparent;
 
     border-right:
-        13px solid transparent;
+        18px solid transparent;
 
     border-bottom:
-        28px solid black;
+        35px solid black;
 
     transform:
         translate(
@@ -673,10 +1029,18 @@ button:active {
         );
 
     z-index:
-        3200;
+        1500;
+
+    pointer-events:
+        none;
 
 }
 
+
+
+/* =====================================================
+   COLA GLITCH
+===================================================== */
 
 .glitchTail {
 
@@ -684,46 +1048,126 @@ button:active {
         absolute;
 
     width:
-        14px;
+        18px;
 
     height:
-        14px;
+        18px;
 
     background:
-        #ff00ff;
+        black;
 
     border:
-        2px solid white;
+        2px solid #ff00ff;
 
     transform:
         translate(
             -50%,
             -50%
-        );
+        )
+        rotate(45deg);
 
     z-index:
-        3200;
+        450;
+
+    opacity:
+        0.8;
+
+    pointer-events:
+        none;
+
+    animation:
+        tailFade
+        0.7s
+        linear forwards;
 
 }
 
 
+@keyframes tailFade {
+
+    0% {
+
+        opacity:
+            0.9;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(1)
+            rotate(45deg);
+
+    }
+
+    100% {
+
+        opacity:
+            0;
+
+        transform:
+            translate(
+                -50%,
+                -50%
+            )
+            scale(0.2)
+            rotate(180deg);
+
+    }
+
+}
+
+
+
 /* =====================================================
-   CONTROLES
+   BOTÓN SHOOT
+   FUNCIONA EN PC Y MOBILE
+===================================================== */
+
+#shootButton {
+
+    position:
+        absolute;
+
+    right:
+        25px;
+
+    bottom:
+        25px;
+
+    z-index:
+        6000;
+
+    width:
+        150px;
+
+    height:
+        65px;
+
+    font-size:
+        12px;
+
+    touch-action:
+        none;
+
+}
+
+
+
+/* =====================================================
+   CONTROLES MOBILE
 ===================================================== */
 
 #mobileControls {
 
     position:
-        fixed;
+        absolute;
 
     inset:
-        auto 0 20px 0;
-
-    height:
-        170px;
+        0;
 
     z-index:
-        10000;
+        5500;
 
     pointer-events:
         none;
@@ -737,33 +1181,16 @@ button:active {
         absolute;
 
     left:
-        30px;
+        25px;
 
     bottom:
-        10px;
+        25px;
 
     width:
-        140px;
+        135px;
 
     height:
-        140px;
-
-    pointer-events:
-        auto;
-
-}
-
-
-#joystickBase {
-
-    position:
-        absolute;
-
-    width:
-        140px;
-
-    height:
-        140px;
+        135px;
 
     border:
         4px solid white;
@@ -772,30 +1199,44 @@ button:active {
         50%;
 
     background:
-        rgba(0,0,0,.55);
+        rgba(
+            0,
+            0,
+            0,
+            0.55
+        );
 
-    box-shadow:
-        6px 6px 0 #ff00ff;
+    pointer-events:
+        auto;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    touch-action:
+        none;
 
 }
 
 
 #joystickKnob {
 
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
     width:
         58px;
 
     height:
         58px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
 
     border:
         4px solid white;
@@ -804,10 +1245,12 @@ button:active {
         50%;
 
     background:
-        #ff00ff;
-
-    box-shadow:
-        4px 4px 0 #00ffff;
+        rgba(
+            255,
+            0,
+            255,
+            0.75
+        );
 
     pointer-events:
         none;
@@ -815,87 +1258,53 @@ button:active {
 }
 
 
-#fireButton {
+#mobileShoot {
 
     position:
         absolute;
 
     right:
-        35px;
-
-    bottom:
         25px;
 
+    bottom:
+        105px;
+
     width:
-        120px;
+        75px;
 
     height:
-        120px;
+        75px;
+
+    border:
+        4px solid white;
 
     border-radius:
         50%;
 
-    font-size:
-        14px;
-
     background:
-        #ff00ff;
+        #000;
 
-    box-shadow:
-        7px 7px 0 #00ffff;
+    color:
+        white;
+
+    font-size:
+        20px;
+
+    padding:
+        0;
 
     pointer-events:
         auto;
 
-}
-
-
-#fireButton:active {
-
-    transform:
-        scale(.92);
+    touch-action:
+        none;
 
 }
+
 
 
 /* =====================================================
-   POWER HUD
-===================================================== */
-
-#powerUpDisplay {
-
-    position:
-        fixed;
-
-    left:
-        50%;
-
-    bottom:
-        20px;
-
-    transform:
-        translateX(-50%);
-
-    z-index:
-        11000;
-
-    padding:
-        10px 15px;
-
-    background:
-        rgba(0,0,0,.9);
-
-    border:
-        3px solid white;
-
-    font-size:
-        10px;
-
-}
-
-
-/* =====================================================
-   EVENTO
+   MENSAJE EVENTO
 ===================================================== */
 
 #eventMessage {
@@ -907,7 +1316,7 @@ button:active {
         50%;
 
     top:
-        22%;
+        20%;
 
     transform:
         translate(
@@ -931,7 +1340,7 @@ button:active {
         6px 6px 0 #00ffff;
 
     font-size:
-        16px;
+        17px;
 
     text-align:
         center;
@@ -943,7 +1352,7 @@ button:active {
         none;
 
     z-index:
-        20000;
+        9000;
 
 }
 
@@ -954,6 +1363,7 @@ button:active {
         1;
 
 }
+
 
 
 /* =====================================================
@@ -971,8 +1381,15 @@ button:active {
     top:
         50%;
 
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(0.5);
+
     width:
-        520px;
+        500px;
 
     max-width:
         90vw;
@@ -980,18 +1397,11 @@ button:active {
     padding:
         30px;
 
-    transform:
-        translate(
-            -50%,
-            -50%
-        )
-        scale(.5);
-
-    opacity:
-        0;
-
     background:
         #000;
+
+    color:
+        white;
 
     border:
         5px solid white;
@@ -1004,16 +1414,19 @@ button:active {
         center;
 
     font-size:
-        16px;
+        18px;
 
     line-height:
-        1.7;
+        1.8;
+
+    opacity:
+        0;
 
     z-index:
-        50000;
+        10000;
 
     transition:
-        .35s;
+        0.4s;
 
 }
 
@@ -1033,16 +1446,16 @@ button:active {
 }
 
 
-.achievementImage {
+.achievementCharacter {
 
     display:
         block;
 
     width:
-        180px;
+        190px;
 
     max-height:
-        180px;
+        190px;
 
     object-fit:
         contain;
@@ -1056,12 +1469,13 @@ button:active {
 }
 
 
+
 /* =====================================================
    RESPONSIVE
 ===================================================== */
 
 @media (
-    max-width: 700px
+    max-width: 900px
 ) {
 
     #hud {
@@ -1075,11 +1489,11 @@ button:active {
         right:
             8px;
 
-        gap:
-            5px;
-
         flex-wrap:
             wrap;
+
+        justify-content:
+            center;
 
     }
 
@@ -1087,27 +1501,10 @@ button:active {
     .hudBox {
 
         font-size:
-            8px;
-
-        padding:
             7px;
 
-    }
-
-
-    #exitGameButton {
-
-        top:
-            100px;
-
-        right:
-            10px;
-
-        font-size:
-            8px;
-
         padding:
-            8px;
+            7px 9px;
 
     }
 
@@ -1115,13 +1512,13 @@ button:active {
     #gameArea {
 
         width:
-            96vw;
+            94vw;
 
         height:
-            65vh;
+            72vh;
 
-        top:
-            45%;
+        max-height:
+            72vh;
 
     }
 
@@ -1129,10 +1526,7 @@ button:active {
     #player {
 
         width:
-            100px;
-
-        max-width:
-            20%;
+            105px;
 
     }
 
@@ -1141,9 +1535,6 @@ button:active {
 
         width:
             70px;
-
-        max-width:
-            16%;
 
     }
 
@@ -1159,7 +1550,7 @@ button:active {
     .friend-glitch {
 
         width:
-            85px;
+            84px;
 
     }
 
@@ -1167,12 +1558,20 @@ button:active {
     .boss {
 
         width:
-            150px !important;
+            180px !important;
 
     }
 
 
-    #mobileControls {
+    #shootButton {
+
+        display:
+            none;
+
+    }
+
+
+    #mobileShoot {
 
         display:
             block;
@@ -1182,30 +1581,57 @@ button:active {
 
     #joystick {
 
-        left:
-            15px;
+        display:
+            block;
 
-        bottom:
-            5px;
+    }
+
+}
+
+
+@media (
+    min-width: 901px
+) {
+
+    #mobileControls {
+
+        display:
+            none;
 
     }
 
 
-    #fireButton {
+    #shootButton {
 
-        right:
-            20px;
+        display:
+            block;
 
-        bottom:
-            15px;
+    }
+
+}
+
+
+@media (
+    max-width: 600px
+) {
+
+    .startBox {
+
+        padding:
+            22px;
 
     }
 
 
-    #powerUpDisplay {
+    .startBox h1 {
 
-        bottom:
-            15px;
+        font-size:
+            19px;
+
+    }
+
+
+    .startBox p {
 
         font-size:
             8px;
@@ -1213,69 +1639,41 @@ button:active {
     }
 
 
-    .achievementPopup {
+    #exitGameButton {
 
         font-size:
-            11px;
+            7px;
 
         padding:
-            20px;
+            8px;
 
     }
 
-}
-
-
-@media (
-    min-width: 701px
-) {
-
-    /*
-     * En PC también se muestran
-     * los controles táctiles.
-     */
-
-    #mobileControls {
-
-        display:
-            block;
-
-        opacity:
-            .65;
-
-    }
-
-}
-
-
-@media (
-    max-height: 650px
-) {
 
     #gameArea {
 
+        top:
+            53%;
+
         height:
-            58vh;
+            68vh;
 
     }
 
 
-    #mobileControls {
-
-        height:
-            130px;
-
-    }
-
-
-    #joystick,
-    #joystickBase {
+    #joystick {
 
         width:
-            110px;
+            115px;
 
         height:
-            110px;
+            115px;
+
+        left:
+            15px;
+
+        bottom:
+            15px;
 
     }
 
@@ -1283,21 +1681,38 @@ button:active {
     #joystickKnob {
 
         width:
-            45px;
+            50px;
 
         height:
-            45px;
+            50px;
 
     }
 
 
-    #fireButton {
+    #mobileShoot {
+
+        right:
+            15px;
+
+        bottom:
+            90px;
 
         width:
-            95px;
+            68px;
 
         height:
-            95px;
+            68px;
+
+    }
+
+
+    .achievementPopup {
+
+        font-size:
+            12px;
+
+        padding:
+            20px;
 
     }
 
