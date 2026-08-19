@@ -854,6 +854,177 @@ body.big-shot-mode #musicButton.music-on {
     image-rendering: pixelated;
 }
 
+/* =====================================================
+   MENUS DE LOGROS
+===================================================== */
+
+.achievementMenu {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(0, 0, 0, 0.75);
+
+    z-index: 99999;
+
+}
+
+
+.achievementMenu.show {
+
+    display: flex;
+
+}
+
+
+.achievementMenuBox {
+
+    width: 500px;
+
+    max-width: 90vw;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        rgba(0, 0, 0, 0.95);
+
+    border:
+        4px solid white;
+
+    box-shadow:
+        10px 10px 0 #ff00ff,
+        -8px -8px 0 #00ffff;
+
+    animation:
+        achievementAppear
+        0.25s
+        ease-out;
+
+}
+
+
+.achievementMenuIcon {
+
+    font-size: 70px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.achievementMenuBox h2 {
+
+    margin:
+        0 0 20px;
+
+    font-size:
+        26px;
+
+}
+
+
+.achievementMenuBox p {
+
+    font-size:
+        11px;
+
+    line-height:
+        2;
+
+}
+
+
+.achievementMenuSmall {
+
+    color:
+        #aaa;
+
+    margin-top:
+        25px;
+
+}
+
+
+.closeAchievement {
+
+    margin-top:
+        20px;
+
+    font-family:
+        'Press Start 2P',
+        cursive;
+
+    font-size:
+        10px;
+
+    color:
+        white;
+
+    background:
+        #000;
+
+    border:
+        3px solid white;
+
+    padding:
+        14px 20px;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        5px 5px 0 #ff00ff;
+
+}
+
+
+.closeAchievement:hover {
+
+    background:
+        #ff00ff;
+
+    color:
+        #000;
+
+}
+
+
+@keyframes achievementAppear {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            scale(0.7);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
 
 /* =========================================================
    ASEGURAR QUE LOS ENLACES SEAN CLICKEABLES
