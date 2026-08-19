@@ -19,6 +19,7 @@
 
 </head>
 
+
 <body>
 
 
@@ -43,19 +44,30 @@
         </p>
 
         <p>
-            PC: W A S D + Z
+            W A S D = MOVE
         </p>
 
         <p>
-            MOBILE: JOYSTICK + FIRE
+            Z = SHOOT
         </p>
+
+        <p>
+            MOBILE:
+            JOYSTICK + SHOOT
+        </p>
+
 
         <div class="startStats">
 
-            TOTAL KILLS:
-            <span id="startTotalKills">0</span>
+            <div>
+                TOTAL KILLS:
+                <span id="startTotalKills">
+                    0
+                </span>
+            </div>
 
         </div>
+
 
         <button
             id="startButton"
@@ -64,8 +76,10 @@
             [ START GAME ]
         </button>
 
+
         <br>
         <br>
+
 
         <a
             href="index.html"
@@ -88,14 +102,14 @@
 
 
     <!-- =================================================
-         BOTÓN SALIR
+         SALIR
     ================================================== -->
 
     <button
         id="exitGameButton"
         type="button"
     >
-        [ EXIT ]
+        [ EXIT GAME ]
     </button>
 
 
@@ -161,7 +175,13 @@
 
     <div id="gameArea">
 
+
         <div id="platform"></div>
+
+
+        <!-- =================================================
+             SPAMTON
+        ================================================== -->
 
         <img
             src="spamton-gun-game.gif"
@@ -169,72 +189,87 @@
             alt="Spamton"
         >
 
+
+        <!-- =================================================
+             FRIENDS
+        ================================================== -->
+
         <div id="friends"></div>
+
+
+        <!-- =================================================
+             PIPIS
+        ================================================== -->
 
         <div id="pipisRain"></div>
 
+
+        <!-- =================================================
+             BALAS
+        ================================================== -->
+
         <div id="bullets"></div>
+
+
+        <!-- =================================================
+             TRIÁNGULOS
+        ================================================== -->
 
         <div id="triangles"></div>
 
-    </div>
+
+        <!-- =================================================
+             POWER UPS
+        ================================================== -->
+
+        <div id="powerUps"></div>
 
 
 
-    <!-- =================================================
-         CONTROLES
-    ================================================== -->
+        <!-- =================================================
+             JOYSTICK
+        ================================================== -->
 
-    <div id="mobileControls">
+        <div id="mobileControls">
 
-
-        <!-- JOYSTICK -->
-
-        <div id="joystick">
-
-            <div id="joystickBase">
+            <div id="joystick">
 
                 <div id="joystickKnob"></div>
 
             </div>
 
+
+            <button
+                id="mobileShoot"
+                type="button"
+            >
+                Z
+            </button>
+
         </div>
 
 
-        <!-- DISPARO -->
+        <!-- =================================================
+             BOTÓN DISPARAR PC / MOBILE
+        ================================================== -->
 
         <button
-            id="fireButton"
+            id="shootButton"
             type="button"
         >
-            FIRE
+            [ SHOOT ]
         </button>
+
 
     </div>
 
 
 
     <!-- =================================================
-         EVENTO
+         MENSAJE EVENTO
     ================================================== -->
 
     <div id="eventMessage"></div>
-
-
-
-    <!-- =================================================
-         POWER UP ACTIVO
-    ================================================== -->
-
-    <div id="powerUpDisplay">
-
-        POWER:
-
-        <span id="powerUpText">
-            NONE
-        </span>
-
-    </div>
 
 
 </div>
@@ -252,6 +287,11 @@
     preload="auto"
 ></audio>
 
+
+
+<!-- =====================================================
+     RISA FRIEND
+===================================================== -->
 
 <audio
     id="friendLaugh"
@@ -297,6 +337,9 @@ const trianglesContainer =
 const pipisContainer =
     document.getElementById("pipisRain");
 
+const powerUpsContainer =
+    document.getElementById("powerUps");
+
 const playerHPText =
     document.getElementById("playerHP");
 
@@ -321,17 +364,17 @@ const gameMusic =
 const friendLaugh =
     document.getElementById("friendLaugh");
 
-const fireButton =
-    document.getElementById("fireButton");
+const shootButton =
+    document.getElementById("shootButton");
 
-const joystickBase =
-    document.getElementById("joystickBase");
+const mobileShoot =
+    document.getElementById("mobileShoot");
+
+const joystick =
+    document.getElementById("joystick");
 
 const joystickKnob =
     document.getElementById("joystickKnob");
-
-const powerUpText =
-    document.getElementById("powerUpText");
 
 
 
@@ -343,15 +386,19 @@ const MAX_HP = 450;
 
 const PLAYER_SPEED = 0.42;
 
-const BULLET_SPEED = 1.8;
+const BULLET_SPEED = 1.35;
 
-const NORMAL_DAMAGE = 10;
+const NORMAL_FRIEND_DAMAGE = 10;
 
-const RED_DAMAGE = 15;
+const RED_FRIEND_DAMAGE = 15;
 
-const GLITCH_DAMAGE = 20;
+const GLITCH_FRIEND_DAMAGE = 20;
 
-const BOSS_DAMAGE = 20;
+const FRIEND_SHOT_DAMAGE = 10;
+
+const PLAYER_DAMAGE_COOLDOWN = 3000;
+
+const POWERUP_LIFETIME = 9000;
 
 
 
@@ -365,6 +412,7 @@ let playerHP =
 let kills =
     0;
 
+
 let totalKills =
     parseInt(
         localStorage.getItem(
@@ -372,67 +420,101 @@ let totalKills =
         )
     ) || 0;
 
+
 let gameRunning =
     false;
+
 
 let gameTime =
     0;
 
+
 let timerInterval =
     null;
+
 
 let spawnTimeout =
     null;
 
+
 let gameLoopId =
     null;
+
 
 let eventInterval =
     null;
 
-let keys =
-    {};
 
-let bullets =
-    [];
+let keys = {};
 
-let friends =
-    [];
 
-let triangles =
-    [];
+let bullets = [];
 
-let playerX =
-    50;
 
-let playerY =
-    75;
+let friends = [];
+
+
+let triangles = [];
+
+
+let powerUps = [];
+
+
+let bossActive =
+    false;
+
 
 let lastTime =
     0;
 
+
+let playerX =
+    50;
+
+
+let playerY =
+    75;
+
+
+let aimX =
+    50;
+
+
+let aimY =
+    0;
+
+
 let shootCooldown =
     false;
 
-let tripleShot =
+
+let playerDamageCooldown =
     false;
+
+
+let tripleShotActive =
+    false;
+
+
+let tripleShotTimeout =
+    null;
+
 
 let joystickActive =
     false;
 
+
 let joystickX =
     0;
+
 
 let joystickY =
     0;
 
-let damageCooldown =
-    false;
-
 
 
 /* =====================================================
-   POSICIÓN
+   POSICIÓN INICIAL
 ===================================================== */
 
 function resetPlayerPosition() {
@@ -440,6 +522,10 @@ function resetPlayerPosition() {
     playerX = 50;
 
     playerY = 75;
+
+    aimX = 50;
+
+    aimY = 0;
 
     player.style.left =
         playerX + "%";
@@ -532,6 +618,47 @@ document.addEventListener(
 
 
 /* =====================================================
+   MOUSE PARA APUNTAR
+===================================================== */
+
+gameArea.addEventListener(
+    "mousemove",
+    function(event) {
+
+        if (!gameRunning) {
+            return;
+        }
+
+
+        const rect =
+            gameArea.getBoundingClientRect();
+
+
+        const mouseX =
+            event.clientX -
+            rect.left;
+
+
+        const mouseY =
+            event.clientY -
+            rect.top;
+
+
+        aimX =
+            (mouseX / rect.width) *
+            100;
+
+
+        aimY =
+            (mouseY / rect.height) *
+            100;
+
+    }
+);
+
+
+
+/* =====================================================
    START
 ===================================================== */
 
@@ -546,34 +673,45 @@ function startGame() {
 
     clearGame();
 
+
     startScreen.style.display =
         "none";
+
 
     game.style.display =
         "block";
 
+
     gameRunning =
         true;
+
 
     playerHP =
         MAX_HP;
 
+
     kills =
         0;
+
 
     gameTime =
         0;
 
-    tripleShot =
+
+    bossActive =
         false;
 
-    damageCooldown =
+
+    tripleShotActive =
         false;
 
-    powerUpText.textContent =
-        "NONE";
+
+    playerDamageCooldown =
+        false;
+
 
     resetPlayerPosition();
+
 
     updateHUD();
 
@@ -581,8 +719,10 @@ function startGame() {
     gameMusic.volume =
         0.40;
 
+
     gameMusic.currentTime =
         0;
+
 
     gameMusic.play()
         .catch(
@@ -618,16 +758,18 @@ function startGame() {
                     return;
                 }
 
+
                 if (
-                    Math.random() < 0.20
+                    Math.random() <
+                    0.15
                 ) {
 
-                    spawnPowerUp();
+                    pipisRainEvent();
 
                 }
 
             },
-            12000
+            15000
         );
 
 
@@ -659,25 +801,31 @@ function exitGame() {
     gameRunning =
         false;
 
+
     clearInterval(
         timerInterval
     );
+
 
     clearInterval(
         eventInterval
     );
 
+
     clearTimeout(
         spawnTimeout
     );
 
-    cancelAnimationFrame(
-        gameLoopId
-    );
 
     gameMusic.pause();
 
+
+    gameMusic.currentTime =
+        0;
+
+
     clearGame();
+
 
     window.location.href =
         "index.html";
@@ -698,7 +846,7 @@ function clearGame() {
 
 
     friends.forEach(
-        friend => {
+        function(friend) {
 
             if (
                 friend.parentNode
@@ -712,8 +860,12 @@ function clearGame() {
     );
 
 
+    friends =
+        [];
+
+
     bullets.forEach(
-        bullet => {
+        function(bullet) {
 
             if (
                 bullet.parentNode
@@ -727,8 +879,12 @@ function clearGame() {
     );
 
 
+    bullets =
+        [];
+
+
     triangles.forEach(
-        triangle => {
+        function(triangle) {
 
             if (
                 triangle.parentNode
@@ -742,20 +898,40 @@ function clearGame() {
     );
 
 
+    triangles =
+        [];
+
+
+    powerUps.forEach(
+        function(powerUp) {
+
+            if (
+                powerUp.parentNode
+            ) {
+
+                powerUp.remove();
+
+            }
+
+        }
+    );
+
+
+    powerUps =
+        [];
+
+
     document
         .querySelectorAll(
-            ".healingPipis, .powerUp"
+            ".healingPipis"
         )
         .forEach(
-            element => element.remove()
+            function(pipis) {
+
+                pipis.remove();
+
+            }
         );
-
-
-    friends = [];
-
-    bullets = [];
-
-    triangles = [];
 
 }
 
@@ -775,19 +951,23 @@ function gameLoop(time) {
     const delta =
         time - lastTime;
 
+
     lastTime =
         time;
 
 
     movePlayer();
 
-    updateBullets(delta);
+    updateBullets();
 
-    updateFriends(delta);
+    updateFriends();
 
-    updateTriangles(delta);
+    updateTriangles();
+
+    updatePowerUps();
 
     checkCollisions();
+
 
     gameLoopId =
         requestAnimationFrame(
@@ -799,30 +979,35 @@ function gameLoop(time) {
 
 
 /* =====================================================
-   MOVER JUGADOR
+   MOVER SPAMTON
 ===================================================== */
 
 function movePlayer() {
 
-    let dx = 0;
+    let moveX =
+        0;
 
-    let dy = 0;
+    let moveY =
+        0;
 
 
     if (keys["w"]) {
-        dy -= 1;
+        moveY -= 1;
     }
+
 
     if (keys["s"]) {
-        dy += 1;
+        moveY += 1;
     }
+
 
     if (keys["a"]) {
-        dx -= 1;
+        moveX -= 1;
     }
 
+
     if (keys["d"]) {
-        dx += 1;
+        moveX += 1;
     }
 
 
@@ -830,30 +1015,36 @@ function movePlayer() {
      * JOYSTICK
      */
 
-    dx += joystickX;
+    moveX +=
+        joystickX;
 
-    dy += joystickY;
+    moveY +=
+        joystickY;
 
 
     const length =
         Math.sqrt(
-            dx * dx +
-            dy * dy
+            moveX * moveX +
+            moveY * moveY
         );
 
 
     if (length > 0) {
 
-        dx /= length;
+        moveX /=
+            length;
 
-        dy /= length;
+        moveY /=
+            length;
+
 
         playerX +=
-            dx *
+            moveX *
             PLAYER_SPEED;
 
+
         playerY +=
-            dy *
+            moveY *
             PLAYER_SPEED;
 
     }
@@ -861,9 +1052,9 @@ function movePlayer() {
 
     playerX =
         Math.max(
-            5,
+            6,
             Math.min(
-                95,
+                94,
                 playerX
             )
         );
@@ -881,6 +1072,7 @@ function movePlayer() {
 
     player.style.left =
         playerX + "%";
+
 
     player.style.top =
         playerY + "%";
@@ -916,35 +1108,89 @@ function shoot() {
                 false;
 
         },
-        120
+        110
     );
 
 
-    if (tripleShot) {
+    /*
+     * DIRECCIÓN
+     */
 
-        createBullet(
-            playerX,
-            playerY,
-            -0.12
+    let dx =
+        aimX - playerX;
+
+
+    let dy =
+        aimY - playerY;
+
+
+    let distance =
+        Math.sqrt(
+            dx * dx +
+            dy * dy
         );
 
+
+    /*
+     * Si todavía no se apuntó,
+     * dispara hacia arriba.
+     */
+
+    if (
+        distance < 1
+    ) {
+
+        dx = 0;
+
+        dy = -1;
+
+        distance = 1;
+
+    }
+
+
+    dx /=
+        distance;
+
+    dy /=
+        distance;
+
+
+    /*
+     * DISPARO TRIPLE
+     */
+
+    if (
+        tripleShotActive
+    ) {
+
         createBullet(
-            playerX,
-            playerY,
+            dx,
+            dy,
+            -0.18
+        );
+
+
+        createBullet(
+            dx,
+            dy,
             0
         );
 
+
         createBullet(
-            playerX,
-            playerY,
-            0.12
+            dx,
+            dy,
+            0.18
         );
 
-    } else {
+    }
+
+    else {
 
         createBullet(
-            playerX,
-            playerY,
+            dx,
+            dy,
             0
         );
 
@@ -959,9 +1205,9 @@ function shoot() {
 ===================================================== */
 
 function createBullet(
-    x,
-    y,
-    direction
+    dx,
+    dy,
+    spread
 ) {
 
     const bullet =
@@ -978,21 +1224,78 @@ function createBullet(
         "bullet";
 
 
+    if (
+        tripleShotActive
+    ) {
+
+        bullet.classList.add(
+            "tripleBullet"
+        );
+
+    }
+
+
+    let finalDX =
+        dx;
+
+
+    let finalDY =
+        dy;
+
+
+    /*
+     * Rotación de dirección
+     */
+
+    if (
+        spread !== 0
+    ) {
+
+        const angle =
+            Math.atan2(
+                dy,
+                dx
+            );
+
+
+        const newAngle =
+            angle + spread;
+
+
+        finalDX =
+            Math.cos(
+                newAngle
+            );
+
+
+        finalDY =
+            Math.sin(
+                newAngle
+            );
+
+    }
+
+
     bullet.dataset.x =
-        x;
+        playerX;
 
     bullet.dataset.y =
-        y - 5;
+        playerY;
+
 
     bullet.dataset.dx =
-        direction;
+        finalDX;
+
+    bullet.dataset.dy =
+        finalDY;
 
 
     bullet.style.left =
-        x + "%";
+        playerX + "%";
+
 
     bullet.style.top =
-        (y - 5) + "%";
+        playerY + "%";
 
 
     bulletsContainer.appendChild(
@@ -1024,15 +1327,31 @@ function updateBullets() {
             bullets[i];
 
 
+        if (
+            !bullet.parentNode
+        ) {
+
+            bullets.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
         let x =
             parseFloat(
                 bullet.dataset.x
             );
 
+
         let y =
             parseFloat(
                 bullet.dataset.y
             );
+
 
         const dx =
             parseFloat(
@@ -1040,12 +1359,20 @@ function updateBullets() {
             );
 
 
-        y -=
-            BULLET_SPEED;
+        const dy =
+            parseFloat(
+                bullet.dataset.dy
+            );
+
 
         x +=
             dx *
-            2;
+            BULLET_SPEED;
+
+
+        y +=
+            dy *
+            BULLET_SPEED;
 
 
         bullet.dataset.x =
@@ -1062,10 +1389,34 @@ function updateBullets() {
             y + "%";
 
 
+        /*
+         * Rotar Pipis según dirección
+         */
+
+        const angle =
+            Math.atan2(
+                dy,
+                dx
+            ) *
+            180 /
+            Math.PI;
+
+
+        bullet.style.transform =
+            "translate(-50%, -50%) rotate(" +
+            angle +
+            "deg)";
+
+
+        /*
+         * Fuera del cuadro
+         */
+
         if (
-            y < -10 ||
             x < -10 ||
-            x > 110
+            x > 110 ||
+            y < -10 ||
+            y > 110
         ) {
 
             bullet.remove();
@@ -1084,7 +1435,7 @@ function updateBullets() {
 
 
 /* =====================================================
-   SPAWN FRIEND
+   SPAWN DESDE LOS BORDES
 ===================================================== */
 
 function scheduleFriendSpawn() {
@@ -1104,7 +1455,13 @@ function scheduleFriendSpawn() {
         setTimeout(
             function() {
 
+                if (!gameRunning) {
+                    return;
+                }
+
+
                 spawnFriend();
+
 
                 scheduleFriendSpawn();
 
@@ -1132,21 +1489,39 @@ function spawnFriend() {
 
 
     if (
-        kills >= 100
+        kills >= 1000
     ) {
 
-        const chance =
+        const random =
             Math.random();
 
+
         if (
-            chance < 0.20
+            random < 0.25
         ) {
 
             type =
                 "glitch";
 
-        } else if (
-            chance < 0.45
+        }
+
+        else if (
+            random < 0.60
+        ) {
+
+            type =
+                "red";
+
+        }
+
+    }
+
+    else if (
+        kills >= 100
+    ) {
+
+        if (
+            Math.random() < 0.40
         ) {
 
             type =
@@ -1168,37 +1543,109 @@ function spawnFriend() {
 
 
     friend.className =
-        "friend friend-" +
-        type;
+        "friend";
 
 
-    const x =
+    friend.classList.add(
+        "friend-" +
+        type
+    );
+
+
+    /*
+     * ENTRADA DESDE LOS BORDES
+     */
+
+    let x;
+
+    let y;
+
+    let targetX =
         Math.random() *
-        90 +
-        5;
+        80 +
+        10;
 
-
-    const y =
+    let targetY =
         Math.random() *
-        75 +
-        5;
+        70 +
+        10;
+
+
+    const side =
+        Math.floor(
+            Math.random() * 4
+        );
+
+
+    if (
+        side === 0
+    ) {
+
+        /*
+         * IZQUIERDA
+         */
+
+        x = -8;
+
+        y = targetY;
+
+    }
+
+    else if (
+        side === 1
+    ) {
+
+        /*
+         * DERECHA
+         */
+
+        x = 108;
+
+        y = targetY;
+
+    }
+
+    else if (
+        side === 2
+    ) {
+
+        /*
+         * ARRIBA
+         */
+
+        x = targetX;
+
+        y = -8;
+
+    }
+
+    else {
+
+        /*
+         * ABAJO
+         */
+
+        x = targetX;
+
+        y = 108;
+
+    }
 
 
     friend.style.left =
         x + "%";
 
+
     friend.style.top =
         y + "%";
 
 
+    /*
+     * VIDA
+     */
+
     let hp =
         20;
-
-    let damage =
-        NORMAL_DAMAGE;
-
-    let speed =
-        0.035;
 
 
     if (
@@ -1208,12 +1655,6 @@ function spawnFriend() {
         hp =
             45;
 
-        damage =
-            RED_DAMAGE;
-
-        speed =
-            0.055;
-
     }
 
 
@@ -1222,13 +1663,7 @@ function spawnFriend() {
     ) {
 
         hp =
-            70;
-
-        damage =
-            GLITCH_DAMAGE;
-
-        speed =
-            0.075;
+            80;
 
     }
 
@@ -1236,20 +1671,29 @@ function spawnFriend() {
     friend.dataset.hp =
         hp;
 
-    friend.dataset.damage =
-        damage;
 
     friend.dataset.x =
         x;
 
+
     friend.dataset.y =
         y;
+
+
+    friend.dataset.targetX =
+        targetX;
+
+
+    friend.dataset.targetY =
+        targetY;
+
 
     friend.dataset.type =
         type;
 
-    friend.dataset.speed =
-        speed;
+
+    friend.dataset.entering =
+        "true";
 
 
     friendsContainer.appendChild(
@@ -1263,16 +1707,12 @@ function spawnFriend() {
 
 
     /*
-     * Boss
+     * BOSS
      */
 
     if (
         kills >= 100 &&
-        !friends.some(
-            f =>
-                f.dataset.type ===
-                "boss"
-        )
+        !bossActive
     ) {
 
         spawnBoss();
@@ -1288,6 +1728,15 @@ function spawnFriend() {
 ===================================================== */
 
 function spawnBoss() {
+
+    if (bossActive) {
+        return;
+    }
+
+
+    bossActive =
+        true;
+
 
     showEvent(
         "!!! BOSS FRIEND !!!"
@@ -1308,37 +1757,40 @@ function spawnBoss() {
         "friend boss";
 
 
-    const x =
-        50;
-
-    const y =
-        10;
-
-
     boss.style.left =
-        x + "%";
+        "50%";
+
 
     boss.style.top =
-        y + "%";
+        "-15%";
 
 
     boss.dataset.hp =
         500;
 
-    boss.dataset.damage =
-        BOSS_DAMAGE;
 
     boss.dataset.x =
-        x;
+        50;
+
 
     boss.dataset.y =
-        y;
+        -15;
+
 
     boss.dataset.type =
         "boss";
 
-    boss.dataset.speed =
-        0.018;
+
+    boss.dataset.dx =
+        0;
+
+
+    boss.dataset.dy =
+        0;
+
+
+    boss.dataset.entering =
+        "true";
 
 
     friendsContainer.appendChild(
@@ -1360,42 +1812,73 @@ function spawnBoss() {
 
 function updateFriends() {
 
-    friends.forEach(
-        function(friend) {
+    for (
+        let i = friends.length - 1;
+        i >= 0;
+        i--
+    ) {
 
-            if (
-                !friend.parentNode
-            ) {
-                return;
-            }
+        const friend =
+            friends[i];
 
 
-            let x =
+        if (
+            !friend.parentNode
+        ) {
+
+            friends.splice(
+                i,
+                1
+            );
+
+            continue;
+
+        }
+
+
+        let x =
+            parseFloat(
+                friend.dataset.x
+            );
+
+
+        let y =
+            parseFloat(
+                friend.dataset.y
+            );
+
+
+        const type =
+            friend.dataset.type;
+
+
+        /*
+         * ENTRADA
+         */
+
+        if (
+            friend.dataset.entering ===
+            "true"
+        ) {
+
+            const targetX =
                 parseFloat(
-                    friend.dataset.x
+                    friend.dataset.targetX
                 );
 
-            let y =
+
+            const targetY =
                 parseFloat(
-                    friend.dataset.y
-                );
-
-
-            const type =
-                friend.dataset.type;
-
-
-            const speed =
-                parseFloat(
-                    friend.dataset.speed
+                    friend.dataset.targetY
                 );
 
 
             const dx =
-                playerX - x;
+                targetX - x;
+
 
             const dy =
-                playerY - y;
+                targetY - y;
 
 
             const distance =
@@ -1405,8 +1888,42 @@ function updateFriends() {
                 );
 
 
+            let entrySpeed =
+                0.16;
+
+
             if (
-                distance > 5
+                type === "red"
+            ) {
+
+                entrySpeed =
+                    0.20;
+
+            }
+
+
+            if (
+                type === "glitch"
+            ) {
+
+                entrySpeed =
+                    0.25;
+
+            }
+
+
+            if (
+                type === "boss"
+            ) {
+
+                entrySpeed =
+                    0.07;
+
+            }
+
+
+            if (
+                distance > 2
             ) {
 
                 x +=
@@ -1414,64 +1931,189 @@ function updateFriends() {
                         dx /
                         distance
                     ) *
-                    speed;
+                    entrySpeed;
+
 
                 y +=
                     (
                         dy /
                         distance
                     ) *
-                    speed;
-
-            } else {
-
-                damagePlayer(
-                    parseInt(
-                        friend.dataset.damage
-                    )
-                );
+                    entrySpeed;
 
             }
 
+            else {
 
-            friend.dataset.x =
-                x;
+                friend.dataset.entering =
+                    "false";
 
-            friend.dataset.y =
-                y;
+            }
 
+        }
 
-            friend.style.left =
-                x + "%";
-
-            friend.style.top =
-                y + "%";
-
+        else {
 
             /*
-             * Glitch lanza pequeñas colas
+             * BOSS
              */
 
             if (
-                type === "glitch" &&
-                Math.random() < 0.025
+                type === "boss"
             ) {
 
-                spawnTail(
-                    x,
-                    y
-                );
+                const dx =
+                    playerX - x;
+
+
+                const dy =
+                    playerY - y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance > 7
+                ) {
+
+                    x +=
+                        (
+                            dx /
+                            distance
+                        ) *
+                        0.018;
+
+
+                    y +=
+                        (
+                            dy /
+                            distance
+                        ) *
+                        0.018;
+
+                }
 
             }
 
+            else {
 
-            /*
-             * Boss lanza triángulos
-             */
+                /*
+                 * FRIEND NORMAL / RED / GLITCH
+                 */
+
+                const dx =
+                    playerX - x;
+
+
+                const dy =
+                    playerY - y;
+
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                let speed =
+                    0.032;
+
+
+                if (
+                    type === "red"
+                ) {
+
+                    speed =
+                        0.050;
+
+                }
+
+
+                if (
+                    type === "glitch"
+                ) {
+
+                    speed =
+                        0.070;
+
+                }
+
+
+                if (
+                    distance > 5
+                ) {
+
+                    x +=
+                        (
+                            dx /
+                            distance
+                        ) *
+                        speed;
+
+
+                    y +=
+                        (
+                            dy /
+                            distance
+                        ) *
+                        speed;
+
+                }
+
+                else {
+
+                    let damage =
+                        NORMAL_FRIEND_DAMAGE;
+
+
+                    if (
+                        type === "red"
+                    ) {
+
+                        damage =
+                            RED_FRIEND_DAMAGE;
+
+                    }
+
+
+                    if (
+                        type === "glitch"
+                    ) {
+
+                        damage =
+                            GLITCH_FRIEND_DAMAGE;
+
+                    }
+
+
+                    damagePlayer(
+                        damage
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        /*
+         * TRIÁNGULOS DEL BOSS
+         */
+
+        if (
+            type === "boss"
+        ) {
 
             if (
-                type === "boss" &&
-                Math.random() < 0.012
+                Math.random() <
+                0.012
             ) {
 
                 spawnTriangle(
@@ -1482,73 +2124,55 @@ function updateFriends() {
             }
 
         }
-    );
+
+
+        /*
+         * COLAS DEL GLITCH
+         */
+
+        if (
+            type === "glitch"
+        ) {
+
+            if (
+                Math.random() <
+                0.025
+            ) {
+
+                spawnGlitchTail(
+                    x,
+                    y
+                );
+
+            }
+
+        }
+
+
+        friend.dataset.x =
+            x;
+
+
+        friend.dataset.y =
+            y;
+
+
+        friend.style.left =
+            x + "%";
+
+
+        friend.style.top =
+            y + "%";
+
+    }
 
 }
 
 
 
 /* =====================================================
-   COLAS GLITCH
-===================================================== */
-
-function spawnTail(
-    x,
-    y
-) {
-
-    const tail =
-        document.createElement(
-            "div"
-        );
-
-
-    tail.className =
-        "glitchTail";
-
-
-    tail.style.left =
-        x + "%";
-
-    tail.style.top =
-        y + "%";
-
-
-    tail.dataset.x =
-        x;
-
-    tail.dataset.y =
-        y;
-
-
-    const angle =
-        Math.random() *
-        Math.PI *
-        2;
-
-
-    tail.dataset.dx =
-        Math.cos(angle);
-
-    tail.dataset.dy =
-        Math.sin(angle);
-
-
-    trianglesContainer.appendChild(
-        tail
-    );
-
-
-    triangles.push(
-        tail
-    );
-
-}
-
-
-
-/* =====================================================
-   TRIÁNGULOS / COLAS
+   TRIÁNGULO
+   AHORA VIAJA RECTO
 ===================================================== */
 
 function spawnTriangle(
@@ -1569,19 +2193,13 @@ function spawnTriangle(
     triangle.style.left =
         x + "%";
 
+
     triangle.style.top =
         y + "%";
 
 
-    triangle.dataset.x =
-        x;
-
-    triangle.dataset.y =
-        y;
-
-
     /*
-     * DIRECCIÓN FIJA
+     * Dirección aleatoria
      */
 
     const angle =
@@ -1590,11 +2208,38 @@ function spawnTriangle(
         2;
 
 
-    triangle.dataset.dx =
+    const dx =
         Math.cos(angle);
 
-    triangle.dataset.dy =
+
+    const dy =
         Math.sin(angle);
+
+
+    triangle.dataset.x =
+        x;
+
+
+    triangle.dataset.y =
+        y;
+
+
+    triangle.dataset.dx =
+        dx;
+
+
+    triangle.dataset.dy =
+        dy;
+
+
+    triangle.style.transform =
+        "translate(-50%, -50%) rotate(" +
+        (
+            angle *
+            180 /
+            Math.PI
+        ) +
+        "deg)";
 
 
     trianglesContainer.appendChild(
@@ -1645,6 +2290,7 @@ function updateTriangles() {
                 triangle.dataset.x
             );
 
+
         let y =
             parseFloat(
                 triangle.dataset.y
@@ -1656,31 +2302,30 @@ function updateTriangles() {
                 triangle.dataset.dx
             );
 
+
         const dy =
             parseFloat(
                 triangle.dataset.dy
             );
 
 
-        const speed =
-            triangle.classList.contains(
-                "glitchTail"
-            )
-                ? 0.20
-                : 0.11;
-
+        /*
+         * SIN TRACKING
+         */
 
         x +=
             dx *
-            speed;
+            0.20;
+
 
         y +=
             dy *
-            speed;
+            0.20;
 
 
         triangle.dataset.x =
             x;
+
 
         triangle.dataset.y =
             y;
@@ -1688,6 +2333,7 @@ function updateTriangles() {
 
         triangle.style.left =
             x + "%";
+
 
         triangle.style.top =
             y + "%";
@@ -1712,24 +2358,22 @@ function updateTriangles() {
 
 
         if (
-            distance < 4
+            distance < 5
         ) {
 
             damagePlayer(
-                triangle.classList.contains(
-                    "glitchTail"
-                )
-                    ? 10
-                    : 15
+                15
             );
 
 
             triangle.remove();
 
+
             triangles.splice(
                 i,
                 1
             );
+
 
             continue;
 
@@ -1737,17 +2381,18 @@ function updateTriangles() {
 
 
         /*
-         * Desaparecer fuera
+         * Fuera del cuadro
          */
 
         if (
-            x < -10 ||
-            x > 110 ||
-            y < -10 ||
-            y > 110
+            x < -15 ||
+            x > 115 ||
+            y < -15 ||
+            y > 115
         ) {
 
             triangle.remove();
+
 
             triangles.splice(
                 i,
@@ -1757,6 +2402,61 @@ function updateTriangles() {
         }
 
     }
+
+}
+
+
+
+/* =====================================================
+   COLA GLITCH
+===================================================== */
+
+function spawnGlitchTail(
+    x,
+    y
+) {
+
+    const tail =
+        document.createElement(
+            "div"
+        );
+
+
+    tail.className =
+        "glitchTail";
+
+
+    tail.style.left =
+        x + "%";
+
+
+    tail.style.top =
+        y + "%";
+
+
+    tail.dataset.life =
+        30;
+
+
+    trianglesContainer.appendChild(
+        tail
+    );
+
+
+    setTimeout(
+        function() {
+
+            if (
+                tail.parentNode
+            ) {
+
+                tail.remove();
+
+            }
+
+        },
+        700
+    );
 
 }
 
@@ -1778,6 +2478,32 @@ function checkCollisions() {
             bullets[b];
 
 
+        if (
+            !bullet.parentNode
+        ) {
+
+            bullets.splice(
+                b,
+                1
+            );
+
+            continue;
+
+        }
+
+
+        const bulletX =
+            parseFloat(
+                bullet.dataset.x
+            );
+
+
+        const bulletY =
+            parseFloat(
+                bullet.dataset.y
+            );
+
+
         for (
             let f = friends.length - 1;
             f >= 0;
@@ -1791,25 +2517,22 @@ function checkCollisions() {
             if (
                 !friend.parentNode
             ) {
+
+                friends.splice(
+                    f,
+                    1
+                );
+
                 continue;
+
             }
-
-
-            const bulletX =
-                parseFloat(
-                    bullet.dataset.x
-                );
-
-            const bulletY =
-                parseFloat(
-                    bullet.dataset.y
-                );
 
 
             const friendX =
                 parseFloat(
                     friend.dataset.x
                 );
+
 
             const friendY =
                 parseFloat(
@@ -1842,9 +2565,69 @@ function checkCollisions() {
                     bullet
                 );
 
+
                 break;
 
             }
+
+        }
+
+    }
+
+
+    /*
+     * POWER UPS
+     */
+
+    for (
+        let i = powerUps.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const powerUp =
+            powerUps[i];
+
+
+        const x =
+            parseFloat(
+                powerUp.dataset.x
+            );
+
+
+        const y =
+            parseFloat(
+                powerUp.dataset.y
+            );
+
+
+        const distance =
+            Math.sqrt(
+                Math.pow(
+                    playerX - x,
+                    2
+                )
+                +
+                Math.pow(
+                    playerY - y,
+                    2
+                )
+            );
+
+
+        if (
+            distance < 7
+        ) {
+
+            collectPowerUp(
+                powerUp
+            );
+
+
+            powerUps.splice(
+                i,
+                1
+            );
 
         }
 
@@ -1855,7 +2638,7 @@ function checkCollisions() {
 
 
 /* =====================================================
-   GOLPE FRIEND
+   GOLPEAR FRIEND
 ===================================================== */
 
 function hitFriend(
@@ -1863,18 +2646,18 @@ function hitFriend(
     bullet
 ) {
 
-    const index =
+    const bulletIndex =
         bullets.indexOf(
             bullet
         );
 
 
     if (
-        index !== -1
+        bulletIndex !== -1
     ) {
 
         bullets.splice(
-            index,
+            bulletIndex,
             1
         );
 
@@ -1891,7 +2674,7 @@ function hitFriend(
 
 
     hp -=
-        10;
+        FRIEND_SHOT_DAMAGE;
 
 
     friend.dataset.hp =
@@ -1911,7 +2694,7 @@ function hitFriend(
             );
 
         },
-        120
+        100
     );
 
 
@@ -1940,8 +2723,10 @@ function killFriend(
     friendLaugh.currentTime =
         0;
 
+
     friendLaugh.volume =
         0.20;
+
 
     friendLaugh.play()
         .catch(
@@ -1950,6 +2735,7 @@ function killFriend(
 
 
     kills++;
+
 
     totalKills++;
 
@@ -1981,7 +2767,37 @@ function killFriend(
     }
 
 
+    const x =
+        parseFloat(
+            friend.dataset.x
+        );
+
+
+    const y =
+        parseFloat(
+            friend.dataset.y
+        );
+
+
     friend.remove();
+
+
+    /*
+     * POWER UP
+     *
+     * 8% de probabilidad
+     */
+
+    if (
+        Math.random() < 0.08
+    ) {
+
+        spawnPowerUp(
+            x,
+            y
+        );
+
+    }
 
 
     checkAchievements();
@@ -1991,16 +2807,209 @@ function killFriend(
 
 
 /* =====================================================
-   DAÑO
+   POWER UP
+===================================================== */
+
+function spawnPowerUp(
+    x,
+    y
+) {
+
+    const powerUp =
+        document.createElement(
+            "img"
+        );
+
+
+    powerUp.src =
+        "pipis.gif";
+
+
+    powerUp.className =
+        "powerUp";
+
+
+    const type =
+        Math.random() < 0.50
+            ? "green"
+            : "glitch";
+
+
+    powerUp.classList.add(
+        "power-" +
+        type
+    );
+
+
+    powerUp.dataset.type =
+        type;
+
+
+    powerUp.dataset.x =
+        x;
+
+
+    powerUp.dataset.y =
+        y;
+
+
+    powerUp.style.left =
+        x + "%";
+
+
+    powerUp.style.top =
+        y + "%";
+
+
+    powerUpsContainer.appendChild(
+        powerUp
+    );
+
+
+    powerUps.push(
+        powerUp
+    );
+
+
+    setTimeout(
+        function() {
+
+            const index =
+                powerUps.indexOf(
+                    powerUp
+                );
+
+
+            if (
+                index !== -1
+            ) {
+
+                powerUps.splice(
+                    index,
+                    1
+                );
+
+            }
+
+
+            if (
+                powerUp.parentNode
+            ) {
+
+                powerUp.remove();
+
+            }
+
+        },
+        POWERUP_LIFETIME
+    );
+
+}
+
+
+
+/* =====================================================
+   RECOGER POWER UP
+===================================================== */
+
+function collectPowerUp(
+    powerUp
+) {
+
+    const type =
+        powerUp.dataset.type;
+
+
+    if (
+        type === "green"
+    ) {
+
+        playerHP +=
+            10;
+
+
+        if (
+            playerHP > MAX_HP
+        ) {
+
+            playerHP =
+                MAX_HP;
+
+        }
+
+
+        showEvent(
+            "💚 +10 HP"
+        );
+
+    }
+
+
+    if (
+        type === "glitch"
+    ) {
+
+        tripleShotActive =
+            true;
+
+
+        clearTimeout(
+            tripleShotTimeout
+        );
+
+
+        showEvent(
+            "!!! GLITCH PIPIS !!!"
+        );
+
+
+        tripleShotTimeout =
+            setTimeout(
+                function() {
+
+                    tripleShotActive =
+                        false;
+
+
+                    showEvent(
+                        "TRIPLE SHOT OFF"
+                    );
+
+                },
+                10000
+            );
+
+    }
+
+
+    updateHUD();
+
+
+    powerUp.remove();
+
+}
+
+
+
+/* =====================================================
+   DAÑO AL JUGADOR
 ===================================================== */
 
 function damagePlayer(
     amount
 ) {
 
+    if (!gameRunning) {
+        return;
+    }
+
+
+    /*
+     * COOLDOWN DE 3 SEGUNDOS
+     */
+
     if (
-        !gameRunning ||
-        damageCooldown
+        playerDamageCooldown
     ) {
 
         return;
@@ -2008,7 +3017,7 @@ function damagePlayer(
     }
 
 
-    damageCooldown =
+    playerDamageCooldown =
         true;
 
 
@@ -2016,11 +3025,14 @@ function damagePlayer(
         amount;
 
 
-    playerHP =
-        Math.max(
-            0,
-            playerHP
-        );
+    if (
+        playerHP < 0
+    ) {
+
+        playerHP =
+            0;
+
+    }
 
 
     updateHUD();
@@ -2046,11 +3058,19 @@ function damagePlayer(
                 "playerHit"
             );
 
-            damageCooldown =
+        },
+        400
+    );
+
+
+    setTimeout(
+        function() {
+
+            playerDamageCooldown =
                 false;
 
         },
-        300
+        PLAYER_DAMAGE_COOLDOWN
     );
 
 
@@ -2067,218 +3087,91 @@ function damagePlayer(
 
 
 /* =====================================================
-   POWER UPS
+   LLUVIA DE PIPIS
 ===================================================== */
 
-function spawnPowerUp() {
+function pipisRainEvent() {
 
-    const power =
-        document.createElement(
-            "img"
-        );
-
-
-    const isGreen =
-        Math.random() < 0.5;
-
-
-    if (
-        isGreen
-    ) {
-
-        power.src =
-            "pipis-green.gif";
-
-        power.className =
-            "powerUp greenPower";
-
-        power.dataset.type =
-            "heal";
-
-    } else {
-
-        power.src =
-            "pipis-glitch.gif";
-
-        power.className =
-            "powerUp glitchPower";
-
-        power.dataset.type =
-            "triple";
-
+    if (!gameRunning) {
+        return;
     }
 
 
-    power.style.left =
-        (
-            Math.random() *
-            80 +
-            10
-        ) + "%";
-
-
-    power.style.top =
-        (
-            Math.random() *
-            65 +
-            10
-        ) + "%";
-
-
-    pipisContainer.appendChild(
-        power
+    showEvent(
+        "!!! PIPIS RAIN !!!"
     );
 
 
-    const check =
-        setInterval(
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const pipis =
+            document.createElement(
+                "img"
+            );
+
+
+        pipis.src =
+            "pipis.gif";
+
+
+        pipis.className =
+            "healingPipis";
+
+
+        pipis.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        pipis.style.animationDelay =
+            Math.random() *
+            1.5 +
+            "s";
+
+
+        pipisContainer.appendChild(
+            pipis
+        );
+
+
+        setTimeout(
             function() {
 
                 if (
-                    !gameRunning ||
-                    !power.parentNode
+                    pipis.parentNode
                 ) {
 
-                    clearInterval(
-                        check
-                    );
-
-                    return;
-
-                }
-
-
-                const x =
-                    parseFloat(
-                        power.style.left
-                    );
-
-                const y =
-                    parseFloat(
-                        power.style.top
-                    );
-
-
-                const distance =
-                    Math.sqrt(
-                        Math.pow(
-                            playerX - x,
-                            2
-                        )
-                        +
-                        Math.pow(
-                            playerY - y,
-                            2
-                        )
-                    );
-
-
-                if (
-                    distance < 8
-                ) {
-
-                    collectPowerUp(
-                        power
-                    );
-
-                    clearInterval(
-                        check
-                    );
+                    pipis.remove();
 
                 }
 
             },
-            50
+            5000
         );
-
-
-    setTimeout(
-        function() {
-
-            clearInterval(
-                check
-            );
-
-            if (
-                power.parentNode
-            ) {
-
-                power.remove();
-
-            }
-
-        },
-        10000
-    );
-
-}
-
-
-
-/* =====================================================
-   RECOGER POWER UP
-===================================================== */
-
-function collectPowerUp(
-    power
-) {
-
-    const type =
-        power.dataset.type;
-
-
-    if (
-        type === "heal"
-    ) {
-
-        playerHP +=
-            10;
-
-
-        playerHP =
-            Math.min(
-                MAX_HP,
-                playerHP
-            );
-
-
-        powerUpText.textContent =
-            "+10 HP";
 
     }
 
 
+    playerHP +=
+        100;
+
+
     if (
-        type === "triple"
+        playerHP > MAX_HP
     ) {
 
-        tripleShot =
-            true;
-
-
-        powerUpText.textContent =
-            "TRIPLE PIPIS";
+        playerHP =
+            MAX_HP;
 
     }
 
 
     updateHUD();
-
-
-    power.remove();
-
-
-    setTimeout(
-        function() {
-
-            powerUpText.textContent =
-                tripleShot
-                    ? "TRIPLE PIPIS"
-                    : "NONE";
-
-        },
-        5000
-    );
 
 }
 
@@ -2291,75 +3184,75 @@ function collectPowerUp(
 function checkAchievements() {
 
     /*
-     * BERDLY
+     * BERDLY - 100
      */
 
     if (
         totalKills >= 100 &&
         localStorage.getItem(
-            "friendAchievementBerdly"
+            "friendAchievement100"
         ) !== "true"
     ) {
 
         localStorage.setItem(
-            "friendAchievementBerdly",
+            "friendAchievement100",
             "true"
         );
 
 
         showAchievement(
-            "BERDLY DESBLOQUEADO!",
-            "berdly"
+            "BERDLY UNLOCKED!",
+            "berdly.gif"
         );
 
     }
 
 
     /*
-     * SUSIE
+     * SUSIE - 1000
      */
 
     if (
         totalKills >= 1000 &&
         localStorage.getItem(
-            "friendAchievementSusie"
+            "friendAchievement1000"
         ) !== "true"
     ) {
 
         localStorage.setItem(
-            "friendAchievementSusie",
+            "friendAchievement1000",
             "true"
         );
 
 
         showAchievement(
-            "SUSIE DESBLOQUEADA!",
-            "susie"
+            "SUSIE UNLOCKED!",
+            "susie-eating-pancakes.gif"
         );
 
     }
 
 
     /*
-     * NOELLE
+     * NOELLE - 10000
      */
 
     if (
         totalKills >= 10000 &&
         localStorage.getItem(
-            "friendAchievementNoelle"
+            "friendAchievement10000"
         ) !== "true"
     ) {
 
         localStorage.setItem(
-            "friendAchievementNoelle",
+            "friendAchievement10000",
             "true"
         );
 
 
         showAchievement(
-            "NOELLE DESBLOQUEADA!",
-            "noelle"
+            "NOELLE UNLOCKED!",
+            "noelle.gif"
         );
 
     }
@@ -2374,7 +3267,7 @@ function checkAchievements() {
 
 function showAchievement(
     message,
-    type
+    imageSrc
 ) {
 
     const box =
@@ -2402,57 +3295,35 @@ function showAchievement(
     );
 
 
-    let image =
-        "";
-
-
     if (
-        type === "berdly"
+        imageSrc
     ) {
 
-        image =
-            "berdly.gif";
-
-    }
-
-
-    if (
-        type === "susie"
-    ) {
-
-        image =
-            "susie-eating-pancakes.gif";
-
-    }
-
-
-    if (
-        type === "noelle"
-    ) {
-
-        image =
-            "noelle.gif";
-
-    }
-
-
-    if (image) {
-
-        const img =
+        const image =
             document.createElement(
                 "img"
             );
 
 
-        img.src =
-            image;
+        image.src =
+            imageSrc;
 
-        img.className =
-            "achievementImage";
+
+        image.className =
+            "achievementCharacter";
+
+
+        image.onerror =
+            function() {
+
+                image.style.display =
+                    "none";
+
+            };
 
 
         box.appendChild(
-            img
+            image
         );
 
     }
@@ -2463,14 +3334,15 @@ function showAchievement(
     );
 
 
-    requestAnimationFrame(
+    setTimeout(
         function() {
 
             box.classList.add(
                 "show"
             );
 
-        }
+        },
+        50
     );
 
 
@@ -2492,7 +3364,7 @@ function showAchievement(
             );
 
         },
-        5000
+        4500
     );
 
 }
@@ -2534,7 +3406,7 @@ function showEvent(
                 );
 
             },
-            2500
+            2200
         );
 
 }
@@ -2590,17 +3462,14 @@ function gameOver() {
         timerInterval
     );
 
+
     clearInterval(
         eventInterval
     );
 
+
     clearTimeout(
         spawnTimeout
-    );
-
-
-    cancelAnimationFrame(
-        gameLoopId
     );
 
 
@@ -2625,6 +3494,7 @@ function gameOver() {
 
             updateHUD();
 
+
         },
         2000
     );
@@ -2637,12 +3507,17 @@ function gameOver() {
    JOYSTICK
 ===================================================== */
 
+let joystickPointerId =
+    null;
+
+
 function updateJoystick(
-    event
+    clientX,
+    clientY
 ) {
 
     const rect =
-        joystickBase.getBoundingClientRect();
+        joystick.getBoundingClientRect();
 
 
     const centerX =
@@ -2655,110 +3530,84 @@ function updateJoystick(
         rect.height / 2;
 
 
-    let x =
-        event.clientX -
+    let dx =
+        clientX -
         centerX;
 
 
-    let y =
-        event.clientY -
+    let dy =
+        clientY -
         centerY;
 
 
-    const max =
-        rect.width / 2 -
-        20;
+    const maxDistance =
+        rect.width *
+        0.32;
 
 
     const distance =
         Math.sqrt(
-            x * x +
-            y * y
+            dx * dx +
+            dy * dy
         );
 
 
     if (
-        distance > max
+        distance > maxDistance
     ) {
 
-        x =
-            x /
-            distance *
-            max;
+        dx =
+            (
+                dx /
+                distance
+            ) *
+            maxDistance;
 
-        y =
-            y /
-            distance *
-            max;
+
+        dy =
+            (
+                dy /
+                distance
+            ) *
+            maxDistance;
 
     }
 
 
+    joystickKnob.style.transform =
+        "translate(" +
+        dx +
+        "px, " +
+        dy +
+        "px)";
+
+
     joystickX =
-        x / max;
+        dx /
+        maxDistance;
+
 
     joystickY =
-        y / max;
-
-
-    joystickKnob.style.transform =
-        `translate(${x}px, ${y}px)`;
+        dy /
+        maxDistance;
 
 }
 
 
 
-/* =====================================================
-   JOYSTICK MOUSE + TOUCH
-===================================================== */
+function resetJoystick() {
 
-joystickBase.addEventListener(
-    "pointerdown",
-    function(event) {
+    joystickPointerId =
+        null;
 
-        joystickActive =
-            true;
-
-        joystickBase.setPointerCapture(
-            event.pointerId
-        );
-
-        updateJoystick(
-            event
-        );
-
-    }
-);
-
-
-joystickBase.addEventListener(
-    "pointermove",
-    function(event) {
-
-        if (
-            !joystickActive
-        ) {
-            return;
-        }
-
-        updateJoystick(
-            event
-        );
-
-    }
-);
-
-
-function stopJoystick() {
-
-    joystickActive =
-        false;
 
     joystickX =
         0;
 
+
     joystickY =
         0;
+
 
     joystickKnob.style.transform =
         "translate(0, 0)";
@@ -2766,38 +3615,89 @@ function stopJoystick() {
 }
 
 
-joystickBase.addEventListener(
-    "pointerup",
-    stopJoystick
-);
 
-joystickBase.addEventListener(
-    "pointercancel",
-    stopJoystick
-);
+joystick.addEventListener(
+    "pointerdown",
+    function(event) {
 
-joystickBase.addEventListener(
-    "pointerleave",
-    function() {
+        event.preventDefault();
 
-        if (
-            joystickActive
-        ) {
 
-            stopJoystick();
+        joystickPointerId =
+            event.pointerId;
 
-        }
+
+        joystick.setPointerCapture(
+            event.pointerId
+        );
+
+
+        joystickActive =
+            true;
+
+
+        updateJoystick(
+            event.clientX,
+            event.clientY
+        );
 
     }
 );
 
 
+joystick.addEventListener(
+    "pointermove",
+    function(event) {
+
+        if (
+            !joystickActive
+        ) {
+
+            return;
+
+        }
+
+
+        updateJoystick(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+joystick.addEventListener(
+    "pointerup",
+    resetJoystick
+);
+
+
+joystick.addEventListener(
+    "pointercancel",
+    resetJoystick
+);
+
+
 
 /* =====================================================
-   BOTÓN FIRE
+   BOTÓN DISPARO
+   PC + MOBILE
 ===================================================== */
 
-fireButton.addEventListener(
+shootButton.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        event.preventDefault();
+
+        shoot();
+
+    }
+);
+
+
+mobileShoot.addEventListener(
     "pointerdown",
     function(event) {
 
@@ -2811,7 +3711,64 @@ fireButton.addEventListener(
 
 
 /* =====================================================
-   INICIO
+   ORIENTACIÓN DEL APUNTADO EN MOBILE
+===================================================== */
+
+gameArea.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            event.target ===
+            mobileShoot ||
+            event.target ===
+            joystick ||
+            joystick.contains(
+                event.target
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const rect =
+            gameArea.getBoundingClientRect();
+
+
+        aimX =
+            (
+                (
+                    event.clientX -
+                    rect.left
+                )
+                /
+                rect.width
+            )
+            *
+            100;
+
+
+        aimY =
+            (
+                (
+                    event.clientY -
+                    rect.top
+                )
+                /
+                rect.height
+            )
+            *
+            100;
+
+    }
+);
+
+
+
+/* =====================================================
+   ESTADO INICIAL
 ===================================================== */
 
 updateHUD();
@@ -2819,6 +3776,7 @@ updateHUD();
 resetPlayerPosition();
 
 </script>
+
 
 </body>
 
